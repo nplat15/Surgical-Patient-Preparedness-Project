@@ -1,0 +1,84 @@
+history_id,patient_id,prior_procedure,procedure_year,prior_anesthesia_issue
+PS0001,P003,Hysterectomy,2018,None documented
+PS0002,P004,Hernia repair,1995,None documented
+PS0003,P005,Hysterectomy,2011,Prior postoperative nausea and vomiting
+PS0004,P005,Knee arthroscopy,2007,Prior postoperative nausea and vomiting
+PS0005,P006,Appendectomy,2002,None documented
+PS0006,P006,Knee arthroscopy,2014,None documented
+PS0007,P006,Cesarean section,2010,None documented
+PS0008,P008,Appendectomy,2015,None documented
+PS0009,P008,Hysterectomy,2011,None documented
+PS0010,P009,Appendectomy,2021,None documented
+PS0011,P010,Tonsillectomy,2024,None documented
+PS0012,P010,Appendectomy,2023,None documented
+PS0013,P010,Knee arthroscopy,2023,None documented
+PS0014,P012,Hernia repair,2006,None documented
+PS0015,P017,Cholecystectomy,2003,None documented
+PS0016,P018,Tonsillectomy,2011,Prior postoperative nausea and vomiting
+PS0017,P018,Hernia repair,2024,Prior postoperative nausea and vomiting
+PS0018,P019,Knee arthroscopy,2022,None documented
+PS0019,P019,Appendectomy,2020,None documented
+PS0020,P020,Hernia repair,1997,None documented
+PS0021,P020,Cataract surgery,2001,None documented
+PS0022,P023,Knee arthroscopy,2000,None documented
+PS0023,P023,Cholecystectomy,2000,None documented
+PS0024,P025,Cholecystectomy,2012,None documented
+PS0025,P027,Knee arthroscopy,2000,None documented
+PS0026,P029,Hysterectomy,2014,Prior postoperative nausea and vomiting
+PS0027,P030,Cesarean section,1996,None documented
+PS0028,P030,Appendectomy,2016,None documented
+PS0029,P031,Cesarean section,2024,None documented
+PS0030,P033,Tonsillectomy,2000,Prior postoperative nausea and vomiting
+PS0031,P034,Appendectomy,2023,None documented
+PS0032,P035,Knee arthroscopy,2015,None documented
+PS0033,P036,Knee arthroscopy,2024,None documented
+PS0034,P037,Tonsillectomy,1996,None documented
+PS0035,P037,Cholecystectomy,2020,None documented
+PS0036,P039,Hernia repair,2020,None documented
+PS0037,P039,Hysterectomy,1996,None documented
+PS0038,P040,Knee arthroscopy,2012,None documented
+PS0039,P041,Cholecystectomy,2010,None documented
+PS0040,P042,Cholecystectomy,2014,None documented
+PS0041,P042,Tonsillectomy,1995,None documented
+PS0042,P042,Cesarean section,2006,None documented
+PS0043,P045,Cholecystectomy,2022,None documented
+PS0044,P046,Cholecystectomy,2024,None documented
+PS0045,P047,Tonsillectomy,1996,None documented
+PS0046,P047,Knee arthroscopy,2002,None documented
+PS0047,P048,Hysterectomy,2023,None documented
+PS0048,P051,Cholecystectomy,2016,None documented
+PS0049,P052,Hysterectomy,2024,None documented
+PS0050,P052,Hernia repair,2022,None documented
+PS0051,P056,Cesarean section,2022,Prior postoperative nausea and vomiting
+PS0052,P060,Hysterectomy,2017,None documented
+PS0053,P060,Cesarean section,2017,None documented
+PS0054,P061,Knee arthroscopy,2023,None documented
+PS0055,P061,Cesarean section,2021,None documented
+PS0056,P065,Hernia repair,2022,None documented
+PS0057,P065,Cholecystectomy,2022,None documented
+PS0058,P070,Hernia repair,2015,None documented
+PS0059,P070,Cesarean section,2021,None documented
+PS0060,P070,Knee arthroscopy,2017,None documented
+PS0061,P073,Knee arthroscopy,2021,None documented
+PS0062,P073,Cholecystectomy,2019,None documented
+PS0063,P073,Cesarean section,2022,None documented
+PS0064,P074,Knee arthroscopy,2018,None documented
+PS0065,P078,Appendectomy,2022,None documented
+PS0066,P078,Hernia repair,2016,None documented
+PS0067,P079,Knee arthroscopy,2021,None documented
+PS0068,P079,Cholecystectomy,2008,None documented
+PS0069,P080,Appendectomy,2018,None documented
+PS0070,P081,Tonsillectomy,2022,None documented
+PS0071,P081,Appendectomy,2024,None documented
+PS0072,P086,Hernia repair,2023,None documented
+PS0073,P086,Cholecystectomy,2015,None documented
+PS0074,P088,Appendectomy,2021,None documented
+PS0075,P091,Cesarean section,2011,None documented
+PS0076,P093,Hernia repair,2024,None documented
+PS0077,P094,Cholecystectomy,1997,None documented
+PS0078,P095,Cesarean section,2005,None documented
+PS0079,P099,Cholecystectomy,2010,None documented
+PS0080,P099,Appendectomy,2008,None documented
+PS0081,P099,Hernia repair,2008,None documented
+PS0082,P100,Cholecystectomy,1997,None documented
+PS0083,P100,Cesarean section,2011,None documented

@@ -1,0 +1,135 @@
+medication_id,patient_id,medication_name,dose,frequency,status
+M0001,P001,Apixaban,See synthetic medication list,As documented,Active
+M0002,P002,Ferrous sulfate,See synthetic medication list,As documented,Active
+M0003,P002,Lisinopril,See synthetic medication list,As documented,Active
+M0004,P002,Omeprazole,See synthetic medication list,As documented,Active
+M0005,P003,Levothyroxine,See synthetic medication list,As documented,Active
+M0006,P003,Albuterol,See synthetic medication list,As documented,Active
+M0007,P004,Tiotropium,See synthetic medication list,As documented,Active
+M0008,P004,Ferrous sulfate,See synthetic medication list,As documented,Active
+M0009,P005,Tiotropium,See synthetic medication list,As documented,Active
+M0010,P005,Atorvastatin,See synthetic medication list,As documented,Active
+M0011,P005,Ferrous sulfate,See synthetic medication list,As documented,Active
+M0012,P006,Albuterol,See synthetic medication list,As documented,Active
+M0013,P006,Apixaban,See synthetic medication list,As documented,Active
+M0014,P008,Omeprazole,See synthetic medication list,As documented,Active
+M0015,P009,Albuterol,See synthetic medication list,As documented,Active
+M0016,P009,Atorvastatin,See synthetic medication list,As documented,Active
+M0017,P010,Levothyroxine,See synthetic medication list,As documented,Active
+M0018,P010,Apixaban,See synthetic medication list,As documented,Active
+M0019,P011,Albuterol,See synthetic medication list,As documented,Active
+M0020,P012,Albuterol,See synthetic medication list,As documented,Active
+M0021,P012,Ferrous sulfate,See synthetic medication list,As documented,Active
+M0022,P013,Omeprazole,See synthetic medication list,As documented,Active
+M0023,P014,Albuterol,See synthetic medication list,As documented,Active
+M0024,P014,Omeprazole,See synthetic medication list,As documented,Active
+M0025,P014,Apixaban,See synthetic medication list,As documented,Active
+M0026,P015,Tiotropium,See synthetic medication list,As documented,Active
+M0027,P016,Levothyroxine,See synthetic medication list,As documented,Active
+M0028,P016,Tiotropium,See synthetic medication list,As documented,Active
+M0029,P017,Tiotropium,See synthetic medication list,As documented,Active
+M0030,P017,Omeprazole,See synthetic medication list,As documented,Active
+M0031,P018,Albuterol,See synthetic medication list,As documented,Active
+M0032,P019,Metformin,See synthetic medication list,As documented,Active
+M0033,P019,Albuterol,See synthetic medication list,As documented,Active
+M0034,P021,Omeprazole,See synthetic medication list,As documented,Active
+M0035,P022,Lisinopril,See synthetic medication list,As documented,Active
+M0036,P023,Lisinopril,See synthetic medication list,As documented,Active
+M0037,P023,Omeprazole,See synthetic medication list,As documented,Active
+M0038,P024,Ferrous sulfate,See synthetic medication list,As documented,Active
+M0039,P025,Apixaban,See synthetic medication list,As documented,Active
+M0040,P025,Albuterol,See synthetic medication list,As documented,Active
+M0041,P026,Omeprazole,See synthetic medication list,As documented,Active
+M0042,P028,Albuterol,See synthetic medication list,As documented,Active
+M0043,P028,Atorvastatin,See synthetic medication list,As documented,Active
+M0044,P028,Lisinopril,See synthetic medication list,As documented,Active
+M0045,P029,Atorvastatin,See synthetic medication list,As documented,Active
+M0046,P029,Albuterol,See synthetic medication list,As documented,Active
+M0047,P030,Atorvastatin,See synthetic medication list,As documented,Active
+M0048,P030,Metformin,See synthetic medication list,As documented,Active
+M0049,P030,Omeprazole,See synthetic medication list,As documented,Active
+M0050,P031,Tiotropium,See synthetic medication list,As documented,Active
+M0051,P033,Apixaban,See synthetic medication list,As documented,Active
+M0052,P034,Ferrous sulfate,See synthetic medication list,As documented,Active
+M0053,P034,Atorvastatin,See synthetic medication list,As documented,Active
+M0054,P035,Albuterol,See synthetic medication list,As documented,Active
+M0055,P035,Lisinopril,See synthetic medication list,As documented,Active
+M0056,P036,Ferrous sulfate,See synthetic medication list,As documented,Active
+M0057,P038,Ferrous sulfate,See synthetic medication list,As documented,Active
+M0058,P039,Omeprazole,See synthetic medication list,As documented,Active
+M0059,P040,Lisinopril,See synthetic medication list,As documented,Active
+M0060,P040,Albuterol,See synthetic medication list,As documented,Active
+M0061,P041,Omeprazole,See synthetic medication list,As documented,Active
+M0062,P042,Lisinopril,See synthetic medication list,As documented,Active
+M0063,P042,Albuterol,See synthetic medication list,As documented,Active
+M0064,P043,Metformin,See synthetic medication list,As documented,Active
+M0065,P044,Metformin,See synthetic medication list,As documented,Active
+M0066,P044,Ferrous sulfate,See synthetic medication list,As documented,Active
+M0067,P046,Levothyroxine,See synthetic medication list,As documented,Active
+M0068,P046,Lisinopril,See synthetic medication list,As documented,Active
+M0069,P046,Tiotropium,See synthetic medication list,As documented,Active
+M0070,P047,Levothyroxine,See synthetic medication list,As documented,Active
+M0071,P047,Albuterol,See synthetic medication list,As documented,Active
+M0072,P048,Lisinopril,See synthetic medication list,As documented,Active
+M0073,P049,Atorvastatin,See synthetic medication list,As documented,Active
+M0074,P050,Metformin,See synthetic medication list,As documented,Active
+M0075,P050,Atorvastatin,See synthetic medication list,As documented,Active
+M0076,P050,Apixaban,See synthetic medication list,As documented,Active
+M0077,P051,Lisinopril,See synthetic medication list,As documented,Active
+M0078,P051,Albuterol,See synthetic medication list,As documented,Active
+M0079,P051,Atorvastatin,See synthetic medication list,As documented,Active
+M0080,P052,Atorvastatin,See synthetic medication list,As documented,Active
+M0081,P053,Lisinopril,See synthetic medication list,As documented,Active
+M0082,P054,Tiotropium,See synthetic medication list,As documented,Active
+M0083,P054,Atorvastatin,See synthetic medication list,As documented,Active
+M0084,P054,Lisinopril,See synthetic medication list,As documented,Active
+M0085,P055,Lisinopril,See synthetic medication list,As documented,Active
+M0086,P055,Tiotropium,See synthetic medication list,As documented,Active
+M0087,P056,Albuterol,See synthetic medication list,As documented,Active
+M0088,P056,Ferrous sulfate,See synthetic medication list,As documented,Active
+M0089,P058,Apixaban,See synthetic medication list,As documented,Active
+M0090,P058,Albuterol,See synthetic medication list,As documented,Active
+M0091,P059,Ferrous sulfate,See synthetic medication list,As documented,Active
+M0092,P059,Albuterol,See synthetic medication list,As documented,Active
+M0093,P060,Metformin,See synthetic medication list,As documented,Active
+M0094,P062,Omeprazole,See synthetic medication list,As documented,Active
+M0095,P062,Tiotropium,See synthetic medication list,As documented,Active
+M0096,P062,Lisinopril,See synthetic medication list,As documented,Active
+M0097,P064,Albuterol,See synthetic medication list,As documented,Active
+M0098,P066,Metformin,See synthetic medication list,As documented,Active
+M0099,P067,Omeprazole,See synthetic medication list,As documented,Active
+M0100,P068,Metformin,See synthetic medication list,As documented,Active
+M0101,P068,Levothyroxine,See synthetic medication list,As documented,Active
+M0102,P071,Tiotropium,See synthetic medication list,As documented,Active
+M0103,P072,Omeprazole,See synthetic medication list,As documented,Active
+M0104,P073,Atorvastatin,See synthetic medication list,As documented,Active
+M0105,P074,Lisinopril,See synthetic medication list,As documented,Active
+M0106,P075,Omeprazole,See synthetic medication list,As documented,Active
+M0107,P077,Atorvastatin,See synthetic medication list,As documented,Active
+M0108,P078,Ferrous sulfate,See synthetic medication list,As documented,Active
+M0109,P079,Lisinopril,See synthetic medication list,As documented,Active
+M0110,P082,Apixaban,See synthetic medication list,As documented,Active
+M0111,P082,Albuterol,See synthetic medication list,As documented,Active
+M0112,P083,Levothyroxine,See synthetic medication list,As documented,Active
+M0113,P083,Metformin,See synthetic medication list,As documented,Active
+M0114,P085,Metformin,See synthetic medication list,As documented,Active
+M0115,P086,Tiotropium,See synthetic medication list,As documented,Active
+M0116,P088,Ferrous sulfate,See synthetic medication list,As documented,Active
+M0117,P088,Lisinopril,See synthetic medication list,As documented,Active
+M0118,P088,Atorvastatin,See synthetic medication list,As documented,Active
+M0119,P090,Ferrous sulfate,See synthetic medication list,As documented,Active
+M0120,P090,Albuterol,See synthetic medication list,As documented,Active
+M0121,P091,Levothyroxine,See synthetic medication list,As documented,Active
+M0122,P091,Ferrous sulfate,See synthetic medication list,As documented,Active
+M0123,P092,Ferrous sulfate,See synthetic medication list,As documented,Active
+M0124,P093,Levothyroxine,See synthetic medication list,As documented,Active
+M0125,P095,Omeprazole,See synthetic medication list,As documented,Active
+M0126,P097,Apixaban,See synthetic medication list,As documented,Active
+M0127,P097,Albuterol,See synthetic medication list,As documented,Active
+M0128,P098,Tiotropium,See synthetic medication list,As documented,Active
+M0129,P098,Ferrous sulfate,See synthetic medication list,As documented,Active
+M0130,P099,Lisinopril,See synthetic medication list,As documented,Active
+M0131,P099,Levothyroxine,See synthetic medication list,As documented,Active
+M0132,P099,Ferrous sulfate,See synthetic medication list,As documented,Active
+M0133,P100,Albuterol,See synthetic medication list,As documented,Active
+M0134,P100,Ferrous sulfate,See synthetic medication list,As documented,Active

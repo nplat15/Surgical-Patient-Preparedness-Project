@@ -1,0 +1,101 @@
+surgery_id,patient_id,scenario,expected_outstanding_items,expected_review_items,expected_preoperative_status,evidence_ids
+S001,P001,complete,,,Documentation complete,L0001 | L0002 | L0003 | T0001 | CO0001 | CO0002 | N001
+S002,P002,missing_consent,Anesthesia consent not documented,,Outstanding requirements,L0004 | L0005 | L0006 | L0007 | CO0004 | CO0005 | N002
+S003,P003,missing_lab,Hemoglobin result not documented,,Outstanding requirements,L0008 | L0009 | T0002 | CO0007 | CO0008 | N003
+S004,P004,outdated_test,Hemoglobin result outside synthetic 90-day documentation window,,Outstanding requirements,L0010 | L0011 | L0012 | T0003 | CO0010 | CO0011 | N004
+S005,P005,clinical_review,,Hemoglobin result requires clinician review,Needs clinical review,L0013 | L0014 | L0015 | L0016 | T0004 | CO0013 | CO0014 | N005
+S006,P006,conflicting_documentation,,Clinical note conflicts with structured consent record,Needs clinical review,L0017 | L0018 | T0005 | CO0016 | CO0017 | N006
+S007,P007,complete,,,Documentation complete,L0019 | L0020 | L0021 | T0006 | CO0019 | CO0020 | N007
+S008,P008,missing_consent,Anesthesia consent not documented,,Outstanding requirements,L0022 | L0023 | L0024 | L0025 | CO0022 | CO0023 | N008
+S009,P009,missing_lab,Hemoglobin result not documented,,Outstanding requirements,L0026 | L0027 | L0028 | L0029 | T0007 | CO0025 | CO0026 | N009
+S010,P010,outdated_test,Hemoglobin result outside synthetic 90-day documentation window,,Outstanding requirements,L0030 | L0031 | L0032 | T0008 | CO0028 | CO0029 | N010
+S011,P011,clinical_review,,Hemoglobin result requires clinician review,Needs clinical review,L0033 | L0034 | T0009 | CO0031 | CO0032 | N011
+S012,P012,conflicting_documentation,,Clinical note conflicts with structured consent record,Needs clinical review,L0035 | L0036 | L0037 | L0038 | T0010 | CO0034 | CO0035 | N012
+S013,P013,complete,,,Documentation complete,L0039 | L0040 | CO0037 | CO0038 | N013
+S014,P014,missing_consent,Anesthesia consent not documented,,Outstanding requirements,L0041 | L0042 | L0043 | L0044 | L0045 | CO0040 | CO0041 | N014
+S015,P015,missing_lab,Hemoglobin result not documented,,Outstanding requirements,L0046 | L0047 | CO0043 | CO0044 | N015
+S016,P016,outdated_test,Hemoglobin result outside synthetic 90-day documentation window,,Outstanding requirements,L0048 | T0011 | CO0046 | CO0047 | N016
+S017,P017,clinical_review,,Hemoglobin result requires clinician review,Needs clinical review,L0049 | L0050 | T0012 | CO0049 | CO0050 | N017
+S018,P018,conflicting_documentation,,Clinical note conflicts with structured consent record,Needs clinical review,L0051 | CO0052 | CO0053 | N018
+S019,P019,complete,,,Documentation complete,L0052 | L0053 | CO0055 | CO0056 | N019
+S020,P020,missing_consent,Anesthesia consent not documented,,Outstanding requirements,L0054 | L0055 | L0056 | L0057 | CO0058 | CO0059 | N020
+S021,P021,complete,,,Documentation complete,L0058 | L0059 | CO0061 | CO0062 | N021
+S022,P022,missing_consent,Anesthesia consent not documented,,Outstanding requirements,L0060 | L0061 | L0062 | CO0064 | CO0065 | N022
+S023,P023,missing_lab,Hemoglobin result not documented,,Outstanding requirements,L0063 | L0064 | L0065 | CO0067 | CO0068 | N023
+S024,P024,outdated_test,Hemoglobin result outside synthetic 90-day documentation window,,Outstanding requirements,L0066 | L0067 | L0068 | CO0070 | CO0071 | N024
+S025,P025,clinical_review,,Hemoglobin result requires clinician review,Needs clinical review,L0069 | L0070 | T0013 | CO0073 | CO0074 | N025
+S026,P026,conflicting_documentation,,Clinical note conflicts with structured consent record,Needs clinical review,L0071 | L0072 | L0073 | L0074 | T0014 | CO0076 | CO0077 | N026
+S027,P027,complete,,,Documentation complete,L0075 | L0076 | L0077 | T0015 | CO0079 | CO0080 | N027
+S028,P028,missing_consent,Anesthesia consent not documented,,Outstanding requirements,L0078 | L0079 | T0016 | CO0082 | CO0083 | N028
+S029,P029,missing_lab,Hemoglobin result not documented,,Outstanding requirements,L0080 | L0081 | CO0085 | CO0086 | N029
+S030,P030,outdated_test,Hemoglobin result outside synthetic 90-day documentation window,,Outstanding requirements,L0082 | L0083 | T0017 | CO0088 | CO0089 | N030
+S031,P031,clinical_review,,Hemoglobin result requires clinician review,Needs clinical review,L0084 | T0018 | CO0091 | CO0092 | N031
+S032,P032,conflicting_documentation,,Clinical note conflicts with structured consent record,Needs clinical review,L0085 | L0086 | L0087 | CO0094 | CO0095 | N032
+S033,P033,complete,,,Documentation complete,L0088 | L0089 | CO0097 | CO0098 | N033
+S034,P034,missing_consent,Anesthesia consent not documented,,Outstanding requirements,L0090 | L0091 | L0092 | CO0100 | CO0101 | N034
+S035,P035,missing_lab,Hemoglobin result not documented,,Outstanding requirements,L0093 | L0094 | CO0103 | CO0104 | N035
+S036,P036,outdated_test,Hemoglobin result outside synthetic 90-day documentation window,,Outstanding requirements,L0095 | L0096 | L0097 | CO0106 | CO0107 | N036
+S037,P037,clinical_review,,Hemoglobin result requires clinician review,Needs clinical review,L0098 | CO0109 | CO0110 | N037
+S038,P038,conflicting_documentation,,Clinical note conflicts with structured consent record,Needs clinical review,L0099 | L0100 | L0101 | T0019 | CO0112 | CO0113 | N038
+S039,P039,complete,,,Documentation complete,L0102 | L0103 | L0104 | CO0115 | CO0116 | N039
+S040,P040,missing_consent,Anesthesia consent not documented,,Outstanding requirements,L0105 | L0106 | L0107 | L0108 | CO0118 | CO0119 | N040
+S041,P041,complete,,,Documentation complete,L0109 | L0110 | L0111 | T0020 | CO0121 | CO0122 | N041
+S042,P042,missing_consent,Anesthesia consent not documented,,Outstanding requirements,L0112 | L0113 | L0114 | L0115 | L0116 | CO0124 | CO0125 | N042
+S043,P043,missing_lab,,,Documentation complete,L0117 | CO0127 | CO0128 | N043
+S044,P044,outdated_test,,,Documentation complete,L0118 | L0119 | L0120 | CO0130 | CO0131 | N044
+S045,P045,clinical_review,,Hemoglobin result requires clinician review,Needs clinical review,L0121 | L0122 | L0123 | CO0133 | CO0134 | N045
+S046,P046,conflicting_documentation,,Clinical note conflicts with structured consent record,Needs clinical review,L0124 | L0125 | L0126 | CO0136 | CO0137 | N046
+S047,P047,complete,,,Documentation complete,L0127 | L0128 | T0021 | CO0139 | CO0140 | N047
+S048,P048,missing_consent,Anesthesia consent not documented,,Outstanding requirements,L0129 | L0130 | CO0142 | CO0143 | N048
+S049,P049,missing_lab,,,Documentation complete,L0131 | L0132 | L0133 | L0134 | L0135 | CO0145 | CO0146 | N049
+S050,P050,outdated_test,,,Documentation complete,L0136 | T0022 | CO0148 | CO0149 | N050
+S051,P051,clinical_review,,Clinical findings require clinician review,Needs clinical review,L0137 | L0138 | CO0151 | CO0152 | N051
+S052,P052,conflicting_documentation,,Clinical note conflicts with structured consent record,Needs clinical review,L0139 | L0140 | CO0154 | CO0155 | N052
+S053,P053,complete,,,Documentation complete,L0141 | L0142 | L0143 | CO0157 | CO0158 | N053
+S054,P054,missing_consent,Anesthesia consent not documented,,Outstanding requirements,L0144 | T0023 | CO0160 | CO0161 | N054
+S055,P055,missing_lab,,,Documentation complete,L0145 | CO0163 | CO0164 | N055
+S056,P056,outdated_test,,,Documentation complete,L0146 | L0147 | L0148 | T0024 | CO0166 | CO0167 | N056
+S057,P057,clinical_review,,Clinical findings require clinician review,Needs clinical review,L0149 | L0150 | CO0169 | CO0170 | N057
+S058,P058,conflicting_documentation,,Clinical note conflicts with structured consent record,Needs clinical review,L0151 | L0152 | CO0172 | CO0173 | N058
+S059,P059,complete,,,Documentation complete,L0153 | L0154 | CO0175 | CO0176 | N059
+S060,P060,missing_consent,Anesthesia consent not documented,,Outstanding requirements,L0155 | L0156 | T0025 | CO0178 | CO0179 | N060
+S061,P061,complete,,,Documentation complete,L0157 | L0158 | L0159 | T0026 | CO0181 | CO0182 | N061
+S062,P062,missing_consent,Anesthesia consent not documented,,Outstanding requirements,L0160 | L0161 | L0162 | L0163 | T0027 | CO0184 | CO0185 | N062
+S063,P063,missing_lab,Creatinine result not documented,,Outstanding requirements,L0164 | L0165 | T0028 | CO0187 | CO0188 | N063
+S064,P064,outdated_test,Creatinine result outside synthetic 90-day documentation window,,Outstanding requirements,L0166 | L0167 | L0168 | T0029 | CO0190 | CO0191 | N064
+S065,P065,clinical_review,,Hemoglobin result requires clinician review,Needs clinical review,L0169 | L0170 | L0171 | T0030 | CO0193 | CO0194 | N065
+S066,P066,conflicting_documentation,,Clinical note conflicts with structured consent record,Needs clinical review,L0172 | L0173 | L0174 | CO0196 | CO0197 | N066
+S067,P067,complete,,,Documentation complete,L0175 | L0176 | T0031 | CO0199 | CO0200 | N067
+S068,P068,missing_consent,Anesthesia consent not documented,,Outstanding requirements,L0177 | L0178 | L0179 | L0180 | CO0202 | CO0203 | N068
+S069,P069,missing_lab,Creatinine result not documented,,Outstanding requirements,L0181 | L0182 | CO0205 | CO0206 | N069
+S070,P070,outdated_test,Creatinine result outside synthetic 90-day documentation window,,Outstanding requirements,L0183 | L0184 | L0185 | L0186 | T0032 | CO0208 | CO0209 | N070
+S071,P071,clinical_review,,Hemoglobin result requires clinician review,Needs clinical review,L0187 | L0188 | L0189 | L0190 | CO0211 | CO0212 | N071
+S072,P072,conflicting_documentation,,Clinical note conflicts with structured consent record,Needs clinical review,L0191 | L0192 | L0193 | CO0214 | CO0215 | N072
+S073,P073,complete,,,Documentation complete,L0194 | L0195 | L0196 | L0197 | CO0217 | CO0218 | N073
+S074,P074,missing_consent,Anesthesia consent not documented,,Outstanding requirements,L0198 | L0199 | L0200 | T0033 | CO0220 | CO0221 | N074
+S075,P075,missing_lab,Creatinine result not documented,,Outstanding requirements,L0201 | CO0223 | CO0224 | N075
+S076,P076,outdated_test,Creatinine result outside synthetic 90-day documentation window,,Outstanding requirements,L0202 | L0203 | L0204 | T0034 | CO0226 | CO0227 | N076
+S077,P077,clinical_review,,Clinical findings require clinician review,Needs clinical review,L0205 | L0206 | T0035 | CO0229 | CO0230 | N077
+S078,P078,conflicting_documentation,,Clinical note conflicts with structured consent record,Needs clinical review,L0207 | L0208 | CO0232 | CO0233 | N078
+S079,P079,complete,,,Documentation complete,L0209 | L0210 | L0211 | CO0235 | CO0236 | N079
+S080,P080,missing_consent,Anesthesia consent not documented,,Outstanding requirements,L0212 | L0213 | L0214 | L0215 | L0216 | CO0238 | CO0239 | N080
+S081,P081,complete,,,Documentation complete,L0217 | L0218 | L0219 | L0220 | L0221 | T0036 | C0161 | CO0241 | CO0242 | CO0243 | N081
+S082,P082,missing_consent,Anesthesia consent not documented,,Outstanding requirements,L0222 | L0223 | L0224 | L0225 | L0226 | L0227 | T0037 | C0163 | CO0244 | CO0245 | CO0246 | N082
+S083,P083,missing_lab,Hemoglobin result not documented,,Outstanding requirements,L0228 | L0229 | L0230 | L0231 | T0038 | C0165 | CO0247 | CO0248 | CO0249 | N083
+S084,P084,outdated_test,Hemoglobin result outside synthetic 90-day documentation window | EKG outside synthetic 90-day documentation window,,Outstanding requirements,L0232 | L0233 | L0234 | L0235 | L0236 | T0039 | C0167 | CO0250 | CO0251 | CO0252 | N084
+S085,P085,clinical_review,,Hemoglobin result requires clinician review,Needs clinical review,L0237 | L0238 | L0239 | L0240 | L0241 | L0242 | T0040 | C0169 | CO0253 | CO0254 | CO0255 | N085
+S086,P086,conflicting_documentation,,Clinical note conflicts with structured consent record,Needs clinical review,L0243 | L0244 | L0245 | L0246 | L0247 | T0041 | C0171 | CO0256 | CO0257 | CO0258 | N086
+S087,P087,complete,,,Documentation complete,L0248 | L0249 | L0250 | L0251 | T0042 | C0173 | CO0259 | CO0260 | CO0261 | N087
+S088,P088,missing_consent,Anesthesia consent not documented,,Outstanding requirements,L0252 | L0253 | L0254 | L0255 | T0043 | C0175 | CO0262 | CO0263 | CO0264 | N088
+S089,P089,missing_lab,Hemoglobin result not documented,,Outstanding requirements,L0256 | L0257 | L0258 | L0259 | T0044 | C0177 | CO0265 | CO0266 | CO0267 | N089
+S090,P090,outdated_test,Hemoglobin result outside synthetic 90-day documentation window | EKG outside synthetic 90-day documentation window,,Outstanding requirements,L0260 | L0261 | L0262 | L0263 | L0264 | T0045 | C0179 | CO0268 | CO0269 | CO0270 | N090
+S091,P091,clinical_review,,Hemoglobin result requires clinician review,Needs clinical review,L0265 | L0266 | L0267 | L0268 | L0269 | T0046 | C0181 | CO0271 | CO0272 | CO0273 | N091
+S092,P092,conflicting_documentation,,Clinical note conflicts with structured consent record,Needs clinical review,L0270 | L0271 | L0272 | L0273 | L0274 | T0047 | C0183 | CO0274 | CO0275 | CO0276 | N092
+S093,P093,complete,,,Documentation complete,L0275 | L0276 | L0277 | L0278 | T0048 | C0185 | CO0277 | CO0278 | CO0279 | N093
+S094,P094,missing_consent,Anesthesia consent not documented,,Outstanding requirements,L0279 | L0280 | L0281 | L0282 | L0283 | L0284 | T0049 | C0187 | CO0280 | CO0281 | CO0282 | N094
+S095,P095,missing_lab,Hemoglobin result not documented,,Outstanding requirements,L0285 | L0286 | L0287 | T0050 | C0189 | CO0283 | CO0284 | CO0285 | N095
+S096,P096,outdated_test,Hemoglobin result outside synthetic 90-day documentation window | EKG outside synthetic 90-day documentation window,,Outstanding requirements,L0288 | L0289 | L0290 | L0291 | L0292 | T0051 | C0191 | CO0286 | CO0287 | CO0288 | N096
+S097,P097,clinical_review,,Hemoglobin result requires clinician review,Needs clinical review,L0293 | L0294 | L0295 | L0296 | L0297 | L0298 | T0052 | C0193 | CO0289 | CO0290 | CO0291 | N097
+S098,P098,conflicting_documentation,,Clinical note conflicts with structured consent record,Needs clinical review,L0299 | L0300 | L0301 | L0302 | T0053 | C0195 | CO0292 | CO0293 | CO0294 | N098
+S099,P099,complete,,,Documentation complete,L0303 | L0304 | L0305 | L0306 | L0307 | T0054 | C0197 | CO0295 | CO0296 | CO0297 | N099
+S100,P100,missing_consent,Anesthesia consent not documented,,Outstanding requirements,L0308 | L0309 | L0310 | L0311 | L0312 | T0055 | C0199 | CO0298 | CO0299 | CO0300 | N100

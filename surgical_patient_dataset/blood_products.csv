@@ -1,0 +1,101 @@
+blood_record_id,surgery_id,patient_id,abo_rh,antibody_screen,crossmatch_status,product_type,units_available,requirement_status
+B001,S001,P001,A-,Not performed,Not required,Not required,0,Not required
+B002,S002,P002,A-,Not performed,Not required,Not required,0,Not required
+B003,S003,P003,O-,Not performed,Not required,Not required,0,Not required
+B004,S004,P004,AB+,Not performed,Not required,Not required,0,Not required
+B005,S005,P005,AB+,Not performed,Not required,Not required,0,Not required
+B006,S006,P006,A+,Not performed,Not required,Not required,0,Not required
+B007,S007,P007,O+,Not performed,Not required,Not required,0,Not required
+B008,S008,P008,A-,Not performed,Not required,Not required,0,Not required
+B009,S009,P009,O-,Not performed,Not required,Not required,0,Not required
+B010,S010,P010,B+,Not performed,Not required,Not required,0,Not required
+B011,S011,P011,O+,Not performed,Not required,Not required,0,Not required
+B012,S012,P012,O-,Not performed,Not required,Not required,0,Not required
+B013,S013,P013,A-,Not performed,Not required,Not required,0,Not required
+B014,S014,P014,O-,Not performed,Not required,Not required,0,Not required
+B015,S015,P015,A+,Not performed,Not required,Not required,0,Not required
+B016,S016,P016,B+,Not performed,Not required,Not required,0,Not required
+B017,S017,P017,O+,Not performed,Not required,Not required,0,Not required
+B018,S018,P018,A+,Not performed,Not required,Not required,0,Not required
+B019,S019,P019,B+,Not performed,Not required,Not required,0,Not required
+B020,S020,P020,A-,Not performed,Not required,Not required,0,Not required
+B021,S021,P021,O+,Not performed,Not required,Not required,0,Not required
+B022,S022,P022,A+,Not performed,Not required,Not required,0,Not required
+B023,S023,P023,O-,Not performed,Not required,Not required,0,Not required
+B024,S024,P024,A+,Not performed,Not required,Not required,0,Not required
+B025,S025,P025,A+,Not performed,Not required,Not required,0,Not required
+B026,S026,P026,A-,Not performed,Not required,Not required,0,Not required
+B027,S027,P027,O+,Not performed,Not required,Not required,0,Not required
+B028,S028,P028,O+,Not performed,Not required,Not required,0,Not required
+B029,S029,P029,AB+,Not performed,Not required,Not required,0,Not required
+B030,S030,P030,A+,Not performed,Not required,Not required,0,Not required
+B031,S031,P031,O+,Not performed,Not required,Not required,0,Not required
+B032,S032,P032,O+,Not performed,Not required,Not required,0,Not required
+B033,S033,P033,B+,Not performed,Not required,Not required,0,Not required
+B034,S034,P034,AB+,Not performed,Not required,Not required,0,Not required
+B035,S035,P035,A+,Not performed,Not required,Not required,0,Not required
+B036,S036,P036,O+,Not performed,Not required,Not required,0,Not required
+B037,S037,P037,B+,Not performed,Not required,Not required,0,Not required
+B038,S038,P038,O+,Not performed,Not required,Not required,0,Not required
+B039,S039,P039,AB+,Not performed,Not required,Not required,0,Not required
+B040,S040,P040,O-,Not performed,Not required,Not required,0,Not required
+B041,S041,P041,AB+,Not performed,Not required,Not required,0,Not required
+B042,S042,P042,A+,Not performed,Not required,Not required,0,Not required
+B043,S043,P043,A+,Not performed,Not required,Not required,0,Not required
+B044,S044,P044,B+,Not performed,Not required,Not required,0,Not required
+B045,S045,P045,O-,Not performed,Not required,Not required,0,Not required
+B046,S046,P046,O-,Not performed,Not required,Not required,0,Not required
+B047,S047,P047,A+,Not performed,Not required,Not required,0,Not required
+B048,S048,P048,O-,Not performed,Not required,Not required,0,Not required
+B049,S049,P049,O-,Not performed,Not required,Not required,0,Not required
+B050,S050,P050,AB+,Not performed,Not required,Not required,0,Not required
+B051,S051,P051,O-,Not performed,Not required,Not required,0,Not required
+B052,S052,P052,B+,Not performed,Not required,Not required,0,Not required
+B053,S053,P053,B+,Not performed,Not required,Not required,0,Not required
+B054,S054,P054,A-,Not performed,Not required,Not required,0,Not required
+B055,S055,P055,A+,Not performed,Not required,Not required,0,Not required
+B056,S056,P056,A-,Not performed,Not required,Not required,0,Not required
+B057,S057,P057,A+,Not performed,Not required,Not required,0,Not required
+B058,S058,P058,O-,Not performed,Not required,Not required,0,Not required
+B059,S059,P059,B+,Not performed,Not required,Not required,0,Not required
+B060,S060,P060,A+,Not performed,Not required,Not required,0,Not required
+B061,S061,P061,O-,Not performed,Not required,Not required,0,Not required
+B062,S062,P062,O-,Not performed,Not required,Not required,0,Not required
+B063,S063,P063,O-,Not performed,Not required,Not required,0,Not required
+B064,S064,P064,B+,Not performed,Not required,Not required,0,Not required
+B065,S065,P065,A-,Not performed,Not required,Not required,0,Not required
+B066,S066,P066,O-,Not performed,Not required,Not required,0,Not required
+B067,S067,P067,A-,Not performed,Not required,Not required,0,Not required
+B068,S068,P068,O+,Not performed,Not required,Not required,0,Not required
+B069,S069,P069,B+,Not performed,Not required,Not required,0,Not required
+B070,S070,P070,A+,Not performed,Not required,Not required,0,Not required
+B071,S071,P071,B+,Not performed,Not required,Not required,0,Not required
+B072,S072,P072,O-,Not performed,Not required,Not required,0,Not required
+B073,S073,P073,B+,Not performed,Not required,Not required,0,Not required
+B074,S074,P074,O+,Not performed,Not required,Not required,0,Not required
+B075,S075,P075,O-,Not performed,Not required,Not required,0,Not required
+B076,S076,P076,A-,Not performed,Not required,Not required,0,Not required
+B077,S077,P077,B+,Not performed,Not required,Not required,0,Not required
+B078,S078,P078,A-,Not performed,Not required,Not required,0,Not required
+B079,S079,P079,A-,Not performed,Not required,Not required,0,Not required
+B080,S080,P080,O+,Not performed,Not required,Not required,0,Not required
+B081,S081,P081,O+,Negative,Completed,Packed red blood cells,2,Available
+B082,S082,P082,AB+,Negative,Completed,Packed red blood cells,2,Available
+B083,S083,P083,A-,Negative,Completed,Packed red blood cells,2,Available
+B084,S084,P084,A+,Negative,Completed,Packed red blood cells,2,Available
+B085,S085,P085,O+,Negative,Completed,Packed red blood cells,2,Available
+B086,S086,P086,A+,Negative,Completed,Packed red blood cells,2,Available
+B087,S087,P087,A-,Negative,Completed,Packed red blood cells,2,Available
+B088,S088,P088,A-,Negative,Completed,Packed red blood cells,2,Available
+B089,S089,P089,O-,Negative,Completed,Packed red blood cells,2,Available
+B090,S090,P090,O-,Negative,Completed,Packed red blood cells,2,Available
+B091,S091,P091,B+,Negative,Completed,Packed red blood cells,2,Available
+B092,S092,P092,O-,Negative,Completed,Packed red blood cells,2,Available
+B093,S093,P093,A+,Negative,Completed,Packed red blood cells,2,Available
+B094,S094,P094,A+,Negative,Completed,Packed red blood cells,2,Available
+B095,S095,P095,O-,Negative,Completed,Packed red blood cells,2,Available
+B096,S096,P096,A+,Negative,Completed,Packed red blood cells,2,Available
+B097,S097,P097,O-,Negative,Completed,Packed red blood cells,2,Available
+B098,S098,P098,A+,Negative,Completed,Packed red blood cells,2,Available
+B099,S099,P099,A+,Negative,Completed,Packed red blood cells,2,Available
+B100,S100,P100,A+,Negative,Completed,Packed red blood cells,2,Available

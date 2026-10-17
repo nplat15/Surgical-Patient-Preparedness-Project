@@ -1,0 +1,301 @@
+consent_id,surgery_id,patient_id,consent_type,applicability,status,signed_date
+CO0001,S001,P001,Surgery consent,Required in synthetic scenario,Signed,2026-11-09
+CO0002,S001,P001,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-09
+CO0003,S001,P001,Blood consent,Not indicated,Not applicable,
+CO0004,S002,P002,Surgery consent,Required in synthetic scenario,Signed,2026-11-10
+CO0005,S002,P002,Anesthesia consent,Required in synthetic scenario,Missing,
+CO0006,S002,P002,Blood consent,Not indicated,Not applicable,
+CO0007,S003,P003,Surgery consent,Required in synthetic scenario,Signed,2026-11-11
+CO0008,S003,P003,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-11
+CO0009,S003,P003,Blood consent,Not indicated,Not applicable,
+CO0010,S004,P004,Surgery consent,Required in synthetic scenario,Signed,2026-11-12
+CO0011,S004,P004,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-12
+CO0012,S004,P004,Blood consent,Not indicated,Not applicable,
+CO0013,S005,P005,Surgery consent,Required in synthetic scenario,Signed,2026-11-13
+CO0014,S005,P005,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-13
+CO0015,S005,P005,Blood consent,Not indicated,Not applicable,
+CO0016,S006,P006,Surgery consent,Required in synthetic scenario,Signed,2026-11-14
+CO0017,S006,P006,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-14
+CO0018,S006,P006,Blood consent,Not indicated,Not applicable,
+CO0019,S007,P007,Surgery consent,Required in synthetic scenario,Signed,2026-11-15
+CO0020,S007,P007,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-15
+CO0021,S007,P007,Blood consent,Not indicated,Not applicable,
+CO0022,S008,P008,Surgery consent,Required in synthetic scenario,Signed,2026-11-16
+CO0023,S008,P008,Anesthesia consent,Required in synthetic scenario,Missing,
+CO0024,S008,P008,Blood consent,Not indicated,Not applicable,
+CO0025,S009,P009,Surgery consent,Required in synthetic scenario,Signed,2026-11-17
+CO0026,S009,P009,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-17
+CO0027,S009,P009,Blood consent,Not indicated,Not applicable,
+CO0028,S010,P010,Surgery consent,Required in synthetic scenario,Signed,2026-11-18
+CO0029,S010,P010,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-18
+CO0030,S010,P010,Blood consent,Not indicated,Not applicable,
+CO0031,S011,P011,Surgery consent,Required in synthetic scenario,Signed,2026-11-19
+CO0032,S011,P011,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-19
+CO0033,S011,P011,Blood consent,Not indicated,Not applicable,
+CO0034,S012,P012,Surgery consent,Required in synthetic scenario,Signed,2026-11-20
+CO0035,S012,P012,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-20
+CO0036,S012,P012,Blood consent,Not indicated,Not applicable,
+CO0037,S013,P013,Surgery consent,Required in synthetic scenario,Signed,2026-11-21
+CO0038,S013,P013,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-21
+CO0039,S013,P013,Blood consent,Not indicated,Not applicable,
+CO0040,S014,P014,Surgery consent,Required in synthetic scenario,Signed,2026-11-22
+CO0041,S014,P014,Anesthesia consent,Required in synthetic scenario,Missing,
+CO0042,S014,P014,Blood consent,Not indicated,Not applicable,
+CO0043,S015,P015,Surgery consent,Required in synthetic scenario,Signed,2026-11-23
+CO0044,S015,P015,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-23
+CO0045,S015,P015,Blood consent,Not indicated,Not applicable,
+CO0046,S016,P016,Surgery consent,Required in synthetic scenario,Signed,2026-11-24
+CO0047,S016,P016,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-24
+CO0048,S016,P016,Blood consent,Not indicated,Not applicable,
+CO0049,S017,P017,Surgery consent,Required in synthetic scenario,Signed,2026-11-25
+CO0050,S017,P017,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-25
+CO0051,S017,P017,Blood consent,Not indicated,Not applicable,
+CO0052,S018,P018,Surgery consent,Required in synthetic scenario,Signed,2026-11-26
+CO0053,S018,P018,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-26
+CO0054,S018,P018,Blood consent,Not indicated,Not applicable,
+CO0055,S019,P019,Surgery consent,Required in synthetic scenario,Signed,2026-11-27
+CO0056,S019,P019,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-27
+CO0057,S019,P019,Blood consent,Not indicated,Not applicable,
+CO0058,S020,P020,Surgery consent,Required in synthetic scenario,Signed,2026-11-28
+CO0059,S020,P020,Anesthesia consent,Required in synthetic scenario,Missing,
+CO0060,S020,P020,Blood consent,Not indicated,Not applicable,
+CO0061,S021,P021,Surgery consent,Required in synthetic scenario,Signed,2026-11-29
+CO0062,S021,P021,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-29
+CO0063,S021,P021,Blood consent,Not indicated,Not applicable,
+CO0064,S022,P022,Surgery consent,Required in synthetic scenario,Signed,2026-11-30
+CO0065,S022,P022,Anesthesia consent,Required in synthetic scenario,Missing,
+CO0066,S022,P022,Blood consent,Not indicated,Not applicable,
+CO0067,S023,P023,Surgery consent,Required in synthetic scenario,Signed,2026-12-01
+CO0068,S023,P023,Anesthesia consent,Required in synthetic scenario,Signed,2026-12-01
+CO0069,S023,P023,Blood consent,Not indicated,Not applicable,
+CO0070,S024,P024,Surgery consent,Required in synthetic scenario,Signed,2026-12-02
+CO0071,S024,P024,Anesthesia consent,Required in synthetic scenario,Signed,2026-12-02
+CO0072,S024,P024,Blood consent,Not indicated,Not applicable,
+CO0073,S025,P025,Surgery consent,Required in synthetic scenario,Signed,2026-12-03
+CO0074,S025,P025,Anesthesia consent,Required in synthetic scenario,Signed,2026-12-03
+CO0075,S025,P025,Blood consent,Not indicated,Not applicable,
+CO0076,S026,P026,Surgery consent,Required in synthetic scenario,Signed,2026-12-04
+CO0077,S026,P026,Anesthesia consent,Required in synthetic scenario,Signed,2026-12-04
+CO0078,S026,P026,Blood consent,Not indicated,Not applicable,
+CO0079,S027,P027,Surgery consent,Required in synthetic scenario,Signed,2026-11-09
+CO0080,S027,P027,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-09
+CO0081,S027,P027,Blood consent,Not indicated,Not applicable,
+CO0082,S028,P028,Surgery consent,Required in synthetic scenario,Signed,2026-11-10
+CO0083,S028,P028,Anesthesia consent,Required in synthetic scenario,Missing,
+CO0084,S028,P028,Blood consent,Not indicated,Not applicable,
+CO0085,S029,P029,Surgery consent,Required in synthetic scenario,Signed,2026-11-11
+CO0086,S029,P029,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-11
+CO0087,S029,P029,Blood consent,Not indicated,Not applicable,
+CO0088,S030,P030,Surgery consent,Required in synthetic scenario,Signed,2026-11-12
+CO0089,S030,P030,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-12
+CO0090,S030,P030,Blood consent,Not indicated,Not applicable,
+CO0091,S031,P031,Surgery consent,Required in synthetic scenario,Signed,2026-11-13
+CO0092,S031,P031,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-13
+CO0093,S031,P031,Blood consent,Not indicated,Not applicable,
+CO0094,S032,P032,Surgery consent,Required in synthetic scenario,Signed,2026-11-14
+CO0095,S032,P032,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-14
+CO0096,S032,P032,Blood consent,Not indicated,Not applicable,
+CO0097,S033,P033,Surgery consent,Required in synthetic scenario,Signed,2026-11-15
+CO0098,S033,P033,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-15
+CO0099,S033,P033,Blood consent,Not indicated,Not applicable,
+CO0100,S034,P034,Surgery consent,Required in synthetic scenario,Signed,2026-11-16
+CO0101,S034,P034,Anesthesia consent,Required in synthetic scenario,Missing,
+CO0102,S034,P034,Blood consent,Not indicated,Not applicable,
+CO0103,S035,P035,Surgery consent,Required in synthetic scenario,Signed,2026-11-17
+CO0104,S035,P035,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-17
+CO0105,S035,P035,Blood consent,Not indicated,Not applicable,
+CO0106,S036,P036,Surgery consent,Required in synthetic scenario,Signed,2026-11-18
+CO0107,S036,P036,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-18
+CO0108,S036,P036,Blood consent,Not indicated,Not applicable,
+CO0109,S037,P037,Surgery consent,Required in synthetic scenario,Signed,2026-11-19
+CO0110,S037,P037,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-19
+CO0111,S037,P037,Blood consent,Not indicated,Not applicable,
+CO0112,S038,P038,Surgery consent,Required in synthetic scenario,Signed,2026-11-20
+CO0113,S038,P038,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-20
+CO0114,S038,P038,Blood consent,Not indicated,Not applicable,
+CO0115,S039,P039,Surgery consent,Required in synthetic scenario,Signed,2026-11-21
+CO0116,S039,P039,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-21
+CO0117,S039,P039,Blood consent,Not indicated,Not applicable,
+CO0118,S040,P040,Surgery consent,Required in synthetic scenario,Signed,2026-11-22
+CO0119,S040,P040,Anesthesia consent,Required in synthetic scenario,Missing,
+CO0120,S040,P040,Blood consent,Not indicated,Not applicable,
+CO0121,S041,P041,Surgery consent,Required in synthetic scenario,Signed,2026-11-23
+CO0122,S041,P041,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-23
+CO0123,S041,P041,Blood consent,Not indicated,Not applicable,
+CO0124,S042,P042,Surgery consent,Required in synthetic scenario,Signed,2026-11-24
+CO0125,S042,P042,Anesthesia consent,Required in synthetic scenario,Missing,
+CO0126,S042,P042,Blood consent,Not indicated,Not applicable,
+CO0127,S043,P043,Surgery consent,Required in synthetic scenario,Signed,2026-11-25
+CO0128,S043,P043,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-25
+CO0129,S043,P043,Blood consent,Not indicated,Not applicable,
+CO0130,S044,P044,Surgery consent,Required in synthetic scenario,Signed,2026-11-26
+CO0131,S044,P044,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-26
+CO0132,S044,P044,Blood consent,Not indicated,Not applicable,
+CO0133,S045,P045,Surgery consent,Required in synthetic scenario,Signed,2026-11-27
+CO0134,S045,P045,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-27
+CO0135,S045,P045,Blood consent,Not indicated,Not applicable,
+CO0136,S046,P046,Surgery consent,Required in synthetic scenario,Signed,2026-11-28
+CO0137,S046,P046,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-28
+CO0138,S046,P046,Blood consent,Not indicated,Not applicable,
+CO0139,S047,P047,Surgery consent,Required in synthetic scenario,Signed,2026-11-29
+CO0140,S047,P047,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-29
+CO0141,S047,P047,Blood consent,Not indicated,Not applicable,
+CO0142,S048,P048,Surgery consent,Required in synthetic scenario,Signed,2026-11-30
+CO0143,S048,P048,Anesthesia consent,Required in synthetic scenario,Missing,
+CO0144,S048,P048,Blood consent,Not indicated,Not applicable,
+CO0145,S049,P049,Surgery consent,Required in synthetic scenario,Signed,2026-12-01
+CO0146,S049,P049,Anesthesia consent,Required in synthetic scenario,Signed,2026-12-01
+CO0147,S049,P049,Blood consent,Not indicated,Not applicable,
+CO0148,S050,P050,Surgery consent,Required in synthetic scenario,Signed,2026-12-02
+CO0149,S050,P050,Anesthesia consent,Required in synthetic scenario,Signed,2026-12-02
+CO0150,S050,P050,Blood consent,Not indicated,Not applicable,
+CO0151,S051,P051,Surgery consent,Required in synthetic scenario,Signed,2026-12-03
+CO0152,S051,P051,Anesthesia consent,Required in synthetic scenario,Signed,2026-12-03
+CO0153,S051,P051,Blood consent,Not indicated,Not applicable,
+CO0154,S052,P052,Surgery consent,Required in synthetic scenario,Signed,2026-12-04
+CO0155,S052,P052,Anesthesia consent,Required in synthetic scenario,Signed,2026-12-04
+CO0156,S052,P052,Blood consent,Not indicated,Not applicable,
+CO0157,S053,P053,Surgery consent,Required in synthetic scenario,Signed,2026-11-09
+CO0158,S053,P053,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-09
+CO0159,S053,P053,Blood consent,Not indicated,Not applicable,
+CO0160,S054,P054,Surgery consent,Required in synthetic scenario,Signed,2026-11-10
+CO0161,S054,P054,Anesthesia consent,Required in synthetic scenario,Missing,
+CO0162,S054,P054,Blood consent,Not indicated,Not applicable,
+CO0163,S055,P055,Surgery consent,Required in synthetic scenario,Signed,2026-11-11
+CO0164,S055,P055,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-11
+CO0165,S055,P055,Blood consent,Not indicated,Not applicable,
+CO0166,S056,P056,Surgery consent,Required in synthetic scenario,Signed,2026-11-12
+CO0167,S056,P056,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-12
+CO0168,S056,P056,Blood consent,Not indicated,Not applicable,
+CO0169,S057,P057,Surgery consent,Required in synthetic scenario,Signed,2026-11-13
+CO0170,S057,P057,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-13
+CO0171,S057,P057,Blood consent,Not indicated,Not applicable,
+CO0172,S058,P058,Surgery consent,Required in synthetic scenario,Signed,2026-11-14
+CO0173,S058,P058,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-14
+CO0174,S058,P058,Blood consent,Not indicated,Not applicable,
+CO0175,S059,P059,Surgery consent,Required in synthetic scenario,Signed,2026-11-15
+CO0176,S059,P059,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-15
+CO0177,S059,P059,Blood consent,Not indicated,Not applicable,
+CO0178,S060,P060,Surgery consent,Required in synthetic scenario,Signed,2026-11-16
+CO0179,S060,P060,Anesthesia consent,Required in synthetic scenario,Missing,
+CO0180,S060,P060,Blood consent,Not indicated,Not applicable,
+CO0181,S061,P061,Surgery consent,Required in synthetic scenario,Signed,2026-11-17
+CO0182,S061,P061,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-17
+CO0183,S061,P061,Blood consent,Not indicated,Not applicable,
+CO0184,S062,P062,Surgery consent,Required in synthetic scenario,Signed,2026-11-18
+CO0185,S062,P062,Anesthesia consent,Required in synthetic scenario,Missing,
+CO0186,S062,P062,Blood consent,Not indicated,Not applicable,
+CO0187,S063,P063,Surgery consent,Required in synthetic scenario,Signed,2026-11-19
+CO0188,S063,P063,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-19
+CO0189,S063,P063,Blood consent,Not indicated,Not applicable,
+CO0190,S064,P064,Surgery consent,Required in synthetic scenario,Signed,2026-11-20
+CO0191,S064,P064,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-20
+CO0192,S064,P064,Blood consent,Not indicated,Not applicable,
+CO0193,S065,P065,Surgery consent,Required in synthetic scenario,Signed,2026-11-21
+CO0194,S065,P065,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-21
+CO0195,S065,P065,Blood consent,Not indicated,Not applicable,
+CO0196,S066,P066,Surgery consent,Required in synthetic scenario,Signed,2026-11-22
+CO0197,S066,P066,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-22
+CO0198,S066,P066,Blood consent,Not indicated,Not applicable,
+CO0199,S067,P067,Surgery consent,Required in synthetic scenario,Signed,2026-11-23
+CO0200,S067,P067,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-23
+CO0201,S067,P067,Blood consent,Not indicated,Not applicable,
+CO0202,S068,P068,Surgery consent,Required in synthetic scenario,Signed,2026-11-24
+CO0203,S068,P068,Anesthesia consent,Required in synthetic scenario,Missing,
+CO0204,S068,P068,Blood consent,Not indicated,Not applicable,
+CO0205,S069,P069,Surgery consent,Required in synthetic scenario,Signed,2026-11-25
+CO0206,S069,P069,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-25
+CO0207,S069,P069,Blood consent,Not indicated,Not applicable,
+CO0208,S070,P070,Surgery consent,Required in synthetic scenario,Signed,2026-11-26
+CO0209,S070,P070,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-26
+CO0210,S070,P070,Blood consent,Not indicated,Not applicable,
+CO0211,S071,P071,Surgery consent,Required in synthetic scenario,Signed,2026-11-27
+CO0212,S071,P071,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-27
+CO0213,S071,P071,Blood consent,Not indicated,Not applicable,
+CO0214,S072,P072,Surgery consent,Required in synthetic scenario,Signed,2026-11-28
+CO0215,S072,P072,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-28
+CO0216,S072,P072,Blood consent,Not indicated,Not applicable,
+CO0217,S073,P073,Surgery consent,Required in synthetic scenario,Signed,2026-11-29
+CO0218,S073,P073,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-29
+CO0219,S073,P073,Blood consent,Not indicated,Not applicable,
+CO0220,S074,P074,Surgery consent,Required in synthetic scenario,Signed,2026-11-30
+CO0221,S074,P074,Anesthesia consent,Required in synthetic scenario,Missing,
+CO0222,S074,P074,Blood consent,Not indicated,Not applicable,
+CO0223,S075,P075,Surgery consent,Required in synthetic scenario,Signed,2026-12-01
+CO0224,S075,P075,Anesthesia consent,Required in synthetic scenario,Signed,2026-12-01
+CO0225,S075,P075,Blood consent,Not indicated,Not applicable,
+CO0226,S076,P076,Surgery consent,Required in synthetic scenario,Signed,2026-12-02
+CO0227,S076,P076,Anesthesia consent,Required in synthetic scenario,Signed,2026-12-02
+CO0228,S076,P076,Blood consent,Not indicated,Not applicable,
+CO0229,S077,P077,Surgery consent,Required in synthetic scenario,Signed,2026-12-03
+CO0230,S077,P077,Anesthesia consent,Required in synthetic scenario,Signed,2026-12-03
+CO0231,S077,P077,Blood consent,Not indicated,Not applicable,
+CO0232,S078,P078,Surgery consent,Required in synthetic scenario,Signed,2026-12-04
+CO0233,S078,P078,Anesthesia consent,Required in synthetic scenario,Signed,2026-12-04
+CO0234,S078,P078,Blood consent,Not indicated,Not applicable,
+CO0235,S079,P079,Surgery consent,Required in synthetic scenario,Signed,2026-11-09
+CO0236,S079,P079,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-09
+CO0237,S079,P079,Blood consent,Not indicated,Not applicable,
+CO0238,S080,P080,Surgery consent,Required in synthetic scenario,Signed,2026-11-10
+CO0239,S080,P080,Anesthesia consent,Required in synthetic scenario,Missing,
+CO0240,S080,P080,Blood consent,Not indicated,Not applicable,
+CO0241,S081,P081,Surgery consent,Required in synthetic scenario,Signed,2026-11-11
+CO0242,S081,P081,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-11
+CO0243,S081,P081,Blood consent,Required in synthetic scenario,Signed,2026-11-11
+CO0244,S082,P082,Surgery consent,Required in synthetic scenario,Signed,2026-11-12
+CO0245,S082,P082,Anesthesia consent,Required in synthetic scenario,Missing,
+CO0246,S082,P082,Blood consent,Required in synthetic scenario,Signed,2026-11-12
+CO0247,S083,P083,Surgery consent,Required in synthetic scenario,Signed,2026-11-13
+CO0248,S083,P083,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-13
+CO0249,S083,P083,Blood consent,Required in synthetic scenario,Signed,2026-11-13
+CO0250,S084,P084,Surgery consent,Required in synthetic scenario,Signed,2026-11-14
+CO0251,S084,P084,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-14
+CO0252,S084,P084,Blood consent,Required in synthetic scenario,Signed,2026-11-14
+CO0253,S085,P085,Surgery consent,Required in synthetic scenario,Signed,2026-11-15
+CO0254,S085,P085,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-15
+CO0255,S085,P085,Blood consent,Required in synthetic scenario,Signed,2026-11-15
+CO0256,S086,P086,Surgery consent,Required in synthetic scenario,Signed,2026-11-16
+CO0257,S086,P086,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-16
+CO0258,S086,P086,Blood consent,Required in synthetic scenario,Signed,2026-11-16
+CO0259,S087,P087,Surgery consent,Required in synthetic scenario,Signed,2026-11-17
+CO0260,S087,P087,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-17
+CO0261,S087,P087,Blood consent,Required in synthetic scenario,Signed,2026-11-17
+CO0262,S088,P088,Surgery consent,Required in synthetic scenario,Signed,2026-11-18
+CO0263,S088,P088,Anesthesia consent,Required in synthetic scenario,Missing,
+CO0264,S088,P088,Blood consent,Required in synthetic scenario,Signed,2026-11-18
+CO0265,S089,P089,Surgery consent,Required in synthetic scenario,Signed,2026-11-19
+CO0266,S089,P089,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-19
+CO0267,S089,P089,Blood consent,Required in synthetic scenario,Signed,2026-11-19
+CO0268,S090,P090,Surgery consent,Required in synthetic scenario,Signed,2026-11-20
+CO0269,S090,P090,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-20
+CO0270,S090,P090,Blood consent,Required in synthetic scenario,Signed,2026-11-20
+CO0271,S091,P091,Surgery consent,Required in synthetic scenario,Signed,2026-11-21
+CO0272,S091,P091,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-21
+CO0273,S091,P091,Blood consent,Required in synthetic scenario,Signed,2026-11-21
+CO0274,S092,P092,Surgery consent,Required in synthetic scenario,Signed,2026-11-22
+CO0275,S092,P092,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-22
+CO0276,S092,P092,Blood consent,Required in synthetic scenario,Signed,2026-11-22
+CO0277,S093,P093,Surgery consent,Required in synthetic scenario,Signed,2026-11-23
+CO0278,S093,P093,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-23
+CO0279,S093,P093,Blood consent,Required in synthetic scenario,Signed,2026-11-23
+CO0280,S094,P094,Surgery consent,Required in synthetic scenario,Signed,2026-11-24
+CO0281,S094,P094,Anesthesia consent,Required in synthetic scenario,Missing,
+CO0282,S094,P094,Blood consent,Required in synthetic scenario,Signed,2026-11-24
+CO0283,S095,P095,Surgery consent,Required in synthetic scenario,Signed,2026-11-25
+CO0284,S095,P095,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-25
+CO0285,S095,P095,Blood consent,Required in synthetic scenario,Signed,2026-11-25
+CO0286,S096,P096,Surgery consent,Required in synthetic scenario,Signed,2026-11-26
+CO0287,S096,P096,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-26
+CO0288,S096,P096,Blood consent,Required in synthetic scenario,Signed,2026-11-26
+CO0289,S097,P097,Surgery consent,Required in synthetic scenario,Signed,2026-11-27
+CO0290,S097,P097,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-27
+CO0291,S097,P097,Blood consent,Required in synthetic scenario,Signed,2026-11-27
+CO0292,S098,P098,Surgery consent,Required in synthetic scenario,Signed,2026-11-28
+CO0293,S098,P098,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-28
+CO0294,S098,P098,Blood consent,Required in synthetic scenario,Signed,2026-11-28
+CO0295,S099,P099,Surgery consent,Required in synthetic scenario,Signed,2026-11-29
+CO0296,S099,P099,Anesthesia consent,Required in synthetic scenario,Signed,2026-11-29
+CO0297,S099,P099,Blood consent,Required in synthetic scenario,Signed,2026-11-29
+CO0298,S100,P100,Surgery consent,Required in synthetic scenario,Signed,2026-11-30
+CO0299,S100,P100,Anesthesia consent,Required in synthetic scenario,Missing,
+CO0300,S100,P100,Blood consent,Required in synthetic scenario,Signed,2026-11-30

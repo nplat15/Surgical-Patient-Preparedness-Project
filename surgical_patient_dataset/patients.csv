@@ -1,0 +1,101 @@
+patient_id,age,sex,diagnoses,medical_history,allergies,anesthesia_complication_history
+P001,66,Female,Symptomatic cholelithiasis; Atrial fibrillation,Symptomatic cholelithiasis; Atrial fibrillation,No known drug allergies,None documented
+P002,23,Female,Symptomatic cholelithiasis; Anemia; Hypertension; Gastroesophageal reflux disease,Symptomatic cholelithiasis; Anemia; Hypertension; Gastroesophageal reflux disease,Penicillin,None documented
+P003,73,Female,Symptomatic cholelithiasis; Hypothyroidism; Asthma,Symptomatic cholelithiasis; Hypothyroidism; Asthma,Latex,None documented
+P004,83,Female,Symptomatic cholelithiasis; COPD; Anemia; Obstructive sleep apnea,Symptomatic cholelithiasis; COPD; Anemia; Obstructive sleep apnea,Penicillin,None documented
+P005,71,Female,Symptomatic cholelithiasis; COPD; Hyperlipidemia; Anemia,Symptomatic cholelithiasis; COPD; Hyperlipidemia; Anemia,No known drug allergies,Prior postoperative nausea and vomiting
+P006,43,Female,Symptomatic cholelithiasis; Asthma; Atrial fibrillation,Symptomatic cholelithiasis; Asthma; Atrial fibrillation,Sulfonamides,None documented
+P007,81,Female,Symptomatic cholelithiasis,Symptomatic cholelithiasis,Latex,None documented
+P008,37,Female,Symptomatic cholelithiasis; Gastroesophageal reflux disease,Symptomatic cholelithiasis; Gastroesophageal reflux disease,No known drug allergies,None documented
+P009,21,Female,Symptomatic cholelithiasis; Asthma; Hyperlipidemia,Symptomatic cholelithiasis; Asthma; Hyperlipidemia,Sulfonamides,None documented
+P010,21,Male,Symptomatic cholelithiasis; Hypothyroidism; Atrial fibrillation,Symptomatic cholelithiasis; Hypothyroidism; Atrial fibrillation,Sulfonamides,None documented
+P011,18,Male,Symptomatic cholelithiasis; Chronic kidney disease; Asthma,Symptomatic cholelithiasis; Chronic kidney disease; Asthma,No known drug allergies,None documented
+P012,35,Female,Symptomatic cholelithiasis; Asthma; Anemia,Symptomatic cholelithiasis; Asthma; Anemia,Latex,None documented
+P013,56,Male,Symptomatic cholelithiasis; Gastroesophageal reflux disease,Symptomatic cholelithiasis; Gastroesophageal reflux disease,Penicillin,None documented
+P014,70,Female,Symptomatic cholelithiasis; Asthma; Gastroesophageal reflux disease; Atrial fibrillation,Symptomatic cholelithiasis; Asthma; Gastroesophageal reflux disease; Atrial fibrillation,No known drug allergies,None documented
+P015,28,Female,Symptomatic cholelithiasis; COPD,Symptomatic cholelithiasis; COPD,Sulfonamides,None documented
+P016,36,Male,Symptomatic cholelithiasis; Hypothyroidism; COPD,Symptomatic cholelithiasis; Hypothyroidism; COPD,Penicillin,None documented
+P017,70,Male,Symptomatic cholelithiasis; COPD; Gastroesophageal reflux disease,Symptomatic cholelithiasis; COPD; Gastroesophageal reflux disease,Penicillin,None documented
+P018,82,Female,Symptomatic cholelithiasis; Chronic kidney disease; Asthma,Symptomatic cholelithiasis; Chronic kidney disease; Asthma,No known drug allergies,Prior postoperative nausea and vomiting
+P019,39,Female,Symptomatic cholelithiasis; Type 2 diabetes mellitus; Asthma,Symptomatic cholelithiasis; Type 2 diabetes mellitus; Asthma,No known drug allergies,None documented
+P020,82,Male,Symptomatic cholelithiasis; Obstructive sleep apnea,Symptomatic cholelithiasis; Obstructive sleep apnea,Sulfonamides,None documented
+P021,75,Female,Breast malignancy; Gastroesophageal reflux disease; Chronic kidney disease,Breast malignancy; Gastroesophageal reflux disease; Chronic kidney disease,Latex,None documented
+P022,64,Female,Breast malignancy; Hypertension,Breast malignancy; Hypertension,No known drug allergies,None documented
+P023,56,Female,Breast malignancy; Hypertension; Gastroesophageal reflux disease,Breast malignancy; Hypertension; Gastroesophageal reflux disease,No known drug allergies,None documented
+P024,53,Female,Breast malignancy; Chronic kidney disease; Anemia,Breast malignancy; Chronic kidney disease; Anemia,No known drug allergies,None documented
+P025,87,Female,Breast malignancy; Atrial fibrillation; Asthma,Breast malignancy; Atrial fibrillation; Asthma,No known drug allergies,None documented
+P026,72,Female,Breast malignancy; Gastroesophageal reflux disease,Breast malignancy; Gastroesophageal reflux disease,No known drug allergies,None documented
+P027,47,Female,Breast malignancy,Breast malignancy,Sulfonamides,None documented
+P028,52,Female,Breast malignancy; Asthma; Hyperlipidemia; Hypertension,Breast malignancy; Asthma; Hyperlipidemia; Hypertension,Sulfonamides,None documented
+P029,76,Female,Breast malignancy; Hyperlipidemia; Asthma,Breast malignancy; Hyperlipidemia; Asthma,Penicillin,Prior postoperative nausea and vomiting
+P030,74,Female,Breast malignancy; Hyperlipidemia; Type 2 diabetes mellitus; Gastroesophageal reflux disease,Breast malignancy; Hyperlipidemia; Type 2 diabetes mellitus; Gastroesophageal reflux disease,Penicillin,None documented
+P031,21,Female,Breast malignancy; COPD,Breast malignancy; COPD,Sulfonamides,None documented
+P032,76,Female,Breast malignancy; Chronic kidney disease; Obstructive sleep apnea,Breast malignancy; Chronic kidney disease; Obstructive sleep apnea,Sulfonamides,None documented
+P033,78,Female,Breast malignancy; Atrial fibrillation; Chronic kidney disease,Breast malignancy; Atrial fibrillation; Chronic kidney disease,Sulfonamides,Prior postoperative nausea and vomiting
+P034,27,Female,Breast malignancy; Anemia; Hyperlipidemia,Breast malignancy; Anemia; Hyperlipidemia,No known drug allergies,None documented
+P035,32,Female,Breast malignancy; Asthma; Hypertension,Breast malignancy; Asthma; Hypertension,Latex,None documented
+P036,77,Female,Breast malignancy; Anemia,Breast malignancy; Anemia,Latex,None documented
+P037,58,Female,Breast malignancy,Breast malignancy,Penicillin,None documented
+P038,75,Female,Breast malignancy; Anemia,Breast malignancy; Anemia,No known drug allergies,None documented
+P039,86,Female,Breast malignancy; Gastroesophageal reflux disease,Breast malignancy; Gastroesophageal reflux disease,Penicillin,None documented
+P040,87,Female,Breast malignancy; Hypertension; Asthma,Breast malignancy; Hypertension; Asthma,Penicillin,None documented
+P041,71,Male,Meniscal tear; Gastroesophageal reflux disease; Chronic kidney disease,Meniscal tear; Gastroesophageal reflux disease; Chronic kidney disease,Latex,None documented
+P042,51,Male,Meniscal tear; Hypertension; Asthma,Meniscal tear; Hypertension; Asthma,No known drug allergies,None documented
+P043,54,Male,Meniscal tear; Type 2 diabetes mellitus,Meniscal tear; Type 2 diabetes mellitus,No known drug allergies,None documented
+P044,83,Female,Meniscal tear; Type 2 diabetes mellitus; Anemia; Chronic kidney disease,Meniscal tear; Type 2 diabetes mellitus; Anemia; Chronic kidney disease,No known drug allergies,None documented
+P045,68,Female,Meniscal tear,Meniscal tear,Latex,None documented
+P046,34,Female,Meniscal tear; Hypothyroidism; Hypertension; COPD,Meniscal tear; Hypothyroidism; Hypertension; COPD,Latex,None documented
+P047,67,Male,Meniscal tear; Hypothyroidism; Asthma,Meniscal tear; Hypothyroidism; Asthma,Latex,None documented
+P048,32,Male,Meniscal tear; Hypertension,Meniscal tear; Hypertension,Sulfonamides,None documented
+P049,47,Female,Meniscal tear; Hyperlipidemia,Meniscal tear; Hyperlipidemia,Penicillin,None documented
+P050,87,Male,Meniscal tear; Type 2 diabetes mellitus; Hyperlipidemia; Atrial fibrillation,Meniscal tear; Type 2 diabetes mellitus; Hyperlipidemia; Atrial fibrillation,No known drug allergies,None documented
+P051,79,Female,Meniscal tear; Hypertension; Asthma; Hyperlipidemia,Meniscal tear; Hypertension; Asthma; Hyperlipidemia,Sulfonamides,None documented
+P052,23,Male,Meniscal tear; Obstructive sleep apnea; Hyperlipidemia,Meniscal tear; Obstructive sleep apnea; Hyperlipidemia,Latex,None documented
+P053,86,Female,Meniscal tear; Obstructive sleep apnea; Hypertension,Meniscal tear; Obstructive sleep apnea; Hypertension,Penicillin,None documented
+P054,75,Male,Meniscal tear; COPD; Hyperlipidemia; Hypertension,Meniscal tear; COPD; Hyperlipidemia; Hypertension,Penicillin,None documented
+P055,81,Female,Meniscal tear; Hypertension; COPD,Meniscal tear; Hypertension; COPD,No known drug allergies,None documented
+P056,19,Male,Meniscal tear; Asthma; Anemia,Meniscal tear; Asthma; Anemia,No known drug allergies,Prior postoperative nausea and vomiting
+P057,82,Male,Meniscal tear,Meniscal tear,No known drug allergies,None documented
+P058,73,Male,Meniscal tear; Atrial fibrillation; Asthma,Meniscal tear; Atrial fibrillation; Asthma,Sulfonamides,None documented
+P059,40,Female,Meniscal tear; Anemia; Asthma,Meniscal tear; Anemia; Asthma,No known drug allergies,None documented
+P060,41,Female,Meniscal tear; Type 2 diabetes mellitus,Meniscal tear; Type 2 diabetes mellitus,Sulfonamides,None documented
+P061,24,Female,Ureteral calculus; Chronic kidney disease,Ureteral calculus; Chronic kidney disease,No known drug allergies,None documented
+P062,56,Female,Ureteral calculus; Gastroesophageal reflux disease; COPD; Hypertension,Ureteral calculus; Gastroesophageal reflux disease; COPD; Hypertension,No known drug allergies,None documented
+P063,81,Female,Ureteral calculus; Obstructive sleep apnea,Ureteral calculus; Obstructive sleep apnea,No known drug allergies,None documented
+P064,56,Male,Ureteral calculus; Asthma,Ureteral calculus; Asthma,Latex,None documented
+P065,23,Male,Ureteral calculus; Obstructive sleep apnea,Ureteral calculus; Obstructive sleep apnea,Penicillin,None documented
+P066,40,Female,Ureteral calculus; Type 2 diabetes mellitus,Ureteral calculus; Type 2 diabetes mellitus,Penicillin,None documented
+P067,55,Male,Ureteral calculus; Gastroesophageal reflux disease,Ureteral calculus; Gastroesophageal reflux disease,Sulfonamides,None documented
+P068,52,Male,Ureteral calculus; Type 2 diabetes mellitus; Hypothyroidism,Ureteral calculus; Type 2 diabetes mellitus; Hypothyroidism,Penicillin,None documented
+P069,18,Female,Ureteral calculus,Ureteral calculus,No known drug allergies,None documented
+P070,31,Female,Ureteral calculus,Ureteral calculus,Sulfonamides,None documented
+P071,82,Male,Ureteral calculus; COPD,Ureteral calculus; COPD,No known drug allergies,None documented
+P072,21,Male,Ureteral calculus; Obstructive sleep apnea; Gastroesophageal reflux disease,Ureteral calculus; Obstructive sleep apnea; Gastroesophageal reflux disease,Penicillin,None documented
+P073,27,Female,Ureteral calculus; Hyperlipidemia,Ureteral calculus; Hyperlipidemia,Penicillin,None documented
+P074,44,Female,Ureteral calculus; Hypertension,Ureteral calculus; Hypertension,Penicillin,None documented
+P075,87,Female,Ureteral calculus; Gastroesophageal reflux disease,Ureteral calculus; Gastroesophageal reflux disease,No known drug allergies,None documented
+P076,56,Female,Ureteral calculus; Chronic kidney disease,Ureteral calculus; Chronic kidney disease,Latex,None documented
+P077,80,Female,Ureteral calculus; Hyperlipidemia,Ureteral calculus; Hyperlipidemia,No known drug allergies,None documented
+P078,33,Male,Ureteral calculus; Anemia,Ureteral calculus; Anemia,No known drug allergies,None documented
+P079,90,Male,Ureteral calculus; Hypertension,Ureteral calculus; Hypertension,No known drug allergies,None documented
+P080,45,Female,Ureteral calculus,Ureteral calculus,Latex,None documented
+P081,20,Female,Multivessel coronary artery disease; Obstructive sleep apnea,Multivessel coronary artery disease; Obstructive sleep apnea,No known drug allergies,None documented
+P082,79,Female,Multivessel coronary artery disease; Atrial fibrillation; Asthma; Obstructive sleep apnea,Multivessel coronary artery disease; Atrial fibrillation; Asthma; Obstructive sleep apnea,Penicillin,None documented
+P083,45,Female,Multivessel coronary artery disease; Hypothyroidism; Type 2 diabetes mellitus,Multivessel coronary artery disease; Hypothyroidism; Type 2 diabetes mellitus,No known drug allergies,None documented
+P084,83,Female,Multivessel coronary artery disease; Obstructive sleep apnea,Multivessel coronary artery disease; Obstructive sleep apnea,Sulfonamides,None documented
+P085,40,Male,Multivessel coronary artery disease; Type 2 diabetes mellitus,Multivessel coronary artery disease; Type 2 diabetes mellitus,Penicillin,Prior postoperative nausea and vomiting
+P086,33,Female,Multivessel coronary artery disease; COPD,Multivessel coronary artery disease; COPD,Penicillin,None documented
+P087,25,Female,Multivessel coronary artery disease,Multivessel coronary artery disease,No known drug allergies,None documented
+P088,20,Male,Multivessel coronary artery disease; Anemia; Hypertension; Hyperlipidemia,Multivessel coronary artery disease; Anemia; Hypertension; Hyperlipidemia,No known drug allergies,None documented
+P089,34,Male,Multivessel coronary artery disease,Multivessel coronary artery disease,No known drug allergies,None documented
+P090,38,Female,Multivessel coronary artery disease; Anemia; Asthma,Multivessel coronary artery disease; Anemia; Asthma,No known drug allergies,None documented
+P091,79,Female,Multivessel coronary artery disease; Hypothyroidism; Anemia,Multivessel coronary artery disease; Hypothyroidism; Anemia,Sulfonamides,None documented
+P092,37,Male,Multivessel coronary artery disease; Anemia,Multivessel coronary artery disease; Anemia,No known drug allergies,None documented
+P093,38,Female,Multivessel coronary artery disease; Hypothyroidism,Multivessel coronary artery disease; Hypothyroidism,No known drug allergies,None documented
+P094,76,Male,Multivessel coronary artery disease; Obstructive sleep apnea,Multivessel coronary artery disease; Obstructive sleep apnea,No known drug allergies,None documented
+P095,82,Male,Multivessel coronary artery disease; Gastroesophageal reflux disease,Multivessel coronary artery disease; Gastroesophageal reflux disease,Penicillin,None documented
+P096,23,Female,Multivessel coronary artery disease; Obstructive sleep apnea,Multivessel coronary artery disease; Obstructive sleep apnea,Sulfonamides,None documented
+P097,32,Male,Multivessel coronary artery disease; Atrial fibrillation; Asthma; Chronic kidney disease,Multivessel coronary artery disease; Atrial fibrillation; Asthma; Chronic kidney disease,No known drug allergies,None documented
+P098,57,Male,Multivessel coronary artery disease; COPD; Anemia,Multivessel coronary artery disease; COPD; Anemia,No known drug allergies,None documented
+P099,43,Female,Multivessel coronary artery disease; Hypertension; Hypothyroidism; Anemia,Multivessel coronary artery disease; Hypertension; Hypothyroidism; Anemia,No known drug allergies,None documented
+P100,85,Female,Multivessel coronary artery disease; Asthma; Anemia,Multivessel coronary artery disease; Asthma; Anemia,Latex,None documented
