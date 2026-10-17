@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+results/cache/
+results/cache_test/
+results/decisions.csv
+.env

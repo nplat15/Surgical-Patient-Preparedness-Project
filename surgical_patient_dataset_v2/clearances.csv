@@ -1,0 +1,30 @@
+clearance_id,surgery_id,patient_id,clearance_type,status,requested_date,completed_date,assessment_note
+C0001,S002,P002,Pulmonary assessment,Completed,2026-10-26,2026-11-02,COPD stable on current inhalers; acceptable pulmonary risk. Incentive spirometry post-op.
+C0002,S007,P007,Pulmonary assessment,Completed,2026-11-11,2026-11-18,COPD stable on current inhalers; acceptable pulmonary risk. Incentive spirometry post-op.
+C0003,S009,P009,Pulmonary assessment,Completed,2026-10-16,2026-10-18,COPD stable on current inhalers; acceptable pulmonary risk. Incentive spirometry post-op.
+C0004,S015,P015,Pulmonary assessment,Completed,2026-11-05,2026-11-11,COPD stable on current inhalers; acceptable pulmonary risk. Incentive spirometry post-op.
+C0005,S038,P038,Pulmonary assessment,Completed,2026-10-31,2026-11-06,COPD stable on current inhalers; acceptable pulmonary risk. Incentive spirometry post-op.
+C0006,S081,P081,Cardiology assessment,Completed,2026-10-21,2026-10-26,Appropriate candidate for surgical revascularization; continue aspirin and beta blocker.
+C0007,S082,P082,Cardiology assessment,Completed,2026-11-02,2026-11-09,Appropriate candidate for surgical revascularization; continue aspirin and beta blocker.
+C0008,S083,P083,Cardiology assessment,Completed,2026-10-28,2026-10-30,Appropriate candidate for surgical revascularization; continue aspirin and beta blocker.
+C0009,S084,P084,Cardiology assessment,Completed,2026-11-14,2026-11-21,Appropriate candidate for surgical revascularization; continue aspirin and beta blocker.
+C0010,S085,P085,Cardiology assessment,Completed,2026-11-01,2026-11-08,Appropriate candidate for surgical revascularization; continue aspirin and beta blocker.
+C0011,S086,P086,Cardiology assessment,Completed,2026-11-18,2026-11-22,Appropriate candidate for surgical revascularization; continue aspirin and beta blocker.
+C0012,S087,P087,Cardiology assessment,Pending,2026-10-29,,
+C0013,S088,P088,Cardiology assessment,Completed,2026-10-22,2026-10-24,Appropriate candidate for surgical revascularization; continue aspirin and beta blocker.
+C0014,S089,P089,Cardiology assessment,Completed,2026-10-19,2026-10-21,Appropriate candidate for surgical revascularization; continue aspirin and beta blocker.
+C0015,S090,P090,Cardiology assessment,Completed,2026-10-30,2026-11-03,Appropriate candidate for surgical revascularization; continue aspirin and beta blocker.
+C0016,S090,P090,Pulmonary assessment,Completed,2026-11-01,2026-11-05,COPD stable on current inhalers; acceptable pulmonary risk. Incentive spirometry post-op.
+C0017,S091,P091,Cardiology assessment,Completed,2026-10-30,2026-11-05,Appropriate candidate for surgical revascularization; continue aspirin and beta blocker.
+C0018,S091,P091,Pulmonary assessment,Completed,2026-11-07,2026-11-10,COPD stable on current inhalers; acceptable pulmonary risk. Incentive spirometry post-op.
+C0019,S092,P092,Cardiology assessment,Completed,2026-10-27,2026-11-01,Appropriate candidate for surgical revascularization; continue aspirin and beta blocker.
+C0020,S093,P093,Cardiology assessment,Completed,2026-11-15,2026-11-19,Appropriate candidate for surgical revascularization; continue aspirin and beta blocker.
+C0021,S093,P093,Pulmonary assessment,Completed,2026-11-17,2026-11-20,COPD stable on current inhalers; acceptable pulmonary risk. Incentive spirometry post-op.
+C0022,S094,P094,Cardiology assessment,Completed,2026-11-14,2026-11-17,Appropriate candidate for surgical revascularization; continue aspirin and beta blocker.
+C0023,S095,P095,Cardiology assessment,Completed,2026-11-14,2026-11-16,Appropriate candidate for surgical revascularization; continue aspirin and beta blocker.
+C0024,S096,P096,Cardiology assessment,Completed,2026-10-19,2026-10-23,Appropriate candidate for surgical revascularization; continue aspirin and beta blocker.
+C0025,S097,P097,Cardiology assessment,Completed,2026-10-22,2026-10-29,Appropriate candidate for surgical revascularization; continue aspirin and beta blocker.
+C0026,S098,P098,Cardiology assessment,Completed,2026-11-01,2026-11-08,Appropriate candidate for surgical revascularization; continue aspirin and beta blocker.
+C0027,S099,P099,Cardiology assessment,Completed,2026-10-28,2026-11-01,Appropriate candidate for surgical revascularization; continue aspirin and beta blocker.
+C0028,S099,P099,Pulmonary assessment,Completed,2026-11-07,2026-11-10,COPD stable on current inhalers; acceptable pulmonary risk. Incentive spirometry post-op.
+C0029,S100,P100,Cardiology assessment,Completed,2026-10-28,2026-11-03,Appropriate candidate for surgical revascularization; continue aspirin and beta blocker.

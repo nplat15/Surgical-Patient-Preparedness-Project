@@ -1,0 +1,75 @@
+history_id,patient_id,prior_procedure,procedure_year,anesthesia_type,prior_anesthesia_issue
+PS0001,P004,Appendectomy,2001,General,Difficult airway - required video laryngoscope and bougie (2019)
+PS0002,P007,Cataract surgery,2017,General,None documented
+PS0003,P008,Cesarean section,1996,General,None documented
+PS0004,P009,Hernia repair,2002,General,None documented
+PS0005,P011,Carpal tunnel release,2019,General,None documented
+PS0006,P011,Cesarean section,2023,General,None documented
+PS0007,P012,Cesarean section,2006,General,None documented
+PS0008,P012,Carpal tunnel release,2014,General,None documented
+PS0009,P013,Cataract surgery,2014,General,"Personal history of malignant hyperthermia (2011, treated with dantrolene)"
+PS0010,P013,Colonoscopy with polypectomy,2018,General,"Personal history of malignant hyperthermia (2011, treated with dantrolene)"
+PS0011,P016,Hernia repair,2021,General,None documented
+PS0012,P017,Cataract surgery,2023,General,None documented
+PS0013,P017,Tonsillectomy,2013,General,None documented
+PS0014,P018,Cataract surgery,2009,General,None documented
+PS0015,P020,Appendectomy,2015,General,None documented
+PS0016,P021,Colonoscopy with polypectomy,2011,General,None documented
+PS0017,P025,Cataract surgery,2016,General,None documented
+PS0018,P025,Carpal tunnel release,2020,General,None documented
+PS0019,P029,Cataract surgery,1995,General,None documented
+PS0020,P029,Appendectomy,2016,General,None documented
+PS0021,P030,Appendectomy,2022,General,None documented
+PS0022,P031,Appendectomy,2015,General,None documented
+PS0023,P035,Cataract surgery,2010,General,None documented
+PS0024,P036,Colonoscopy with polypectomy,2014,General,None documented
+PS0025,P036,Cesarean section,2016,General,None documented
+PS0026,P037,Colonoscopy with polypectomy,2023,General,None documented
+PS0027,P041,Hernia repair,2020,General,None documented
+PS0028,P045,Cataract surgery,1990,General,None documented
+PS0029,P048,Tonsillectomy,2009,General,"Personal history of malignant hyperthermia (2011, treated with dantrolene)"
+PS0030,P049,Carpal tunnel release,2012,General,"Personal history of malignant hyperthermia (2011, treated with dantrolene)"
+PS0031,P051,Tonsillectomy,2011,General,None documented
+PS0032,P054,Tonsillectomy,2012,General,None documented
+PS0033,P054,Cataract surgery,1991,General,None documented
+PS0034,P055,Carpal tunnel release,2006,General,None documented
+PS0035,P055,Hernia repair,2010,General,None documented
+PS0036,P056,Carpal tunnel release,1994,General,None documented
+PS0037,P059,Carpal tunnel release,2014,General,Prior postoperative nausea and vomiting
+PS0038,P060,Cataract surgery,2024,General,None documented
+PS0039,P060,Carpal tunnel release,2020,General,None documented
+PS0040,P061,Tonsillectomy,2016,General,None documented
+PS0041,P061,Appendectomy,2012,General,None documented
+PS0042,P063,Appendectomy,2007,General,None documented
+PS0043,P064,Colonoscopy with polypectomy,2017,General,None documented
+PS0044,P067,Colonoscopy with polypectomy,2014,General,None documented
+PS0045,P067,Appendectomy,1994,General,None documented
+PS0046,P068,Carpal tunnel release,2020,General,None documented
+PS0047,P069,Cataract surgery,1990,General,None documented
+PS0048,P072,Colonoscopy with polypectomy,2024,General,None documented
+PS0049,P073,Carpal tunnel release,2014,General,None documented
+PS0050,P074,Cesarean section,2024,General,Difficult airway - required video laryngoscope and bougie (2019)
+PS0051,P075,Tonsillectomy,1994,General,None documented
+PS0052,P077,Cataract surgery,2012,General,Prior postoperative nausea and vomiting
+PS0053,P078,Colonoscopy with polypectomy,2007,General,None documented
+PS0054,P079,Cesarean section,2008,General,None documented
+PS0055,P082,Colonoscopy with polypectomy,2010,General,None documented
+PS0056,P083,Cesarean section,2020,General,None documented
+PS0057,P083,Cataract surgery,2011,General,None documented
+PS0058,P084,Cesarean section,2022,General,None documented
+PS0059,P084,Cataract surgery,2018,General,None documented
+PS0060,P085,Cesarean section,2000,General,None documented
+PS0061,P086,Cataract surgery,1999,General,None documented
+PS0062,P087,Carpal tunnel release,1993,General,"Personal history of malignant hyperthermia (2011, treated with dantrolene)"
+PS0063,P088,Hernia repair,2014,General,None documented
+PS0064,P089,Cataract surgery,2013,General,"Personal history of malignant hyperthermia (2011, treated with dantrolene)"
+PS0065,P090,Cesarean section,2007,General,None documented
+PS0066,P092,Appendectomy,2003,General,None documented
+PS0067,P093,Cesarean section,1993,General,None documented
+PS0068,P093,Tonsillectomy,2010,General,None documented
+PS0069,P096,Carpal tunnel release,2001,General,None documented
+PS0070,P097,Tonsillectomy,1992,General,"Personal history of malignant hyperthermia (2011, treated with dantrolene)"
+PS0071,P097,Carpal tunnel release,1998,General,"Personal history of malignant hyperthermia (2011, treated with dantrolene)"
+PS0072,P098,Appendectomy,2013,General,None documented
+PS0073,P099,Colonoscopy with polypectomy,2018,General,None documented
+PS0074,P099,Tonsillectomy,2024,General,None documented

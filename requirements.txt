@@ -1,0 +1,5 @@
+pandas>=2.0
+streamlit>=1.36
+jinja2
+anthropic
+openai

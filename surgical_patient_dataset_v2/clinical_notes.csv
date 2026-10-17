@@ -1,0 +1,1809 @@
+note_id,surgery_id,patient_id,note_type,note_date,author,note_text
+N001,S001,P001,History and Physical,2026-10-28,Dr. Synth Alvarez (General Surgery),"HISTORY AND PHYSICAL
+Date: 2026-10-28  Author: Dr. Synth Alvarez (General Surgery)
+
+HPI: 23-year-old male with recurrent postprandial RUQ pain; ultrasound shows cholelithiasis. Presents for elective laparoscopic cholecystectomy.
+PMH: Symptomatic cholelithiasis; Obesity
+PSH: None
+Medications: None
+Allergies: No known drug allergies
+Social: Smoking status former.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 131/77, HR 71, SpO2 94% RA, BMI 40.5.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Symptomatic cholelithiasis. Proceed with laparoscopic cholecystectomy as scheduled pending pre-operative review."
+N002,S002,P002,History and Physical,2026-10-29,Dr. Synth Alvarez (General Surgery),"HISTORY AND PHYSICAL
+Date: 2026-10-29  Author: Dr. Synth Alvarez (General Surgery)
+
+HPI: 71-year-old female with recurrent postprandial RUQ pain; ultrasound shows cholelithiasis. Presents for elective laparoscopic cholecystectomy.
+PMH: Symptomatic cholelithiasis; Hyperlipidemia; COPD
+PSH: None
+Medications: Atorvastatin 40 mg Nightly; Tiotropium 18 mcg Daily; Albuterol inhaler 90 mcg 2 puffs Q4H PRN
+Allergies: NKDA
+Social: Smoking status current.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 125/72, HR 64, SpO2 98% RA, BMI 23.6.
+General: No acute distress.
+Airway: Mallampati III; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Mildly diminished breath sounds bilaterally; no wheezes or crackles.
+
+Assessment/Plan: Symptomatic cholelithiasis. Proceed with laparoscopic cholecystectomy as scheduled pending pre-operative review."
+N003,S003,P003,History and Physical,2026-11-07,Dr. Synth Alvarez (General Surgery),"HISTORY AND PHYSICAL
+Date: 2026-11-07  Author: Dr. Synth Alvarez (General Surgery)
+
+HPI: 50-year-old female with recurrent postprandial RUQ pain; ultrasound shows cholelithiasis. Presents for elective laparoscopic cholecystectomy.
+PMH: Symptomatic cholelithiasis; Obstructive sleep apnea; Hypertension; COPD
+PSH: None
+Medications: Lisinopril 10 mg Daily; Tiotropium 18 mcg Daily; Albuterol inhaler 90 mcg 2 puffs Q4H PRN
+Allergies: Latex (contact dermatitis)
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 132/86, HR 77, SpO2 98% RA, BMI 27.1.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Mildly diminished breath sounds bilaterally; no wheezes or crackles.
+
+Assessment/Plan: Symptomatic cholelithiasis. Proceed with laparoscopic cholecystectomy as scheduled pending pre-operative review. Surgical and anesthesia consents signed and in chart."
+N004,S004,P004,History and Physical,2026-11-03,Dr. Synth Alvarez (General Surgery),"HISTORY AND PHYSICAL
+Date: 2026-11-03  Author: Dr. Synth Alvarez (General Surgery)
+
+HPI: 69-year-old male with recurrent postprandial RUQ pain; ultrasound shows cholelithiasis. Presents for elective laparoscopic cholecystectomy.
+PMH: Symptomatic cholelithiasis; Atrial fibrillation; Obesity
+PSH: Appendectomy
+Medications: Apixaban 5 mg BID; Metoprolol succinate 50 mg Daily
+Allergies: Latex (contact dermatitis)
+Social: Smoking status former.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 131/78, HR 74, SpO2 94% RA, BMI 34.8.
+General: No acute distress.
+Airway: Mallampati IV, limited mouth opening; full neck range of motion.
+Heart: Irregularly irregular rhythm, rate controlled; no murmurs.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Symptomatic cholelithiasis. Proceed with laparoscopic cholecystectomy as scheduled pending pre-operative review."
+N005,S005,P005,History and Physical,2026-11-05,Dr. Synth Alvarez (General Surgery),"HISTORY AND PHYSICAL
+Date: 2026-11-05  Author: Dr. Synth Alvarez (General Surgery)
+
+HPI: 52-year-old male with recurrent postprandial RUQ pain; ultrasound shows cholelithiasis. Presents for elective laparoscopic cholecystectomy.
+PMH: Symptomatic cholelithiasis
+PSH: None
+Medications: None
+Allergies: Codeine (nausea)
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 125/78, HR 72, SpO2 96% RA, BMI 21.3.
+General: No acute distress.
+Airway: Mallampati IV, limited mouth opening; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Symptomatic cholelithiasis. Proceed with laparoscopic cholecystectomy as scheduled pending pre-operative review."
+N006,S006,P006,History and Physical,2026-11-19,Dr. Synth Alvarez (General Surgery),"HISTORY AND PHYSICAL
+Date: 2026-11-19  Author: Dr. Synth Alvarez (General Surgery)
+
+HPI: 32-year-old male with recurrent postprandial RUQ pain; ultrasound shows cholelithiasis. Presents for elective laparoscopic cholecystectomy.
+PMH: Symptomatic cholelithiasis
+PSH: None
+Medications: None
+Allergies: Sulfonamides (rash)
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 126/82, HR 73, SpO2 98% RA, BMI 28.8.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Symptomatic cholelithiasis. Proceed with laparoscopic cholecystectomy as scheduled pending pre-operative review."
+N007,S007,P007,History and Physical,2026-11-12,Dr. Synth Alvarez (General Surgery),"HISTORY AND PHYSICAL
+Date: 2026-11-12  Author: Dr. Synth Alvarez (General Surgery)
+
+HPI: 36-year-old male with recurrent postprandial RUQ pain; ultrasound shows cholelithiasis. Presents for elective laparoscopic cholecystectomy.
+PMH: Symptomatic cholelithiasis; Hyperlipidemia; Hypertension; COPD; Atrial fibrillation
+PSH: Cataract surgery
+Medications: Atorvastatin 40 mg Nightly; Lisinopril 10 mg Daily; Tiotropium 18 mcg Daily; Albuterol inhaler 90 mcg 2 puffs Q4H PRN; Warfarin 5 mg Daily; Metoprolol succinate 50 mg Daily
+Allergies: No known drug allergies
+Social: Smoking status former.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Physical exam: deferred to day of surgery.
+
+Assessment/Plan: Symptomatic cholelithiasis. Proceed with laparoscopic cholecystectomy as scheduled pending pre-operative review."
+N008,S008,P008,History and Physical,2026-11-20,Dr. Synth Alvarez (General Surgery),"HISTORY AND PHYSICAL
+Date: 2026-11-20  Author: Dr. Synth Alvarez (General Surgery)
+
+HPI: 64-year-old female with recurrent postprandial RUQ pain; ultrasound shows cholelithiasis. Presents for elective laparoscopic cholecystectomy.
+PMH: Symptomatic cholelithiasis; Gastroesophageal reflux disease; Obesity
+PSH: Cesarean section
+Medications: Omeprazole 20 mg Daily
+Allergies: NKDA
+Social: Smoking status former.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 128/82, HR 62, SpO2 96% RA, BMI 37.7.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Symptomatic cholelithiasis. Proceed with laparoscopic cholecystectomy as scheduled pending pre-operative review."
+N009,S009,P009,History and Physical,2026-10-25,Dr. Synth Alvarez (General Surgery),"HISTORY AND PHYSICAL
+Date: 2026-10-25  Author: Dr. Synth Alvarez (General Surgery)
+
+HPI: 48-year-old male with recurrent postprandial RUQ pain; ultrasound shows cholelithiasis. Presents for elective laparoscopic cholecystectomy.
+PMH: Symptomatic cholelithiasis; COPD; Chronic kidney disease; Atrial fibrillation
+PSH: Hernia repair
+Medications: Tiotropium 18 mcg Daily; Albuterol inhaler 90 mcg 2 puffs Q4H PRN; Warfarin 5 mg Daily; Metoprolol succinate 50 mg Daily
+Allergies: Latex (contact dermatitis)
+Social: Smoking status former.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 118/76, HR 60, SpO2 96% RA, BMI 26.9.
+General: No acute distress.
+Airway: Mallampati III; full neck range of motion.
+Heart: Irregularly irregular rhythm, rate controlled; no murmurs.
+Lungs: Mildly diminished breath sounds bilaterally; no wheezes or crackles.
+
+Assessment/Plan: Symptomatic cholelithiasis. Proceed with laparoscopic cholecystectomy as scheduled pending pre-operative review."
+N010,S010,P010,History and Physical,2026-11-01,Dr. Synth Alvarez (General Surgery),"HISTORY AND PHYSICAL
+Date: 2026-11-01  Author: Dr. Synth Alvarez (General Surgery)
+
+HPI: 31-year-old female with recurrent postprandial RUQ pain; ultrasound shows cholelithiasis. Presents for elective laparoscopic cholecystectomy.
+PMH: Symptomatic cholelithiasis; Type 2 diabetes mellitus; COPD
+PSH: None
+Medications: Metformin 1000 mg BID; Tiotropium 18 mcg Daily; Albuterol inhaler 90 mcg 2 puffs Q4H PRN; Insulin glargine 24 units Nightly
+Allergies: Codeine (nausea)
+Social: Smoking status current.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 136/87, HR 83, SpO2 99% RA, BMI 21.4.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Mildly diminished breath sounds bilaterally; no wheezes or crackles.
+
+Assessment/Plan: Symptomatic cholelithiasis. Proceed with laparoscopic cholecystectomy as scheduled pending pre-operative review."
+N011,S011,P011,History and Physical,2026-11-12,Dr. Synth Alvarez (General Surgery),"HISTORY AND PHYSICAL
+Date: 2026-11-12  Author: Dr. Synth Alvarez (General Surgery)
+
+HPI: 27-year-old female with recurrent postprandial RUQ pain; ultrasound shows cholelithiasis. Presents for elective laparoscopic cholecystectomy.
+PMH: Symptomatic cholelithiasis; Atrial fibrillation
+PSH: Carpal tunnel release; Cesarean section
+Medications: Apixaban 5 mg BID; Metoprolol succinate 50 mg Daily
+Allergies: No known drug allergies
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 127/69, HR 73, SpO2 95% RA, BMI 26.4.
+General: No acute distress.
+Airway: Mallampati III; full neck range of motion.
+Heart: Irregularly irregular rhythm, rate controlled; no murmurs.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Symptomatic cholelithiasis. Proceed with laparoscopic cholecystectomy as scheduled pending pre-operative review."
+N012,S012,P012,History and Physical,2026-11-03,Dr. Synth Alvarez (General Surgery),"HISTORY AND PHYSICAL
+Date: 2026-11-03  Author: Dr. Synth Alvarez (General Surgery)
+
+HPI: 75-year-old female with recurrent postprandial RUQ pain; ultrasound shows cholelithiasis. Presents for elective laparoscopic cholecystectomy.
+PMH: Symptomatic cholelithiasis; Hypothyroidism; Obesity
+PSH: Cesarean section; Carpal tunnel release
+Medications: Levothyroxine 75 mcg Daily
+Allergies: Latex (contact dermatitis)
+Social: Smoking status never.
+Family history: Brother developed a very high fever and muscle rigidity during anesthesia for an appendectomy and was transferred to the ICU; the family was told to warn doctors before any surgery.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 141/86, HR 78, SpO2 99% RA, BMI 39.2.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Symptomatic cholelithiasis. Proceed with laparoscopic cholecystectomy as scheduled pending pre-operative review."
+N013,S013,P013,History and Physical,2026-11-06,Dr. Synth Alvarez (General Surgery),"HISTORY AND PHYSICAL
+Date: 2026-11-06  Author: Dr. Synth Alvarez (General Surgery)
+
+HPI: 45-year-old male with recurrent postprandial RUQ pain; ultrasound shows cholelithiasis. Presents for elective laparoscopic cholecystectomy.
+PMH: Symptomatic cholelithiasis; Obstructive sleep apnea
+PSH: Cataract surgery; Colonoscopy with polypectomy
+Medications: None
+Allergies: Sulfonamides (rash)
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 147/78, HR 64, SpO2 97% RA, BMI 23.6.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Symptomatic cholelithiasis. Proceed with laparoscopic cholecystectomy as scheduled pending pre-operative review."
+N014,S014,P014,History and Physical,2026-11-10,Dr. Synth Alvarez (General Surgery),"HISTORY AND PHYSICAL
+Date: 2026-11-10  Author: Dr. Synth Alvarez (General Surgery)
+
+HPI: 56-year-old female with recurrent postprandial RUQ pain; ultrasound shows cholelithiasis. Presents for elective laparoscopic cholecystectomy.
+PMH: Symptomatic cholelithiasis; Obesity; Atrial fibrillation
+PSH: None
+Medications: Apixaban 5 mg BID; Metoprolol succinate 50 mg Daily
+Allergies: Penicillin (hives)
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 145/77, HR 67, SpO2 99% RA, BMI 39.6.
+General: No acute distress.
+Airway: Mallampati III; full neck range of motion.
+Heart: Irregularly irregular rhythm, rate controlled; no murmurs.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Symptomatic cholelithiasis. Proceed with laparoscopic cholecystectomy as scheduled pending pre-operative review."
+N015,S015,P015,History and Physical,2026-11-14,Dr. Synth Alvarez (General Surgery),"HISTORY AND PHYSICAL
+Date: 2026-11-14  Author: Dr. Synth Alvarez (General Surgery)
+
+HPI: 54-year-old male with recurrent postprandial RUQ pain; ultrasound shows cholelithiasis. Presents for elective laparoscopic cholecystectomy.
+PMH: Symptomatic cholelithiasis; COPD; Type 2 diabetes mellitus
+PSH: None
+Medications: Tiotropium 18 mcg Daily; Albuterol inhaler 90 mcg 2 puffs Q4H PRN; Metformin 1000 mg BID; Insulin glargine 24 units Nightly; Empagliflozin 10 mg Daily
+Allergies: No known drug allergies
+Social: Smoking status current.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 130/76, HR 80, SpO2 94% RA, BMI 26.1.
+General: No acute distress.
+Airway: Mallampati IV, limited mouth opening; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Mildly diminished breath sounds bilaterally; no wheezes or crackles.
+
+Assessment/Plan: Symptomatic cholelithiasis. Proceed with laparoscopic cholecystectomy as scheduled pending pre-operative review."
+N016,S016,P016,History and Physical,2026-11-23,Dr. Synth Alvarez (General Surgery),"HISTORY AND PHYSICAL
+Date: 2026-11-23  Author: Dr. Synth Alvarez (General Surgery)
+
+HPI: 27-year-old female with recurrent postprandial RUQ pain; ultrasound shows cholelithiasis. Presents for elective laparoscopic cholecystectomy.
+PMH: Symptomatic cholelithiasis; Hypertension; Gastroesophageal reflux disease
+PSH: Hernia repair
+Medications: Lisinopril 10 mg Daily; Omeprazole 20 mg Daily
+Allergies: Sulfonamides (rash)
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 135/82, HR 76, SpO2 98% RA, BMI 25.0.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Symptomatic cholelithiasis. Proceed with laparoscopic cholecystectomy as scheduled pending pre-operative review."
+N017,S017,P017,History and Physical,2026-11-25,Dr. Synth Alvarez (General Surgery),"HISTORY AND PHYSICAL
+Date: 2026-11-25  Author: Dr. Synth Alvarez (General Surgery)
+
+HPI: 68-year-old male with recurrent postprandial RUQ pain; ultrasound shows cholelithiasis. Presents for elective laparoscopic cholecystectomy.
+PMH: Symptomatic cholelithiasis; Obstructive sleep apnea
+PSH: Cataract surgery; Tonsillectomy
+Medications: None
+Allergies: No known drug allergies
+Social: Smoking status former.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 131/69, HR 65, SpO2 94% RA, BMI 26.2.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Symptomatic cholelithiasis. Proceed with laparoscopic cholecystectomy as scheduled pending pre-operative review. Surgical and anesthesia consents signed and in chart."
+N018,S018,P018,History and Physical,2026-11-08,Dr. Synth Alvarez (General Surgery),"HISTORY AND PHYSICAL
+Date: 2026-11-08  Author: Dr. Synth Alvarez (General Surgery)
+
+HPI: 63-year-old male with recurrent postprandial RUQ pain; ultrasound shows cholelithiasis. Presents for elective laparoscopic cholecystectomy. Reports new chest tightness with walking one block over the past week; has not seen a doctor for this.
+PMH: Symptomatic cholelithiasis; Obstructive sleep apnea
+PSH: Cataract surgery
+Medications: None
+Allergies: Codeine (nausea)
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Positive as noted in HPI; otherwise negative.
+
+Vitals: BP 122/79, HR 85, SpO2 98% RA, BMI 25.0.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Symptomatic cholelithiasis. Proceed with laparoscopic cholecystectomy as scheduled pending pre-operative review."
+N019,S019,P019,History and Physical,2026-11-12,Dr. Synth Alvarez (General Surgery),"HISTORY AND PHYSICAL
+Date: 2026-11-12  Author: Dr. Synth Alvarez (General Surgery)
+
+HPI: 65-year-old female with recurrent postprandial RUQ pain; ultrasound shows cholelithiasis. Presents for elective laparoscopic cholecystectomy.
+PMH: Symptomatic cholelithiasis; Hyperlipidemia
+PSH: None
+Medications: Atorvastatin 40 mg Nightly
+Allergies: No known drug allergies
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 131/72, HR 80, SpO2 99% RA, BMI 28.8.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Symptomatic cholelithiasis. Proceed with laparoscopic cholecystectomy as scheduled pending pre-operative review."
+N020,S021,P021,History and Physical,2026-11-16,Dr. Synth Morrow (Surgical Oncology),"HISTORY AND PHYSICAL
+Date: 2026-11-16  Author: Dr. Synth Morrow (Surgical Oncology)
+
+HPI: 36-year-old female with biopsy-proven invasive ductal carcinoma of the left breast. Presents for radical mastectomy after multidisciplinary tumor board review.
+PMH: Breast malignancy
+PSH: Colonoscopy with polypectomy
+Medications: None
+Allergies: No known drug allergies
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 126/84, HR 72, SpO2 94% RA, BMI 23.2.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Breast malignancy. Proceed with radical mastectomy as scheduled pending pre-operative review."
+N021,S022,P022,History and Physical,2026-11-11,Dr. Synth Morrow (Surgical Oncology),"HISTORY AND PHYSICAL
+Date: 2026-11-11  Author: Dr. Synth Morrow (Surgical Oncology)
+
+HPI: 60-year-old female with biopsy-proven invasive ductal carcinoma of the left breast. Presents for radical mastectomy after multidisciplinary tumor board review.
+PMH: Breast malignancy; Atrial fibrillation
+PSH: None
+Medications: Apixaban 5 mg BID; Metoprolol succinate 50 mg Daily
+Allergies: No known drug allergies
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 146/84, HR 84, SpO2 96% RA, BMI 22.0.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Irregularly irregular rhythm, rate controlled; no murmurs.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Breast malignancy. Proceed with radical mastectomy as scheduled pending pre-operative review. She states she was not told to stop apixaban and plans to keep taking it until the day of surgery."
+N022,S023,P023,History and Physical,2026-11-20,Dr. Synth Morrow (Surgical Oncology),"HISTORY AND PHYSICAL
+Date: 2026-11-20  Author: Dr. Synth Morrow (Surgical Oncology)
+
+HPI: 57-year-old female with biopsy-proven invasive ductal carcinoma of the left breast. Presents for radical mastectomy after multidisciplinary tumor board review.
+PMH: Breast malignancy; Obesity
+PSH: None
+Medications: Clopidogrel 75 mg Daily
+Allergies: No known drug allergies
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 141/81, HR 87, SpO2 97% RA, BMI 34.4.
+General: No acute distress.
+Airway: Mallampati III; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Breast malignancy. Proceed with radical mastectomy as scheduled pending pre-operative review."
+N023,S024,P024,History and Physical,2026-09-25,Dr. Synth Morrow (Surgical Oncology),"HISTORY AND PHYSICAL
+Date: 2026-09-25  Author: Dr. Synth Morrow (Surgical Oncology)
+
+HPI: 45-year-old female with biopsy-proven invasive ductal carcinoma of the left breast. Presents for radical mastectomy after multidisciplinary tumor board review.
+PMH: Breast malignancy; Obesity
+PSH: None
+Medications: Clopidogrel 75 mg Daily
+Allergies: Codeine (nausea)
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 135/87, HR 61, SpO2 95% RA, BMI 37.1.
+General: No acute distress.
+Airway: Mallampati III; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Breast malignancy. Proceed with radical mastectomy as scheduled pending pre-operative review."
+N024,S025,P025,History and Physical,2026-11-24,Dr. Synth Morrow (Surgical Oncology),"HISTORY AND PHYSICAL
+Date: 2026-11-24  Author: Dr. Synth Morrow (Surgical Oncology)
+
+HPI: 35-year-old female with biopsy-proven invasive ductal carcinoma of the left breast. Presents for radical mastectomy after multidisciplinary tumor board review. Reports fever to 101.2 F and productive cough for the past 3 days.
+PMH: Breast malignancy; Asthma; COPD
+PSH: Cataract surgery; Carpal tunnel release
+Medications: Albuterol inhaler 90 mcg 2 puffs Q4H PRN; Tiotropium 18 mcg Daily
+Allergies: Sulfonamides (rash)
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Positive as noted in HPI; otherwise negative.
+
+Vitals: BP 142/86, HR 85, SpO2 94% RA, BMI 27.6.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Scattered rhonchi in the right lower lobe.
+
+Assessment/Plan: Breast malignancy. Proceed with radical mastectomy as scheduled pending pre-operative review."
+N025,S026,P026,History and Physical,2026-11-05,Dr. Synth Morrow (Surgical Oncology),"HISTORY AND PHYSICAL
+Date: 2026-11-05  Author: Dr. Synth Morrow (Surgical Oncology)
+
+HPI: 69-year-old female with biopsy-proven invasive ductal carcinoma of the left breast. Presents for radical mastectomy after multidisciplinary tumor board review.
+PMH: Breast malignancy; Obesity
+PSH: None
+Medications: None
+Allergies: Latex (contact dermatitis)
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 131/82, HR 75, SpO2 94% RA, BMI 33.6.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Breast malignancy. Proceed with radical mastectomy as scheduled pending pre-operative review."
+N026,S027,P027,History and Physical,2026-11-03,Dr. Synth Morrow (Surgical Oncology),"HISTORY AND PHYSICAL
+Date: 2026-11-03  Author: Dr. Synth Morrow (Surgical Oncology)
+
+HPI: 80-year-old female with biopsy-proven invasive ductal carcinoma of the left breast. Presents for radical mastectomy after multidisciplinary tumor board review.
+PMH: Breast malignancy; Asthma; Hyperlipidemia; Type 2 diabetes mellitus
+PSH: None
+Medications: Albuterol inhaler 90 mcg 2 puffs Q4H PRN; Atorvastatin 40 mg Nightly; Metformin 1000 mg BID
+Allergies: NKDA
+Social: Smoking status current.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 136/83, HR 66, SpO2 95% RA, BMI 21.5.
+General: No acute distress.
+Airway: Mallampati III; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Breast malignancy. Proceed with radical mastectomy as scheduled pending pre-operative review."
+N027,S028,P028,History and Physical,2026-11-10,Dr. Synth Morrow (Surgical Oncology),"HISTORY AND PHYSICAL
+Date: 2026-11-10  Author: Dr. Synth Morrow (Surgical Oncology)
+
+HPI: 66-year-old female with biopsy-proven invasive ductal carcinoma of the left breast. Presents for radical mastectomy after multidisciplinary tumor board review.
+PMH: Breast malignancy; Type 2 diabetes mellitus; Atrial fibrillation
+PSH: None
+Medications: Metformin 1000 mg BID; Apixaban 5 mg BID; Metoprolol succinate 50 mg Daily; Insulin glargine 24 units Nightly
+Allergies: No known drug allergies
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 140/84, HR 61, SpO2 94% RA, BMI 22.5.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Irregularly irregular rhythm, rate controlled; no murmurs.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Breast malignancy. Proceed with radical mastectomy as scheduled pending pre-operative review. She states she was not told to stop apixaban and plans to keep taking it until the day of surgery."
+N028,S029,P029,History and Physical,2026-11-01,Dr. Synth Morrow (Surgical Oncology),"HISTORY AND PHYSICAL
+Date: 2026-11-01  Author: Dr. Synth Morrow (Surgical Oncology)
+
+HPI: 74-year-old female with biopsy-proven invasive ductal carcinoma of the left breast. Presents for radical mastectomy after multidisciplinary tumor board review.
+PMH: Breast malignancy; Type 2 diabetes mellitus; Obesity
+PSH: Cataract surgery; Appendectomy
+Medications: Metformin 1000 mg BID; Semaglutide 1 mg Weekly
+Allergies: Latex (contact dermatitis)
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 134/75, HR 88, SpO2 98% RA, BMI 23.6.
+General: No acute distress.
+Airway: Mallampati III; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Breast malignancy. Proceed with radical mastectomy as scheduled pending pre-operative review."
+N029,S030,P030,History and Physical,2026-11-16,Dr. Synth Morrow (Surgical Oncology),"HISTORY AND PHYSICAL
+Date: 2026-11-16  Author: Dr. Synth Morrow (Surgical Oncology)
+
+HPI: 48-year-old female with biopsy-proven invasive ductal carcinoma of the left breast. Presents for radical mastectomy after multidisciplinary tumor board review.
+PMH: Breast malignancy; Obstructive sleep apnea; Asthma; COPD
+PSH: Appendectomy
+Medications: Albuterol inhaler 90 mcg 2 puffs Q4H PRN; Tiotropium 18 mcg Daily
+Allergies: Codeine (nausea)
+Social: Smoking status former.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 146/83, HR 86, SpO2 99% RA, BMI 23.6.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Mildly diminished breath sounds bilaterally; no wheezes or crackles.
+
+Assessment/Plan: Breast malignancy. Proceed with radical mastectomy as scheduled pending pre-operative review."
+N030,S031,P031,History and Physical,2026-11-15,Dr. Synth Morrow (Surgical Oncology),"HISTORY AND PHYSICAL
+Date: 2026-11-15  Author: Dr. Synth Morrow (Surgical Oncology)
+
+HPI: 44-year-old female with biopsy-proven invasive ductal carcinoma of the left breast. Presents for radical mastectomy after multidisciplinary tumor board review.
+PMH: Breast malignancy
+PSH: Appendectomy
+Medications: None
+Allergies: Sulfonamides (rash)
+Social: Smoking status current.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 135/74, HR 60, SpO2 96% RA, BMI 29.2.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Breast malignancy. Proceed with radical mastectomy as scheduled pending pre-operative review."
+N031,S032,P032,History and Physical,2026-11-18,Dr. Synth Morrow (Surgical Oncology),"HISTORY AND PHYSICAL
+Date: 2026-11-18  Author: Dr. Synth Morrow (Surgical Oncology)
+
+HPI: 57-year-old female with biopsy-proven invasive ductal carcinoma of the left breast. Presents for radical mastectomy after multidisciplinary tumor board review.
+PMH: Breast malignancy; Obesity; Atrial fibrillation
+PSH: None
+Medications: Apixaban 5 mg BID; Metoprolol succinate 50 mg Daily
+Allergies: No known drug allergies
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 147/78, HR 82, SpO2 99% RA, BMI 37.6.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Irregularly irregular rhythm, rate controlled; no murmurs.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Breast malignancy. Proceed with radical mastectomy as scheduled pending pre-operative review. She states she was not told to stop apixaban and plans to keep taking it until the day of surgery."
+N032,S033,P033,History and Physical,2026-11-13,Dr. Synth Morrow (Surgical Oncology),"HISTORY AND PHYSICAL
+Date: 2026-11-13  Author: Dr. Synth Morrow (Surgical Oncology)
+
+HPI: 70-year-old female with biopsy-proven invasive ductal carcinoma of the left breast. Presents for radical mastectomy after multidisciplinary tumor board review.
+PMH: Breast malignancy; Gastroesophageal reflux disease; Hypothyroidism; Atrial fibrillation
+PSH: None
+Medications: Omeprazole 20 mg Daily; Levothyroxine 75 mcg Daily; Apixaban 5 mg BID; Metoprolol succinate 50 mg Daily
+Allergies: Codeine (nausea)
+Social: Smoking status current.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 142/77, HR 60, SpO2 95% RA, BMI 29.2.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Irregularly irregular rhythm, rate controlled; no murmurs.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Breast malignancy. Proceed with radical mastectomy as scheduled pending pre-operative review. She states she was not told to stop apixaban and plans to keep taking it until the day of surgery."
+N033,S034,P034,History and Physical,2026-11-21,Dr. Synth Morrow (Surgical Oncology),"HISTORY AND PHYSICAL
+Date: 2026-11-21  Author: Dr. Synth Morrow (Surgical Oncology)
+
+HPI: 64-year-old female with biopsy-proven invasive ductal carcinoma of the left breast. Presents for radical mastectomy after multidisciplinary tumor board review.
+PMH: Breast malignancy; Type 2 diabetes mellitus; Obstructive sleep apnea; Asthma; COPD
+PSH: None
+Medications: Metformin 1000 mg BID; Albuterol inhaler 90 mcg 2 puffs Q4H PRN; Tiotropium 18 mcg Daily
+Allergies: Codeine (nausea)
+Social: Smoking status current.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 121/70, HR 80, SpO2 98% RA, BMI 29.3.
+General: No acute distress.
+Airway: Mallampati III; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Mildly diminished breath sounds bilaterally; no wheezes or crackles.
+
+Assessment/Plan: Breast malignancy. Proceed with radical mastectomy as scheduled pending pre-operative review."
+N034,S035,P035,History and Physical,2026-10-31,Dr. Synth Morrow (Surgical Oncology),"HISTORY AND PHYSICAL
+Date: 2026-10-31  Author: Dr. Synth Morrow (Surgical Oncology)
+
+HPI: 34-year-old female with biopsy-proven invasive ductal carcinoma of the left breast. Presents for radical mastectomy after multidisciplinary tumor board review.
+PMH: Breast malignancy; Hypothyroidism; Obesity
+PSH: Cataract surgery
+Medications: Levothyroxine 75 mcg Daily; Semaglutide 1 mg Weekly
+Allergies: No known drug allergies
+Social: Smoking status current.
+Family history: Brother developed a very high fever and muscle rigidity during anesthesia for an appendectomy and was transferred to the ICU; the family was told to warn doctors before any surgery.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 128/73, HR 75, SpO2 97% RA, BMI 23.9.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Breast malignancy. Proceed with radical mastectomy as scheduled pending pre-operative review."
+N035,S036,P036,History and Physical,2026-11-01,Dr. Synth Morrow (Surgical Oncology),"HISTORY AND PHYSICAL
+Date: 2026-11-01  Author: Dr. Synth Morrow (Surgical Oncology)
+
+HPI: 34-year-old female with biopsy-proven invasive ductal carcinoma of the left breast. Presents for radical mastectomy after multidisciplinary tumor board review.
+PMH: Breast malignancy; Gastroesophageal reflux disease
+PSH: Colonoscopy with polypectomy; Cesarean section
+Medications: Omeprazole 20 mg Daily
+Allergies: No known drug allergies
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 131/74, HR 85, SpO2 96% RA, BMI 26.8.
+General: No acute distress.
+Airway: Mallampati III; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Breast malignancy. Proceed with radical mastectomy as scheduled pending pre-operative review."
+N036,S037,P037,History and Physical,2026-10-31,Dr. Synth Morrow (Surgical Oncology),"HISTORY AND PHYSICAL
+Date: 2026-10-31  Author: Dr. Synth Morrow (Surgical Oncology)
+
+HPI: 60-year-old female with biopsy-proven invasive ductal carcinoma of the left breast. Presents for radical mastectomy after multidisciplinary tumor board review.
+PMH: Breast malignancy; Chronic kidney disease
+PSH: Colonoscopy with polypectomy
+Medications: None
+Allergies: No known drug allergies
+Social: Smoking status current.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 128/73, HR 67, SpO2 98% RA, BMI 21.3.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Breast malignancy. Proceed with radical mastectomy as scheduled pending pre-operative review."
+N037,S038,P038,History and Physical,2026-10-30,Dr. Synth Morrow (Surgical Oncology),"HISTORY AND PHYSICAL
+Date: 2026-10-30  Author: Dr. Synth Morrow (Surgical Oncology)
+
+HPI: 51-year-old female with biopsy-proven invasive ductal carcinoma of the left breast. Presents for radical mastectomy after multidisciplinary tumor board review.
+PMH: Breast malignancy; Gastroesophageal reflux disease; COPD; Obesity
+PSH: None
+Medications: Omeprazole 20 mg Daily; Tiotropium 18 mcg Daily; Albuterol inhaler 90 mcg 2 puffs Q4H PRN; Semaglutide 1 mg Weekly
+Allergies: Codeine (nausea)
+Social: Smoking status former.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 141/80, HR 63, SpO2 97% RA, BMI 23.4.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Mildly diminished breath sounds bilaterally; no wheezes or crackles.
+
+Assessment/Plan: Breast malignancy. Proceed with radical mastectomy as scheduled pending pre-operative review."
+N038,S039,P039,History and Physical,2026-11-13,Dr. Synth Morrow (Surgical Oncology),"HISTORY AND PHYSICAL
+Date: 2026-11-13  Author: Dr. Synth Morrow (Surgical Oncology)
+
+HPI: 64-year-old female with biopsy-proven invasive ductal carcinoma of the left breast. Presents for radical mastectomy after multidisciplinary tumor board review.
+PMH: Breast malignancy; Type 2 diabetes mellitus
+PSH: None
+Medications: Metformin 1000 mg BID
+Allergies: No known drug allergies
+Social: Smoking status current.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 144/86, HR 61, SpO2 98% RA, BMI 29.5.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Breast malignancy. Proceed with radical mastectomy as scheduled pending pre-operative review."
+N039,S040,P040,History and Physical,2026-11-10,Dr. Synth Morrow (Surgical Oncology),"HISTORY AND PHYSICAL
+Date: 2026-11-10  Author: Dr. Synth Morrow (Surgical Oncology)
+
+HPI: 52-year-old female with biopsy-proven invasive ductal carcinoma of the left breast. Presents for radical mastectomy after multidisciplinary tumor board review.
+PMH: Breast malignancy; Hyperlipidemia; Hypothyroidism
+PSH: None
+Medications: Atorvastatin 40 mg Nightly; Levothyroxine 75 mcg Daily
+Allergies: Sulfonamides (rash)
+Social: Smoking status former.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 128/86, HR 87, SpO2 99% RA, BMI 26.9.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Breast malignancy. Proceed with radical mastectomy as scheduled pending pre-operative review."
+N040,S041,P041,History and Physical,2026-11-18,Dr. Synth Patel (Orthopedics),"HISTORY AND PHYSICAL
+Date: 2026-11-18  Author: Dr. Synth Patel (Orthopedics)
+
+HPI: 31-year-old female with mechanical right knee pain and locking; MRI shows medial meniscus tear. Presents for elective arthroscopy.
+PMH: Meniscal tear; Atrial fibrillation; Hypothyroidism
+PSH: Hernia repair
+Medications: Apixaban 5 mg BID; Metoprolol succinate 50 mg Daily; Levothyroxine 75 mcg Daily
+Allergies: No known drug allergies
+Social: Smoking status former.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 126/79, HR 81, SpO2 94% RA, BMI 29.1.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Irregularly irregular rhythm, rate controlled; no murmurs.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Meniscal tear. Proceed with knee arthroscopy as scheduled pending pre-operative review."
+N041,S042,P042,History and Physical,2026-11-16,Dr. Synth Patel (Orthopedics),"HISTORY AND PHYSICAL
+Date: 2026-11-16  Author: Dr. Synth Patel (Orthopedics)
+
+HPI: 34-year-old female with mechanical right knee pain and locking; MRI shows medial meniscus tear. Presents for elective arthroscopy.
+PMH: Meniscal tear; Hyperlipidemia
+PSH: None
+Medications: Atorvastatin 40 mg Nightly
+Allergies: Sulfonamides (rash)
+Social: Smoking status former.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 128/68, HR 76, SpO2 94% RA, BMI 28.7.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Meniscal tear. Proceed with knee arthroscopy as scheduled pending pre-operative review."
+N042,S043,P043,History and Physical,2026-11-22,Dr. Synth Patel (Orthopedics),"HISTORY AND PHYSICAL
+Date: 2026-11-22  Author: Dr. Synth Patel (Orthopedics)
+
+HPI: 54-year-old female with mechanical right knee pain and locking; MRI shows medial meniscus tear. Presents for elective arthroscopy.
+PMH: Meniscal tear; Hyperlipidemia; COPD; Hypothyroidism
+PSH: None
+Medications: Atorvastatin 40 mg Nightly; Tiotropium 18 mcg Daily; Albuterol inhaler 90 mcg 2 puffs Q4H PRN; Levothyroxine 75 mcg Daily
+Allergies: No known drug allergies
+Social: Smoking status current.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 122/74, HR 79, SpO2 95% RA, BMI 29.0.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Mildly diminished breath sounds bilaterally; no wheezes or crackles.
+
+Assessment/Plan: Meniscal tear. Proceed with knee arthroscopy as scheduled pending pre-operative review."
+N043,S044,P044,History and Physical,2026-10-31,Dr. Synth Patel (Orthopedics),"HISTORY AND PHYSICAL
+Date: 2026-10-31  Author: Dr. Synth Patel (Orthopedics)
+
+HPI: 49-year-old female with mechanical right knee pain and locking; MRI shows medial meniscus tear. Presents for elective arthroscopy.
+PMH: Meniscal tear; Obesity; COPD; Gastroesophageal reflux disease
+PSH: None
+Medications: Tiotropium 18 mcg Daily; Albuterol inhaler 90 mcg 2 puffs Q4H PRN; Omeprazole 20 mg Daily; Clopidogrel 75 mg Daily
+Allergies: Penicillin (hives)
+Social: Smoking status former.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 146/81, HR 70, SpO2 97% RA, BMI 40.0.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Mildly diminished breath sounds bilaterally; no wheezes or crackles.
+
+Assessment/Plan: Meniscal tear. Proceed with knee arthroscopy as scheduled pending pre-operative review."
+N044,S045,P045,History and Physical,2026-11-04,Dr. Synth Patel (Orthopedics),"HISTORY AND PHYSICAL
+Date: 2026-11-04  Author: Dr. Synth Patel (Orthopedics)
+
+HPI: 68-year-old male with mechanical right knee pain and locking; MRI shows medial meniscus tear. Presents for elective arthroscopy.
+PMH: Meniscal tear; Obesity; Atrial fibrillation
+PSH: Cataract surgery
+Medications: Apixaban 5 mg BID; Metoprolol succinate 50 mg Daily
+Allergies: No known drug allergies
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 142/83, HR 85, SpO2 99% RA, BMI 34.8.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Irregularly irregular rhythm, rate controlled; no murmurs.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Meniscal tear. Proceed with knee arthroscopy as scheduled pending pre-operative review. He states he was not told to stop apixaban and plans to keep taking it until the day of surgery."
+N045,S046,P046,History and Physical,2026-11-10,Dr. Synth Patel (Orthopedics),"HISTORY AND PHYSICAL
+Date: 2026-11-10  Author: Dr. Synth Patel (Orthopedics)
+
+HPI: 76-year-old female with mechanical right knee pain and locking; MRI shows medial meniscus tear. Presents for elective arthroscopy.
+PMH: Meniscal tear
+PSH: None
+Medications: None
+Allergies: No known drug allergies
+Social: Smoking status current.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 147/88, HR 80, SpO2 97% RA, BMI 27.1.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Meniscal tear. Proceed with knee arthroscopy as scheduled pending pre-operative review."
+N046,S047,P047,History and Physical,2026-10-08,Dr. Synth Patel (Orthopedics),"HISTORY AND PHYSICAL
+Date: 2026-10-08  Author: Dr. Synth Patel (Orthopedics)
+
+HPI: 51-year-old male with mechanical right knee pain and locking; MRI shows medial meniscus tear. Presents for elective arthroscopy.
+PMH: Meniscal tear; Type 2 diabetes mellitus
+PSH: None
+Medications: Metformin 1000 mg BID; Insulin glargine 24 units Nightly
+Allergies: No known drug allergies
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 119/87, HR 86, SpO2 98% RA, BMI 24.9.
+General: No acute distress.
+Airway: Mallampati III; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Meniscal tear. Proceed with knee arthroscopy as scheduled pending pre-operative review."
+N047,S048,P048,History and Physical,2026-11-15,Dr. Synth Patel (Orthopedics),"HISTORY AND PHYSICAL
+Date: 2026-11-15  Author: Dr. Synth Patel (Orthopedics)
+
+HPI: 69-year-old male with mechanical right knee pain and locking; MRI shows medial meniscus tear. Presents for elective arthroscopy.
+PMH: Meniscal tear; Type 2 diabetes mellitus
+PSH: Tonsillectomy
+Medications: Metformin 1000 mg BID
+Allergies: No known drug allergies
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 118/71, HR 84, SpO2 99% RA, BMI 22.6.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Meniscal tear. Proceed with knee arthroscopy as scheduled pending pre-operative review."
+N048,S050,P050,History and Physical,2026-11-24,Dr. Synth Patel (Orthopedics),"HISTORY AND PHYSICAL
+Date: 2026-11-24  Author: Dr. Synth Patel (Orthopedics)
+
+HPI: 31-year-old female with mechanical right knee pain and locking; MRI shows medial meniscus tear. Presents for elective arthroscopy.
+PMH: Meniscal tear; Type 2 diabetes mellitus; Gastroesophageal reflux disease
+PSH: None
+Medications: Metformin 1000 mg BID; Omeprazole 20 mg Daily; Insulin glargine 24 units Nightly
+Allergies: No known drug allergies
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 131/78, HR 77, SpO2 96% RA, BMI 24.2.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Meniscal tear. Proceed with knee arthroscopy as scheduled pending pre-operative review."
+N049,S051,P051,History and Physical,2026-11-25,Dr. Synth Patel (Orthopedics),"HISTORY AND PHYSICAL
+Date: 2026-11-25  Author: Dr. Synth Patel (Orthopedics)
+
+HPI: 48-year-old male with mechanical right knee pain and locking; MRI shows medial meniscus tear. Presents for elective arthroscopy.
+PMH: Meniscal tear; Hyperlipidemia; Type 2 diabetes mellitus; Asthma
+PSH: Tonsillectomy
+Medications: Atorvastatin 40 mg Nightly; Metformin 1000 mg BID; Albuterol inhaler 90 mcg 2 puffs Q4H PRN
+Allergies: No known drug allergies
+Social: Smoking status current.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 127/76, HR 62, SpO2 95% RA, BMI 27.3.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Meniscal tear. Proceed with knee arthroscopy as scheduled pending pre-operative review."
+N050,S053,P053,History and Physical,2026-10-31,Dr. Synth Patel (Orthopedics),"HISTORY AND PHYSICAL
+Date: 2026-10-31  Author: Dr. Synth Patel (Orthopedics)
+
+HPI: 39-year-old female with mechanical right knee pain and locking; MRI shows medial meniscus tear. Presents for elective arthroscopy.
+PMH: Meniscal tear
+PSH: None
+Medications: Clopidogrel 75 mg Daily
+Allergies: Latex (contact dermatitis)
+Social: Smoking status former.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 128/68, HR 81, SpO2 95% RA, BMI 21.6.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Meniscal tear. Proceed with knee arthroscopy as scheduled pending pre-operative review."
+N051,S054,P054,History and Physical,2026-11-05,Dr. Synth Patel (Orthopedics),"HISTORY AND PHYSICAL
+Date: 2026-11-05  Author: Dr. Synth Patel (Orthopedics)
+
+HPI: 60-year-old male with mechanical right knee pain and locking; MRI shows medial meniscus tear. Presents for elective arthroscopy.
+PMH: Meniscal tear; Gastroesophageal reflux disease
+PSH: Tonsillectomy; Cataract surgery
+Medications: Omeprazole 20 mg Daily
+Allergies: Penicillin (hives)
+Social: Smoking status never.
+Family history: Brother developed a very high fever and muscle rigidity during anesthesia for an appendectomy and was transferred to the ICU; the family was told to warn doctors before any surgery.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 145/73, HR 85, SpO2 99% RA, BMI 23.2.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Meniscal tear. Proceed with knee arthroscopy as scheduled pending pre-operative review."
+N052,S055,P055,History and Physical,2026-11-15,Dr. Synth Patel (Orthopedics),"HISTORY AND PHYSICAL
+Date: 2026-11-15  Author: Dr. Synth Patel (Orthopedics)
+
+HPI: 54-year-old female with mechanical right knee pain and locking; MRI shows medial meniscus tear. Presents for elective arthroscopy.
+PMH: Meniscal tear; COPD; Obesity
+PSH: Carpal tunnel release; Hernia repair
+Medications: Tiotropium 18 mcg Daily; Albuterol inhaler 90 mcg 2 puffs Q4H PRN; Semaglutide 1 mg Weekly
+Allergies: No known drug allergies
+Social: Smoking status former.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 129/86, HR 78, SpO2 94% RA, BMI 25.7.
+General: No acute distress.
+Airway: Mallampati III; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Mildly diminished breath sounds bilaterally; no wheezes or crackles.
+
+Assessment/Plan: Meniscal tear. Proceed with knee arthroscopy as scheduled pending pre-operative review."
+N053,S056,P056,History and Physical,2026-11-14,Dr. Synth Patel (Orthopedics),"HISTORY AND PHYSICAL
+Date: 2026-11-14  Author: Dr. Synth Patel (Orthopedics)
+
+HPI: 76-year-old female with mechanical right knee pain and locking; MRI shows medial meniscus tear. Presents for elective arthroscopy.
+PMH: Meniscal tear
+PSH: Carpal tunnel release
+Medications: None
+Allergies: No known drug allergies
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 123/82, HR 77, SpO2 95% RA, BMI 21.0.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Meniscal tear. Proceed with knee arthroscopy as scheduled pending pre-operative review."
+N054,S057,P057,History and Physical,2026-11-14,Dr. Synth Patel (Orthopedics),"HISTORY AND PHYSICAL
+Date: 2026-11-14  Author: Dr. Synth Patel (Orthopedics)
+
+HPI: 31-year-old female with mechanical right knee pain and locking; MRI shows medial meniscus tear. Presents for elective arthroscopy.
+PMH: Meniscal tear; Gastroesophageal reflux disease; Type 2 diabetes mellitus
+PSH: None
+Medications: Omeprazole 20 mg Daily; Metformin 1000 mg BID; Insulin glargine 24 units Nightly
+Allergies: No known drug allergies
+Social: Smoking status current.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 122/88, HR 81, SpO2 96% RA, BMI 21.2.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Meniscal tear. Proceed with knee arthroscopy as scheduled pending pre-operative review."
+N055,S058,P058,History and Physical,2026-11-12,Dr. Synth Patel (Orthopedics),"HISTORY AND PHYSICAL
+Date: 2026-11-12  Author: Dr. Synth Patel (Orthopedics)
+
+HPI: 74-year-old male with mechanical right knee pain and locking; MRI shows medial meniscus tear. Presents for elective arthroscopy.
+PMH: Meniscal tear; Hypertension; Obesity
+PSH: None
+Medications: Lisinopril 10 mg Daily
+Allergies: No known drug allergies
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 146/68, HR 68, SpO2 94% RA, BMI 35.5.
+General: No acute distress.
+Airway: Mallampati III; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Meniscal tear. Proceed with knee arthroscopy as scheduled pending pre-operative review."
+N056,S059,P059,History and Physical,2026-11-16,Dr. Synth Patel (Orthopedics),"HISTORY AND PHYSICAL
+Date: 2026-11-16  Author: Dr. Synth Patel (Orthopedics)
+
+HPI: 35-year-old male with mechanical right knee pain and locking; MRI shows medial meniscus tear. Presents for elective arthroscopy. Reports fever to 101.2 F and productive cough for the past 3 days.
+PMH: Meniscal tear
+PSH: Carpal tunnel release
+Medications: None
+Allergies: Sulfonamides (rash)
+Social: Smoking status current.
+Family history: Noncontributory.
+ROS: Positive as noted in HPI; otherwise negative.
+
+Vitals: BP 118/86, HR 87, SpO2 98% RA, BMI 24.0.
+General: No acute distress.
+Airway: Mallampati III; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Scattered rhonchi in the right lower lobe.
+
+Assessment/Plan: Meniscal tear. Proceed with knee arthroscopy as scheduled pending pre-operative review."
+N057,S060,P060,History and Physical,2026-11-21,Dr. Synth Patel (Orthopedics),"HISTORY AND PHYSICAL
+Date: 2026-11-21  Author: Dr. Synth Patel (Orthopedics)
+
+HPI: 25-year-old female with mechanical right knee pain and locking; MRI shows medial meniscus tear. Presents for elective arthroscopy.
+PMH: Meniscal tear; Hyperlipidemia; Type 2 diabetes mellitus
+PSH: Cataract surgery; Carpal tunnel release
+Medications: Atorvastatin 40 mg Nightly; Metformin 1000 mg BID; Insulin glargine 24 units Nightly
+Allergies: NKDA
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 140/73, HR 84, SpO2 97% RA, BMI 28.4.
+General: No acute distress.
+Airway: Mallampati III; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Meniscal tear. Proceed with knee arthroscopy as scheduled pending pre-operative review."
+N058,S061,P061,History and Physical,2026-10-31,Dr. Synth Greene (Urology),"HISTORY AND PHYSICAL
+Date: 2026-10-31  Author: Dr. Synth Greene (Urology)
+
+HPI: 40-year-old female with intermittent left flank pain; CT shows 6 mm proximal ureteral stone. Presents for ureteroscopy and stent placement.
+PMH: Ureteral calculus
+PSH: Tonsillectomy; Appendectomy
+Medications: None
+Allergies: Penicillin (hives)
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 128/84, HR 60, SpO2 98% RA, BMI 29.3.
+General: No acute distress.
+Airway: Mallampati III; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Ureteral calculus. Proceed with ureteroscopy with stent placement as scheduled pending pre-operative review."
+N059,S062,P062,History and Physical,2026-11-07,Dr. Synth Greene (Urology),"HISTORY AND PHYSICAL
+Date: 2026-11-07  Author: Dr. Synth Greene (Urology)
+
+HPI: 69-year-old female with intermittent left flank pain; CT shows 6 mm proximal ureteral stone. Presents for ureteroscopy and stent placement. Reports new shortness of breath climbing one flight of stairs over the past two weeks and ankle swelling.
+PMH: Ureteral calculus; Chronic kidney disease; Obesity
+PSH: None
+Medications: Semaglutide 1 mg Weekly
+Allergies: No known drug allergies
+Social: Smoking status former.
+Family history: Noncontributory.
+ROS: Positive as noted in HPI; otherwise negative.
+
+Vitals: BP 131/77, HR 75, SpO2 95% RA, BMI 25.2.
+General: No acute distress.
+Airway: Mallampati III; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Ureteral calculus. Proceed with ureteroscopy with stent placement as scheduled pending pre-operative review."
+N060,S063,P063,History and Physical,2026-10-31,Dr. Synth Greene (Urology),"HISTORY AND PHYSICAL
+Date: 2026-10-31  Author: Dr. Synth Greene (Urology)
+
+HPI: 70-year-old male with intermittent left flank pain; CT shows 6 mm proximal ureteral stone. Presents for ureteroscopy and stent placement.
+PMH: Ureteral calculus
+PSH: Appendectomy
+Medications: None
+Allergies: Sulfonamides (rash)
+Social: Smoking status former.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 121/76, HR 81, SpO2 95% RA, BMI 22.7.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Ureteral calculus. Proceed with ureteroscopy with stent placement as scheduled pending pre-operative review."
+N061,S064,P064,History and Physical,2026-10-31,Dr. Synth Greene (Urology),"HISTORY AND PHYSICAL
+Date: 2026-10-31  Author: Dr. Synth Greene (Urology)
+
+HPI: 31-year-old female with intermittent left flank pain; CT shows 6 mm proximal ureteral stone. Presents for ureteroscopy and stent placement.
+PMH: Ureteral calculus; Chronic kidney disease; Hypertension; Obstructive sleep apnea
+PSH: Colonoscopy with polypectomy
+Medications: Lisinopril 10 mg Daily
+Allergies: No known drug allergies
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 121/70, HR 82, SpO2 99% RA, BMI 29.5.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Ureteral calculus. Proceed with ureteroscopy with stent placement as scheduled pending pre-operative review. Surgical and anesthesia consents signed and in chart."
+N062,S065,P065,History and Physical,2026-11-16,Dr. Synth Greene (Urology),"HISTORY AND PHYSICAL
+Date: 2026-11-16  Author: Dr. Synth Greene (Urology)
+
+HPI: 40-year-old male with intermittent left flank pain; CT shows 6 mm proximal ureteral stone. Presents for ureteroscopy and stent placement.
+PMH: Ureteral calculus
+PSH: None
+Medications: None
+Allergies: Codeine (nausea)
+Social: Smoking status current.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Physical exam: deferred to day of surgery.
+
+Assessment/Plan: Ureteral calculus. Proceed with ureteroscopy with stent placement as scheduled pending pre-operative review."
+N063,S066,P066,History and Physical,2026-11-16,Dr. Synth Greene (Urology),"HISTORY AND PHYSICAL
+Date: 2026-11-16  Author: Dr. Synth Greene (Urology)
+
+HPI: 71-year-old female with intermittent left flank pain; CT shows 6 mm proximal ureteral stone. Presents for ureteroscopy and stent placement.
+PMH: Ureteral calculus; Chronic kidney disease; Hyperlipidemia
+PSH: None
+Medications: Atorvastatin 40 mg Nightly
+Allergies: No known drug allergies
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 137/70, HR 82, SpO2 98% RA, BMI 26.4.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Ureteral calculus. Proceed with ureteroscopy with stent placement as scheduled pending pre-operative review."
+N064,S067,P067,History and Physical,2026-11-17,Dr. Synth Greene (Urology),"HISTORY AND PHYSICAL
+Date: 2026-11-17  Author: Dr. Synth Greene (Urology)
+
+HPI: 56-year-old female with intermittent left flank pain; CT shows 6 mm proximal ureteral stone. Presents for ureteroscopy and stent placement.
+PMH: Ureteral calculus; COPD; Gastroesophageal reflux disease; Hypothyroidism; Type 2 diabetes mellitus
+PSH: Colonoscopy with polypectomy; Appendectomy
+Medications: Tiotropium 18 mcg Daily; Albuterol inhaler 90 mcg 2 puffs Q4H PRN; Omeprazole 20 mg Daily; Levothyroxine 75 mcg Daily; Metformin 1000 mg BID; Insulin glargine 24 units Nightly
+Allergies: No known drug allergies
+Social: Smoking status former.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 127/79, HR 71, SpO2 94% RA, BMI 25.1.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Mildly diminished breath sounds bilaterally; no wheezes or crackles.
+
+Assessment/Plan: Ureteral calculus. Proceed with ureteroscopy with stent placement as scheduled pending pre-operative review."
+N065,S068,P068,History and Physical,2026-11-12,Dr. Synth Greene (Urology),"HISTORY AND PHYSICAL
+Date: 2026-11-12  Author: Dr. Synth Greene (Urology)
+
+HPI: 30-year-old male with intermittent left flank pain; CT shows 6 mm proximal ureteral stone. Presents for ureteroscopy and stent placement.
+PMH: Ureteral calculus; Hypothyroidism; Chronic kidney disease
+PSH: Carpal tunnel release
+Medications: Levothyroxine 75 mcg Daily
+Allergies: No known drug allergies
+Social: Smoking status former.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 148/88, HR 79, SpO2 96% RA, BMI 22.6.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Ureteral calculus. Proceed with ureteroscopy with stent placement as scheduled pending pre-operative review."
+N066,S069,P069,History and Physical,2026-11-29,Dr. Synth Greene (Urology),"HISTORY AND PHYSICAL
+Date: 2026-11-29  Author: Dr. Synth Greene (Urology)
+
+HPI: 72-year-old male with intermittent left flank pain; CT shows 6 mm proximal ureteral stone. Presents for ureteroscopy and stent placement.
+PMH: Ureteral calculus; Chronic kidney disease; Obesity; Hypertension
+PSH: Cataract surgery
+Medications: Lisinopril 10 mg Daily
+Allergies: No known drug allergies
+Social: Smoking status former.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 119/75, HR 75, SpO2 97% RA, BMI 38.4.
+General: No acute distress.
+Airway: Mallampati III; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Ureteral calculus. Proceed with ureteroscopy with stent placement as scheduled pending pre-operative review."
+N067,S070,P070,History and Physical,2026-11-04,Dr. Synth Greene (Urology),"HISTORY AND PHYSICAL
+Date: 2026-11-04  Author: Dr. Synth Greene (Urology)
+
+HPI: 58-year-old female with intermittent left flank pain; CT shows 6 mm proximal ureteral stone. Presents for ureteroscopy and stent placement.
+PMH: Ureteral calculus; Hypertension; Hyperlipidemia
+PSH: None
+Medications: Lisinopril 10 mg Daily; Atorvastatin 40 mg Nightly
+Allergies: Sulfonamides (rash)
+Social: Smoking status current.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 148/77, HR 88, SpO2 94% RA, BMI 27.5.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Ureteral calculus. Proceed with ureteroscopy with stent placement as scheduled pending pre-operative review."
+N068,S071,P071,History and Physical,2026-11-06,Dr. Synth Greene (Urology),"HISTORY AND PHYSICAL
+Date: 2026-11-06  Author: Dr. Synth Greene (Urology)
+
+HPI: 75-year-old male with intermittent left flank pain; CT shows 6 mm proximal ureteral stone. Presents for ureteroscopy and stent placement.
+PMH: Ureteral calculus; Hypertension; Obesity; Asthma
+PSH: None
+Medications: Lisinopril 10 mg Daily; Albuterol inhaler 90 mcg 2 puffs Q4H PRN
+Allergies: No known drug allergies
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 136/85, HR 67, SpO2 96% RA, BMI 40.2.
+General: No acute distress.
+Airway: Mallampati III; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Ureteral calculus. Proceed with ureteroscopy with stent placement as scheduled pending pre-operative review."
+N069,S072,P072,History and Physical,2026-11-14,Dr. Synth Greene (Urology),"HISTORY AND PHYSICAL
+Date: 2026-11-14  Author: Dr. Synth Greene (Urology)
+
+HPI: 56-year-old male with intermittent left flank pain; CT shows 6 mm proximal ureteral stone. Presents for ureteroscopy and stent placement.
+PMH: Ureteral calculus; Obstructive sleep apnea; Asthma
+PSH: Colonoscopy with polypectomy
+Medications: Albuterol inhaler 90 mcg 2 puffs Q4H PRN
+Allergies: No known drug allergies
+Social: Smoking status current.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 127/71, HR 73, SpO2 96% RA, BMI 21.6.
+General: No acute distress.
+Airway: Mallampati III; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Ureteral calculus. Proceed with ureteroscopy with stent placement as scheduled pending pre-operative review."
+N070,S073,P073,History and Physical,2026-11-12,Dr. Synth Greene (Urology),"HISTORY AND PHYSICAL
+Date: 2026-11-12  Author: Dr. Synth Greene (Urology)
+
+HPI: 72-year-old female with intermittent left flank pain; CT shows 6 mm proximal ureteral stone. Presents for ureteroscopy and stent placement.
+PMH: Ureteral calculus; Hypothyroidism; Atrial fibrillation
+PSH: Carpal tunnel release
+Medications: Levothyroxine 75 mcg Daily; Apixaban 5 mg BID; Metoprolol succinate 50 mg Daily
+Allergies: No known drug allergies
+Social: Smoking status former.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 135/88, HR 81, SpO2 99% RA, BMI 25.3.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Irregularly irregular rhythm, rate controlled; no murmurs.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Ureteral calculus. Proceed with ureteroscopy with stent placement as scheduled pending pre-operative review."
+N071,S074,P074,History and Physical,2026-11-16,Dr. Synth Greene (Urology),"HISTORY AND PHYSICAL
+Date: 2026-11-16  Author: Dr. Synth Greene (Urology)
+
+HPI: 30-year-old female with intermittent left flank pain; CT shows 6 mm proximal ureteral stone. Presents for ureteroscopy and stent placement.
+PMH: Ureteral calculus; Chronic kidney disease; Atrial fibrillation; Type 2 diabetes mellitus
+PSH: Cesarean section
+Medications: Apixaban 5 mg BID; Metoprolol succinate 50 mg Daily; Metformin 1000 mg BID
+Allergies: Sulfonamides (rash)
+Social: Smoking status current.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 138/76, HR 64, SpO2 99% RA, BMI 23.1.
+General: No acute distress.
+Airway: Mallampati IV, limited mouth opening; full neck range of motion.
+Heart: Irregularly irregular rhythm, rate controlled; no murmurs.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Ureteral calculus. Proceed with ureteroscopy with stent placement as scheduled pending pre-operative review."
+N072,S075,P075,History and Physical,2026-11-14,Dr. Synth Greene (Urology),"HISTORY AND PHYSICAL
+Date: 2026-11-14  Author: Dr. Synth Greene (Urology)
+
+HPI: 71-year-old male with intermittent left flank pain; CT shows 6 mm proximal ureteral stone. Presents for ureteroscopy and stent placement.
+PMH: Ureteral calculus; Type 2 diabetes mellitus
+PSH: Tonsillectomy
+Medications: Metformin 1000 mg BID; Insulin glargine 24 units Nightly
+Allergies: No known drug allergies
+Social: Smoking status former.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 124/75, HR 62, SpO2 97% RA, BMI 26.5.
+General: No acute distress.
+Airway: Mallampati III; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Ureteral calculus. Proceed with ureteroscopy with stent placement as scheduled pending pre-operative review."
+N073,S076,P076,History and Physical,2026-11-21,Dr. Synth Greene (Urology),"HISTORY AND PHYSICAL
+Date: 2026-11-21  Author: Dr. Synth Greene (Urology)
+
+HPI: 29-year-old female with intermittent left flank pain; CT shows 6 mm proximal ureteral stone. Presents for ureteroscopy and stent placement.
+PMH: Ureteral calculus; Chronic kidney disease; Atrial fibrillation
+PSH: None
+Medications: Apixaban 5 mg BID; Metoprolol succinate 50 mg Daily
+Allergies: Latex (contact dermatitis)
+Social: Smoking status former.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 118/68, HR 88, SpO2 94% RA, BMI 23.2.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Irregularly irregular rhythm, rate controlled; no murmurs.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Ureteral calculus. Proceed with ureteroscopy with stent placement as scheduled pending pre-operative review."
+N074,S077,P077,History and Physical,2026-11-12,Dr. Synth Greene (Urology),"HISTORY AND PHYSICAL
+Date: 2026-11-12  Author: Dr. Synth Greene (Urology)
+
+HPI: 52-year-old female with intermittent left flank pain; CT shows 6 mm proximal ureteral stone. Presents for ureteroscopy and stent placement.
+PMH: Ureteral calculus
+PSH: Cataract surgery
+Medications: None
+Allergies: NKDA
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 123/85, HR 62, SpO2 95% RA, BMI 23.3.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Ureteral calculus. Proceed with ureteroscopy with stent placement as scheduled pending pre-operative review."
+N075,S078,P078,History and Physical,2026-10-23,Dr. Synth Greene (Urology),"HISTORY AND PHYSICAL
+Date: 2026-10-23  Author: Dr. Synth Greene (Urology)
+
+HPI: 72-year-old male with intermittent left flank pain; CT shows 6 mm proximal ureteral stone. Presents for ureteroscopy and stent placement.
+PMH: Ureteral calculus; Obstructive sleep apnea; Type 2 diabetes mellitus
+PSH: Colonoscopy with polypectomy
+Medications: Metformin 1000 mg BID; Insulin glargine 24 units Nightly
+Allergies: Latex (contact dermatitis)
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 126/72, HR 70, SpO2 95% RA, BMI 21.3.
+General: No acute distress.
+Airway: Mallampati III; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Ureteral calculus. Proceed with ureteroscopy with stent placement as scheduled pending pre-operative review."
+N076,S080,P080,History and Physical,2026-11-12,Dr. Synth Greene (Urology),"HISTORY AND PHYSICAL
+Date: 2026-11-12  Author: Dr. Synth Greene (Urology)
+
+HPI: 33-year-old male with intermittent left flank pain; CT shows 6 mm proximal ureteral stone. Presents for ureteroscopy and stent placement. Reports fever to 101.2 F and productive cough for the past 3 days.
+PMH: Ureteral calculus; Chronic kidney disease
+PSH: None
+Medications: None
+Allergies: No known drug allergies
+Social: Smoking status former.
+Family history: Noncontributory.
+ROS: Positive as noted in HPI; otherwise negative.
+
+Vitals: BP 136/83, HR 85, SpO2 98% RA, BMI 25.9.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Scattered rhonchi in the right lower lobe.
+
+Assessment/Plan: Ureteral calculus. Proceed with ureteroscopy with stent placement as scheduled pending pre-operative review."
+N077,S081,P081,History and Physical,2026-11-12,Dr. Synth Okonkwo (Cardiothoracic),"HISTORY AND PHYSICAL
+Date: 2026-11-12  Author: Dr. Synth Okonkwo (Cardiothoracic)
+
+HPI: 58-year-old female with exertional angina; catheterization shows three-vessel coronary artery disease. Presents for elective CABG.
+PMH: Multivessel coronary artery disease; Hypertension; Hyperlipidemia; Obesity; Type 2 diabetes mellitus
+PSH: None
+Medications: Aspirin 81 mg Daily; Metoprolol succinate 50 mg Daily; Atorvastatin 80 mg Nightly; Nitroglycerin 0.4 mg PRN chest pain; Lisinopril 10 mg Daily; Metformin 1000 mg BID
+Allergies: No known drug allergies
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 136/80, HR 63, SpO2 98% RA, BMI 38.6.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Multivessel coronary artery disease. Proceed with coronary artery bypass graft as scheduled pending pre-operative review."
+N078,S082,P082,History and Physical,2026-11-12,Dr. Synth Okonkwo (Cardiothoracic),"HISTORY AND PHYSICAL
+Date: 2026-11-12  Author: Dr. Synth Okonkwo (Cardiothoracic)
+
+HPI: 68-year-old male with exertional angina; catheterization shows three-vessel coronary artery disease. Presents for elective CABG. Reports two episodes of chest pressure at rest over the past 3 days, each lasting about 10 minutes and relieved by nitroglycerin.
+PMH: Multivessel coronary artery disease; Hypertension; Hyperlipidemia; Type 2 diabetes mellitus; Atrial fibrillation
+PSH: Colonoscopy with polypectomy
+Medications: Aspirin 81 mg Daily; Metoprolol succinate 50 mg Daily; Atorvastatin 80 mg Nightly; Nitroglycerin 0.4 mg PRN chest pain; Lisinopril 10 mg Daily; Metformin 1000 mg BID; Warfarin 5 mg Daily
+Allergies: No known drug allergies
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Positive as noted in HPI; otherwise negative.
+
+Vitals: BP 142/72, HR 65, SpO2 94% RA, BMI 25.8.
+General: No acute distress.
+Airway: Mallampati III; full neck range of motion.
+Heart: Irregularly irregular rhythm, rate controlled; no murmurs.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Multivessel coronary artery disease. Proceed with coronary artery bypass graft as scheduled pending pre-operative review."
+N079,S083,P083,History and Physical,2026-11-06,Dr. Synth Okonkwo (Cardiothoracic),"HISTORY AND PHYSICAL
+Date: 2026-11-06  Author: Dr. Synth Okonkwo (Cardiothoracic)
+
+HPI: 62-year-old female with exertional angina; catheterization shows three-vessel coronary artery disease. Presents for elective CABG.
+PMH: Multivessel coronary artery disease; Hypertension; Hyperlipidemia; Chronic kidney disease
+PSH: Cesarean section; Cataract surgery
+Medications: Aspirin 81 mg Daily; Metoprolol succinate 50 mg Daily; Atorvastatin 80 mg Nightly; Nitroglycerin 0.4 mg PRN chest pain; Lisinopril 10 mg Daily
+Allergies: No known drug allergies
+Social: Smoking status current.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 148/82, HR 76, SpO2 95% RA, BMI 22.1.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Multivessel coronary artery disease. Proceed with coronary artery bypass graft as scheduled pending pre-operative review. Surgical and anesthesia consents signed and in chart."
+N080,S084,P084,History and Physical,2026-11-13,Dr. Synth Okonkwo (Cardiothoracic),"HISTORY AND PHYSICAL
+Date: 2026-11-13  Author: Dr. Synth Okonkwo (Cardiothoracic)
+
+HPI: 65-year-old female with exertional angina; catheterization shows three-vessel coronary artery disease. Presents for elective CABG.
+PMH: Multivessel coronary artery disease; Hypertension; Hyperlipidemia; Chronic kidney disease
+PSH: Cesarean section; Cataract surgery
+Medications: Aspirin 81 mg Daily; Metoprolol succinate 50 mg Daily; Atorvastatin 80 mg Nightly; Nitroglycerin 0.4 mg PRN chest pain; Lisinopril 10 mg Daily
+Allergies: No known drug allergies
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 134/74, HR 77, SpO2 96% RA, BMI 25.2.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Multivessel coronary artery disease. Proceed with coronary artery bypass graft as scheduled pending pre-operative review."
+N081,S085,P085,History and Physical,2026-11-13,Dr. Synth Okonkwo (Cardiothoracic),"HISTORY AND PHYSICAL
+Date: 2026-11-13  Author: Dr. Synth Okonkwo (Cardiothoracic)
+
+HPI: 74-year-old female with exertional angina; catheterization shows three-vessel coronary artery disease. Presents for elective CABG.
+PMH: Multivessel coronary artery disease; Hypertension; Hyperlipidemia
+PSH: Cesarean section
+Medications: Aspirin 81 mg Daily; Metoprolol succinate 50 mg Daily; Atorvastatin 80 mg Nightly; Nitroglycerin 0.4 mg PRN chest pain; Lisinopril 10 mg Daily
+Allergies: No known drug allergies
+Social: Smoking status current.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 131/68, HR 74, SpO2 98% RA, BMI 27.0.
+General: No acute distress.
+Airway: Mallampati III; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Multivessel coronary artery disease. Proceed with coronary artery bypass graft as scheduled pending pre-operative review."
+N082,S086,P086,History and Physical,2026-11-16,Dr. Synth Okonkwo (Cardiothoracic),"HISTORY AND PHYSICAL
+Date: 2026-11-16  Author: Dr. Synth Okonkwo (Cardiothoracic)
+
+HPI: 84-year-old female with exertional angina; catheterization shows three-vessel coronary artery disease. Presents for elective CABG.
+PMH: Multivessel coronary artery disease; Hypertension; Hyperlipidemia
+PSH: Cataract surgery
+Medications: Aspirin 81 mg Daily; Metoprolol succinate 50 mg Daily; Atorvastatin 80 mg Nightly; Nitroglycerin 0.4 mg PRN chest pain; Lisinopril 10 mg Daily
+Allergies: No known drug allergies
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 128/81, HR 68, SpO2 98% RA, BMI 26.0.
+General: No acute distress.
+Airway: Mallampati III; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Multivessel coronary artery disease. Proceed with coronary artery bypass graft as scheduled pending pre-operative review."
+N083,S087,P087,History and Physical,2026-10-28,Dr. Synth Okonkwo (Cardiothoracic),"HISTORY AND PHYSICAL
+Date: 2026-10-28  Author: Dr. Synth Okonkwo (Cardiothoracic)
+
+HPI: 66-year-old male with exertional angina; catheterization shows three-vessel coronary artery disease. Presents for elective CABG.
+PMH: Multivessel coronary artery disease; Hypertension; Hyperlipidemia; Obstructive sleep apnea
+PSH: Carpal tunnel release
+Medications: Aspirin 81 mg Daily; Metoprolol succinate 50 mg Daily; Atorvastatin 80 mg Nightly; Nitroglycerin 0.4 mg PRN chest pain; Lisinopril 10 mg Daily
+Allergies: Sulfonamides (rash)
+Social: Smoking status current.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 119/86, HR 71, SpO2 94% RA, BMI 24.9.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Multivessel coronary artery disease. Proceed with coronary artery bypass graft as scheduled pending pre-operative review."
+N084,S088,P088,History and Physical,2026-09-05,Dr. Synth Okonkwo (Cardiothoracic),"HISTORY AND PHYSICAL
+Date: 2026-09-05  Author: Dr. Synth Okonkwo (Cardiothoracic)
+
+HPI: 64-year-old female with exertional angina; catheterization shows three-vessel coronary artery disease. Presents for elective CABG.
+PMH: Multivessel coronary artery disease; Hypertension; Hyperlipidemia; Type 2 diabetes mellitus
+PSH: Hernia repair
+Medications: Aspirin 81 mg Daily; Metoprolol succinate 50 mg Daily; Atorvastatin 80 mg Nightly; Nitroglycerin 0.4 mg PRN chest pain; Lisinopril 10 mg Daily; Metformin 1000 mg BID; Insulin glargine 24 units Nightly; Empagliflozin 10 mg Daily
+Allergies: No known drug allergies
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 137/86, HR 64, SpO2 96% RA, BMI 28.4.
+General: No acute distress.
+Airway: Mallampati III; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Multivessel coronary artery disease. Proceed with coronary artery bypass graft as scheduled pending pre-operative review."
+N085,S089,P089,History and Physical,2026-11-10,Dr. Synth Okonkwo (Cardiothoracic),"HISTORY AND PHYSICAL
+Date: 2026-11-10  Author: Dr. Synth Okonkwo (Cardiothoracic)
+
+HPI: 77-year-old female with exertional angina; catheterization shows three-vessel coronary artery disease. Presents for elective CABG.
+PMH: Multivessel coronary artery disease; Hypertension; Hyperlipidemia; Obesity
+PSH: Cataract surgery
+Medications: Aspirin 81 mg Daily; Metoprolol succinate 50 mg Daily; Atorvastatin 80 mg Nightly; Nitroglycerin 0.4 mg PRN chest pain; Lisinopril 10 mg Daily
+Allergies: Sulfonamides (rash)
+Social: Smoking status former.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 140/75, HR 71, SpO2 98% RA, BMI 39.2.
+General: No acute distress.
+Airway: Mallampati III; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Multivessel coronary artery disease. Proceed with coronary artery bypass graft as scheduled pending pre-operative review. Surgical and anesthesia consents signed and in chart."
+N086,S090,P090,History and Physical,2026-10-30,Dr. Synth Okonkwo (Cardiothoracic),"HISTORY AND PHYSICAL
+Date: 2026-10-30  Author: Dr. Synth Okonkwo (Cardiothoracic)
+
+HPI: 65-year-old female with exertional angina; catheterization shows three-vessel coronary artery disease. Presents for elective CABG.
+PMH: Multivessel coronary artery disease; Hypertension; Hyperlipidemia; COPD; Obesity
+PSH: Cesarean section
+Medications: Aspirin 81 mg Daily; Metoprolol succinate 50 mg Daily; Atorvastatin 80 mg Nightly; Nitroglycerin 0.4 mg PRN chest pain; Lisinopril 10 mg Daily; Tiotropium 18 mcg Daily; Albuterol inhaler 90 mcg 2 puffs Q4H PRN; Semaglutide 1 mg Weekly
+Allergies: Latex (contact dermatitis)
+Social: Smoking status former.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 128/68, HR 67, SpO2 98% RA, BMI 29.4.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Mildly diminished breath sounds bilaterally; no wheezes or crackles.
+
+Assessment/Plan: Multivessel coronary artery disease. Proceed with coronary artery bypass graft as scheduled pending pre-operative review."
+N087,S091,P091,History and Physical,2026-11-13,Dr. Synth Okonkwo (Cardiothoracic),"HISTORY AND PHYSICAL
+Date: 2026-11-13  Author: Dr. Synth Okonkwo (Cardiothoracic)
+
+HPI: 66-year-old male with exertional angina; catheterization shows three-vessel coronary artery disease. Presents for elective CABG.
+PMH: Multivessel coronary artery disease; Hypertension; Hyperlipidemia; COPD
+PSH: None
+Medications: Aspirin 81 mg Daily; Metoprolol succinate 50 mg Daily; Atorvastatin 80 mg Nightly; Nitroglycerin 0.4 mg PRN chest pain; Lisinopril 10 mg Daily; Tiotropium 18 mcg Daily; Albuterol inhaler 90 mcg 2 puffs Q4H PRN
+Allergies: No known drug allergies
+Social: Smoking status current.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 123/75, HR 60, SpO2 96% RA, BMI 26.5.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Mildly diminished breath sounds bilaterally; no wheezes or crackles.
+
+Assessment/Plan: Multivessel coronary artery disease. Proceed with coronary artery bypass graft as scheduled pending pre-operative review."
+N088,S092,P092,History and Physical,2026-11-17,Dr. Synth Okonkwo (Cardiothoracic),"HISTORY AND PHYSICAL
+Date: 2026-11-17  Author: Dr. Synth Okonkwo (Cardiothoracic)
+
+HPI: 79-year-old female with exertional angina; catheterization shows three-vessel coronary artery disease. Presents for elective CABG.
+PMH: Multivessel coronary artery disease; Hypertension; Hyperlipidemia; Gastroesophageal reflux disease; Chronic kidney disease
+PSH: Appendectomy
+Medications: Aspirin 81 mg Daily; Metoprolol succinate 50 mg Daily; Atorvastatin 80 mg Nightly; Nitroglycerin 0.4 mg PRN chest pain; Lisinopril 10 mg Daily; Omeprazole 20 mg Daily
+Allergies: No known drug allergies
+Social: Smoking status former.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 118/71, HR 72, SpO2 99% RA, BMI 22.8.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Multivessel coronary artery disease. Proceed with coronary artery bypass graft as scheduled pending pre-operative review."
+N089,S093,P093,History and Physical,2026-11-13,Dr. Synth Okonkwo (Cardiothoracic),"HISTORY AND PHYSICAL
+Date: 2026-11-13  Author: Dr. Synth Okonkwo (Cardiothoracic)
+
+HPI: 84-year-old female with exertional angina; catheterization shows three-vessel coronary artery disease. Presents for elective CABG.
+PMH: Multivessel coronary artery disease; Hypertension; Hyperlipidemia; COPD
+PSH: Cesarean section; Tonsillectomy
+Medications: Aspirin 81 mg Daily; Metoprolol succinate 50 mg Daily; Atorvastatin 80 mg Nightly; Nitroglycerin 0.4 mg PRN chest pain; Lisinopril 10 mg Daily; Tiotropium 18 mcg Daily; Albuterol inhaler 90 mcg 2 puffs Q4H PRN
+Allergies: Latex (contact dermatitis)
+Social: Smoking status current.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Physical exam: deferred to day of surgery.
+
+Assessment/Plan: Multivessel coronary artery disease. Proceed with coronary artery bypass graft as scheduled pending pre-operative review."
+N090,S094,P094,History and Physical,2026-09-30,Dr. Synth Okonkwo (Cardiothoracic),"HISTORY AND PHYSICAL
+Date: 2026-09-30  Author: Dr. Synth Okonkwo (Cardiothoracic)
+
+HPI: 63-year-old female with exertional angina; catheterization shows three-vessel coronary artery disease. Presents for elective CABG.
+PMH: Multivessel coronary artery disease; Hypertension; Hyperlipidemia; Type 2 diabetes mellitus
+PSH: None
+Medications: Aspirin 81 mg Daily; Metoprolol succinate 50 mg Daily; Atorvastatin 80 mg Nightly; Nitroglycerin 0.4 mg PRN chest pain; Lisinopril 10 mg Daily; Metformin 1000 mg BID; Insulin glargine 24 units Nightly
+Allergies: No known drug allergies
+Social: Smoking status current.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 120/81, HR 73, SpO2 94% RA, BMI 24.7.
+General: No acute distress.
+Airway: Mallampati III; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Multivessel coronary artery disease. Proceed with coronary artery bypass graft as scheduled pending pre-operative review."
+N091,S095,P095,History and Physical,2026-11-25,Dr. Synth Okonkwo (Cardiothoracic),"HISTORY AND PHYSICAL
+Date: 2026-11-25  Author: Dr. Synth Okonkwo (Cardiothoracic)
+
+HPI: 69-year-old male with exertional angina; catheterization shows three-vessel coronary artery disease. Presents for elective CABG.
+PMH: Multivessel coronary artery disease; Hypertension; Hyperlipidemia; Type 2 diabetes mellitus; COPD
+PSH: None
+Medications: Aspirin 81 mg Daily; Metoprolol succinate 50 mg Daily; Atorvastatin 80 mg Nightly; Nitroglycerin 0.4 mg PRN chest pain; Lisinopril 10 mg Daily; Metformin 1000 mg BID; Tiotropium 18 mcg Daily; Albuterol inhaler 90 mcg 2 puffs Q4H PRN
+Allergies: NKDA
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 121/87, HR 86, SpO2 98% RA, BMI 26.9.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Mildly diminished breath sounds bilaterally; no wheezes or crackles.
+
+Assessment/Plan: Multivessel coronary artery disease. Proceed with coronary artery bypass graft as scheduled pending pre-operative review."
+N092,S096,P096,History and Physical,2026-11-01,Dr. Synth Okonkwo (Cardiothoracic),"HISTORY AND PHYSICAL
+Date: 2026-11-01  Author: Dr. Synth Okonkwo (Cardiothoracic)
+
+HPI: 66-year-old female with exertional angina; catheterization shows three-vessel coronary artery disease. Presents for elective CABG.
+PMH: Multivessel coronary artery disease; Hypertension; Hyperlipidemia; Chronic kidney disease; Type 2 diabetes mellitus
+PSH: Carpal tunnel release
+Medications: Aspirin 81 mg Daily; Metoprolol succinate 50 mg Daily; Atorvastatin 80 mg Nightly; Nitroglycerin 0.4 mg PRN chest pain; Lisinopril 10 mg Daily; Metformin 1000 mg BID; Insulin glargine 24 units Nightly
+Allergies: No known drug allergies
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 143/77, HR 70, SpO2 96% RA, BMI 29.1.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Multivessel coronary artery disease. Proceed with coronary artery bypass graft as scheduled pending pre-operative review."
+N093,S097,P097,History and Physical,2026-11-07,Dr. Synth Okonkwo (Cardiothoracic),"HISTORY AND PHYSICAL
+Date: 2026-11-07  Author: Dr. Synth Okonkwo (Cardiothoracic)
+
+HPI: 53-year-old female with exertional angina; catheterization shows three-vessel coronary artery disease. Presents for elective CABG.
+PMH: Multivessel coronary artery disease; Hypertension; Hyperlipidemia; Chronic kidney disease; Type 2 diabetes mellitus
+PSH: Tonsillectomy; Carpal tunnel release
+Medications: Aspirin 81 mg Daily; Metoprolol succinate 50 mg Daily; Atorvastatin 80 mg Nightly; Nitroglycerin 0.4 mg PRN chest pain; Lisinopril 10 mg Daily; Metformin 1000 mg BID; Insulin glargine 24 units Nightly
+Allergies: Latex (contact dermatitis)
+Social: Smoking status former.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 137/85, HR 74, SpO2 98% RA, BMI 24.9.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Multivessel coronary artery disease. Proceed with coronary artery bypass graft as scheduled pending pre-operative review."
+N094,S098,P098,History and Physical,2026-11-08,Dr. Synth Okonkwo (Cardiothoracic),"HISTORY AND PHYSICAL
+Date: 2026-11-08  Author: Dr. Synth Okonkwo (Cardiothoracic)
+
+HPI: 77-year-old female with exertional angina; catheterization shows three-vessel coronary artery disease. Presents for elective CABG.
+PMH: Multivessel coronary artery disease; Hypertension; Hyperlipidemia; Type 2 diabetes mellitus
+PSH: Appendectomy
+Medications: Aspirin 81 mg Daily; Metoprolol succinate 50 mg Daily; Atorvastatin 80 mg Nightly; Nitroglycerin 0.4 mg PRN chest pain; Lisinopril 10 mg Daily; Metformin 1000 mg BID; Insulin glargine 24 units Nightly
+Allergies: No known drug allergies
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 134/74, HR 84, SpO2 97% RA, BMI 24.1.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Multivessel coronary artery disease. Proceed with coronary artery bypass graft as scheduled pending pre-operative review."
+N095,S099,P099,History and Physical,2026-11-04,Dr. Synth Okonkwo (Cardiothoracic),"HISTORY AND PHYSICAL
+Date: 2026-11-04  Author: Dr. Synth Okonkwo (Cardiothoracic)
+
+HPI: 62-year-old male with exertional angina; catheterization shows three-vessel coronary artery disease. Presents for elective CABG.
+PMH: Multivessel coronary artery disease; Hypertension; Hyperlipidemia; Chronic kidney disease; Obesity; COPD
+PSH: Colonoscopy with polypectomy; Tonsillectomy
+Medications: Aspirin 81 mg Daily; Metoprolol succinate 50 mg Daily; Atorvastatin 80 mg Nightly; Nitroglycerin 0.4 mg PRN chest pain; Lisinopril 10 mg Daily; Tiotropium 18 mcg Daily; Albuterol inhaler 90 mcg 2 puffs Q4H PRN
+Allergies: No known drug allergies
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Physical exam: deferred to day of surgery.
+
+Assessment/Plan: Multivessel coronary artery disease. Proceed with coronary artery bypass graft as scheduled pending pre-operative review."
+N096,S100,P100,History and Physical,2026-11-16,Dr. Synth Okonkwo (Cardiothoracic),"HISTORY AND PHYSICAL
+Date: 2026-11-16  Author: Dr. Synth Okonkwo (Cardiothoracic)
+
+HPI: 69-year-old male with exertional angina; catheterization shows three-vessel coronary artery disease. Presents for elective CABG.
+PMH: Multivessel coronary artery disease; Hypertension; Hyperlipidemia; Obesity
+PSH: None
+Medications: Aspirin 81 mg Daily; Metoprolol succinate 50 mg Daily; Atorvastatin 80 mg Nightly; Nitroglycerin 0.4 mg PRN chest pain; Lisinopril 10 mg Daily; Semaglutide 1 mg Weekly
+Allergies: Codeine (nausea)
+Social: Smoking status never.
+Family history: Noncontributory.
+ROS: Denies chest pain, shortness of breath, fever, or recent illness.
+
+Vitals: BP 144/87, HR 80, SpO2 98% RA, BMI 24.1.
+General: No acute distress.
+Airway: Mallampati II; full neck range of motion.
+Heart: Regular rate and rhythm; no murmurs, rubs, or gallops.
+Lungs: Clear to auscultation bilaterally.
+
+Assessment/Plan: Multivessel coronary artery disease. Proceed with coronary artery bypass graft as scheduled pending pre-operative review."

@@ -1,0 +1,101 @@
+patient_id,mrn,name,dob,age,sex,height_cm,weight_kg,bmi,smoking_status,diagnoses,allergies,anesthesia_complication_history
+P001,SYN656287,Frank Tanaka,2003-02-24,23,Male,182,134.2,40.5,Former,Symptomatic cholelithiasis; Obesity,No known drug allergies,None documented
+P002,SYN140517,Keisha Fairchild,1955-07-10,71,Female,163,62.7,23.6,Current,Symptomatic cholelithiasis; Hyperlipidemia; COPD,Penicillin (hives),None documented
+P003,SYN900952,Maria Okafor,1975-12-12,50,Female,163,72.0,27.1,Never,Symptomatic cholelithiasis; Obstructive sleep apnea; Hypertension; COPD,Latex (contact dermatitis),None documented
+P004,SYN973151,Frank Mercer,1957-05-01,69,Male,169,99.4,34.8,Former,Symptomatic cholelithiasis; Atrial fibrillation; Obesity,Latex (contact dermatitis),Difficult airway - required video laryngoscope and bougie (2019)
+P005,SYN756156,Michael Sandoval,1974-03-04,52,Male,180,69.0,21.3,Never,Symptomatic cholelithiasis,Codeine (nausea),Difficult airway - required video laryngoscope and bougie (2019)
+P006,SYN478106,Luis Kowalski,1994-07-25,32,Male,181,94.4,28.8,Never,Symptomatic cholelithiasis,Sulfonamides (rash),None documented
+P007,SYN185860,Wayne Lindqvist,1990-01-29,36,Male,173,85.9,28.7,Former,Symptomatic cholelithiasis; Hyperlipidemia; Hypertension; COPD; Atrial fibrillation,No known drug allergies,None documented
+P008,SYN979225,Brenda Nguyen,1962-04-27,64,Female,165,102.6,37.7,Former,Symptomatic cholelithiasis; Gastroesophageal reflux disease; Obesity,Penicillin (hives),None documented
+P009,SYN696484,Harold Wexler,1978-10-13,48,Male,176,83.3,26.9,Former,Symptomatic cholelithiasis; COPD; Chronic kidney disease; Atrial fibrillation,Latex (contact dermatitis),None documented
+P010,SYN556559,Diane Vasquez,1995-06-24,31,Female,155,51.4,21.4,Current,Symptomatic cholelithiasis; Type 2 diabetes mellitus; COPD,Codeine (nausea),Prior postoperative nausea and vomiting
+P011,SYN502999,Tamika Kowalski,1999-09-18,27,Female,156,64.2,26.4,Never,Symptomatic cholelithiasis; Atrial fibrillation,No known drug allergies,None documented
+P012,SYN261306,Diane Nguyen,1951-01-31,75,Female,162,102.9,39.2,Never,Symptomatic cholelithiasis; Hypothyroidism; Obesity,Latex (contact dermatitis),None documented
+P013,SYN481595,Wayne Lindqvist,1981-11-24,45,Male,180,76.5,23.6,Never,Symptomatic cholelithiasis; Obstructive sleep apnea,Sulfonamides (rash),"Personal history of malignant hyperthermia (2011, treated with dantrolene)"
+P014,SYN144652,Maria Nguyen,1970-10-24,56,Female,152,91.5,39.6,Never,Symptomatic cholelithiasis; Obesity; Atrial fibrillation,Penicillin (hives),None documented
+P015,SYN733530,Curtis Fairchild,1972-11-21,54,Male,175,79.9,26.1,Current,Symptomatic cholelithiasis; COPD; Type 2 diabetes mellitus,No known drug allergies,Difficult airway - required video laryngoscope and bougie (2019)
+P016,SYN592755,Carmen Nguyen,1999-11-27,27,Female,168,70.6,25.0,Never,Symptomatic cholelithiasis; Hypertension; Gastroesophageal reflux disease,Sulfonamides (rash),None documented
+P017,SYN799121,Luis Castillo,1958-06-11,68,Male,169,74.8,26.2,Former,Symptomatic cholelithiasis; Obstructive sleep apnea,No known drug allergies,None documented
+P018,SYN833204,Robert Underwood,1963-03-26,63,Male,178,79.2,25.0,Never,Symptomatic cholelithiasis; Obstructive sleep apnea,Codeine (nausea),None documented
+P019,SYN969971,Tamika Delgado,1961-01-22,65,Female,157,71.0,28.8,Never,Symptomatic cholelithiasis; Hyperlipidemia,No known drug allergies,None documented
+P020,SYN279729,Darnell Tanaka,1944-04-26,82,Male,183,125.2,37.4,Former,Symptomatic cholelithiasis; Obesity,Sulfonamides (rash),None documented
+P021,SYN239357,Lauren Vasquez,1990-09-27,36,Female,164,62.4,23.2,Never,Breast malignancy,No known drug allergies,None documented
+P022,SYN303440,Diane Yarbrough,1966-06-22,60,Female,155,52.9,22.0,Never,Breast malignancy; Atrial fibrillation,No known drug allergies,None documented
+P023,SYN519008,Yvonne Fairchild,1969-07-10,57,Female,163,91.4,34.4,Never,Breast malignancy; Obesity,No known drug allergies,None documented
+P024,SYN878956,Tamika Brennan,1981-02-06,45,Female,167,103.5,37.1,Never,Breast malignancy; Obesity,Codeine (nausea),None documented
+P025,SYN641359,Rosa Fairchild,1991-06-21,35,Female,165,75.1,27.6,Never,Breast malignancy; Asthma; COPD,Sulfonamides (rash),None documented
+P026,SYN497419,Heather Haddad,1957-08-01,69,Female,161,87.1,33.6,Never,Breast malignancy; Obesity,Latex (contact dermatitis),None documented
+P027,SYN759087,Priya Wexler,1945-12-17,80,Female,169,61.4,21.5,Current,Breast malignancy; Asthma; Hyperlipidemia; Type 2 diabetes mellitus,Codeine (nausea),None documented
+P028,SYN314668,Heather Fairchild,1960-07-26,66,Female,162,59.0,22.5,Never,Breast malignancy; Type 2 diabetes mellitus; Atrial fibrillation,No known drug allergies,None documented
+P029,SYN520144,Angela Underwood,1952-09-20,74,Female,153,55.2,23.6,Never,Breast malignancy; Type 2 diabetes mellitus; Obesity,Latex (contact dermatitis),None documented
+P030,SYN415047,Brenda Nguyen,1978-05-16,48,Female,156,57.4,23.6,Former,Breast malignancy; Obstructive sleep apnea; Asthma; COPD,Codeine (nausea),None documented
+P031,SYN996929,Tamika Whitfield,1982-01-01,44,Female,169,83.4,29.2,Current,Breast malignancy,Sulfonamides (rash),None documented
+P032,SYN980773,Keisha Ingram,1969-08-29,57,Female,165,102.4,37.6,Never,Breast malignancy; Obesity; Atrial fibrillation,No known drug allergies,Prior postoperative nausea and vomiting
+P033,SYN531305,Tamika Castillo,1956-05-14,70,Female,153,68.4,29.2,Current,Breast malignancy; Gastroesophageal reflux disease; Hypothyroidism; Atrial fibrillation,Codeine (nausea),None documented
+P034,SYN732703,Diane Rhodes,1962-10-31,64,Female,160,75.0,29.3,Current,Breast malignancy; Type 2 diabetes mellitus; Obstructive sleep apnea; Asthma; COPD,Codeine (nausea),None documented
+P035,SYN312476,Joan Yarbrough,1992-04-16,34,Female,156,58.2,23.9,Current,Breast malignancy; Hypothyroidism; Obesity,No known drug allergies,None documented
+P036,SYN766557,Brenda Fairchild,1992-01-20,34,Female,159,67.8,26.8,Never,Breast malignancy; Gastroesophageal reflux disease,No known drug allergies,None documented
+P037,SYN677099,Gloria Fairchild,1966-11-01,60,Female,158,53.2,21.3,Current,Breast malignancy; Chronic kidney disease,No known drug allergies,None documented
+P038,SYN331847,Erin Gallagher,1975-01-28,51,Female,165,63.7,23.4,Former,Breast malignancy; Gastroesophageal reflux disease; COPD; Obesity,Codeine (nausea),Prior postoperative nausea and vomiting
+P039,SYN948949,Yvonne Vasquez,1962-10-15,64,Female,165,80.3,29.5,Current,Breast malignancy; Type 2 diabetes mellitus,No known drug allergies,None documented
+P040,SYN679562,Denise Lindqvist,1974-09-13,52,Female,168,75.9,26.9,Former,Breast malignancy; Hyperlipidemia; Hypothyroidism,Sulfonamides (rash),None documented
+P041,SYN956934,Brenda Brennan,1995-04-06,31,Female,168,82.1,29.1,Former,Meniscal tear; Atrial fibrillation; Hypothyroidism,No known drug allergies,None documented
+P042,SYN376704,Yvonne Ingram,1992-04-03,34,Female,154,68.1,28.7,Former,Meniscal tear; Hyperlipidemia,Sulfonamides (rash),None documented
+P043,SYN750667,Keisha Sandoval,1972-08-11,54,Female,166,79.9,29.0,Current,Meniscal tear; Hyperlipidemia; COPD; Hypothyroidism,No known drug allergies,"Personal history of malignant hyperthermia (2011, treated with dantrolene)"
+P044,SYN286520,Monica Delgado,1977-09-27,49,Female,170,115.6,40.0,Former,Meniscal tear; Obesity; COPD; Gastroesophageal reflux disease,Penicillin (hives),None documented
+P045,SYN845729,Michael Hollis,1958-08-19,68,Male,173,104.2,34.8,Never,Meniscal tear; Obesity; Atrial fibrillation,No known drug allergies,None documented
+P046,SYN560785,Sharon Hollis,1950-12-04,76,Female,166,74.7,27.1,Current,Meniscal tear,No known drug allergies,None documented
+P047,SYN267128,Darnell Batiste,1975-07-13,51,Male,174,75.4,24.9,Never,Meniscal tear; Type 2 diabetes mellitus,No known drug allergies,None documented
+P048,SYN896530,Victor Nguyen,1957-11-22,69,Male,172,66.9,22.6,Never,Meniscal tear; Type 2 diabetes mellitus,No known drug allergies,"Personal history of malignant hyperthermia (2011, treated with dantrolene)"
+P049,SYN568351,Lauren Haddad,1992-06-15,34,Female,158,62.7,25.1,Current,Meniscal tear; Gastroesophageal reflux disease; Type 2 diabetes mellitus,No known drug allergies,"Personal history of malignant hyperthermia (2011, treated with dantrolene)"
+P050,SYN578376,Karen Wexler,1995-07-15,31,Female,169,69.1,24.2,Never,Meniscal tear; Type 2 diabetes mellitus; Gastroesophageal reflux disease,No known drug allergies,None documented
+P051,SYN894820,Robert Yarbrough,1978-06-04,48,Male,171,79.8,27.3,Current,Meniscal tear; Hyperlipidemia; Type 2 diabetes mellitus; Asthma,No known drug allergies,None documented
+P052,SYN703508,Raj Brennan,1973-07-10,53,Male,187,88.5,25.3,Never,Meniscal tear,No known drug allergies,Prior postoperative nausea and vomiting
+P053,SYN668656,Lauren Rhodes,1987-02-11,39,Female,167,60.2,21.6,Former,Meniscal tear,Latex (contact dermatitis),"Personal history of malignant hyperthermia (2011, treated with dantrolene)"
+P054,SYN261974,Darnell Gallagher,1966-01-05,60,Male,183,77.7,23.2,Never,Meniscal tear; Gastroesophageal reflux disease,Penicillin (hives),None documented
+P055,SYN121179,Rosa Zamora,1972-10-02,54,Female,161,66.6,25.7,Former,Meniscal tear; COPD; Obesity,No known drug allergies,None documented
+P056,SYN961174,Carmen Nguyen,1950-11-15,76,Female,168,59.3,21.0,Never,Meniscal tear,No known drug allergies,None documented
+P057,SYN554814,Sharon Rhodes,1995-11-22,31,Female,156,51.6,21.2,Current,Meniscal tear; Gastroesophageal reflux disease; Type 2 diabetes mellitus,No known drug allergies,None documented
+P058,SYN914173,Michael Fairchild,1952-05-22,74,Male,170,102.6,35.5,Never,Meniscal tear; Hypertension; Obesity,No known drug allergies,None documented
+P059,SYN403676,Wayne Delgado,1991-11-28,35,Male,186,83.0,24.0,Current,Meniscal tear,Sulfonamides (rash),Prior postoperative nausea and vomiting
+P060,SYN343708,Gloria Delgado,2001-04-01,25,Female,157,70.0,28.4,Never,Meniscal tear; Hyperlipidemia; Type 2 diabetes mellitus,Penicillin (hives),None documented
+P061,SYN990443,Brenda Mercer,1986-06-28,40,Female,161,75.9,29.3,Never,Ureteral calculus,Penicillin (hives),None documented
+P062,SYN972579,Lauren Mercer,1957-08-30,69,Female,156,61.3,25.2,Former,Ureteral calculus; Chronic kidney disease; Obesity,No known drug allergies,None documented
+P063,SYN669026,Frank Lindqvist,1956-02-26,70,Male,165,61.8,22.7,Former,Ureteral calculus,Sulfonamides (rash),None documented
+P064,SYN773962,Heather Yarbrough,1994-12-20,31,Female,166,81.3,29.5,Never,Ureteral calculus; Chronic kidney disease; Hypertension; Obstructive sleep apnea,No known drug allergies,None documented
+P065,SYN698777,Omar Zamora,1986-01-24,40,Male,167,69.4,24.9,Current,Ureteral calculus,Codeine (nausea),None documented
+P066,SYN410666,Carmen Batiste,1955-07-03,71,Female,159,66.7,26.4,Never,Ureteral calculus; Chronic kidney disease; Hyperlipidemia,No known drug allergies,None documented
+P067,SYN746965,Maria Pruitt,1970-09-03,56,Female,168,70.8,25.1,Former,Ureteral calculus; COPD; Gastroesophageal reflux disease; Hypothyroidism; Type 2 diabetes mellitus,No known drug allergies,None documented
+P068,SYN782483,Darnell Brennan,1996-03-12,30,Male,179,72.4,22.6,Former,Ureteral calculus; Hypothyroidism; Chronic kidney disease,No known drug allergies,None documented
+P069,SYN184936,Darnell Whitfield,1954-07-27,72,Male,179,123.0,38.4,Former,Ureteral calculus; Chronic kidney disease; Obesity; Hypertension,No known drug allergies,None documented
+P070,SYN768299,Yvonne Brennan,1968-07-15,58,Female,154,65.2,27.5,Current,Ureteral calculus; Hypertension; Hyperlipidemia,Sulfonamides (rash),None documented
+P071,SYN497581,Darnell Lindqvist,1951-08-01,75,Male,172,118.9,40.2,Never,Ureteral calculus; Hypertension; Obesity; Asthma,No known drug allergies,None documented
+P072,SYN985476,Marcus Lindqvist,1970-01-25,56,Male,175,66.2,21.6,Current,Ureteral calculus; Obstructive sleep apnea; Asthma,No known drug allergies,None documented
+P073,SYN757681,Angela Abernathy,1954-04-19,72,Female,160,64.8,25.3,Former,Ureteral calculus; Hypothyroidism; Atrial fibrillation,No known drug allergies,None documented
+P074,SYN883219,Gloria Underwood,1996-03-14,30,Female,161,59.9,23.1,Current,Ureteral calculus; Chronic kidney disease; Atrial fibrillation; Type 2 diabetes mellitus,Sulfonamides (rash),Difficult airway - required video laryngoscope and bougie (2019)
+P075,SYN863642,Robert Whitfield,1955-08-28,71,Male,180,85.9,26.5,Former,Ureteral calculus; Type 2 diabetes mellitus,No known drug allergies,None documented
+P076,SYN781082,Rosa Gallagher,1997-05-23,29,Female,154,55.0,23.2,Former,Ureteral calculus; Chronic kidney disease; Atrial fibrillation,Latex (contact dermatitis),None documented
+P077,SYN394799,Lauren Mercer,1974-08-22,52,Female,154,55.3,23.3,Never,Ureteral calculus,Penicillin (hives),Prior postoperative nausea and vomiting
+P078,SYN832044,Marcus Lindqvist,1954-04-28,72,Male,166,58.7,21.3,Never,Ureteral calculus; Obstructive sleep apnea; Type 2 diabetes mellitus,Latex (contact dermatitis),None documented
+P079,SYN103747,Keisha Pruitt,1967-01-11,59,Female,169,82.3,28.8,Never,Ureteral calculus; Gastroesophageal reflux disease; Type 2 diabetes mellitus,Codeine (nausea),None documented
+P080,SYN253829,Frank Kowalski,1993-02-19,33,Male,178,82.1,25.9,Former,Ureteral calculus; Chronic kidney disease,No known drug allergies,None documented
+P081,SYN289984,Keisha Pruitt,1968-08-05,58,Female,154,91.5,38.6,Never,Multivessel coronary artery disease; Hypertension; Hyperlipidemia; Obesity; Type 2 diabetes mellitus,No known drug allergies,None documented
+P082,SYN917984,Darnell Tanaka,1958-11-04,68,Male,186,89.3,25.8,Never,Multivessel coronary artery disease; Hypertension; Hyperlipidemia; Type 2 diabetes mellitus; Atrial fibrillation,No known drug allergies,None documented
+P083,SYN249563,Denise Tanaka,1964-12-06,62,Female,158,55.2,22.1,Current,Multivessel coronary artery disease; Hypertension; Hyperlipidemia; Chronic kidney disease,No known drug allergies,None documented
+P084,SYN462346,Angela Ingram,1961-08-25,65,Female,155,60.5,25.2,Never,Multivessel coronary artery disease; Hypertension; Hyperlipidemia; Chronic kidney disease,No known drug allergies,None documented
+P085,SYN592395,Linda Underwood,1952-10-31,74,Female,165,73.5,27.0,Current,Multivessel coronary artery disease; Hypertension; Hyperlipidemia,No known drug allergies,None documented
+P086,SYN958275,Joan Yarbrough,1942-11-28,84,Female,157,64.1,26.0,Never,Multivessel coronary artery disease; Hypertension; Hyperlipidemia,No known drug allergies,None documented
+P087,SYN558587,Victor Okafor,1960-02-27,66,Male,175,76.3,24.9,Current,Multivessel coronary artery disease; Hypertension; Hyperlipidemia; Obstructive sleep apnea,Sulfonamides (rash),"Personal history of malignant hyperthermia (2011, treated with dantrolene)"
+P088,SYN801998,Heather Whitfield,1962-05-10,64,Female,154,67.4,28.4,Never,Multivessel coronary artery disease; Hypertension; Hyperlipidemia; Type 2 diabetes mellitus,No known drug allergies,None documented
+P089,SYN271628,Denise Okafor,1949-04-13,77,Female,162,102.9,39.2,Former,Multivessel coronary artery disease; Hypertension; Hyperlipidemia; Obesity,Sulfonamides (rash),"Personal history of malignant hyperthermia (2011, treated with dantrolene)"
+P090,SYN855532,Heather Brennan,1961-04-02,65,Female,163,78.1,29.4,Former,Multivessel coronary artery disease; Hypertension; Hyperlipidemia; COPD; Obesity,Latex (contact dermatitis),None documented
+P091,SYN565728,Raj Batiste,1960-08-13,66,Male,176,82.1,26.5,Current,Multivessel coronary artery disease; Hypertension; Hyperlipidemia; COPD,No known drug allergies,None documented
+P092,SYN946855,Yvonne Hollis,1947-09-29,79,Female,162,59.8,22.8,Former,Multivessel coronary artery disease; Hypertension; Hyperlipidemia; Gastroesophageal reflux disease; Chronic kidney disease,No known drug allergies,None documented
+P093,SYN979998,Lauren Brennan,1942-11-19,84,Female,154,59.3,25.0,Current,Multivessel coronary artery disease; Hypertension; Hyperlipidemia; COPD,Latex (contact dermatitis),None documented
+P094,SYN888773,Heather Fairchild,1963-05-17,63,Female,158,61.7,24.7,Current,Multivessel coronary artery disease; Hypertension; Hyperlipidemia; Type 2 diabetes mellitus,No known drug allergies,None documented
+P095,SYN310760,Dennis Brennan,1957-11-07,69,Male,182,89.1,26.9,Never,Multivessel coronary artery disease; Hypertension; Hyperlipidemia; Type 2 diabetes mellitus; COPD,Penicillin (hives),None documented
+P096,SYN150869,Angela Fairchild,1960-10-19,66,Female,163,77.3,29.1,Never,Multivessel coronary artery disease; Hypertension; Hyperlipidemia; Chronic kidney disease; Type 2 diabetes mellitus,No known drug allergies,None documented
+P097,SYN279301,Rosa Delgado,1973-01-08,53,Female,156,60.6,24.9,Former,Multivessel coronary artery disease; Hypertension; Hyperlipidemia; Chronic kidney disease; Type 2 diabetes mellitus,Latex (contact dermatitis),"Personal history of malignant hyperthermia (2011, treated with dantrolene)"
+P098,SYN111083,Lauren Batiste,1949-11-16,77,Female,159,60.9,24.1,Never,Multivessel coronary artery disease; Hypertension; Hyperlipidemia; Type 2 diabetes mellitus,No known drug allergies,None documented
+P099,SYN241862,Marcus Sandoval,1964-09-19,62,Male,169,98.5,34.5,Never,Multivessel coronary artery disease; Hypertension; Hyperlipidemia; Chronic kidney disease; Obesity; COPD,No known drug allergies,None documented
+P100,SYN567250,Andre Lindqvist,1957-04-21,69,Male,166,66.4,24.1,Never,Multivessel coronary artery disease; Hypertension; Hyperlipidemia; Obesity,Codeine (nausea),None documented

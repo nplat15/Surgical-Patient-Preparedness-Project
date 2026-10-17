@@ -1,0 +1,270 @@
+medication_id,patient_id,medication_name,dose,route,frequency,preop_instruction,status
+M0001,P002,Atorvastatin,40 mg,PO,Nightly,Continue,Active
+M0002,P002,Tiotropium,18 mcg,INH,Daily,Take morning of surgery,Active
+M0003,P002,Albuterol inhaler,90 mcg 2 puffs,INH,Q4H PRN,Bring inhaler day of surgery,Active
+M0004,P003,Lisinopril,10 mg,PO,Daily,Hold morning of surgery,Active
+M0005,P003,Tiotropium,18 mcg,INH,Daily,Take morning of surgery,Active
+M0006,P003,Albuterol inhaler,90 mcg 2 puffs,INH,Q4H PRN,Bring inhaler day of surgery,Active
+M0007,P004,Apixaban,5 mg,PO,BID,Hold 2 days before surgery per surgeon,Active
+M0008,P004,Metoprolol succinate,50 mg,PO,Daily,Take morning of surgery with sip of water,Active
+M0009,P007,Atorvastatin,40 mg,PO,Nightly,Continue,Active
+M0010,P007,Lisinopril,10 mg,PO,Daily,Hold morning of surgery,Active
+M0011,P007,Tiotropium,18 mcg,INH,Daily,Take morning of surgery,Active
+M0012,P007,Albuterol inhaler,90 mcg 2 puffs,INH,Q4H PRN,Bring inhaler day of surgery,Active
+M0013,P007,Warfarin,5 mg,PO,Daily,Hold 5 days before surgery per cardiology,Active
+M0014,P007,Metoprolol succinate,50 mg,PO,Daily,Take morning of surgery with sip of water,Active
+M0015,P008,Omeprazole,20 mg,PO,Daily,Take morning of surgery,Active
+M0016,P009,Tiotropium,18 mcg,INH,Daily,Take morning of surgery,Active
+M0017,P009,Albuterol inhaler,90 mcg 2 puffs,INH,Q4H PRN,Bring inhaler day of surgery,Active
+M0018,P009,Warfarin,5 mg,PO,Daily,Hold 5 days before surgery per cardiology,Active
+M0019,P009,Metoprolol succinate,50 mg,PO,Daily,Take morning of surgery with sip of water,Active
+M0020,P010,Metformin,1000 mg,PO,BID,,Active
+M0021,P010,Tiotropium,18 mcg,INH,Daily,Take morning of surgery,Active
+M0022,P010,Albuterol inhaler,90 mcg 2 puffs,INH,Q4H PRN,Bring inhaler day of surgery,Active
+M0023,P010,Insulin glargine,24 units,SC,Nightly,Take 80% of usual dose the night before surgery,Active
+M0024,P011,Apixaban,5 mg,PO,BID,Hold 2 days before surgery per surgeon,Active
+M0025,P011,Metoprolol succinate,50 mg,PO,Daily,Take morning of surgery with sip of water,Active
+M0026,P012,Levothyroxine,75 mcg,PO,Daily,Take morning of surgery,Active
+M0027,P014,Apixaban,5 mg,PO,BID,Hold 2 days before surgery per surgeon,Active
+M0028,P014,Metoprolol succinate,50 mg,PO,Daily,Take morning of surgery with sip of water,Active
+M0029,P015,Tiotropium,18 mcg,INH,Daily,Take morning of surgery,Active
+M0030,P015,Albuterol inhaler,90 mcg 2 puffs,INH,Q4H PRN,Bring inhaler day of surgery,Active
+M0031,P015,Metformin,1000 mg,PO,BID,Hold morning of surgery,Active
+M0032,P015,Insulin glargine,24 units,SC,Nightly,Take 80% of usual dose the night before surgery,Active
+M0033,P015,Empagliflozin,10 mg,PO,Daily,,Active
+M0034,P016,Lisinopril,10 mg,PO,Daily,Hold morning of surgery,Active
+M0035,P016,Omeprazole,20 mg,PO,Daily,Take morning of surgery,Active
+M0036,P019,Atorvastatin,40 mg,PO,Nightly,Continue,Active
+M0037,P022,Apixaban,5 mg,PO,BID,Hold 2 days before surgery per surgeon,Active
+M0038,P022,Metoprolol succinate,50 mg,PO,Daily,Take morning of surgery with sip of water,Active
+M0039,P023,Clopidogrel,75 mg,PO,Daily,,Active
+M0040,P024,Clopidogrel,75 mg,PO,Daily,,Active
+M0041,P025,Albuterol inhaler,90 mcg 2 puffs,INH,Q4H PRN,Bring inhaler day of surgery,Active
+M0042,P025,Tiotropium,18 mcg,INH,Daily,Take morning of surgery,Active
+M0043,P027,Albuterol inhaler,90 mcg 2 puffs,INH,Q4H PRN,Bring inhaler day of surgery,Active
+M0044,P027,Atorvastatin,40 mg,PO,Nightly,Continue,Active
+M0045,P027,Metformin,1000 mg,PO,BID,Hold morning of surgery,Active
+M0046,P028,Metformin,1000 mg,PO,BID,Hold morning of surgery,Active
+M0047,P028,Apixaban,5 mg,PO,BID,Hold 2 days before surgery per surgeon,Active
+M0048,P028,Metoprolol succinate,50 mg,PO,Daily,Take morning of surgery with sip of water,Active
+M0049,P028,Insulin glargine,24 units,SC,Nightly,Take 80% of usual dose the night before surgery,Active
+M0050,P029,Metformin,1000 mg,PO,BID,Hold morning of surgery,Active
+M0051,P029,Semaglutide,1 mg,SC,Weekly,,Active
+M0052,P030,Albuterol inhaler,90 mcg 2 puffs,INH,Q4H PRN,Bring inhaler day of surgery,Active
+M0053,P030,Tiotropium,18 mcg,INH,Daily,Take morning of surgery,Active
+M0054,P032,Apixaban,5 mg,PO,BID,Hold 2 days before surgery per surgeon,Active
+M0055,P032,Metoprolol succinate,50 mg,PO,Daily,Take morning of surgery with sip of water,Active
+M0056,P033,Omeprazole,20 mg,PO,Daily,Take morning of surgery,Active
+M0057,P033,Levothyroxine,75 mcg,PO,Daily,Take morning of surgery,Active
+M0058,P033,Apixaban,5 mg,PO,BID,Hold 2 days before surgery per surgeon,Active
+M0059,P033,Metoprolol succinate,50 mg,PO,Daily,Take morning of surgery with sip of water,Active
+M0060,P034,Metformin,1000 mg,PO,BID,Hold morning of surgery,Active
+M0061,P034,Albuterol inhaler,90 mcg 2 puffs,INH,Q4H PRN,Bring inhaler day of surgery,Active
+M0062,P034,Tiotropium,18 mcg,INH,Daily,Take morning of surgery,Active
+M0063,P035,Levothyroxine,75 mcg,PO,Daily,Take morning of surgery,Active
+M0064,P035,Semaglutide,1 mg,SC,Weekly,,Active
+M0065,P036,Omeprazole,20 mg,PO,Daily,Take morning of surgery,Active
+M0066,P038,Omeprazole,20 mg,PO,Daily,Take morning of surgery,Active
+M0067,P038,Tiotropium,18 mcg,INH,Daily,Take morning of surgery,Active
+M0068,P038,Albuterol inhaler,90 mcg 2 puffs,INH,Q4H PRN,Bring inhaler day of surgery,Active
+M0069,P038,Semaglutide,1 mg,SC,Weekly,,Active
+M0070,P039,Metformin,1000 mg,PO,BID,Hold morning of surgery,Active
+M0071,P040,Atorvastatin,40 mg,PO,Nightly,Continue,Active
+M0072,P040,Levothyroxine,75 mcg,PO,Daily,Take morning of surgery,Active
+M0073,P041,Apixaban,5 mg,PO,BID,Hold 2 days before surgery per surgeon,Active
+M0074,P041,Metoprolol succinate,50 mg,PO,Daily,Take morning of surgery with sip of water,Active
+M0075,P041,Levothyroxine,75 mcg,PO,Daily,Take morning of surgery,Active
+M0076,P042,Atorvastatin,40 mg,PO,Nightly,Continue,Active
+M0077,P043,Atorvastatin,40 mg,PO,Nightly,Continue,Active
+M0078,P043,Tiotropium,18 mcg,INH,Daily,Take morning of surgery,Active
+M0079,P043,Albuterol inhaler,90 mcg 2 puffs,INH,Q4H PRN,Bring inhaler day of surgery,Active
+M0080,P043,Levothyroxine,75 mcg,PO,Daily,Take morning of surgery,Active
+M0081,P044,Tiotropium,18 mcg,INH,Daily,Take morning of surgery,Active
+M0082,P044,Albuterol inhaler,90 mcg 2 puffs,INH,Q4H PRN,Bring inhaler day of surgery,Active
+M0083,P044,Omeprazole,20 mg,PO,Daily,Take morning of surgery,Active
+M0084,P044,Clopidogrel,75 mg,PO,Daily,,Active
+M0085,P045,Apixaban,5 mg,PO,BID,Hold 2 days before surgery per surgeon,Active
+M0086,P045,Metoprolol succinate,50 mg,PO,Daily,Take morning of surgery with sip of water,Active
+M0087,P047,Metformin,1000 mg,PO,BID,Hold morning of surgery,Active
+M0088,P047,Insulin glargine,24 units,SC,Nightly,Take 80% of usual dose the night before surgery,Active
+M0089,P048,Metformin,1000 mg,PO,BID,Hold morning of surgery,Active
+M0090,P049,Omeprazole,20 mg,PO,Daily,Take morning of surgery,Active
+M0091,P049,Metformin,1000 mg,PO,BID,,Active
+M0092,P049,Insulin glargine,24 units,SC,Nightly,Take 80% of usual dose the night before surgery,Active
+M0093,P050,Metformin,1000 mg,PO,BID,,Active
+M0094,P050,Omeprazole,20 mg,PO,Daily,Take morning of surgery,Active
+M0095,P050,Insulin glargine,24 units,SC,Nightly,Take 80% of usual dose the night before surgery,Active
+M0096,P051,Atorvastatin,40 mg,PO,Nightly,Continue,Active
+M0097,P051,Metformin,1000 mg,PO,BID,Hold morning of surgery,Active
+M0098,P051,Albuterol inhaler,90 mcg 2 puffs,INH,Q4H PRN,Bring inhaler day of surgery,Active
+M0099,P053,Clopidogrel,75 mg,PO,Daily,,Active
+M0100,P054,Omeprazole,20 mg,PO,Daily,Take morning of surgery,Active
+M0101,P055,Tiotropium,18 mcg,INH,Daily,Take morning of surgery,Active
+M0102,P055,Albuterol inhaler,90 mcg 2 puffs,INH,Q4H PRN,Bring inhaler day of surgery,Active
+M0103,P055,Semaglutide,1 mg,SC,Weekly,,Active
+M0104,P057,Omeprazole,20 mg,PO,Daily,Take morning of surgery,Active
+M0105,P057,Metformin,1000 mg,PO,BID,Hold morning of surgery,Active
+M0106,P057,Insulin glargine,24 units,SC,Nightly,Take 80% of usual dose the night before surgery,Active
+M0107,P058,Lisinopril,10 mg,PO,Daily,Hold morning of surgery,Active
+M0108,P060,Atorvastatin,40 mg,PO,Nightly,Continue,Active
+M0109,P060,Metformin,1000 mg,PO,BID,Hold morning of surgery,Active
+M0110,P060,Insulin glargine,24 units,SC,Nightly,Take 80% of usual dose the night before surgery,Active
+M0111,P062,Semaglutide,1 mg,SC,Weekly,,Active
+M0112,P064,Lisinopril,10 mg,PO,Daily,Hold morning of surgery,Active
+M0113,P066,Atorvastatin,40 mg,PO,Nightly,Continue,Active
+M0114,P067,Tiotropium,18 mcg,INH,Daily,Take morning of surgery,Active
+M0115,P067,Albuterol inhaler,90 mcg 2 puffs,INH,Q4H PRN,Bring inhaler day of surgery,Active
+M0116,P067,Omeprazole,20 mg,PO,Daily,Take morning of surgery,Active
+M0117,P067,Levothyroxine,75 mcg,PO,Daily,Take morning of surgery,Active
+M0118,P067,Metformin,1000 mg,PO,BID,,Active
+M0119,P067,Insulin glargine,24 units,SC,Nightly,Take 80% of usual dose the night before surgery,Active
+M0120,P068,Levothyroxine,75 mcg,PO,Daily,Take morning of surgery,Active
+M0121,P069,Lisinopril,10 mg,PO,Daily,Hold morning of surgery,Active
+M0122,P070,Lisinopril,10 mg,PO,Daily,Hold morning of surgery,Active
+M0123,P070,Atorvastatin,40 mg,PO,Nightly,Continue,Active
+M0124,P071,Lisinopril,10 mg,PO,Daily,Hold morning of surgery,Active
+M0125,P071,Albuterol inhaler,90 mcg 2 puffs,INH,Q4H PRN,Bring inhaler day of surgery,Active
+M0126,P072,Albuterol inhaler,90 mcg 2 puffs,INH,Q4H PRN,Bring inhaler day of surgery,Active
+M0127,P073,Levothyroxine,75 mcg,PO,Daily,Take morning of surgery,Active
+M0128,P073,Apixaban,5 mg,PO,BID,Hold 2 days before surgery per surgeon,Active
+M0129,P073,Metoprolol succinate,50 mg,PO,Daily,Take morning of surgery with sip of water,Active
+M0130,P074,Apixaban,5 mg,PO,BID,,Active
+M0131,P074,Metoprolol succinate,50 mg,PO,Daily,Take morning of surgery with sip of water,Active
+M0132,P074,Metformin,1000 mg,PO,BID,Hold morning of surgery,Active
+M0133,P075,Metformin,1000 mg,PO,BID,Hold morning of surgery,Active
+M0134,P075,Insulin glargine,24 units,SC,Nightly,Take 80% of usual dose the night before surgery,Active
+M0135,P076,Apixaban,5 mg,PO,BID,Hold 2 days before surgery per surgeon,Active
+M0136,P076,Metoprolol succinate,50 mg,PO,Daily,Take morning of surgery with sip of water,Active
+M0137,P078,Metformin,1000 mg,PO,BID,Hold morning of surgery,Active
+M0138,P078,Insulin glargine,24 units,SC,Nightly,,Active
+M0139,P079,Omeprazole,20 mg,PO,Daily,Take morning of surgery,Active
+M0140,P079,Metformin,1000 mg,PO,BID,Hold morning of surgery,Active
+M0141,P079,Empagliflozin,10 mg,PO,Daily,,Active
+M0142,P081,Aspirin,81 mg,PO,Daily,Continue through surgery,Active
+M0143,P081,Metoprolol succinate,50 mg,PO,Daily,Take morning of surgery with sip of water,Active
+M0144,P081,Atorvastatin,80 mg,PO,Nightly,Continue,Active
+M0145,P081,Nitroglycerin,0.4 mg,SL,PRN chest pain,Bring to hospital,Active
+M0146,P081,Lisinopril,10 mg,PO,Daily,Hold morning of surgery,Active
+M0147,P081,Metformin,1000 mg,PO,BID,Hold morning of surgery,Active
+M0148,P082,Aspirin,81 mg,PO,Daily,Continue through surgery,Active
+M0149,P082,Metoprolol succinate,50 mg,PO,Daily,Take morning of surgery with sip of water,Active
+M0150,P082,Atorvastatin,80 mg,PO,Nightly,Continue,Active
+M0151,P082,Nitroglycerin,0.4 mg,SL,PRN chest pain,Bring to hospital,Active
+M0152,P082,Lisinopril,10 mg,PO,Daily,Hold morning of surgery,Active
+M0153,P082,Metformin,1000 mg,PO,BID,Hold morning of surgery,Active
+M0154,P082,Warfarin,5 mg,PO,Daily,,Active
+M0155,P083,Aspirin,81 mg,PO,Daily,Continue through surgery,Active
+M0156,P083,Metoprolol succinate,50 mg,PO,Daily,Take morning of surgery with sip of water,Active
+M0157,P083,Atorvastatin,80 mg,PO,Nightly,Continue,Active
+M0158,P083,Nitroglycerin,0.4 mg,SL,PRN chest pain,Bring to hospital,Active
+M0159,P083,Lisinopril,10 mg,PO,Daily,Hold morning of surgery,Active
+M0160,P084,Aspirin,81 mg,PO,Daily,Continue through surgery,Active
+M0161,P084,Metoprolol succinate,50 mg,PO,Daily,Take morning of surgery with sip of water,Active
+M0162,P084,Atorvastatin,80 mg,PO,Nightly,Continue,Active
+M0163,P084,Nitroglycerin,0.4 mg,SL,PRN chest pain,Bring to hospital,Active
+M0164,P084,Lisinopril,10 mg,PO,Daily,Hold morning of surgery,Active
+M0165,P085,Aspirin,81 mg,PO,Daily,Continue through surgery,Active
+M0166,P085,Metoprolol succinate,50 mg,PO,Daily,Take morning of surgery with sip of water,Active
+M0167,P085,Atorvastatin,80 mg,PO,Nightly,Continue,Active
+M0168,P085,Nitroglycerin,0.4 mg,SL,PRN chest pain,Bring to hospital,Active
+M0169,P085,Lisinopril,10 mg,PO,Daily,Hold morning of surgery,Active
+M0170,P086,Aspirin,81 mg,PO,Daily,Continue through surgery,Active
+M0171,P086,Metoprolol succinate,50 mg,PO,Daily,Take morning of surgery with sip of water,Active
+M0172,P086,Atorvastatin,80 mg,PO,Nightly,Continue,Active
+M0173,P086,Nitroglycerin,0.4 mg,SL,PRN chest pain,Bring to hospital,Active
+M0174,P086,Lisinopril,10 mg,PO,Daily,Hold morning of surgery,Active
+M0175,P087,Aspirin,81 mg,PO,Daily,Continue through surgery,Active
+M0176,P087,Metoprolol succinate,50 mg,PO,Daily,Take morning of surgery with sip of water,Active
+M0177,P087,Atorvastatin,80 mg,PO,Nightly,Continue,Active
+M0178,P087,Nitroglycerin,0.4 mg,SL,PRN chest pain,Bring to hospital,Active
+M0179,P087,Lisinopril,10 mg,PO,Daily,Hold morning of surgery,Active
+M0180,P088,Aspirin,81 mg,PO,Daily,Continue through surgery,Active
+M0181,P088,Metoprolol succinate,50 mg,PO,Daily,Take morning of surgery with sip of water,Active
+M0182,P088,Atorvastatin,80 mg,PO,Nightly,Continue,Active
+M0183,P088,Nitroglycerin,0.4 mg,SL,PRN chest pain,Bring to hospital,Active
+M0184,P088,Lisinopril,10 mg,PO,Daily,Hold morning of surgery,Active
+M0185,P088,Metformin,1000 mg,PO,BID,Hold morning of surgery,Active
+M0186,P088,Insulin glargine,24 units,SC,Nightly,Take 80% of usual dose the night before surgery,Active
+M0187,P088,Empagliflozin,10 mg,PO,Daily,,Active
+M0188,P089,Aspirin,81 mg,PO,Daily,Continue through surgery,Active
+M0189,P089,Metoprolol succinate,50 mg,PO,Daily,Take morning of surgery with sip of water,Active
+M0190,P089,Atorvastatin,80 mg,PO,Nightly,Continue,Active
+M0191,P089,Nitroglycerin,0.4 mg,SL,PRN chest pain,Bring to hospital,Active
+M0192,P089,Lisinopril,10 mg,PO,Daily,Hold morning of surgery,Active
+M0193,P090,Aspirin,81 mg,PO,Daily,Continue through surgery,Active
+M0194,P090,Metoprolol succinate,50 mg,PO,Daily,Take morning of surgery with sip of water,Active
+M0195,P090,Atorvastatin,80 mg,PO,Nightly,Continue,Active
+M0196,P090,Nitroglycerin,0.4 mg,SL,PRN chest pain,Bring to hospital,Active
+M0197,P090,Lisinopril,10 mg,PO,Daily,Hold morning of surgery,Active
+M0198,P090,Tiotropium,18 mcg,INH,Daily,Take morning of surgery,Active
+M0199,P090,Albuterol inhaler,90 mcg 2 puffs,INH,Q4H PRN,Bring inhaler day of surgery,Active
+M0200,P090,Semaglutide,1 mg,SC,Weekly,,Active
+M0201,P091,Aspirin,81 mg,PO,Daily,Continue through surgery,Active
+M0202,P091,Metoprolol succinate,50 mg,PO,Daily,Take morning of surgery with sip of water,Active
+M0203,P091,Atorvastatin,80 mg,PO,Nightly,Continue,Active
+M0204,P091,Nitroglycerin,0.4 mg,SL,PRN chest pain,Bring to hospital,Active
+M0205,P091,Lisinopril,10 mg,PO,Daily,Hold morning of surgery,Active
+M0206,P091,Tiotropium,18 mcg,INH,Daily,Take morning of surgery,Active
+M0207,P091,Albuterol inhaler,90 mcg 2 puffs,INH,Q4H PRN,Bring inhaler day of surgery,Active
+M0208,P092,Aspirin,81 mg,PO,Daily,Continue through surgery,Active
+M0209,P092,Metoprolol succinate,50 mg,PO,Daily,Take morning of surgery with sip of water,Active
+M0210,P092,Atorvastatin,80 mg,PO,Nightly,Continue,Active
+M0211,P092,Nitroglycerin,0.4 mg,SL,PRN chest pain,Bring to hospital,Active
+M0212,P092,Lisinopril,10 mg,PO,Daily,Hold morning of surgery,Active
+M0213,P092,Omeprazole,20 mg,PO,Daily,Take morning of surgery,Active
+M0214,P093,Aspirin,81 mg,PO,Daily,Continue through surgery,Active
+M0215,P093,Metoprolol succinate,50 mg,PO,Daily,Take morning of surgery with sip of water,Active
+M0216,P093,Atorvastatin,80 mg,PO,Nightly,Continue,Active
+M0217,P093,Nitroglycerin,0.4 mg,SL,PRN chest pain,Bring to hospital,Active
+M0218,P093,Lisinopril,10 mg,PO,Daily,Hold morning of surgery,Active
+M0219,P093,Tiotropium,18 mcg,INH,Daily,Take morning of surgery,Active
+M0220,P093,Albuterol inhaler,90 mcg 2 puffs,INH,Q4H PRN,Bring inhaler day of surgery,Active
+M0221,P094,Aspirin,81 mg,PO,Daily,Continue through surgery,Active
+M0222,P094,Metoprolol succinate,50 mg,PO,Daily,Take morning of surgery with sip of water,Active
+M0223,P094,Atorvastatin,80 mg,PO,Nightly,Continue,Active
+M0224,P094,Nitroglycerin,0.4 mg,SL,PRN chest pain,Bring to hospital,Active
+M0225,P094,Lisinopril,10 mg,PO,Daily,Hold morning of surgery,Active
+M0226,P094,Metformin,1000 mg,PO,BID,,Active
+M0227,P094,Insulin glargine,24 units,SC,Nightly,Take 80% of usual dose the night before surgery,Active
+M0228,P095,Aspirin,81 mg,PO,Daily,Continue through surgery,Active
+M0229,P095,Metoprolol succinate,50 mg,PO,Daily,Take morning of surgery with sip of water,Active
+M0230,P095,Atorvastatin,80 mg,PO,Nightly,Continue,Active
+M0231,P095,Nitroglycerin,0.4 mg,SL,PRN chest pain,Bring to hospital,Active
+M0232,P095,Lisinopril,10 mg,PO,Daily,Hold morning of surgery,Active
+M0233,P095,Metformin,1000 mg,PO,BID,Hold morning of surgery,Active
+M0234,P095,Tiotropium,18 mcg,INH,Daily,Take morning of surgery,Active
+M0235,P095,Albuterol inhaler,90 mcg 2 puffs,INH,Q4H PRN,Bring inhaler day of surgery,Active
+M0236,P096,Aspirin,81 mg,PO,Daily,Continue through surgery,Active
+M0237,P096,Metoprolol succinate,50 mg,PO,Daily,Take morning of surgery with sip of water,Active
+M0238,P096,Atorvastatin,80 mg,PO,Nightly,Continue,Active
+M0239,P096,Nitroglycerin,0.4 mg,SL,PRN chest pain,Bring to hospital,Active
+M0240,P096,Lisinopril,10 mg,PO,Daily,Hold morning of surgery,Active
+M0241,P096,Metformin,1000 mg,PO,BID,Hold morning of surgery,Active
+M0242,P096,Insulin glargine,24 units,SC,Nightly,Take 80% of usual dose the night before surgery,Active
+M0243,P097,Aspirin,81 mg,PO,Daily,Continue through surgery,Active
+M0244,P097,Metoprolol succinate,50 mg,PO,Daily,Take morning of surgery with sip of water,Active
+M0245,P097,Atorvastatin,80 mg,PO,Nightly,Continue,Active
+M0246,P097,Nitroglycerin,0.4 mg,SL,PRN chest pain,Bring to hospital,Active
+M0247,P097,Lisinopril,10 mg,PO,Daily,Hold morning of surgery,Active
+M0248,P097,Metformin,1000 mg,PO,BID,Hold morning of surgery,Active
+M0249,P097,Insulin glargine,24 units,SC,Nightly,Take 80% of usual dose the night before surgery,Active
+M0250,P098,Aspirin,81 mg,PO,Daily,Continue through surgery,Active
+M0251,P098,Metoprolol succinate,50 mg,PO,Daily,Take morning of surgery with sip of water,Active
+M0252,P098,Atorvastatin,80 mg,PO,Nightly,Continue,Active
+M0253,P098,Nitroglycerin,0.4 mg,SL,PRN chest pain,Bring to hospital,Active
+M0254,P098,Lisinopril,10 mg,PO,Daily,Hold morning of surgery,Active
+M0255,P098,Metformin,1000 mg,PO,BID,,Active
+M0256,P098,Insulin glargine,24 units,SC,Nightly,Take 80% of usual dose the night before surgery,Active
+M0257,P099,Aspirin,81 mg,PO,Daily,Continue through surgery,Active
+M0258,P099,Metoprolol succinate,50 mg,PO,Daily,Take morning of surgery with sip of water,Active
+M0259,P099,Atorvastatin,80 mg,PO,Nightly,Continue,Active
+M0260,P099,Nitroglycerin,0.4 mg,SL,PRN chest pain,Bring to hospital,Active
+M0261,P099,Lisinopril,10 mg,PO,Daily,Hold morning of surgery,Active
+M0262,P099,Tiotropium,18 mcg,INH,Daily,Take morning of surgery,Active
+M0263,P099,Albuterol inhaler,90 mcg 2 puffs,INH,Q4H PRN,Bring inhaler day of surgery,Active
+M0264,P100,Aspirin,81 mg,PO,Daily,Continue through surgery,Active
+M0265,P100,Metoprolol succinate,50 mg,PO,Daily,Take morning of surgery with sip of water,Active
+M0266,P100,Atorvastatin,80 mg,PO,Nightly,Continue,Active
+M0267,P100,Nitroglycerin,0.4 mg,SL,PRN chest pain,Bring to hospital,Active
+M0268,P100,Lisinopril,10 mg,PO,Daily,Hold morning of surgery,Active
+M0269,P100,Semaglutide,1 mg,SC,Weekly,,Active

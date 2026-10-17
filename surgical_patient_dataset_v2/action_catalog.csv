@@ -1,0 +1,72 @@
+action_code,role,action
+OBTAIN_SURGERY_CONSENT,nurse,Contact the surgical team to complete and sign the surgical consent before the patient goes to the OR.
+NOTIFY_ANESTHESIA_CONSENT,nurse,Notify anesthesia that the anesthesia consent is not signed.
+OBTAIN_ANESTHESIA_CONSENT,anesthesia,Complete the anesthesia consent discussion and signature with the patient.
+OBTAIN_BLOOD_CONSENT,nurse,Obtain a signed blood transfusion consent or a signed refusal form.
+VERIFY_BLOOD_REFUSAL_FORM,nurse,Patient refuses blood: verify the refusal form is signed and the refusal is flagged for the OR team.
+BLOOD_REFUSAL_PLAN,anesthesia,"Patient refuses blood products: develop a bloodless management plan with the surgeon (e.g., cell saver, anemia optimization)."
+RECONCILE_CONSENT_DOCUMENTATION,nurse,Clinical note and consent record disagree: reconcile which consents are actually signed.
+OBTAIN_UPDATED_HP,nurse,"Request a current, complete H&P (within 30 days, including heart and lung exam) from the surgical team."
+RECONCILE_ALLERGIES,nurse,Allergy list and H&P disagree: reconcile allergies with the patient and update the chart.
+DRAW_CBC,nurse,Obtain order and draw CBC.
+DRAW_BMP,nurse,Obtain order and draw BMP.
+DRAW_COAGS,nurse,"Obtain order and draw coagulation panel (PT/INR, PTT)."
+DRAW_LFT,nurse,Obtain order and draw liver function tests.
+DRAW_ALBUMIN,nurse,Obtain order and draw albumin.
+DRAW_HBA1C,nurse,Obtain order and draw HbA1c.
+DRAW_UA,nurse,Obtain order and collect urinalysis.
+DRAW_URINE_CULTURE,nurse,Obtain order and collect urine culture.
+DRAW_PREGNANCY_TEST,nurse,Obtain order and draw pregnancy test (serum hCG).
+DRAW_TYPE_AND_SCREEN,nurse,Obtain order and draw a new type and screen (current one missing or expires before surgery).
+REPEAT_BMP,nurse,Obtain order to repeat BMP and notify anesthesia of the result.
+POC_GLUCOSE_DAY_OF,nurse,Check point-of-care glucose on arrival day of surgery and notify anesthesia if elevated.
+OBTAIN_EKG,nurse,Obtain order and perform a 12-lead EKG.
+OBTAIN_CHEST_XRAY,nurse,Obtain order for a pre-op chest X-ray.
+REQUEST_ECHO,anesthesia,Order/request an echocardiogram before surgery.
+REQUEST_PFT,anesthesia,Order/request pulmonary function tests before surgery.
+ORDER_CROSSMATCH,nurse,Obtain order for crossmatch of 2 units PRBC and confirm with the blood bank.
+CONFIRM_BLOOD_PRODUCTS,anesthesia,Confirm crossmatched PRBC (and FFP/platelets per plan) are available before incision.
+CONTACT_BLOOD_BANK,nurse,Contact the blood bank about the positive antibody screen; allow extra time for compatible units.
+ANTIBODY_BLOOD_BANK,anesthesia,Positive antibody screen: coordinate with blood bank on antibody ID and compatible units; consider delaying if units unavailable.
+REQUEST_CARDIOLOGY_CLEARANCE,anesthesia,Request a cardiology assessment/clearance before surgery.
+REQUEST_PULMONARY_CLEARANCE,anesthesia,Request a pulmonary assessment/clearance before surgery.
+FOLLOW_UP_CLEARANCE,nurse,Follow up on the pending clearance and make sure the result is in the chart before surgery.
+EVALUATE_ANEMIA,anesthesia,Evaluate anemia: confirm blood availability and consider optimizing or delaying elective surgery.
+NOTIFY_LOW_HGB,nurse,Notify surgeon and anesthesia of the low hemoglobin.
+EVALUATE_THROMBOCYTOPENIA,anesthesia,"Evaluate low platelets: bleeding risk, platelet availability, avoid neuraxial technique if appropriate."
+NOTIFY_LOW_PLATELETS,nurse,Notify surgeon and anesthesia of the low platelet count.
+EVALUATE_ELEVATED_INR,anesthesia,"Evaluate elevated INR: review anticoagulant, plan reversal/hold with surgeon, repeat coags before surgery."
+NOTIFY_ELEVATED_INR,nurse,Notify surgeon and anesthesia of the elevated INR.
+CORRECT_POTASSIUM,anesthesia,Evaluate and correct potassium before surgery; repeat EKG if indicated.
+EVALUATE_SODIUM,anesthesia,Evaluate abnormal sodium before surgery.
+RENAL_DOSING_PLAN,anesthesia,Reduced kidney function: adjust renally cleared drugs and avoid nephrotoxins.
+NOTIFY_RENAL_FUNCTION,nurse,Notify surgeon and anesthesia of the elevated creatinine.
+GLYCEMIC_PLAN,anesthesia,Poor glucose control: create perioperative glucose/insulin plan; consider postponing elective surgery if severe.
+REVIEW_LOW_ALBUMIN,anesthesia,Low albumin: note malnutrition/healing risk and discuss optimization with surgeon.
+REVIEW_ELEVATED_LFTS,anesthesia,Elevated liver tests: evaluate hepatic function and adjust drug choices.
+NOTIFY_ELEVATED_LFTS,nurse,Notify surgeon and anesthesia of the elevated liver tests.
+NOTIFY_SURGEON_POSITIVE_CULTURE,nurse,Notify surgeon of positive urinalysis/urine culture so infection is treated before the procedure.
+REVIEW_INFECTION_RISK,anesthesia,Active urinary infection: review sepsis risk and whether to proceed.
+NOTIFY_POSITIVE_PREGNANCY,nurse,Positive pregnancy test: notify surgeon and anesthesia immediately; do not proceed until reviewed.
+REVIEW_POSITIVE_PREGNANCY,anesthesia,Positive pregnancy test: review with surgeon and patient whether to proceed.
+EVALUATE_EKG_ABNORMALITY,anesthesia,New EKG abnormality: evaluate and consider cardiology consult before surgery.
+NOTIFY_EKG_ABNORMALITY,nurse,Notify anesthesia of the new EKG finding.
+REVIEW_LOW_EF,anesthesia,Reduced ejection fraction: plan hemodynamic monitoring/support.
+REVIEW_SEVERE_LUNG_DISEASE,anesthesia,"Severe obstruction on PFTs: plan for pulmonary risk (bronchodilators, ventilation, post-op care)."
+EVALUATE_NEW_SYMPTOMS,anesthesia,New symptoms documented in the H&P: evaluate before surgery and consider postponing.
+NOTIFY_NEW_SYMPTOMS,nurse,Notify anesthesia and surgeon of new symptoms reported in the H&P.
+ANTITHROMBOTIC_PLAN,anesthesia,Blood thinner without a clear hold plan: decide hold/bridge timing with surgeon and prescriber.
+VERIFY_ANTITHROMBOTIC_HOLD,nurse,Call patient to verify blood-thinner hold instructions and last dose; document.
+METFORMIN_HOLD_INSTRUCTIONS,nurse,Give and document metformin hold instructions for day of surgery.
+INSULIN_DOSE_PLAN,anesthesia,Write pre-op insulin dose adjustment orders.
+INSULIN_INSTRUCTIONS,nurse,Give and document insulin dose instructions for the night before / morning of surgery.
+GLP1_ASPIRATION_REVIEW,anesthesia,GLP-1 agonist: review aspiration risk and hold timing; adjust fasting/airway plan.
+VERIFY_GLP1_LAST_DOSE,nurse,Verify date of last GLP-1 agonist dose and document.
+SGLT2_HOLD_INSTRUCTIONS,nurse,Give and document SGLT2 inhibitor hold instructions (stop before surgery per protocol).
+OSA_PRECAUTIONS,anesthesia,"Obstructive sleep apnea: plan OSA precautions (airway, opioid-sparing, post-op monitoring)."
+BRING_CPAP,nurse,Instruct patient to bring CPAP device on day of surgery.
+MH_PRECAUTIONS,anesthesia,Malignant hyperthermia risk: plan trigger-free anesthetic.
+NOTIFY_MH_RISK,nurse,Notify OR charge nurse of malignant hyperthermia risk (prepare MH cart / trigger-free machine).
+DIFFICULT_AIRWAY_PLAN,anesthesia,History of difficult airway: prepare difficult airway plan and equipment.
+PONV_PROPHYLAXIS,anesthesia,History of post-op nausea/vomiting: plan PONV prophylaxis.
+LATEX_PRECAUTIONS,nurse,Latex allergy: notify OR to set up a latex-free room.

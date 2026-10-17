@@ -1,0 +1,346 @@
+<title>Pre-Op Readiness Board</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: EHR workspace. OR schedule rail on the left, patient chart on the right, readiness tab first. */
+:root{
+  --bg:#f3f6f6; --panel:#ffffff; --ink:#18272c; --muted:#5b6d72; --line:#d6e0e1; --soft:#e8eff0;
+  --accent:#0d6b73; --accent-ink:#ffffff;
+  --ok:#1d7a4e; --warn:#a8650a; --bad:#b83a2f; --hold:#6d2f8f;
+  --ok-bg:#e3f2ea; --warn-bg:#fbf0dc; --bad-bg:#f9e4e1; --hold-bg:#f0e5f6;
+  --sans:"Libre Franklin",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1719; --panel:#162124; --ink:#e3ecee; --muted:#93a6ab; --line:#2a3a3e; --soft:#1d2b2f;
+  --accent:#4fb3bb; --accent-ink:#0b1416;
+  --ok:#5cc28e; --warn:#e3a649; --bad:#ef7a6e; --hold:#c08ae0;
+  --ok-bg:#183126; --warn-bg:#352a15; --bad-bg:#3a1f1c; --hold-bg:#2d1f37; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1719; --panel:#162124; --ink:#e3ecee; --muted:#93a6ab; --line:#2a3a3e; --soft:#1d2b2f;
+  --accent:#4fb3bb; --accent-ink:#0b1416;
+  --ok:#5cc28e; --warn:#e3a649; --bad:#ef7a6e; --hold:#c08ae0;
+  --ok-bg:#183126; --warn-bg:#352a15; --bad-bg:#3a1f1c; --hold-bg:#2d1f37; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.45;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:16px}
+h1,h2,h3{text-wrap:balance;margin:0}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.top{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:12px}
+.top h1{font-size:20px;font-weight:700;letter-spacing:-.01em}
+.top .note{color:var(--muted);font-size:12px}
+.shell{display:grid;grid-template-columns:290px minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:860px){.shell{grid-template-columns:minmax(0,1fr)}}
+.rail{background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.rail-head{padding:10px 12px;border-bottom:1px solid var(--line);display:grid;gap:8px}
+.label{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+select,button{font:inherit;color:inherit}
+select{width:100%;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--panel)}
+.list{max-height:70vh;overflow:auto}
+@media (max-width:860px){.list{max-height:260px}}
+.row{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 10px;width:100%;text-align:left;padding:8px 12px;border:0;border-bottom:1px solid var(--soft);background:none;cursor:pointer}
+.row:hover{background:var(--soft)}
+.row[aria-current="true"]{background:var(--soft);box-shadow:inset 3px 0 0 var(--accent)}
+.row .t{font-family:var(--mono);font-size:12px;color:var(--muted);grid-row:span 2}
+.row .n{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .p{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.main{min-width:0;display:grid;gap:12px}
+.banner{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px 14px;display:grid;gap:6px}
+.banner .who{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline}
+.banner .who b{font-size:18px}
+.banner .meta{display:flex;flex-wrap:wrap;gap:4px 14px;color:var(--muted);font-size:13px}
+.allergy{color:var(--bad);font-weight:600}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--panel)}
+.seg button{border:0;background:none;padding:7px 14px;cursor:pointer;font-weight:600;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.tabs{display:flex;gap:2px;border-bottom:1px solid var(--line);overflow-x:auto}
+.tabs button{border:0;background:none;padding:8px 12px;cursor:pointer;color:var(--muted);font-weight:500;border-bottom:2px solid transparent;white-space:nowrap}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+button:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px}
+.status{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;padding:10px 14px;border-radius:8px;font-weight:600}
+.st-Ready{background:var(--ok-bg);color:var(--ok)}
+.st-Outstanding{background:var(--warn-bg);color:var(--warn)}
+.st-Needs{background:var(--bad-bg);color:var(--bad)}
+.st-Recommend{background:var(--hold-bg);color:var(--hold)}
+.status .why{font-weight:400;color:var(--ink)}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:12px;align-items:start}
+@media (max-width:1100px){.grid2{grid-template-columns:minmax(0,1fr)}}
+.panel h3{font-size:15px;margin-bottom:8px}
+.sec{margin-bottom:10px}
+.sec .label{margin-bottom:2px}
+.sec ul{margin:0;padding-left:18px}
+.act{border:1px solid var(--line);border-radius:8px;padding:10px 12px;display:grid;gap:6px;margin-bottom:8px}
+.act .head{display:flex;gap:8px;align-items:flex-start}
+.pri{flex:none;width:8px;height:8px;border-radius:50%;margin-top:6px;background:var(--muted)}
+.pri.high{background:var(--bad)} .pri.medium{background:var(--warn)} .pri.low{background:var(--ok)}
+.act .why{color:var(--muted);font-size:13px}
+.chip{font-family:var(--mono);font-size:11px;background:var(--soft);border-radius:4px;padding:1px 5px;margin-right:4px}
+.dec{display:flex;gap:6px}
+.dec button{border:1px solid var(--line);background:var(--panel);border-radius:6px;padding:3px 10px;cursor:pointer;font-size:13px}
+.dec button[aria-pressed="true"].acc{background:var(--ok-bg);color:var(--ok);border-color:var(--ok)}
+.dec button[aria-pressed="true"].dcl{background:var(--bad-bg);color:var(--bad);border-color:var(--bad)}
+.ask{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.btn{border:0;border-radius:6px;padding:8px 14px;font-weight:600;cursor:pointer;background:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:none;color:var(--accent);border:1px solid var(--accent)}
+.btn:disabled{opacity:.55;cursor:default}
+.src{font-size:12px;color:var(--muted)}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--soft);vertical-align:top}
+th{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.flag{font-weight:700;color:var(--bad)}
+td.wrap{white-space:normal}
+.badtxt{color:var(--bad);font-weight:600}
+pre.note{white-space:pre-wrap;font-family:var(--mono);font-size:12.5px;line-height:1.55;margin:0;max-width:85ch}
+.grade{font-size:13px;display:grid;gap:4px}
+.grade b{font-weight:600}
+.disclaimer{color:var(--muted);font-size:12px;margin-top:4px}
+details summary{cursor:pointer;color:var(--accent);font-weight:600}
+@media (prefers-reduced-motion:no-preference){.act,.status{transition:background .15s}}
+</style>
+
+<div class="top">
+  <h1>Pre-Op Readiness Board</h1>
+  <span class="note">100 synthetic patients · teaching rules, not clinical guidelines · not for patient care</span>
+</div>
+
+<div class="shell">
+  <aside class="rail">
+    <div class="rail-head">
+      <label class="label" for="proc">Procedure</label>
+      <select id="proc"><option value="">All procedures</option></select>
+      <label class="label" for="statusFilter">Rules status</label>
+      <select id="statusFilter"><option value="">Any status</option><option>Ready</option><option>Outstanding items</option><option>Needs clinical review</option><option>Recommend hold</option></select>
+    </div>
+    <div class="list" id="list" role="list"></div>
+  </aside>
+
+  <main class="main">
+    <section class="banner" id="banner"></section>
+    <div class="controls">
+      <div class="seg" role="group" aria-label="Role">
+        <button id="r-nurse" aria-pressed="true">Pre-op nurse</button>
+        <button id="r-anesthesia" aria-pressed="false">Anesthesiologist</button>
+      </div>
+      <span class="src" id="engineNote"></span>
+    </div>
+    <nav class="tabs" role="tablist" id="tabs"></nav>
+    <section id="view"></section>
+  </main>
+</div>
+
+<script>
+const DATA = /*__DATA__*/null;
+const CASES = DATA.cases;
+const TABS = ["Readiness","Labs","Medications","Tests & imaging","Consents & blood","H&P"];
+const ROLE_LABEL = {nurse:"Pre-op nurse", anesthesia:"Anesthesiologist"};
+const ROLE_GUIDE = {
+  nurse:"The user is a PRE-OP NURSE. Focus on consents and paperwork, labs/tests to draw or obtain, patient instructions (medications to hold, CPAP), following up on pending items, notifying the right provider about abnormal values, and OR safety set-up (latex, malignant hyperthermia). The nurse does not diagnose or change the anesthetic plan.",
+  anesthesia:"The user is an ANESTHESIOLOGIST. Focus on cardiac and pulmonary risk, abnormal labs that change the anesthetic or whether to proceed, anticoagulation and bleeding risk, blood availability, airway and prior anesthesia problems, perioperative glucose, needed clearances or further testing, and whether the case should proceed as scheduled."
+};
+const SECTIONS = {
+  nurse:["Procedure & timing","Consents & documentation","Labs & tests","Medication instructions","Safety & precautions"],
+  anesthesia:["Procedure & planned anesthesia","Cardiac","Pulmonary & airway","Key labs","Medications affecting anesthesia","Blood availability","Anesthesia history & allergies"]
+};
+const KEY_TESTS = {
+  nurse:["Hemoglobin","Potassium","Glucose","POC glucose","INR","Serum hCG","UA nitrite","Urine culture"],
+  anesthesia:["Hemoglobin","Platelets","PT","INR","PTT","Sodium","Potassium","Creatinine","eGFR","Glucose","POC glucose","HbA1c","Albumin","AST","ALT","Total bilirubin"]
+};
+
+const state = {id:"S082", role:"nurse", tab:"Readiness", ai:{}, decisions:{}, busy:null};
+try{ Object.assign(state.decisions, JSON.parse(localStorage.getItem("preop-decisions")||"{}")); }catch(e){}
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const cur = () => CASES.find(c => c.id === state.id);
+const stClass = s => "st-" + String(s).split(" ")[0];
+const latestLab = (c, t) => c.labs.filter(l => l.test_name === t).sort((a,b)=>b.collection_date.localeCompare(a.collection_date))[0];
+
+let sample = null;
+(async () => { try { sample = await window.claude?.use?.("sample"); } catch(e){ sample = null; } render(); })();
+
+// ---------- schedule rail ----------
+const procSel = $("#proc");
+[...new Set(CASES.map(c => c.case.procedure))].forEach(p => procSel.insertAdjacentHTML("beforeend", `<option>${esc(p)}</option>`));
+procSel.onchange = renderList; $("#statusFilter").onchange = renderList;
+function renderList(){
+  const pf = procSel.value, sf = $("#statusFilter").value;
+  const rows = CASES.filter(c => (!pf || c.case.procedure === pf) && (!sf || c.rules.nurse.status === sf))
+    .sort((a,b) => (a.case.surgery_date + a.case.surgery_time).localeCompare(b.case.surgery_date + b.case.surgery_time));
+  $("#list").innerHTML = rows.map(c => `<button class="row" role="listitem" data-id="${c.id}" aria-current="${c.id===state.id}">
+      <span class="t">${esc(c.case.surgery_date.slice(5))}<br>${esc(c.case.surgery_time)}</span>
+      <span class="n">${esc(c.patient.name)}</span><span class="p">${esc(c.case.procedure)}</span></button>`).join("") || `<p style="padding:12px" class="src">No cases match.</p>`;
+  $("#list").querySelectorAll(".row").forEach(b => b.onclick = () => { state.id = b.dataset.id; render(); });
+}
+
+// ---------- role + tabs ----------
+["nurse","anesthesia"].forEach(r => $("#r-"+r).onclick = () => { state.role = r; render(); });
+function renderTabs(){
+  $("#tabs").innerHTML = TABS.map(t => `<button role="tab" aria-selected="${t===state.tab}" data-t="${t}">${t}</button>`).join("");
+  $("#tabs").querySelectorAll("button").forEach(b => b.onclick = () => { state.tab = b.dataset.t; render(); });
+}
+
+function render(){
+  const c = cur(), p = c.patient, k = c.case;
+  renderList(); renderTabs();
+  ["nurse","anesthesia"].forEach(r => $("#r-"+r).setAttribute("aria-pressed", r===state.role));
+  const nka = p.allergies.startsWith("No known");
+  $("#banner").innerHTML = `<div class="who"><b>${esc(p.name)}</b><span>${esc(p.age)} y/o ${esc(p.sex)}</span>
+      <span class="mono">MRN ${esc(p.mrn)}</span><span>BMI ${esc(p.bmi)}</span>
+      <span class="${nka?"":"allergy"}">Allergies: ${esc(p.allergies)}</span></div>
+    <div class="meta"><span><b>${esc(k.procedure)}</b></span><span class="mono">${esc(k.surgery_date)} ${esc(k.surgery_time)}</span>
+      <span>${esc(k.surgery_location)}</span><span>${esc(k.surgeon)}</span><span>Anesthesia: ${esc(k.planned_anesthesia)}</span><span>Post-op: ${esc(k.postoperative_location)}</span></div>`;
+  $("#engineNote").textContent = sample ? "Claude can run the readiness review on your Claude account." : "Showing the rules-only check. Open on claude.ai to run Claude.";
+  const v = $("#view");
+  ({ "Readiness":viewReady, "Labs":viewLabs, "Medications":viewMeds, "Tests & imaging":viewTests,
+     "Consents & blood":viewConsents, "H&P":viewHP })[state.tab](v, c);
+}
+
+// ---------- readiness ----------
+function viewReady(v, c){
+  const key = c.id + "|" + state.role;
+  const ai = state.ai[key];
+  const res = ai && !ai.error ? ai : null;
+  const steps = res ? res : c.rules[state.role];
+  const status = steps.status;
+  const headline = res ? res.headline : "Rules-only check on structured data. It cannot read the H&P.";
+  const sections = res ? res.sections : null;
+  const busy = state.busy === key;
+  v.innerHTML = `
+    <div class="status ${stClass(status)}"><span>${esc(status)}</span><span class="why">${esc(headline)}</span></div>
+    <div class="ask" style="margin:10px 0">
+      ${sample ? `<button class="btn" id="run" ${busy?"disabled":""}>${busy ? "Claude is reading the chart…" : (res ? "Run the review again" : `Run Claude review for the ${ROLE_LABEL[state.role].toLowerCase()}`)}</button>` : ""}
+      <span class="src">${res ? `Source: Claude (${esc(res.tier||"default")}) · ${ROLE_LABEL[state.role]} view` : `Source: rules engine · ${ROLE_LABEL[state.role]} view`}</span>
+      ${ai && ai.error ? `<span class="badtxt">${esc(ai.error)}</span>` : ""}
+    </div>
+    <div class="grid2">
+      <div class="panel">
+        <h3>Summary</h3>
+        ${sections ? sections.map(s => `<div class="sec"><div class="label">${esc(s.title)}</div><ul>${(s.bullets||[]).map(b => `<li>${esc(b)}</li>`).join("")}</ul></div>`).join("")
+          : `<p class="src">${sample ? "Run the Claude review to get a written summary for this role." : "Written summaries need Claude."}</p>`}
+        <h3 style="margin-top:12px">Key values for the ${ROLE_LABEL[state.role].toLowerCase()}</h3>
+        ${keyValues(c)}
+      </div>
+      <div class="panel">
+        <h3>Next steps · ${ROLE_LABEL[state.role]}</h3>
+        ${steps.actions.length ? steps.actions.map((a,i) => actionCard(c, a, i)).join("") : `<p>No actions for this role.</p>`}
+        ${res && res.other_considerations && res.other_considerations.length ? `<div class="sec"><div class="label">Other considerations</div><ul>${res.other_considerations.map(o=>`<li>${esc(o)}</li>`).join("")}</ul></div>` : ""}
+        ${gradeBlock(c, steps)}
+      </div>
+    </div>
+    <details class="panel" style="margin-top:12px"><summary>Requirements that apply to this case (Module 1)</summary>
+      <div class="tbl"><table><tr><th>Item</th><th>Type</th><th>When</th><th>Valid (days)</th></tr>
+      ${c.reqs.map(r => `<tr><td>${esc(r.item)}</td><td>${esc(r.type)}</td><td>${esc(r.when)}</td><td class="num">${r.days ?? "–"}</td></tr>`).join("")}</table></div></details>
+    <p class="disclaimer">Every suggestion needs human review. Decisions are saved in this browser only.</p>`;
+  const run = $("#run"); if (run) run.onclick = () => runClaude(c);
+  v.querySelectorAll(".dec button").forEach(b => b.onclick = () => {
+    const dk = `${c.id}|${state.role}|${b.dataset.code}`;
+    state.decisions[dk] = state.decisions[dk] === b.dataset.v ? undefined : b.dataset.v;
+    try{ localStorage.setItem("preop-decisions", JSON.stringify(state.decisions)); }catch(e){}
+    render();
+  });
+}
+function actionCard(c, a, i){
+  const text = DATA.catalog[a.code] ? DATA.catalog[a.code].text : a.code;
+  const d = state.decisions[`${c.id}|${state.role}|${a.code}`];
+  return `<div class="act"><div class="head"><span class="pri ${esc(a.priority)}" title="${esc(a.priority)} priority"></span><div><b>${esc(text)}</b>
+      <div class="why">${esc(a.reason)}</div>
+      <div>${(a.evidence_ids||[]).map(e => `<span class="chip">${esc(e)}</span>`).join("")}<span class="chip">${esc(a.code)}</span></div></div></div>
+    <div class="dec"><button class="acc" data-code="${esc(a.code)}" data-v="acc" aria-pressed="${d==="acc"}">Accept</button>
+      <button class="dcl" data-code="${esc(a.code)}" data-v="dcl" aria-pressed="${d==="dcl"}">Decline</button></div></div>`;
+}
+function keyValues(c){
+  const rows = [];
+  KEY_TESTS[state.role].forEach(t => { const l = latestLab(c, t); if (l) rows.push([t, `${l.result_value} ${l.unit==="text"?"":l.unit}`, l.flag, l.collection_date]); });
+  c.diags.forEach(d => { if (state.role==="anesthesia" || d.test_type==="EKG") rows.push([d.test_type, d.result_value ? `${d.result_value} ${d.result_unit}` : d.interpretation, d.compared_to_prior==="New finding"?"New":"", d.test_date]); });
+  if (!rows.length) return `<p class="src">No values in chart.</p>`;
+  return `<div class="tbl"><table><tr><th>Test</th><th>Value</th><th>Flag</th><th>Date</th></tr>${rows.map(r =>
+    `<tr><td>${esc(r[0])}</td><td class="num wrap">${esc(r[1])}</td><td class="flag">${esc(r[2])}</td><td class="num">${esc(r[3])}</td></tr>`).join("")}</table></div>`;
+}
+function gradeBlock(c, steps){
+  const exp = new Set(c.key[state.role]), got = new Set(steps.actions.map(a=>a.code));
+  const hit = [...exp].filter(x=>got.has(x)), miss = [...exp].filter(x=>!got.has(x)), extra = [...got].filter(x=>!exp.has(x));
+  return `<details style="margin-top:8px"><summary>Compare with the answer key</summary><div class="grade" style="margin-top:6px">
+    <span>Expected status: <b>${esc(c.key.status)}</b> · shown: <b>${esc(steps.status)}</b></span>
+    <span>Matched ${hit.length} of ${exp.size} expected actions</span>
+    ${miss.length ? `<span class="badtxt">Missed: ${miss.map(esc).join(", ")}</span>` : ""}
+    ${extra.length ? `<span>Extra: ${extra.map(esc).join(", ")}</span>` : ""}
+    <span class="src">The answer key is never sent to Claude. Case is in the ${esc(c.split)} split.</span></div></details>`;
+}
+
+async function runClaude(c){
+  const role = state.role, key = c.id + "|" + role;
+  if (!sample || state.busy) return;
+  state.busy = key; render();
+  const catalog = Object.entries(DATA.catalog).filter(([k,v]) => v.role === role);
+  const prompt = `You are a pre-operative readiness assistant (Modules 2-4: question answering, summarization, next-step generation). ${ROLE_GUIDE[role]}
+This is a class prototype with fully synthetic patients. The criteria are teaching rules, not clinical guidelines. Never invent values that are not in the chart.
+
+HOSPITAL PRE-OP CRITERIA:
+${DATA.criteria[c.case.procedure]}
+
+ORDER SET FOR THE ${ROLE_LABEL[role].toUpperCase()} (the only action codes you may use):
+${catalog.map(([k,v]) => `- ${k}: ${v.text}`).join("\n")}
+
+CHART:
+${c.packet}
+
+Instructions:
+1. Check every required item for this procedure and patient: present, signed, and within its validity window (count days from the result date to the surgery date).
+2. Check every value and history rule, including problems that can only be found by reading the H&P text (new symptoms, disagreements with the allergy list, consents or medication instructions, family history).
+3. Recommend each applicable action from the ${ROLE_LABEL[role]} order set once. Do not use codes from other roles. Do not recommend actions for items that are present, valid and normal.
+4. Put anything important with no matching code in other_considerations.
+5. Set status using section C of the criteria (Ready / Outstanding items / Needs clinical review / Recommend hold).
+6. Write a summary for the ${ROLE_LABEL[role]} with these sections in order: ${SECTIONS[role].join(", ")}. 1-4 short bullets each with real values and dates; start abnormal or missing items with "⚠". Under 220 words.
+
+Reply with only this JSON:
+{"status":"...","headline":"one sentence on readiness for this role","sections":[{"title":"...","bullets":["..."]}],"actions":[{"code":"CODE","reason":"short reason with value/date","evidence_ids":["L0001"],"priority":"high|medium|low"}],"other_considerations":["..."]}`;
+  try{
+    const out = await sample.json(prompt, {modelTier:"default"});
+    const allowed = new Set(catalog.map(([k]) => k)), seen = new Set(), actions = [], other = [...(out.other_considerations||[])];
+    (out.actions||[]).forEach(a => { const code = String(a.code||"").trim().toUpperCase();
+      if (allowed.has(code) && !seen.has(code)) { seen.add(code); actions.push({code, reason:a.reason||"", evidence_ids:Array.isArray(a.evidence_ids)?a.evidence_ids:[], priority:["high","medium","low"].includes(a.priority)?a.priority:"medium"}); }
+      else if (code && !allowed.has(code)) other.push(`${code}: ${a.reason||""}`); });
+    const statuses = ["Ready","Outstanding items","Needs clinical review","Recommend hold"];
+    state.ai[key] = {status: statuses.includes(out.status) ? out.status : "Needs clinical review", headline: out.headline||"",
+      sections: Array.isArray(out.sections)?out.sections:[], actions, other_considerations: other};
+  }catch(e){
+    const msg = {not_granted:"Claude was not allowed for this page.", rate_limited:"Too many requests. Try again in a minute.",
+      invalid_json:"Claude's answer could not be read. Try again.", sampling_disabled:"Claude is not available on this account."}[e && e.code] || "The review did not finish. Try again.";
+    state.ai[key] = {error: msg};
+    if (e && (e.code==="not_granted" || e.code==="sampling_disabled")) sample = null;
+  }
+  state.busy = null; render();
+}
+
+// ---------- chart tabs ----------
+function table(rows, cols, opts={}){
+  if (!rows || !rows.length) return `<p class="src">None in chart.</p>`;
+  return `<div class="tbl"><table><tr>${cols.map(c=>`<th>${esc(c[1])}</th>`).join("")}</tr>${rows.map(r => `<tr>${cols.map(([k,_,cls]) => {
+    const val = r[k] ?? ""; const bad = (opts.bad||[]).includes(k) && /^(H|L|Critical|Abnormal|Missing|Refused|Pending|Positive|New finding)$/.test(val);
+    return `<td class="${cls||""} ${bad?"badtxt":""}">${esc(val===""&&opts.blank?opts.blank:val)}</td>`; }).join("")}</tr>`).join("")}</table></div>`;
+}
+function viewLabs(v,c){
+  const rows = [...c.labs].sort((a,b)=>(a.panel+a.test_name).localeCompare(b.panel+b.test_name)).map(l => ({...l, range: l.reference_low||l.reference_high ? `${l.reference_low}–${l.reference_high}` : "", unit: l.unit==="text"?"":l.unit}));
+  v.innerHTML = `<div class="panel">${table(rows, [["panel","Panel"],["test_name","Test"],["result_value","Result","num"],["unit","Unit"],["range","Reference","num"],["flag","Flag"],["collection_date","Collected","num"],["lab_id","ID","num"]], {bad:["flag"]})}</div>`;
+}
+function viewMeds(v,c){
+  v.innerHTML = `<div class="panel">${table(c.meds, [["medication_name","Medication"],["dose","Dose"],["route","Route"],["frequency","Frequency"],["preop_instruction","Pre-op instruction"],["medication_id","ID","num"]], {blank:"⚠ none documented"})}</div>`;
+}
+function viewTests(v,c){
+  v.innerHTML = `<div class="panel"><h3>Diagnostic tests</h3>${table(c.diags, [["test_type","Test"],["test_date","Date","num"],["interpretation","Interpretation"],["compared_to_prior","Vs prior"],["test_id","ID","num"]], {bad:["compared_to_prior"]})}
+    <h3 style="margin-top:12px">Imaging</h3>${table(c.imaging, [["imaging_type","Study"],["imaging_date","Date","num"],["report","Report"],["imaging_id","ID","num"]])}
+    <h3 style="margin-top:12px">Clearances</h3>${table(c.clearances, [["clearance_type","Clearance"],["status","Status"],["requested_date","Requested","num"],["completed_date","Completed","num"],["assessment_note","Note"]], {bad:["status"]})}</div>`;
+}
+function viewConsents(v,c){
+  v.innerHTML = `<div class="panel"><h3>Consents</h3>${table(c.consents, [["consent_type","Consent"],["status","Status"],["signed_date","Signed","num"],["consent_id","ID","num"]], {bad:["status"]})}
+    <h3 style="margin-top:12px">Blood bank</h3>${c.blood ? table([c.blood], [["abo_rh","ABO/Rh"],["antibody_screen","Antibody screen"],["type_screen_date","T&S drawn","num"],["type_screen_expires","T&S expires","num"],["prbc_crossmatched_units","PRBC crossmatched","num"],["ffp_units_available","FFP"],["platelet_units_available","Platelets"]], {bad:["antibody_screen"]}) : `<p class="src">No blood bank record (not required for this procedure).</p>`}</div>`;
+}
+function viewHP(v,c){
+  v.innerHTML = `<div class="panel">${c.notes.length ? c.notes.map(n => `<pre class="note">${esc(n.note_text)}</pre>`).join("") : `<p class="badtxt">No H&P in chart.</p>`}
+    <p class="src" style="margin-top:10px">Anesthesia history on file: ${esc(c.patient.anesthesia_complication_history)}</p></div>`;
+}
+render();
+</script>

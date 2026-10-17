@@ -1,0 +1,41 @@
+blood_record_id,surgery_id,patient_id,abo_rh,antibody_screen,type_screen_date,type_screen_expires,prbc_crossmatched_units,ffp_units_available,platelet_units_available
+B001,S021,P021,A+,Negative,2026-11-18,2026-11-21,0,On request,On request
+B002,S022,P022,A+,Positive,2026-11-22,2026-11-25,0,On request,On request
+B003,S023,P023,A+,Negative,2026-11-24,2026-11-27,0,On request,On request
+B004,S024,P024,O-,Negative,2026-11-28,2026-12-01,0,On request,On request
+B005,S025,P025,A+,Negative,2026-11-30,2026-12-03,0,On request,On request
+B006,S026,P026,O+,Negative,2026-11-07,2026-11-10,0,On request,On request
+B007,S027,P027,A-,Negative,2026-11-10,2026-11-13,0,On request,On request
+B008,S028,P028,B+,Negative,2026-11-14,2026-11-17,0,On request,On request
+B009,S029,P029,O+,Positive,2026-11-16,2026-11-19,0,On request,On request
+B010,S030,P030,AB+,Negative,2026-11-22,2026-11-25,0,On request,On request
+B011,S031,P031,O+,Negative,2026-11-22,2026-11-25,0,On request,On request
+B012,S032,P032,A+,Negative,2026-11-26,2026-11-29,0,On request,On request
+B013,S033,P033,O+,Negative,2026-11-29,2026-12-02,0,On request,On request
+B014,S034,P034,AB+,Negative,2026-12-01,2026-12-04,0,On request,On request
+B015,S035,P035,O-,Negative,2026-11-08,2026-11-11,0,Not applicable - refuses blood,Not applicable - refuses blood
+B016,S036,P036,AB+,Negative,2026-11-11,2026-11-14,0,On request,On request
+B017,S037,P037,B+,Negative,2026-11-14,2026-11-17,0,On request,On request
+B018,S038,P038,A-,Negative,2026-11-17,2026-11-20,0,On request,On request
+B019,S039,P039,O+,Negative,2026-11-15,2026-11-18,0,Not applicable - refuses blood,Not applicable - refuses blood
+B020,S040,P040,AB+,Negative,2026-11-23,2026-11-26,0,On request,On request
+B021,S081,P081,B+,Negative,2026-11-16,2026-11-19,2,4,2
+B022,S082,P082,A-,Negative,2026-11-22,2026-11-25,0,4,2
+B023,S083,P083,B+,Negative,2026-11-23,2026-11-26,2,4,2
+B024,S084,P084,O-,Negative,2026-11-25,2026-11-28,2,4,2
+B025,S085,P085,A+,Negative,2026-11-29,2026-12-02,0,Not applicable - refuses blood,Not applicable - refuses blood
+B026,S086,P086,O-,Negative,2026-12-01,2026-12-04,2,4,2
+B027,S087,P087,AB+,Negative,2026-11-09,2026-11-12,0,Not applicable - refuses blood,Not applicable - refuses blood
+B028,S088,P088,O+,Negative,2026-11-12,2026-11-15,2,4,2
+B029,S089,P089,O-,Negative,2026-11-15,2026-11-18,2,4,2
+B030,S090,P090,O-,Negative,2026-11-17,2026-11-20,2,4,2
+B031,S091,P091,A+,Negative,2026-11-22,2026-11-25,2,4,2
+B032,S092,P092,AB+,Negative,2026-11-24,2026-11-27,2,4,2
+B033,S093,P093,B+,Negative,2026-11-28,2026-12-01,2,4,2
+B034,S094,P094,O-,Positive,2026-11-29,2026-12-02,2,4,2
+B035,S095,P095,B+,Negative,2026-12-03,2026-12-06,0,4,2
+B036,S096,P096,B+,Negative,2026-11-10,2026-11-13,2,4,2
+B037,S097,P097,A+,Negative,2026-11-14,2026-11-17,2,4,2
+B038,S098,P098,O+,Negative,2026-11-15,2026-11-18,2,4,2
+B039,S099,P099,A+,Negative,2026-11-18,2026-11-21,2,4,2
+B040,S100,P100,O+,Negative,2026-11-21,2026-11-24,2,4,2

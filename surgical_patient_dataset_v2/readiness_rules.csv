@@ -1,0 +1,34 @@
+finding_code,category,rule,nurse_actions,anesthesia_actions,source
+LOW_HEMOGLOBIN,clinical,Hemoglobin < 10 g/dL (critical < 7),NOTIFY_LOW_HGB,EVALUATE_ANEMIA,structured
+LOW_PLATELETS,clinical,Platelets < 100 x10^3/uL,NOTIFY_LOW_PLATELETS,EVALUATE_THROMBOCYTOPENIA,structured
+ELEVATED_INR,clinical,INR > 1.5,NOTIFY_ELEVATED_INR,EVALUATE_ELEVATED_INR,structured
+ABNORMAL_POTASSIUM,clinical,Potassium > 5.5 or < 3.3 mmol/L (critical >= 6.0 or <= 3.0),REPEAT_BMP,CORRECT_POTASSIUM,structured
+ABNORMAL_SODIUM,clinical,Sodium < 130 or > 150 mmol/L,REPEAT_BMP,EVALUATE_SODIUM,structured
+ELEVATED_CREATININE,clinical,Creatinine > 1.5 mg/dL,NOTIFY_RENAL_FUNCTION,RENAL_DOSING_PLAN,structured
+HYPERGLYCEMIA,clinical,"Glucose or POC glucose > 200 mg/dL, or HbA1c > 8.5%",POC_GLUCOSE_DAY_OF,GLYCEMIC_PLAN,structured
+LOW_ALBUMIN,clinical,Albumin < 3.0 g/dL,,REVIEW_LOW_ALBUMIN,structured
+ELEVATED_LFTS,clinical,"AST or ALT > 120 U/L, or total bilirubin > 2.0 mg/dL",NOTIFY_ELEVATED_LFTS,REVIEW_ELEVATED_LFTS,structured
+URINARY_INFECTION,clinical,"Urine culture with growth, or UA nitrite positive",NOTIFY_SURGEON_POSITIVE_CULTURE,REVIEW_INFECTION_RISK,structured
+POSITIVE_PREGNANCY,critical,Serum hCG positive,NOTIFY_POSITIVE_PREGNANCY,REVIEW_POSITIVE_PREGNANCY,structured
+POSITIVE_ANTIBODY_SCREEN,clinical,Antibody screen positive,CONTACT_BLOOD_BANK,ANTIBODY_BLOOD_BANK,structured
+NEW_EKG_ABNORMALITY,clinical,EKG compared to prior shows a new finding,NOTIFY_EKG_ABNORMALITY,EVALUATE_EKG_ABNORMALITY,structured
+LOW_EJECTION_FRACTION,clinical,Echo ejection fraction < 35%,,REVIEW_LOW_EF,structured
+SEVERE_OBSTRUCTION,clinical,PFT FEV1 < 50% predicted,,REVIEW_SEVERE_LUNG_DISEASE,structured
+BLOOD_REFUSAL,clinical,Blood consent status is Refused,VERIFY_BLOOD_REFUSAL_FORM,BLOOD_REFUSAL_PLAN,structured
+PENDING_CLEARANCE,missing,Required clearance is Pending,FOLLOW_UP_CLEARANCE,,structured
+ANTITHROMBOTIC_NO_PLAN,missing,Anticoagulant/antiplatelet (not aspirin) with no pre-op instruction,VERIFY_ANTITHROMBOTIC_HOLD,ANTITHROMBOTIC_PLAN,structured
+METFORMIN_NO_INSTRUCTION,missing,Metformin with no pre-op instruction,METFORMIN_HOLD_INSTRUCTIONS,,structured
+INSULIN_NO_INSTRUCTION,missing,Insulin with no pre-op instruction,INSULIN_INSTRUCTIONS,INSULIN_DOSE_PLAN,structured
+SGLT2_NO_INSTRUCTION,missing,SGLT2 inhibitor with no pre-op instruction,SGLT2_HOLD_INSTRUCTIONS,,structured
+GLP1_AGONIST,clinical,GLP-1 agonist with no pre-op instruction,VERIFY_GLP1_LAST_DOSE,GLP1_ASPIRATION_REVIEW,structured
+OBSTRUCTIVE_SLEEP_APNEA,routine,Diagnosis of obstructive sleep apnea,BRING_CPAP,OSA_PRECAUTIONS,structured
+MALIGNANT_HYPERTHERMIA_RISK,safety,Personal or family history of malignant hyperthermia,NOTIFY_MH_RISK,MH_PRECAUTIONS,structured
+DIFFICULT_AIRWAY,safety,History of difficult airway,,DIFFICULT_AIRWAY_PLAN,structured
+PONV_HISTORY,routine,History of post-op nausea and vomiting,,PONV_PROPHYLAXIS,structured
+LATEX_ALLERGY,safety,Latex allergy,LATEX_PRECAUTIONS,,structured
+NOTE_ALLERGY_CONFLICT,missing,H&P allergy statement disagrees with allergy list,RECONCILE_ALLERGIES,,note
+NOTE_CONSENT_CONFLICT,missing,H&P says a consent is signed but consent record says missing,RECONCILE_CONSENT_DOCUMENTATION,,note
+NOTE_NEW_SYMPTOMS,clinical,H&P documents new cardiac/respiratory symptoms or acute illness,NOTIFY_NEW_SYMPTOMS,EVALUATE_NEW_SYMPTOMS,note
+NOTE_MH_FAMILY_HISTORY,safety,H&P mentions a family history suggestive of malignant hyperthermia,NOTIFY_MH_RISK,MH_PRECAUTIONS,note
+NOTE_EXAM_INCOMPLETE,missing,H&P lacks a heart and lung exam,OBTAIN_UPDATED_HP,,note
+NOTE_ANTITHROMBOTIC_CONFLICT,missing,H&P says patient is still taking a blood thinner that the med list says to hold,VERIFY_ANTITHROMBOTIC_HOLD,ANTITHROMBOTIC_PLAN,note

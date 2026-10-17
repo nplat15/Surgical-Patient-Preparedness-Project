@@ -1,0 +1,202 @@
+surgery_id,finding_code,category,source,detail,nurse_actions,anesthesia_actions,evidence_ids
+S002,NEW_EKG_ABNORMALITY,clinical,structured,EKG: New left bundle branch block,NOTIFY_EKG_ABNORMALITY,EVALUATE_EKG_ABNORMALITY,T0001
+S002,NOTE_ALLERGY_CONFLICT,missing,note,H&P says NKDA; allergy list says Penicillin (hives),RECONCILE_ALLERGIES,,N002 | P002
+S003,MISSING:Anesthesia consent,missing,structured,Anesthesia consent not signed,NOTIFY_ANESTHESIA_CONSENT,OBTAIN_ANESTHESIA_CONSENT,CO0006
+S003,MISSING:Pulmonary assessment,missing,structured,Pulmonary assessment not requested/completed,,REQUEST_PULMONARY_CLEARANCE,
+S003,OBSTRUCTIVE_SLEEP_APNEA,routine,structured,Obstructive sleep apnea,BRING_CPAP,OSA_PRECAUTIONS,P003
+S003,LATEX_ALLERGY,safety,structured,Latex allergy,LATEX_PRECAUTIONS,,P003
+S003,NOTE_CONSENT_CONFLICT,missing,note,H&P says anesthesia consent signed; consent record says missing,RECONCILE_CONSENT_DOCUMENTATION,,N003
+S004,MISSING:Surgery consent,missing,structured,Surgery consent not signed,OBTAIN_SURGERY_CONSENT,,CO0007
+S004,DIFFICULT_AIRWAY,safety,structured,Difficult airway - required video laryngoscope and bougie (2019),,DIFFICULT_AIRWAY_PLAN,P004
+S004,LATEX_ALLERGY,safety,structured,Latex allergy,LATEX_PRECAUTIONS,,P004
+S005,MISSING:Surgery consent,missing,structured,Surgery consent not signed,OBTAIN_SURGERY_CONSENT,,CO0009
+S005,ABNORMAL_SODIUM,clinical,structured,Sodium 125,REPEAT_BMP,EVALUATE_SODIUM,L0074
+S005,DIFFICULT_AIRWAY,safety,structured,Difficult airway - required video laryngoscope and bougie (2019),,DIFFICULT_AIRWAY_PLAN,P005
+S007,ELEVATED_INR,clinical,structured,INR 2.2,NOTIFY_ELEVATED_INR,EVALUATE_ELEVATED_INR,L0122
+S007,NOTE_EXAM_INCOMPLETE,missing,note,H&P has no heart or lung exam,OBTAIN_UPDATED_HP,,N007
+S008,NOTE_ALLERGY_CONFLICT,missing,note,H&P says NKDA; allergy list says Penicillin (hives),RECONCILE_ALLERGIES,,N008 | P008
+S009,ELEVATED_INR,clinical,structured,INR 2.9,NOTIFY_ELEVATED_INR,EVALUATE_ELEVATED_INR,L0159
+S009,ELEVATED_CREATININE,clinical,structured,Creatinine 2.3,NOTIFY_RENAL_FUNCTION,RENAL_DOSING_PLAN,L0150
+S009,LATEX_ALLERGY,safety,structured,Latex allergy,LATEX_PRECAUTIONS,,P009
+S010,MISSING:Pulmonary assessment,missing,structured,Pulmonary assessment not requested/completed,,REQUEST_PULMONARY_CLEARANCE,
+S010,METFORMIN_NO_INSTRUCTION,missing,structured,Metformin with no pre-op instruction,METFORMIN_HOLD_INSTRUCTIONS,,M0020
+S010,PONV_HISTORY,routine,structured,Prior postoperative nausea and vomiting,,PONV_PROPHYLAXIS,P010
+S012,OUTDATED:EKG,missing,structured,EKG dated 2026-07-04 (138 days before surgery; must be within 90),OBTAIN_EKG,,T0011
+S012,LATEX_ALLERGY,safety,structured,Latex allergy,LATEX_PRECAUTIONS,,P012
+S012,NOTE_MH_FAMILY_HISTORY,safety,note,Brother developed a very high fever and muscle rigidity during anesthesia for an appendectomy and was transferred to the ICU; the family was told to warn doctors before any surgery.,NOTIFY_MH_RISK,MH_PRECAUTIONS,N012
+S013,OBSTRUCTIVE_SLEEP_APNEA,routine,structured,Obstructive sleep apnea,BRING_CPAP,OSA_PRECAUTIONS,P013
+S013,MALIGNANT_HYPERTHERMIA_RISK,safety,structured,"Personal history of malignant hyperthermia (2011, treated with dantrolene)",NOTIFY_MH_RISK,MH_PRECAUTIONS,P013
+S014,MISSING:CBC,missing,structured,CBC not in chart,DRAW_CBC,,
+S015,SGLT2_NO_INSTRUCTION,missing,structured,Empagliflozin with no pre-op instruction,SGLT2_HOLD_INSTRUCTIONS,,M0033
+S015,DIFFICULT_AIRWAY,safety,structured,Difficult airway - required video laryngoscope and bougie (2019),,DIFFICULT_AIRWAY_PLAN,P015
+S017,MISSING:Anesthesia consent,missing,structured,Anesthesia consent not signed,NOTIFY_ANESTHESIA_CONSENT,OBTAIN_ANESTHESIA_CONSENT,CO0034
+S017,OBSTRUCTIVE_SLEEP_APNEA,routine,structured,Obstructive sleep apnea,BRING_CPAP,OSA_PRECAUTIONS,P017
+S017,NOTE_CONSENT_CONFLICT,missing,note,H&P says anesthesia consent signed; consent record says missing,RECONCILE_CONSENT_DOCUMENTATION,,N017
+S018,OBSTRUCTIVE_SLEEP_APNEA,routine,structured,Obstructive sleep apnea,BRING_CPAP,OSA_PRECAUTIONS,P018
+S018,NOTE_NEW_SYMPTOMS,clinical,note,Reports new chest tightness with walking one block over the past week; has not seen a doctor for this.,NOTIFY_NEW_SYMPTOMS,EVALUATE_NEW_SYMPTOMS,N018
+S019,ABNORMAL_SODIUM,clinical,structured,Sodium 126,REPEAT_BMP,EVALUATE_SODIUM,L0321
+S020,MISSING:H&P,missing,structured,No H&P in chart,OBTAIN_UPDATED_HP,,
+S020,MISSING:CBC,missing,structured,CBC not in chart,DRAW_CBC,,
+S022,POSITIVE_ANTIBODY_SCREEN,clinical,structured,Antibody screen positive,CONTACT_BLOOD_BANK,ANTIBODY_BLOOD_BANK,B002
+S022,NOTE_ANTITHROMBOTIC_CONFLICT,missing,note,Med list says 'Hold 2 days before surgery per surgeon' but H&P: She states she was not told to stop apixaban and plans to keep taking it until the day of surgery.,VERIFY_ANTITHROMBOTIC_HOLD,ANTITHROMBOTIC_PLAN,N021 | M0037
+S023,ANTITHROMBOTIC_NO_PLAN,missing,structured,Clopidogrel with no pre-op hold instruction,VERIFY_ANTITHROMBOTIC_HOLD,ANTITHROMBOTIC_PLAN,M0039
+S024,OUTDATED:H&P,missing,structured,H&P dated 2026-09-25 (66 days before surgery; must be within 30),OBTAIN_UPDATED_HP,,N023
+S024,ANTITHROMBOTIC_NO_PLAN,missing,structured,Clopidogrel with no pre-op hold instruction,VERIFY_ANTITHROMBOTIC_HOLD,ANTITHROMBOTIC_PLAN,M0040
+S025,MISSING:Blood consent,missing,structured,Blood consent not signed,OBTAIN_BLOOD_CONSENT,,CO0055
+S025,MISSING:Pulmonary assessment,missing,structured,Pulmonary assessment not requested/completed,,REQUEST_PULMONARY_CLEARANCE,
+S025,NOTE_NEW_SYMPTOMS,clinical,note,Reports fever to 101.2 F and productive cough for the past 3 days.,NOTIFY_NEW_SYMPTOMS,EVALUATE_NEW_SYMPTOMS,N024
+S026,LATEX_ALLERGY,safety,structured,Latex allergy,LATEX_PRECAUTIONS,,P026
+S027,MISSING:HbA1c,missing,structured,HbA1c not in chart,DRAW_HBA1C,,
+S027,NOTE_ALLERGY_CONFLICT,missing,note,H&P says NKDA; allergy list says Codeine (nausea),RECONCILE_ALLERGIES,,N026 | P027
+S028,HYPERGLYCEMIA,clinical,structured,Glucose 286; POC glucose 243; HbA1c 10.0,POC_GLUCOSE_DAY_OF,GLYCEMIC_PLAN,L0453 | L0456 | L0442
+S028,NOTE_ANTITHROMBOTIC_CONFLICT,missing,note,Med list says 'Hold 2 days before surgery per surgeon' but H&P: She states she was not told to stop apixaban and plans to keep taking it until the day of surgery.,VERIFY_ANTITHROMBOTIC_HOLD,ANTITHROMBOTIC_PLAN,N027 | M0047
+S029,MISSING:HbA1c,missing,structured,HbA1c not in chart,DRAW_HBA1C,,
+S029,POSITIVE_ANTIBODY_SCREEN,clinical,structured,Antibody screen positive,CONTACT_BLOOD_BANK,ANTIBODY_BLOOD_BANK,B009
+S029,GLP1_AGONIST,clinical,structured,Semaglutide with no pre-op instruction,VERIFY_GLP1_LAST_DOSE,GLP1_ASPIRATION_REVIEW,M0051
+S029,LATEX_ALLERGY,safety,structured,Latex allergy,LATEX_PRECAUTIONS,,P029
+S030,MISSING:Anesthesia consent,missing,structured,Anesthesia consent not signed,NOTIFY_ANESTHESIA_CONSENT,OBTAIN_ANESTHESIA_CONSENT,CO0069
+S030,MISSING:Pregnancy test,missing,structured,Pregnancy test not in chart,DRAW_PREGNANCY_TEST,,
+S030,MISSING:Pulmonary assessment,missing,structured,Pulmonary assessment not requested/completed,,REQUEST_PULMONARY_CLEARANCE,
+S030,OBSTRUCTIVE_SLEEP_APNEA,routine,structured,Obstructive sleep apnea,BRING_CPAP,OSA_PRECAUTIONS,P030
+S032,OUTDATED:EKG,missing,structured,EKG dated 2026-07-27 (123 days before surgery; must be within 90),OBTAIN_EKG,,T0022
+S032,PONV_HISTORY,routine,structured,Prior postoperative nausea and vomiting,,PONV_PROPHYLAXIS,P032
+S032,NOTE_ANTITHROMBOTIC_CONFLICT,missing,note,Med list says 'Hold 2 days before surgery per surgeon' but H&P: She states she was not told to stop apixaban and plans to keep taking it until the day of surgery.,VERIFY_ANTITHROMBOTIC_HOLD,ANTITHROMBOTIC_PLAN,N031 | M0054
+S033,MISSING:EKG,missing,structured,No EKG in chart,OBTAIN_EKG,,
+S033,ABNORMAL_POTASSIUM,clinical,structured,Potassium 5.8,REPEAT_BMP,CORRECT_POTASSIUM,L0516
+S033,NOTE_ANTITHROMBOTIC_CONFLICT,missing,note,Med list says 'Hold 2 days before surgery per surgeon' but H&P: She states she was not told to stop apixaban and plans to keep taking it until the day of surgery.,VERIFY_ANTITHROMBOTIC_HOLD,ANTITHROMBOTIC_PLAN,N032 | M0058
+S034,MISSING:Pulmonary assessment,missing,structured,Pulmonary assessment not requested/completed,,REQUEST_PULMONARY_CLEARANCE,
+S034,OBSTRUCTIVE_SLEEP_APNEA,routine,structured,Obstructive sleep apnea,BRING_CPAP,OSA_PRECAUTIONS,P034
+S035,BLOOD_REFUSAL,clinical,structured,Patient refuses blood products,VERIFY_BLOOD_REFUSAL_FORM,BLOOD_REFUSAL_PLAN,CO0085
+S035,GLP1_AGONIST,clinical,structured,Semaglutide with no pre-op instruction,VERIFY_GLP1_LAST_DOSE,GLP1_ASPIRATION_REVIEW,M0064
+S035,NOTE_MH_FAMILY_HISTORY,safety,note,Brother developed a very high fever and muscle rigidity during anesthesia for an appendectomy and was transferred to the ICU; the family was told to warn doctors before any surgery.,NOTIFY_MH_RISK,MH_PRECAUTIONS,N034
+S037,ABNORMAL_POTASSIUM,critical,structured,Potassium 6.0,REPEAT_BMP,CORRECT_POTASSIUM,L0572
+S037,ELEVATED_CREATININE,clinical,structured,Creatinine 1.78,NOTIFY_RENAL_FUNCTION,RENAL_DOSING_PLAN,L0576
+S038,GLP1_AGONIST,clinical,structured,Semaglutide with no pre-op instruction,VERIFY_GLP1_LAST_DOSE,GLP1_ASPIRATION_REVIEW,M0069
+S038,PONV_HISTORY,routine,structured,Prior postoperative nausea and vomiting,,PONV_PROPHYLAXIS,P038
+S039,OUTDATED:Type and screen,missing,structured,"Type and screen expires 2026-11-18, before surgery 2026-11-23",DRAW_TYPE_AND_SCREEN,,B019
+S039,BLOOD_REFUSAL,clinical,structured,Patient refuses blood products,VERIFY_BLOOD_REFUSAL_FORM,BLOOD_REFUSAL_PLAN,CO0097
+S040,MISSING:Blood consent,missing,structured,Blood consent not signed,OBTAIN_BLOOD_CONSENT,,CO0100
+S042,MISSING:Surgery consent,missing,structured,Surgery consent not signed,OBTAIN_SURGERY_CONSENT,,CO0103
+S043,MALIGNANT_HYPERTHERMIA_RISK,safety,structured,"Personal history of malignant hyperthermia (2011, treated with dantrolene)",NOTIFY_MH_RISK,MH_PRECAUTIONS,P043
+S044,POSITIVE_PREGNANCY,critical,structured,Serum hCG positive,NOTIFY_POSITIVE_PREGNANCY,REVIEW_POSITIVE_PREGNANCY,L0627
+S044,ANTITHROMBOTIC_NO_PLAN,missing,structured,Clopidogrel with no pre-op hold instruction,VERIFY_ANTITHROMBOTIC_HOLD,ANTITHROMBOTIC_PLAN,M0084
+S045,MISSING:EKG,missing,structured,No EKG in chart,OBTAIN_EKG,,
+S045,NOTE_ANTITHROMBOTIC_CONFLICT,missing,note,Med list says 'Hold 2 days before surgery per surgeon' but H&P: He states he was not told to stop apixaban and plans to keep taking it until the day of surgery.,VERIFY_ANTITHROMBOTIC_HOLD,ANTITHROMBOTIC_PLAN,N044 | M0085
+S047,OUTDATED:H&P,missing,structured,H&P dated 2026-10-08 (43 days before surgery; must be within 30),OBTAIN_UPDATED_HP,,N046
+S047,MISSING:HbA1c,missing,structured,HbA1c not in chart,DRAW_HBA1C,,
+S048,MALIGNANT_HYPERTHERMIA_RISK,safety,structured,"Personal history of malignant hyperthermia (2011, treated with dantrolene)",NOTIFY_MH_RISK,MH_PRECAUTIONS,P048
+S049,MISSING:H&P,missing,structured,No H&P in chart,OBTAIN_UPDATED_HP,,
+S049,METFORMIN_NO_INSTRUCTION,missing,structured,Metformin with no pre-op instruction,METFORMIN_HOLD_INSTRUCTIONS,,M0091
+S049,MALIGNANT_HYPERTHERMIA_RISK,safety,structured,"Personal history of malignant hyperthermia (2011, treated with dantrolene)",NOTIFY_MH_RISK,MH_PRECAUTIONS,P049
+S050,METFORMIN_NO_INSTRUCTION,missing,structured,Metformin with no pre-op instruction,METFORMIN_HOLD_INSTRUCTIONS,,M0093
+S052,MISSING:Anesthesia consent,missing,structured,Anesthesia consent not signed,NOTIFY_ANESTHESIA_CONSENT,OBTAIN_ANESTHESIA_CONSENT,CO0124
+S052,MISSING:H&P,missing,structured,No H&P in chart,OBTAIN_UPDATED_HP,,
+S052,PONV_HISTORY,routine,structured,Prior postoperative nausea and vomiting,,PONV_PROPHYLAXIS,P052
+S053,ANTITHROMBOTIC_NO_PLAN,missing,structured,Clopidogrel with no pre-op hold instruction,VERIFY_ANTITHROMBOTIC_HOLD,ANTITHROMBOTIC_PLAN,M0099
+S053,MALIGNANT_HYPERTHERMIA_RISK,safety,structured,"Personal history of malignant hyperthermia (2011, treated with dantrolene)",NOTIFY_MH_RISK,MH_PRECAUTIONS,P053
+S053,LATEX_ALLERGY,safety,structured,Latex allergy,LATEX_PRECAUTIONS,,P053
+S054,NOTE_MH_FAMILY_HISTORY,safety,note,Brother developed a very high fever and muscle rigidity during anesthesia for an appendectomy and was transferred to the ICU; the family was told to warn doctors before any surgery.,NOTIFY_MH_RISK,MH_PRECAUTIONS,N051
+S055,GLP1_AGONIST,clinical,structured,Semaglutide with no pre-op instruction,VERIFY_GLP1_LAST_DOSE,GLP1_ASPIRATION_REVIEW,M0103
+S057,HYPERGLYCEMIA,clinical,structured,Glucose 252; POC glucose 279; HbA1c 9.2,POC_GLUCOSE_DAY_OF,GLYCEMIC_PLAN,L0753 | L0756 | L0746
+S058,MISSING:Anesthesia consent,missing,structured,Anesthesia consent not signed,NOTIFY_ANESTHESIA_CONSENT,OBTAIN_ANESTHESIA_CONSENT,CO0136
+S059,PONV_HISTORY,routine,structured,Prior postoperative nausea and vomiting,,PONV_PROPHYLAXIS,P059
+S059,NOTE_NEW_SYMPTOMS,clinical,note,Reports fever to 101.2 F and productive cough for the past 3 days.,NOTIFY_NEW_SYMPTOMS,EVALUATE_NEW_SYMPTOMS,N056
+S060,HYPERGLYCEMIA,clinical,structured,Glucose 243; POC glucose 271; HbA1c 9.8,POC_GLUCOSE_DAY_OF,GLYCEMIC_PLAN,L0782 | L0785 | L0775
+S060,NOTE_ALLERGY_CONFLICT,missing,note,H&P says NKDA; allergy list says Penicillin (hives),RECONCILE_ALLERGIES,,N057 | P060
+S062,ELEVATED_CREATININE,clinical,structured,Creatinine 2.31,NOTIFY_RENAL_FUNCTION,RENAL_DOSING_PLAN,L0814
+S062,GLP1_AGONIST,clinical,structured,Semaglutide with no pre-op instruction,VERIFY_GLP1_LAST_DOSE,GLP1_ASPIRATION_REVIEW,M0111
+S062,NOTE_NEW_SYMPTOMS,clinical,note,Reports new shortness of breath climbing one flight of stairs over the past two weeks and ankle swelling.,NOTIFY_NEW_SYMPTOMS,EVALUATE_NEW_SYMPTOMS,N059
+S063,MISSING:Surgery consent,missing,structured,Surgery consent not signed,OBTAIN_SURGERY_CONSENT,,CO0145
+S064,MISSING:Anesthesia consent,missing,structured,Anesthesia consent not signed,NOTIFY_ANESTHESIA_CONSENT,OBTAIN_ANESTHESIA_CONSENT,CO0148
+S064,ELEVATED_CREATININE,clinical,structured,Creatinine 2.35,NOTIFY_RENAL_FUNCTION,RENAL_DOSING_PLAN,L0851
+S064,OBSTRUCTIVE_SLEEP_APNEA,routine,structured,Obstructive sleep apnea,BRING_CPAP,OSA_PRECAUTIONS,P064
+S064,NOTE_CONSENT_CONFLICT,missing,note,H&P says anesthesia consent signed; consent record says missing,RECONCILE_CONSENT_DOCUMENTATION,,N061
+S065,NOTE_EXAM_INCOMPLETE,missing,note,H&P has no heart or lung exam,OBTAIN_UPDATED_HP,,N062
+S066,ELEVATED_CREATININE,clinical,structured,Creatinine 2.03,NOTIFY_RENAL_FUNCTION,RENAL_DOSING_PLAN,L0887
+S067,MISSING:HbA1c,missing,structured,HbA1c not in chart,DRAW_HBA1C,,
+S067,METFORMIN_NO_INSTRUCTION,missing,structured,Metformin with no pre-op instruction,METFORMIN_HOLD_INSTRUCTIONS,,M0118
+S068,MISSING:Urinalysis,missing,structured,Urinalysis not in chart,DRAW_UA,,
+S068,ELEVATED_CREATININE,clinical,structured,Creatinine 2.29,NOTIFY_RENAL_FUNCTION,RENAL_DOSING_PLAN,L0924
+S069,MISSING:CBC,missing,structured,CBC not in chart,DRAW_CBC,,
+S069,ELEVATED_CREATININE,clinical,structured,Creatinine 1.77,NOTIFY_RENAL_FUNCTION,RENAL_DOSING_PLAN,L0934
+S070,OUTDATED:Urinalysis,missing,structured,Urinalysis drawn 2026-09-16 (56 days before surgery; must be within 30),DRAW_UA,,L0956 | L0957 | L0958 | L0959
+S070,ELEVATED_CREATININE,clinical,structured,Creatinine 1.89,NOTIFY_RENAL_FUNCTION,RENAL_DOSING_PLAN,L0952
+S072,MISSING:Anesthesia consent,missing,structured,Anesthesia consent not signed,NOTIFY_ANESTHESIA_CONSENT,OBTAIN_ANESTHESIA_CONSENT,CO0164
+S072,OBSTRUCTIVE_SLEEP_APNEA,routine,structured,Obstructive sleep apnea,BRING_CPAP,OSA_PRECAUTIONS,P072
+S073,OUTDATED:EKG,missing,structured,EKG dated 2026-05-26 (178 days before surgery; must be within 90),OBTAIN_EKG,,T0042
+S074,MISSING:HbA1c,missing,structured,HbA1c not in chart,DRAW_HBA1C,,
+S074,ELEVATED_CREATININE,clinical,structured,Creatinine 2.24,NOTIFY_RENAL_FUNCTION,RENAL_DOSING_PLAN,L1025
+S074,ANTITHROMBOTIC_NO_PLAN,missing,structured,Apixaban with no pre-op hold instruction,VERIFY_ANTITHROMBOTIC_HOLD,ANTITHROMBOTIC_PLAN,M0130
+S074,DIFFICULT_AIRWAY,safety,structured,Difficult airway - required video laryngoscope and bougie (2019),,DIFFICULT_AIRWAY_PLAN,P074
+S075,MISSING:HbA1c,missing,structured,HbA1c not in chart,DRAW_HBA1C,,
+S075,HYPERGLYCEMIA,clinical,structured,Glucose 247; POC glucose 278,POC_GLUCOSE_DAY_OF,GLYCEMIC_PLAN,L1045 | L1053
+S076,ELEVATED_CREATININE,clinical,structured,Creatinine 1.75,NOTIFY_RENAL_FUNCTION,RENAL_DOSING_PLAN,L1064
+S076,LATEX_ALLERGY,safety,structured,Latex allergy,LATEX_PRECAUTIONS,,P076
+S077,PONV_HISTORY,routine,structured,Prior postoperative nausea and vomiting,,PONV_PROPHYLAXIS,P077
+S077,NOTE_ALLERGY_CONFLICT,missing,note,H&P says NKDA; allergy list says Penicillin (hives),RECONCILE_ALLERGIES,,N074 | P077
+S078,HYPERGLYCEMIA,clinical,structured,Glucose 300; POC glucose 261; HbA1c 9.1,POC_GLUCOSE_DAY_OF,GLYCEMIC_PLAN,L1102 | L1110 | L1091
+S078,INSULIN_NO_INSTRUCTION,missing,structured,Insulin glargine with no pre-op instruction,INSULIN_INSTRUCTIONS,INSULIN_DOSE_PLAN,M0138
+S078,OBSTRUCTIVE_SLEEP_APNEA,routine,structured,Obstructive sleep apnea,BRING_CPAP,OSA_PRECAUTIONS,P078
+S078,LATEX_ALLERGY,safety,structured,Latex allergy,LATEX_PRECAUTIONS,,P078
+S079,MISSING:H&P,missing,structured,No H&P in chart,OBTAIN_UPDATED_HP,,
+S079,SGLT2_NO_INSTRUCTION,missing,structured,Empagliflozin with no pre-op instruction,SGLT2_HOLD_INSTRUCTIONS,,M0141
+S080,MISSING:Surgery consent,missing,structured,Surgery consent not signed,OBTAIN_SURGERY_CONSENT,,CO0179
+S080,ELEVATED_CREATININE,clinical,structured,Creatinine 1.95,NOTIFY_RENAL_FUNCTION,RENAL_DOSING_PLAN,L1140
+S080,NOTE_NEW_SYMPTOMS,clinical,note,Reports fever to 101.2 F and productive cough for the past 3 days.,NOTIFY_NEW_SYMPTOMS,EVALUATE_NEW_SYMPTOMS,N076
+S082,MISSING:Crossmatched PRBC (2 units),missing,structured,0 units PRBC crossmatched (2 required),ORDER_CROSSMATCH,CONFIRM_BLOOD_PRODUCTS,B022
+S082,LOW_HEMOGLOBIN,clinical,structured,Hemoglobin 8.7 g/dL,NOTIFY_LOW_HGB,EVALUATE_ANEMIA,L1174
+S082,ELEVATED_INR,clinical,structured,INR 2.1,NOTIFY_ELEVATED_INR,EVALUATE_ELEVATED_INR,L1187
+S082,ABNORMAL_POTASSIUM,clinical,structured,Potassium 5.9,REPEAT_BMP,CORRECT_POTASSIUM,L1178
+S082,HYPERGLYCEMIA,clinical,structured,Glucose 268; POC glucose 254; HbA1c 9.4,POC_GLUCOSE_DAY_OF,GLYCEMIC_PLAN,L1183 | L1194 | L1172
+S082,ANTITHROMBOTIC_NO_PLAN,missing,structured,Warfarin with no pre-op hold instruction,VERIFY_ANTITHROMBOTIC_HOLD,ANTITHROMBOTIC_PLAN,M0154
+S082,NOTE_NEW_SYMPTOMS,clinical,note,"Reports two episodes of chest pressure at rest over the past 3 days, each lasting about 10 minutes and relieved by nitroglycerin.",NOTIFY_NEW_SYMPTOMS,EVALUATE_NEW_SYMPTOMS,N078
+S083,MISSING:Anesthesia consent,missing,structured,Anesthesia consent not signed,NOTIFY_ANESTHESIA_CONSENT,OBTAIN_ANESTHESIA_CONSENT,CO0188
+S083,ELEVATED_CREATININE,clinical,structured,Creatinine 2.39,NOTIFY_RENAL_FUNCTION,RENAL_DOSING_PLAN,L1204
+S083,NOTE_CONSENT_CONFLICT,missing,note,H&P says anesthesia consent signed; consent record says missing,RECONCILE_CONSENT_DOCUMENTATION,,N079
+S084,LOW_HEMOGLOBIN,clinical,structured,Hemoglobin 8.6 g/dL,NOTIFY_LOW_HGB,EVALUATE_ANEMIA,L1217
+S084,ABNORMAL_POTASSIUM,clinical,structured,Potassium 5.8,REPEAT_BMP,CORRECT_POTASSIUM,L1221
+S084,ELEVATED_CREATININE,clinical,structured,Creatinine 2.12,NOTIFY_RENAL_FUNCTION,RENAL_DOSING_PLAN,L1225
+S085,MISSING:Surgery consent,missing,structured,Surgery consent not signed,OBTAIN_SURGERY_CONSENT,,CO0193
+S085,ELEVATED_LFTS,clinical,structured,AST 235; ALT 212; Total bilirubin 3.6,NOTIFY_ELEVATED_LFTS,REVIEW_ELEVATED_LFTS,L1253 | L1254 | L1256
+S085,BLOOD_REFUSAL,clinical,structured,Patient refuses blood products,VERIFY_BLOOD_REFUSAL_FORM,BLOOD_REFUSAL_PLAN,CO0195
+S087,PENDING_CLEARANCE,missing,structured,Cardiology assessment pending (requested 2026-10-29),FOLLOW_UP_CLEARANCE,,C0012
+S087,ABNORMAL_POTASSIUM,critical,structured,Potassium 6.1,REPEAT_BMP,CORRECT_POTASSIUM,L1284
+S087,BLOOD_REFUSAL,clinical,structured,Patient refuses blood products,VERIFY_BLOOD_REFUSAL_FORM,BLOOD_REFUSAL_PLAN,CO0201
+S087,OBSTRUCTIVE_SLEEP_APNEA,routine,structured,Obstructive sleep apnea,BRING_CPAP,OSA_PRECAUTIONS,P087
+S087,MALIGNANT_HYPERTHERMIA_RISK,safety,structured,"Personal history of malignant hyperthermia (2011, treated with dantrolene)",NOTIFY_MH_RISK,MH_PRECAUTIONS,P087
+S088,OUTDATED:H&P,missing,structured,H&P dated 2026-09-05 (69 days before surgery; must be within 30),OBTAIN_UPDATED_HP,,N084
+S088,SGLT2_NO_INSTRUCTION,missing,structured,Empagliflozin with no pre-op instruction,SGLT2_HOLD_INSTRUCTIONS,,M0187
+S089,MISSING:Anesthesia consent,missing,structured,Anesthesia consent not signed,NOTIFY_ANESTHESIA_CONSENT,OBTAIN_ANESTHESIA_CONSENT,CO0206
+S089,LOW_HEMOGLOBIN,clinical,structured,Hemoglobin 7.9 g/dL,NOTIFY_LOW_HGB,EVALUATE_ANEMIA,L1324
+S089,MALIGNANT_HYPERTHERMIA_RISK,safety,structured,"Personal history of malignant hyperthermia (2011, treated with dantrolene)",NOTIFY_MH_RISK,MH_PRECAUTIONS,P089
+S089,NOTE_CONSENT_CONFLICT,missing,note,H&P says anesthesia consent signed; consent record says missing,RECONCILE_CONSENT_DOCUMENTATION,,N085
+S090,MISSING:Blood consent,missing,structured,Blood consent not signed,OBTAIN_BLOOD_CONSENT,,CO0210
+S090,MISSING:Pulmonary function test,missing,structured,No Pulmonary function test in chart,,REQUEST_PFT,
+S090,GLP1_AGONIST,clinical,structured,Semaglutide with no pre-op instruction,VERIFY_GLP1_LAST_DOSE,GLP1_ASPIRATION_REVIEW,M0200
+S090,LATEX_ALLERGY,safety,structured,Latex allergy,LATEX_PRECAUTIONS,,P090
+S092,MISSING:Coagulation panel,missing,structured,Coagulation panel not in chart,DRAW_COAGS,,
+S092,OUTDATED:EKG,missing,structured,EKG dated 2026-09-16 (70 days before surgery; must be within 30),OBTAIN_EKG,,T0070
+S092,ABNORMAL_POTASSIUM,critical,structured,Potassium 2.9,REPEAT_BMP,CORRECT_POTASSIUM,L1391
+S092,ELEVATED_CREATININE,clinical,structured,Creatinine 1.99,NOTIFY_RENAL_FUNCTION,RENAL_DOSING_PLAN,L1395
+S093,ABNORMAL_POTASSIUM,critical,structured,Potassium 3.0,REPEAT_BMP,CORRECT_POTASSIUM,L1409
+S093,LATEX_ALLERGY,safety,structured,Latex allergy,LATEX_PRECAUTIONS,,P093
+S093,NOTE_EXAM_INCOMPLETE,missing,note,H&P has no heart or lung exam,OBTAIN_UPDATED_HP,,N089
+S094,OUTDATED:H&P,missing,structured,H&P dated 2026-09-30 (62 days before surgery; must be within 30),OBTAIN_UPDATED_HP,,N090
+S094,OUTDATED:EKG,missing,structured,EKG dated 2026-10-01 (61 days before surgery; must be within 30),OBTAIN_EKG,,T0075
+S094,POSITIVE_ANTIBODY_SCREEN,clinical,structured,Antibody screen positive,CONTACT_BLOOD_BANK,ANTIBODY_BLOOD_BANK,B034
+S094,METFORMIN_NO_INSTRUCTION,missing,structured,Metformin with no pre-op instruction,METFORMIN_HOLD_INSTRUCTIONS,,M0226
+S095,MISSING:Crossmatched PRBC (2 units),missing,structured,0 units PRBC crossmatched (2 required),ORDER_CROSSMATCH,CONFIRM_BLOOD_PRODUCTS,B035
+S095,MISSING:Pulmonary assessment,missing,structured,Pulmonary assessment not requested/completed,,REQUEST_PULMONARY_CLEARANCE,
+S095,NOTE_ALLERGY_CONFLICT,missing,note,H&P says NKDA; allergy list says Penicillin (hives),RECONCILE_ALLERGIES,,N091 | P095
+S096,ELEVATED_CREATININE,clinical,structured,Creatinine 2.03,NOTIFY_RENAL_FUNCTION,RENAL_DOSING_PLAN,L1481
+S097,MISSING:HbA1c,missing,structured,HbA1c not in chart,DRAW_HBA1C,,
+S097,OUTDATED:EKG,missing,structured,EKG dated 2026-09-28 (49 days before surgery; must be within 30),OBTAIN_EKG,,T0082
+S097,MISSING:Chest X-ray,missing,structured,No Chest X-ray in chart,OBTAIN_CHEST_XRAY,,
+S097,ELEVATED_CREATININE,clinical,structured,Creatinine 1.83,NOTIFY_RENAL_FUNCTION,RENAL_DOSING_PLAN,L1503
+S097,MALIGNANT_HYPERTHERMIA_RISK,safety,structured,"Personal history of malignant hyperthermia (2011, treated with dantrolene)",NOTIFY_MH_RISK,MH_PRECAUTIONS,P097
+S097,LATEX_ALLERGY,safety,structured,Latex allergy,LATEX_PRECAUTIONS,,P097
+S098,METFORMIN_NO_INSTRUCTION,missing,structured,Metformin with no pre-op instruction,METFORMIN_HOLD_INSTRUCTIONS,,M0255
+S099,ELEVATED_CREATININE,clinical,structured,Creatinine 1.72,NOTIFY_RENAL_FUNCTION,RENAL_DOSING_PLAN,L1548
+S099,SEVERE_OBSTRUCTION,clinical,structured,FEV1 37% predicted,,REVIEW_SEVERE_LUNG_DISEASE,T0088
+S099,NOTE_EXAM_INCOMPLETE,missing,note,H&P has no heart or lung exam,OBTAIN_UPDATED_HP,,N095
+S100,GLP1_AGONIST,clinical,structured,Semaglutide with no pre-op instruction,VERIFY_GLP1_LAST_DOSE,GLP1_ASPIRATION_REVIEW,M0269

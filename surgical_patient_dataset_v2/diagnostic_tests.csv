@@ -1,0 +1,91 @@
+test_id,surgery_id,patient_id,test_type,test_date,result_value,result_unit,interpretation,compared_to_prior,status
+T0001,S002,P002,EKG,2026-11-02,,,New left bundle branch block,New finding,Final
+T0002,S002,P002,Pulmonary function test,2026-07-25,68,% predicted FEV1,"FEV1 68% predicted, FEV1/FVC 0.61; moderate obstruction",No prior,Final
+T0003,S003,P003,Pulmonary function test,2026-06-20,58,% predicted FEV1,"FEV1 58% predicted, FEV1/FVC 0.61; moderate obstruction",No prior,Final
+T0004,S004,P004,EKG,2026-11-07,,,"Atrial fibrillation, controlled ventricular rate (78 bpm)",No change,Final
+T0005,S007,P007,EKG,2026-11-06,,,"Atrial fibrillation, controlled ventricular rate (78 bpm)",No change,Final
+T0006,S009,P009,EKG,2026-10-28,,,"Atrial fibrillation, controlled ventricular rate (78 bpm)",No change,Final
+T0007,S009,P009,Pulmonary function test,2026-09-08,56,% predicted FEV1,"FEV1 56% predicted, FEV1/FVC 0.57; moderate obstruction",No prior,Final
+T0008,S010,P010,EKG,2026-10-23,,,"Sinus rhythm, 68 bpm; normal axis",No prior,Final
+T0009,S010,P010,Pulmonary function test,2026-07-12,64,% predicted FEV1,"FEV1 64% predicted, FEV1/FVC 0.60; moderate obstruction",No prior,Final
+T0010,S011,P011,EKG,2026-10-29,,,"Atrial fibrillation, controlled ventricular rate (78 bpm)",No change,Final
+T0011,S012,P012,EKG,2026-07-04,,,"Sinus rhythm, 68 bpm; normal axis",No prior,Final
+T0012,S014,P014,EKG,2026-11-09,,,"Atrial fibrillation, controlled ventricular rate (78 bpm)",No change,Final
+T0013,S017,P017,EKG,2026-11-27,,,"Sinus rhythm, 68 bpm; normal axis",No change,Final
+T0014,S019,P019,EKG,2026-11-03,,,"Normal sinus rhythm, 74 bpm",No prior,Final
+T0015,S020,P020,EKG,2026-10-28,,,"Sinus rhythm, 68 bpm; normal axis",No prior,Final
+T0016,S022,P022,EKG,2026-11-09,,,"Atrial fibrillation, controlled ventricular rate (78 bpm)",No change,Final
+T0017,S024,P024,EKG,2026-11-19,,,"Sinus bradycardia, 56 bpm; otherwise normal",No prior,Final
+T0018,S026,P026,EKG,2026-10-22,,,"Sinus rhythm, 68 bpm; normal axis",No prior,Final
+T0019,S027,P027,EKG,2026-11-07,,,"Normal sinus rhythm, 74 bpm",No change,Final
+T0020,S028,P028,EKG,2026-11-10,,,"Atrial fibrillation, controlled ventricular rate (78 bpm)",No change,Final
+T0021,S029,P029,EKG,2026-10-26,,,"Normal sinus rhythm, 74 bpm",No prior,Final
+T0022,S032,P032,EKG,2026-07-27,,,"Atrial fibrillation, controlled ventricular rate (78 bpm)",No change,Final
+T0023,S036,P036,EKG,2026-11-10,,,"Sinus rhythm, 68 bpm; normal axis",No change,Final
+T0024,S038,P038,EKG,2026-10-26,,,"Sinus bradycardia, 56 bpm; otherwise normal",No change,Final
+T0025,S041,P041,EKG,2026-11-19,,,"Atrial fibrillation, controlled ventricular rate (78 bpm)",No change,Final
+T0026,S046,P046,EKG,2026-10-28,,,"Normal sinus rhythm, 74 bpm",No change,Final
+T0027,S048,P048,EKG,2026-11-09,,,"Sinus bradycardia, 56 bpm; otherwise normal",No prior,Final
+T0028,S051,P051,EKG,2026-11-26,,,"Sinus bradycardia, 56 bpm; otherwise normal",No change,Final
+T0029,S055,P055,EKG,2026-11-15,,,"Normal sinus rhythm, 74 bpm",No change,Final
+T0030,S055,P055,Pulmonary function test,2026-06-20,74,% predicted FEV1,"FEV1 74% predicted, FEV1/FVC 0.62; moderate obstruction",No prior,Final
+T0031,S056,P056,EKG,2026-11-04,,,"Normal sinus rhythm, 74 bpm",No change,Final
+T0032,S058,P058,EKG,2026-11-13,,,"Sinus rhythm, 68 bpm; normal axis",No prior,Final
+T0033,S059,P059,EKG,2026-11-21,,,"Normal sinus rhythm, 74 bpm",No change,Final
+T0034,S062,P062,EKG,2026-10-31,,,"Sinus bradycardia, 56 bpm; otherwise normal",No prior,Final
+T0035,S063,P063,EKG,2026-11-01,,,"Sinus rhythm, 68 bpm; normal axis",No change,Final
+T0036,S066,P066,EKG,2026-11-14,,,"Normal sinus rhythm, 74 bpm",No change,Final
+T0037,S067,P067,EKG,2026-11-24,,,"Sinus bradycardia, 56 bpm; otherwise normal",No prior,Final
+T0038,S067,P067,Pulmonary function test,2026-10-01,62,% predicted FEV1,"FEV1 62% predicted, FEV1/FVC 0.65; moderate obstruction",No prior,Final
+T0039,S069,P069,EKG,2026-11-30,,,"Normal sinus rhythm, 74 bpm",No change,Final
+T0040,S070,P070,EKG,2026-10-21,,,"Sinus rhythm, 68 bpm; normal axis",No prior,Final
+T0041,S071,P071,EKG,2026-10-23,,,"Sinus bradycardia, 56 bpm; otherwise normal",No change,Final
+T0042,S073,P073,EKG,2026-05-26,,,"Atrial fibrillation, controlled ventricular rate (78 bpm)",No change,Final
+T0043,S074,P074,EKG,2026-11-19,,,"Atrial fibrillation, controlled ventricular rate (78 bpm)",No change,Final
+T0044,S075,P075,EKG,2026-11-08,,,"Sinus rhythm, 68 bpm; normal axis",No prior,Final
+T0045,S076,P076,EKG,2026-11-15,,,"Atrial fibrillation, controlled ventricular rate (78 bpm)",No change,Final
+T0046,S078,P078,EKG,2026-10-25,,,"Normal sinus rhythm, 74 bpm",No change,Final
+T0047,S081,P081,EKG,2026-11-03,,,"Sinus rhythm, 72 bpm; Q waves in II, III, aVF consistent with old inferior infarct",No change,Final
+T0048,S081,P081,Echocardiogram,2026-09-22,52,% EF,"LVEF 52%; normal LV size, mild inferior hypokinesis",No prior,Final
+T0049,S082,P082,EKG,2026-11-20,,,"Atrial fibrillation, controlled ventricular rate (78 bpm)",No change,Final
+T0050,S082,P082,Echocardiogram,2026-10-06,52,% EF,"LVEF 52%; normal LV size, mild inferior hypokinesis",No prior,Final
+T0051,S083,P083,EKG,2026-11-13,,,"Sinus rhythm, 72 bpm; Q waves in II, III, aVF consistent with old inferior infarct",No change,Final
+T0052,S083,P083,Echocardiogram,2026-10-09,51,% EF,"LVEF 51%; normal LV size, mild inferior hypokinesis",No prior,Final
+T0053,S084,P084,EKG,2026-11-12,,,"Sinus rhythm, 72 bpm; Q waves in II, III, aVF consistent with old inferior infarct",No change,Final
+T0054,S084,P084,Echocardiogram,2026-11-06,56,% EF,"LVEF 56%; normal LV size, mild inferior hypokinesis",No prior,Final
+T0055,S085,P085,EKG,2026-11-24,,,"Sinus rhythm, 72 bpm; Q waves in II, III, aVF consistent with old inferior infarct",No change,Final
+T0056,S085,P085,Echocardiogram,2026-11-06,51,% EF,"LVEF 51%; normal LV size, mild inferior hypokinesis",No prior,Final
+T0057,S086,P086,EKG,2026-11-21,,,"Sinus rhythm, 72 bpm; Q waves in II, III, aVF consistent with old inferior infarct",No change,Final
+T0058,S086,P086,Echocardiogram,2026-10-19,58,% EF,"LVEF 58%; normal LV size, mild inferior hypokinesis",No prior,Final
+T0059,S087,P087,EKG,2026-10-21,,,"Sinus rhythm, 72 bpm; Q waves in II, III, aVF consistent with old inferior infarct",No change,Final
+T0060,S087,P087,Echocardiogram,2026-09-28,55,% EF,"LVEF 55%; normal LV size, mild inferior hypokinesis",No prior,Final
+T0061,S088,P088,EKG,2026-10-28,,,"Sinus rhythm, 72 bpm; Q waves in II, III, aVF consistent with old inferior infarct",No change,Final
+T0062,S088,P088,Echocardiogram,2026-08-28,51,% EF,"LVEF 51%; normal LV size, mild inferior hypokinesis",No prior,Final
+T0063,S089,P089,EKG,2026-11-05,,,"Sinus rhythm, 72 bpm; Q waves in II, III, aVF consistent with old inferior infarct",No change,Final
+T0064,S089,P089,Echocardiogram,2026-10-19,54,% EF,"LVEF 54%; normal LV size, mild inferior hypokinesis",No prior,Final
+T0065,S090,P090,EKG,2026-11-03,,,"Sinus rhythm, 72 bpm; Q waves in II, III, aVF consistent with old inferior infarct",No change,Final
+T0066,S090,P090,Echocardiogram,2026-10-12,53,% EF,"LVEF 53%; normal LV size, mild inferior hypokinesis",No prior,Final
+T0067,S091,P091,EKG,2026-11-18,,,"Sinus rhythm, 72 bpm; Q waves in II, III, aVF consistent with old inferior infarct",No change,Final
+T0068,S091,P091,Echocardiogram,2026-09-17,51,% EF,"LVEF 51%; normal LV size, mild inferior hypokinesis",No prior,Final
+T0069,S091,P091,Pulmonary function test,2026-10-30,58,% predicted FEV1,"FEV1 58% predicted, FEV1/FVC 0.66; moderate obstruction",No prior,Final
+T0070,S092,P092,EKG,2026-09-16,,,"Sinus rhythm, 72 bpm; Q waves in II, III, aVF consistent with old inferior infarct",No change,Final
+T0071,S092,P092,Echocardiogram,2026-09-17,54,% EF,"LVEF 54%; normal LV size, mild inferior hypokinesis",No prior,Final
+T0072,S093,P093,EKG,2026-11-22,,,"Sinus rhythm, 72 bpm; Q waves in II, III, aVF consistent with old inferior infarct",No change,Final
+T0073,S093,P093,Echocardiogram,2026-09-12,58,% EF,"LVEF 58%; normal LV size, mild inferior hypokinesis",No prior,Final
+T0074,S093,P093,Pulmonary function test,2026-08-21,63,% predicted FEV1,"FEV1 63% predicted, FEV1/FVC 0.56; moderate obstruction",No prior,Final
+T0075,S094,P094,EKG,2026-10-01,,,"Sinus rhythm, 72 bpm; Q waves in II, III, aVF consistent with old inferior infarct",No change,Final
+T0076,S094,P094,Echocardiogram,2026-11-01,58,% EF,"LVEF 58%; normal LV size, mild inferior hypokinesis",No prior,Final
+T0077,S095,P095,EKG,2026-11-27,,,"Sinus rhythm, 72 bpm; Q waves in II, III, aVF consistent with old inferior infarct",No change,Final
+T0078,S095,P095,Echocardiogram,2026-09-05,58,% EF,"LVEF 58%; normal LV size, mild inferior hypokinesis",No prior,Final
+T0079,S095,P095,Pulmonary function test,2026-06-13,68,% predicted FEV1,"FEV1 68% predicted, FEV1/FVC 0.58; moderate obstruction",No prior,Final
+T0080,S096,P096,EKG,2026-10-30,,,"Sinus rhythm, 72 bpm; Q waves in II, III, aVF consistent with old inferior infarct",No change,Final
+T0081,S096,P096,Echocardiogram,2026-10-27,51,% EF,"LVEF 51%; normal LV size, mild inferior hypokinesis",No prior,Final
+T0082,S097,P097,EKG,2026-09-28,,,"Sinus rhythm, 72 bpm; Q waves in II, III, aVF consistent with old inferior infarct",No change,Final
+T0083,S097,P097,Echocardiogram,2026-08-21,55,% EF,"LVEF 55%; normal LV size, mild inferior hypokinesis",No prior,Final
+T0084,S098,P098,EKG,2026-11-06,,,"Sinus rhythm, 72 bpm; Q waves in II, III, aVF consistent with old inferior infarct",No change,Final
+T0085,S098,P098,Echocardiogram,2026-08-27,51,% EF,"LVEF 51%; normal LV size, mild inferior hypokinesis",No prior,Final
+T0086,S099,P099,EKG,2026-11-15,,,"Sinus rhythm, 72 bpm; Q waves in II, III, aVF consistent with old inferior infarct",No change,Final
+T0087,S099,P099,Echocardiogram,2026-10-12,55,% EF,"LVEF 55%; normal LV size, mild inferior hypokinesis",No prior,Final
+T0088,S099,P099,Pulmonary function test,2026-07-13,37,% predicted FEV1,"FEV1 37% predicted, FEV1/FVC 0.64; severe obstruction",No prior,Final
+T0089,S100,P100,EKG,2026-11-16,,,"Sinus rhythm, 72 bpm; Q waves in II, III, aVF consistent with old inferior infarct",No change,Final
+T0090,S100,P100,Echocardiogram,2026-11-11,59,% EF,"LVEF 59%; normal LV size, mild inferior hypokinesis",No prior,Final

@@ -1,0 +1,101 @@
+surgery_id,patient_id,procedure,split,injected_scenarios,expected_status,expected_findings,expected_nurse_actions,expected_anesthesia_actions,note_only_findings
+S001,P001,Laparoscopic Cholecystectomy,dev,none,Ready,,,,
+S002,P002,Laparoscopic Cholecystectomy,dev,note_allergy_conflict | new_ekg_abn,Needs clinical review,NEW_EKG_ABNORMALITY | NOTE_ALLERGY_CONFLICT,NOTIFY_EKG_ABNORMALITY | RECONCILE_ALLERGIES,EVALUATE_EKG_ABNORMALITY,NOTE_ALLERGY_CONFLICT
+S003,P003,Laparoscopic Cholecystectomy,dev,consent_conflict | missing_pulm_clearance,Outstanding items,MISSING:Anesthesia consent | MISSING:Pulmonary assessment | OBSTRUCTIVE_SLEEP_APNEA | LATEX_ALLERGY | NOTE_CONSENT_CONFLICT,NOTIFY_ANESTHESIA_CONSENT | BRING_CPAP | LATEX_PRECAUTIONS | RECONCILE_CONSENT_DOCUMENTATION,OBTAIN_ANESTHESIA_CONSENT | REQUEST_PULMONARY_CLEARANCE | OSA_PRECAUTIONS,NOTE_CONSENT_CONFLICT
+S004,P004,Laparoscopic Cholecystectomy,dev,difficult_airway | missing_surgery_consent,Outstanding items,MISSING:Surgery consent | DIFFICULT_AIRWAY | LATEX_ALLERGY,OBTAIN_SURGERY_CONSENT | LATEX_PRECAUTIONS,DIFFICULT_AIRWAY_PLAN,
+S005,P005,Laparoscopic Cholecystectomy,dev,low_na | difficult_airway | missing_surgery_consent,Needs clinical review,MISSING:Surgery consent | ABNORMAL_SODIUM | DIFFICULT_AIRWAY,OBTAIN_SURGERY_CONSENT | REPEAT_BMP,EVALUATE_SODIUM | DIFFICULT_AIRWAY_PLAN,
+S006,P006,Laparoscopic Cholecystectomy,test,none,Ready,,,,
+S007,P007,Laparoscopic Cholecystectomy,dev,elevated_inr | note_exam_missing,Needs clinical review,ELEVATED_INR | NOTE_EXAM_INCOMPLETE,NOTIFY_ELEVATED_INR | OBTAIN_UPDATED_HP,EVALUATE_ELEVATED_INR,NOTE_EXAM_INCOMPLETE
+S008,P008,Laparoscopic Cholecystectomy,test,note_allergy_conflict,Outstanding items,NOTE_ALLERGY_CONFLICT,RECONCILE_ALLERGIES,,NOTE_ALLERGY_CONFLICT
+S009,P009,Laparoscopic Cholecystectomy,dev,elevated_inr,Needs clinical review,ELEVATED_INR | ELEVATED_CREATININE | LATEX_ALLERGY,NOTIFY_ELEVATED_INR | NOTIFY_RENAL_FUNCTION | LATEX_PRECAUTIONS,EVALUATE_ELEVATED_INR | RENAL_DOSING_PLAN,
+S010,P010,Laparoscopic Cholecystectomy,dev,med_instruction_missing | missing_pulm_clearance,Outstanding items,MISSING:Pulmonary assessment | METFORMIN_NO_INSTRUCTION | PONV_HISTORY,METFORMIN_HOLD_INSTRUCTIONS,REQUEST_PULMONARY_CLEARANCE | PONV_PROPHYLAXIS,
+S011,P011,Laparoscopic Cholecystectomy,dev,none,Ready,,,,
+S012,P012,Laparoscopic Cholecystectomy,dev,outdated_ekg | note_mh_family,Outstanding items,OUTDATED:EKG | LATEX_ALLERGY | NOTE_MH_FAMILY_HISTORY,OBTAIN_EKG | LATEX_PRECAUTIONS | NOTIFY_MH_RISK,MH_PRECAUTIONS,NOTE_MH_FAMILY_HISTORY
+S013,P013,Laparoscopic Cholecystectomy,dev,mh_history,Ready,OBSTRUCTIVE_SLEEP_APNEA | MALIGNANT_HYPERTHERMIA_RISK,BRING_CPAP | NOTIFY_MH_RISK,OSA_PRECAUTIONS | MH_PRECAUTIONS,
+S014,P014,Laparoscopic Cholecystectomy,test,missing_lab,Outstanding items,MISSING:CBC,DRAW_CBC,,
+S015,P015,Laparoscopic Cholecystectomy,dev,difficult_airway | med_instruction_missing,Outstanding items,SGLT2_NO_INSTRUCTION | DIFFICULT_AIRWAY,SGLT2_HOLD_INSTRUCTIONS,DIFFICULT_AIRWAY_PLAN,
+S016,P016,Laparoscopic Cholecystectomy,dev,none,Ready,,,,
+S017,P017,Laparoscopic Cholecystectomy,dev,consent_conflict,Outstanding items,MISSING:Anesthesia consent | OBSTRUCTIVE_SLEEP_APNEA | NOTE_CONSENT_CONFLICT,NOTIFY_ANESTHESIA_CONSENT | BRING_CPAP | RECONCILE_CONSENT_DOCUMENTATION,OBTAIN_ANESTHESIA_CONSENT | OSA_PRECAUTIONS,NOTE_CONSENT_CONFLICT
+S018,P018,Laparoscopic Cholecystectomy,dev,note_new_symptoms,Needs clinical review,OBSTRUCTIVE_SLEEP_APNEA | NOTE_NEW_SYMPTOMS,BRING_CPAP | NOTIFY_NEW_SYMPTOMS,OSA_PRECAUTIONS | EVALUATE_NEW_SYMPTOMS,NOTE_NEW_SYMPTOMS
+S019,P019,Laparoscopic Cholecystectomy,test,low_na,Needs clinical review,ABNORMAL_SODIUM,REPEAT_BMP,EVALUATE_SODIUM,
+S020,P020,Laparoscopic Cholecystectomy,dev,hp_missing | missing_lab,Outstanding items,MISSING:H&P | MISSING:CBC,OBTAIN_UPDATED_HP | DRAW_CBC,,
+S021,P021,Radical Mastectomy,dev,none,Ready,,,,
+S022,P022,Radical Mastectomy,dev,note_antithrombotic_conflict | antibody_pos,Needs clinical review,POSITIVE_ANTIBODY_SCREEN | NOTE_ANTITHROMBOTIC_CONFLICT,CONTACT_BLOOD_BANK | VERIFY_ANTITHROMBOTIC_HOLD,ANTIBODY_BLOOD_BANK | ANTITHROMBOTIC_PLAN,NOTE_ANTITHROMBOTIC_CONFLICT
+S023,P023,Radical Mastectomy,dev,antithrombotic_no_plan,Outstanding items,ANTITHROMBOTIC_NO_PLAN,VERIFY_ANTITHROMBOTIC_HOLD,ANTITHROMBOTIC_PLAN,
+S024,P024,Radical Mastectomy,dev,hp_outdated | antithrombotic_no_plan,Outstanding items,OUTDATED:H&P | ANTITHROMBOTIC_NO_PLAN,OBTAIN_UPDATED_HP | VERIFY_ANTITHROMBOTIC_HOLD,ANTITHROMBOTIC_PLAN,
+S025,P025,Radical Mastectomy,dev,note_new_symptoms | missing_pulm_clearance | missing_blood_consent,Needs clinical review,MISSING:Blood consent | MISSING:Pulmonary assessment | NOTE_NEW_SYMPTOMS,OBTAIN_BLOOD_CONSENT | NOTIFY_NEW_SYMPTOMS,REQUEST_PULMONARY_CLEARANCE | EVALUATE_NEW_SYMPTOMS,NOTE_NEW_SYMPTOMS
+S026,P026,Radical Mastectomy,test,none,Ready,LATEX_ALLERGY,LATEX_PRECAUTIONS,,
+S027,P027,Radical Mastectomy,dev,note_allergy_conflict | missing_hba1c,Outstanding items,MISSING:HbA1c | NOTE_ALLERGY_CONFLICT,DRAW_HBA1C | RECONCILE_ALLERGIES,,NOTE_ALLERGY_CONFLICT
+S028,P028,Radical Mastectomy,test,high_glucose | note_antithrombotic_conflict,Needs clinical review,HYPERGLYCEMIA | NOTE_ANTITHROMBOTIC_CONFLICT,POC_GLUCOSE_DAY_OF | VERIFY_ANTITHROMBOTIC_HOLD,GLYCEMIC_PLAN | ANTITHROMBOTIC_PLAN,NOTE_ANTITHROMBOTIC_CONFLICT
+S029,P029,Radical Mastectomy,dev,missing_hba1c | glp1 | antibody_pos,Needs clinical review,MISSING:HbA1c | POSITIVE_ANTIBODY_SCREEN | GLP1_AGONIST | LATEX_ALLERGY,DRAW_HBA1C | CONTACT_BLOOD_BANK | VERIFY_GLP1_LAST_DOSE | LATEX_PRECAUTIONS,ANTIBODY_BLOOD_BANK | GLP1_ASPIRATION_REVIEW,
+S030,P030,Radical Mastectomy,dev,missing_pulm_clearance | missing_hcg | missing_anesthesia_consent,Outstanding items,MISSING:Anesthesia consent | MISSING:Pregnancy test | MISSING:Pulmonary assessment | OBSTRUCTIVE_SLEEP_APNEA,NOTIFY_ANESTHESIA_CONSENT | DRAW_PREGNANCY_TEST | BRING_CPAP,OBTAIN_ANESTHESIA_CONSENT | REQUEST_PULMONARY_CLEARANCE | OSA_PRECAUTIONS,
+S031,P031,Radical Mastectomy,dev,none,Ready,,,,
+S032,P032,Radical Mastectomy,dev,note_antithrombotic_conflict | outdated_ekg,Outstanding items,OUTDATED:EKG | PONV_HISTORY | NOTE_ANTITHROMBOTIC_CONFLICT,OBTAIN_EKG | VERIFY_ANTITHROMBOTIC_HOLD,PONV_PROPHYLAXIS | ANTITHROMBOTIC_PLAN,NOTE_ANTITHROMBOTIC_CONFLICT
+S033,P033,Radical Mastectomy,dev,missing_ekg | note_antithrombotic_conflict | high_k,Needs clinical review,MISSING:EKG | ABNORMAL_POTASSIUM | NOTE_ANTITHROMBOTIC_CONFLICT,OBTAIN_EKG | REPEAT_BMP | VERIFY_ANTITHROMBOTIC_HOLD,CORRECT_POTASSIUM | ANTITHROMBOTIC_PLAN,NOTE_ANTITHROMBOTIC_CONFLICT
+S034,P034,Radical Mastectomy,test,missing_pulm_clearance,Outstanding items,MISSING:Pulmonary assessment | OBSTRUCTIVE_SLEEP_APNEA,BRING_CPAP,REQUEST_PULMONARY_CLEARANCE | OSA_PRECAUTIONS,
+S035,P035,Radical Mastectomy,dev,blood_refusal | note_mh_family | glp1,Needs clinical review,BLOOD_REFUSAL | GLP1_AGONIST | NOTE_MH_FAMILY_HISTORY,VERIFY_BLOOD_REFUSAL_FORM | VERIFY_GLP1_LAST_DOSE | NOTIFY_MH_RISK,BLOOD_REFUSAL_PLAN | GLP1_ASPIRATION_REVIEW | MH_PRECAUTIONS,NOTE_MH_FAMILY_HISTORY
+S036,P036,Radical Mastectomy,dev,none,Ready,,,,
+S037,P037,Radical Mastectomy,dev,high_k,Recommend hold,ABNORMAL_POTASSIUM | ELEVATED_CREATININE,REPEAT_BMP | NOTIFY_RENAL_FUNCTION,CORRECT_POTASSIUM | RENAL_DOSING_PLAN,
+S038,P038,Radical Mastectomy,dev,glp1,Needs clinical review,GLP1_AGONIST | PONV_HISTORY,VERIFY_GLP1_LAST_DOSE,GLP1_ASPIRATION_REVIEW | PONV_PROPHYLAXIS,
+S039,P039,Radical Mastectomy,test,blood_refusal | expired_ts,Needs clinical review,OUTDATED:Type and screen | BLOOD_REFUSAL,DRAW_TYPE_AND_SCREEN | VERIFY_BLOOD_REFUSAL_FORM,BLOOD_REFUSAL_PLAN,
+S040,P040,Radical Mastectomy,dev,missing_blood_consent,Outstanding items,MISSING:Blood consent,OBTAIN_BLOOD_CONSENT,,
+S041,P041,Knee Arthroscopy,dev,none,Ready,,,,
+S042,P042,Knee Arthroscopy,dev,missing_surgery_consent,Outstanding items,MISSING:Surgery consent,OBTAIN_SURGERY_CONSENT,,
+S043,P043,Knee Arthroscopy,dev,mh_history,Ready,MALIGNANT_HYPERTHERMIA_RISK,NOTIFY_MH_RISK,MH_PRECAUTIONS,
+S044,P044,Knee Arthroscopy,dev,positive_hcg | antithrombotic_no_plan,Recommend hold,POSITIVE_PREGNANCY | ANTITHROMBOTIC_NO_PLAN,NOTIFY_POSITIVE_PREGNANCY | VERIFY_ANTITHROMBOTIC_HOLD,REVIEW_POSITIVE_PREGNANCY | ANTITHROMBOTIC_PLAN,
+S045,P045,Knee Arthroscopy,dev,note_antithrombotic_conflict | missing_ekg,Outstanding items,MISSING:EKG | NOTE_ANTITHROMBOTIC_CONFLICT,OBTAIN_EKG | VERIFY_ANTITHROMBOTIC_HOLD,ANTITHROMBOTIC_PLAN,NOTE_ANTITHROMBOTIC_CONFLICT
+S046,P046,Knee Arthroscopy,test,none,Ready,,,,
+S047,P047,Knee Arthroscopy,dev,hp_outdated | missing_hba1c,Outstanding items,OUTDATED:H&P | MISSING:HbA1c,OBTAIN_UPDATED_HP | DRAW_HBA1C,,
+S048,P048,Knee Arthroscopy,test,mh_history,Ready,MALIGNANT_HYPERTHERMIA_RISK,NOTIFY_MH_RISK,MH_PRECAUTIONS,
+S049,P049,Knee Arthroscopy,dev,hp_missing | mh_history | med_instruction_missing,Outstanding items,MISSING:H&P | METFORMIN_NO_INSTRUCTION | MALIGNANT_HYPERTHERMIA_RISK,OBTAIN_UPDATED_HP | METFORMIN_HOLD_INSTRUCTIONS | NOTIFY_MH_RISK,MH_PRECAUTIONS,
+S050,P050,Knee Arthroscopy,dev,med_instruction_missing,Outstanding items,METFORMIN_NO_INSTRUCTION,METFORMIN_HOLD_INSTRUCTIONS,,
+S051,P051,Knee Arthroscopy,dev,none,Ready,,,,
+S052,P052,Knee Arthroscopy,dev,missing_anesthesia_consent | hp_missing,Outstanding items,MISSING:Anesthesia consent | MISSING:H&P | PONV_HISTORY,NOTIFY_ANESTHESIA_CONSENT | OBTAIN_UPDATED_HP,OBTAIN_ANESTHESIA_CONSENT | PONV_PROPHYLAXIS,
+S053,P053,Knee Arthroscopy,dev,mh_history | antithrombotic_no_plan,Outstanding items,ANTITHROMBOTIC_NO_PLAN | MALIGNANT_HYPERTHERMIA_RISK | LATEX_ALLERGY,VERIFY_ANTITHROMBOTIC_HOLD | NOTIFY_MH_RISK | LATEX_PRECAUTIONS,ANTITHROMBOTIC_PLAN | MH_PRECAUTIONS,
+S054,P054,Knee Arthroscopy,test,note_mh_family,Ready,NOTE_MH_FAMILY_HISTORY,NOTIFY_MH_RISK,MH_PRECAUTIONS,NOTE_MH_FAMILY_HISTORY
+S055,P055,Knee Arthroscopy,dev,glp1,Needs clinical review,GLP1_AGONIST,VERIFY_GLP1_LAST_DOSE,GLP1_ASPIRATION_REVIEW,
+S056,P056,Knee Arthroscopy,dev,none,Ready,,,,
+S057,P057,Knee Arthroscopy,dev,high_glucose,Needs clinical review,HYPERGLYCEMIA,POC_GLUCOSE_DAY_OF,GLYCEMIC_PLAN,
+S058,P058,Knee Arthroscopy,dev,missing_anesthesia_consent,Outstanding items,MISSING:Anesthesia consent,NOTIFY_ANESTHESIA_CONSENT,OBTAIN_ANESTHESIA_CONSENT,
+S059,P059,Knee Arthroscopy,test,note_new_symptoms,Needs clinical review,PONV_HISTORY | NOTE_NEW_SYMPTOMS,NOTIFY_NEW_SYMPTOMS,PONV_PROPHYLAXIS | EVALUATE_NEW_SYMPTOMS,NOTE_NEW_SYMPTOMS
+S060,P060,Knee Arthroscopy,dev,high_glucose | note_allergy_conflict,Needs clinical review,HYPERGLYCEMIA | NOTE_ALLERGY_CONFLICT,POC_GLUCOSE_DAY_OF | RECONCILE_ALLERGIES,GLYCEMIC_PLAN,NOTE_ALLERGY_CONFLICT
+S061,P061,Ureteroscopy with Stent Placement,dev,none,Ready,,,,
+S062,P062,Ureteroscopy with Stent Placement,dev,note_new_symptoms | glp1,Needs clinical review,ELEVATED_CREATININE | GLP1_AGONIST | NOTE_NEW_SYMPTOMS,NOTIFY_RENAL_FUNCTION | VERIFY_GLP1_LAST_DOSE | NOTIFY_NEW_SYMPTOMS,RENAL_DOSING_PLAN | GLP1_ASPIRATION_REVIEW | EVALUATE_NEW_SYMPTOMS,NOTE_NEW_SYMPTOMS
+S063,P063,Ureteroscopy with Stent Placement,dev,missing_surgery_consent,Outstanding items,MISSING:Surgery consent,OBTAIN_SURGERY_CONSENT,,
+S064,P064,Ureteroscopy with Stent Placement,dev,consent_conflict,Needs clinical review,MISSING:Anesthesia consent | ELEVATED_CREATININE | OBSTRUCTIVE_SLEEP_APNEA | NOTE_CONSENT_CONFLICT,NOTIFY_ANESTHESIA_CONSENT | NOTIFY_RENAL_FUNCTION | BRING_CPAP | RECONCILE_CONSENT_DOCUMENTATION,OBTAIN_ANESTHESIA_CONSENT | RENAL_DOSING_PLAN | OSA_PRECAUTIONS,NOTE_CONSENT_CONFLICT
+S065,P065,Ureteroscopy with Stent Placement,dev,note_exam_missing,Outstanding items,NOTE_EXAM_INCOMPLETE,OBTAIN_UPDATED_HP,,NOTE_EXAM_INCOMPLETE
+S066,P066,Ureteroscopy with Stent Placement,test,none,Needs clinical review,ELEVATED_CREATININE,NOTIFY_RENAL_FUNCTION,RENAL_DOSING_PLAN,
+S067,P067,Ureteroscopy with Stent Placement,dev,med_instruction_missing | missing_hba1c,Outstanding items,MISSING:HbA1c | METFORMIN_NO_INSTRUCTION,DRAW_HBA1C | METFORMIN_HOLD_INSTRUCTIONS,,
+S068,P068,Ureteroscopy with Stent Placement,test,missing_lab,Needs clinical review,MISSING:Urinalysis | ELEVATED_CREATININE,DRAW_UA | NOTIFY_RENAL_FUNCTION,RENAL_DOSING_PLAN,
+S069,P069,Ureteroscopy with Stent Placement,dev,missing_lab,Needs clinical review,MISSING:CBC | ELEVATED_CREATININE,DRAW_CBC | NOTIFY_RENAL_FUNCTION,RENAL_DOSING_PLAN,
+S070,P070,Ureteroscopy with Stent Placement,dev,outdated_lab | high_cr,Needs clinical review,OUTDATED:Urinalysis | ELEVATED_CREATININE,DRAW_UA | NOTIFY_RENAL_FUNCTION,RENAL_DOSING_PLAN,
+S071,P071,Ureteroscopy with Stent Placement,dev,none,Ready,,,,
+S072,P072,Ureteroscopy with Stent Placement,dev,missing_anesthesia_consent,Outstanding items,MISSING:Anesthesia consent | OBSTRUCTIVE_SLEEP_APNEA,NOTIFY_ANESTHESIA_CONSENT | BRING_CPAP,OBTAIN_ANESTHESIA_CONSENT | OSA_PRECAUTIONS,
+S073,P073,Ureteroscopy with Stent Placement,dev,outdated_ekg,Outstanding items,OUTDATED:EKG,OBTAIN_EKG,,
+S074,P074,Ureteroscopy with Stent Placement,test,antithrombotic_no_plan | missing_hba1c | difficult_airway,Needs clinical review,MISSING:HbA1c | ELEVATED_CREATININE | ANTITHROMBOTIC_NO_PLAN | DIFFICULT_AIRWAY,DRAW_HBA1C | NOTIFY_RENAL_FUNCTION | VERIFY_ANTITHROMBOTIC_HOLD,RENAL_DOSING_PLAN | ANTITHROMBOTIC_PLAN | DIFFICULT_AIRWAY_PLAN,
+S075,P075,Ureteroscopy with Stent Placement,dev,high_glucose | missing_hba1c,Needs clinical review,MISSING:HbA1c | HYPERGLYCEMIA,DRAW_HBA1C | POC_GLUCOSE_DAY_OF,GLYCEMIC_PLAN,
+S076,P076,Ureteroscopy with Stent Placement,dev,none,Needs clinical review,ELEVATED_CREATININE | LATEX_ALLERGY,NOTIFY_RENAL_FUNCTION | LATEX_PRECAUTIONS,RENAL_DOSING_PLAN,
+S077,P077,Ureteroscopy with Stent Placement,dev,note_allergy_conflict,Outstanding items,PONV_HISTORY | NOTE_ALLERGY_CONFLICT,RECONCILE_ALLERGIES,PONV_PROPHYLAXIS,NOTE_ALLERGY_CONFLICT
+S078,P078,Ureteroscopy with Stent Placement,dev,high_glucose | med_instruction_missing,Needs clinical review,HYPERGLYCEMIA | INSULIN_NO_INSTRUCTION | OBSTRUCTIVE_SLEEP_APNEA | LATEX_ALLERGY,POC_GLUCOSE_DAY_OF | INSULIN_INSTRUCTIONS | BRING_CPAP | LATEX_PRECAUTIONS,GLYCEMIC_PLAN | INSULIN_DOSE_PLAN | OSA_PRECAUTIONS,
+S079,P079,Ureteroscopy with Stent Placement,test,med_instruction_missing | hp_missing,Outstanding items,MISSING:H&P | SGLT2_NO_INSTRUCTION,OBTAIN_UPDATED_HP | SGLT2_HOLD_INSTRUCTIONS,,
+S080,P080,Ureteroscopy with Stent Placement,dev,note_new_symptoms | missing_surgery_consent,Needs clinical review,MISSING:Surgery consent | ELEVATED_CREATININE | NOTE_NEW_SYMPTOMS,OBTAIN_SURGERY_CONSENT | NOTIFY_RENAL_FUNCTION | NOTIFY_NEW_SYMPTOMS,RENAL_DOSING_PLAN | EVALUATE_NEW_SYMPTOMS,NOTE_NEW_SYMPTOMS
+S081,P081,Coronary Artery Bypass Graft,dev,none,Ready,,,,
+S082,P082,Coronary Artery Bypass Graft,dev,high_k | elevated_inr | antithrombotic_no_plan | low_hgb | high_glucose | no_crossmatch | note_new_symptoms,Needs clinical review,MISSING:Crossmatched PRBC (2 units) | LOW_HEMOGLOBIN | ELEVATED_INR | ABNORMAL_POTASSIUM | HYPERGLYCEMIA | ANTITHROMBOTIC_NO_PLAN | NOTE_NEW_SYMPTOMS,ORDER_CROSSMATCH | NOTIFY_LOW_HGB | NOTIFY_ELEVATED_INR | REPEAT_BMP | POC_GLUCOSE_DAY_OF | VERIFY_ANTITHROMBOTIC_HOLD | NOTIFY_NEW_SYMPTOMS,CONFIRM_BLOOD_PRODUCTS | EVALUATE_ANEMIA | EVALUATE_ELEVATED_INR | CORRECT_POTASSIUM | GLYCEMIC_PLAN | ANTITHROMBOTIC_PLAN | EVALUATE_NEW_SYMPTOMS,NOTE_NEW_SYMPTOMS
+S083,P083,Coronary Artery Bypass Graft,dev,consent_conflict,Needs clinical review,MISSING:Anesthesia consent | ELEVATED_CREATININE | NOTE_CONSENT_CONFLICT,NOTIFY_ANESTHESIA_CONSENT | NOTIFY_RENAL_FUNCTION | RECONCILE_CONSENT_DOCUMENTATION,OBTAIN_ANESTHESIA_CONSENT | RENAL_DOSING_PLAN,NOTE_CONSENT_CONFLICT
+S084,P084,Coronary Artery Bypass Graft,dev,high_k | low_hgb,Needs clinical review,LOW_HEMOGLOBIN | ABNORMAL_POTASSIUM | ELEVATED_CREATININE,NOTIFY_LOW_HGB | REPEAT_BMP | NOTIFY_RENAL_FUNCTION,EVALUATE_ANEMIA | CORRECT_POTASSIUM | RENAL_DOSING_PLAN,
+S085,P085,Coronary Artery Bypass Graft,dev,missing_surgery_consent | high_lft | blood_refusal,Needs clinical review,MISSING:Surgery consent | ELEVATED_LFTS | BLOOD_REFUSAL,OBTAIN_SURGERY_CONSENT | NOTIFY_ELEVATED_LFTS | VERIFY_BLOOD_REFUSAL_FORM,REVIEW_ELEVATED_LFTS | BLOOD_REFUSAL_PLAN,
+S086,P086,Coronary Artery Bypass Graft,test,none,Ready,,,,
+S087,P087,Coronary Artery Bypass Graft,dev,mh_history | pending_cardiology | blood_refusal | high_k,Recommend hold,PENDING_CLEARANCE | ABNORMAL_POTASSIUM | BLOOD_REFUSAL | OBSTRUCTIVE_SLEEP_APNEA | MALIGNANT_HYPERTHERMIA_RISK,FOLLOW_UP_CLEARANCE | REPEAT_BMP | VERIFY_BLOOD_REFUSAL_FORM | BRING_CPAP | NOTIFY_MH_RISK,CORRECT_POTASSIUM | BLOOD_REFUSAL_PLAN | OSA_PRECAUTIONS | MH_PRECAUTIONS,
+S088,P088,Coronary Artery Bypass Graft,test,hp_outdated | med_instruction_missing,Outstanding items,OUTDATED:H&P | SGLT2_NO_INSTRUCTION,OBTAIN_UPDATED_HP | SGLT2_HOLD_INSTRUCTIONS,,
+S089,P089,Coronary Artery Bypass Graft,dev,mh_history | low_hgb | consent_conflict,Needs clinical review,MISSING:Anesthesia consent | LOW_HEMOGLOBIN | MALIGNANT_HYPERTHERMIA_RISK | NOTE_CONSENT_CONFLICT,NOTIFY_ANESTHESIA_CONSENT | NOTIFY_LOW_HGB | NOTIFY_MH_RISK | RECONCILE_CONSENT_DOCUMENTATION,OBTAIN_ANESTHESIA_CONSENT | EVALUATE_ANEMIA | MH_PRECAUTIONS,NOTE_CONSENT_CONFLICT
+S090,P090,Coronary Artery Bypass Graft,dev,missing_blood_consent | missing_pft | glp1,Needs clinical review,MISSING:Blood consent | MISSING:Pulmonary function test | GLP1_AGONIST | LATEX_ALLERGY,OBTAIN_BLOOD_CONSENT | VERIFY_GLP1_LAST_DOSE | LATEX_PRECAUTIONS,REQUEST_PFT | GLP1_ASPIRATION_REVIEW,
+S091,P091,Coronary Artery Bypass Graft,dev,none,Ready,,,,
+S092,P092,Coronary Artery Bypass Graft,dev,missing_lab | low_k | outdated_ekg,Recommend hold,MISSING:Coagulation panel | OUTDATED:EKG | ABNORMAL_POTASSIUM | ELEVATED_CREATININE,DRAW_COAGS | OBTAIN_EKG | REPEAT_BMP | NOTIFY_RENAL_FUNCTION,CORRECT_POTASSIUM | RENAL_DOSING_PLAN,
+S093,P093,Coronary Artery Bypass Graft,dev,note_exam_missing | low_k,Recommend hold,ABNORMAL_POTASSIUM | LATEX_ALLERGY | NOTE_EXAM_INCOMPLETE,REPEAT_BMP | LATEX_PRECAUTIONS | OBTAIN_UPDATED_HP,CORRECT_POTASSIUM,NOTE_EXAM_INCOMPLETE
+S094,P094,Coronary Artery Bypass Graft,test,antibody_pos | med_instruction_missing | hp_outdated | outdated_ekg,Needs clinical review,OUTDATED:H&P | OUTDATED:EKG | POSITIVE_ANTIBODY_SCREEN | METFORMIN_NO_INSTRUCTION,OBTAIN_UPDATED_HP | OBTAIN_EKG | CONTACT_BLOOD_BANK | METFORMIN_HOLD_INSTRUCTIONS,ANTIBODY_BLOOD_BANK,
+S095,P095,Coronary Artery Bypass Graft,dev,note_allergy_conflict | no_crossmatch | missing_pulm_clearance,Outstanding items,MISSING:Crossmatched PRBC (2 units) | MISSING:Pulmonary assessment | NOTE_ALLERGY_CONFLICT,ORDER_CROSSMATCH | RECONCILE_ALLERGIES,CONFIRM_BLOOD_PRODUCTS | REQUEST_PULMONARY_CLEARANCE,NOTE_ALLERGY_CONFLICT
+S096,P096,Coronary Artery Bypass Graft,dev,none,Needs clinical review,ELEVATED_CREATININE,NOTIFY_RENAL_FUNCTION,RENAL_DOSING_PLAN,
+S097,P097,Coronary Artery Bypass Graft,dev,mh_history | missing_hba1c | outdated_ekg | missing_cxr,Needs clinical review,MISSING:HbA1c | OUTDATED:EKG | MISSING:Chest X-ray | ELEVATED_CREATININE | MALIGNANT_HYPERTHERMIA_RISK | LATEX_ALLERGY,DRAW_HBA1C | OBTAIN_EKG | OBTAIN_CHEST_XRAY | NOTIFY_RENAL_FUNCTION | NOTIFY_MH_RISK | LATEX_PRECAUTIONS,RENAL_DOSING_PLAN | MH_PRECAUTIONS,
+S098,P098,Coronary Artery Bypass Graft,dev,med_instruction_missing,Outstanding items,METFORMIN_NO_INSTRUCTION,METFORMIN_HOLD_INSTRUCTIONS,,
+S099,P099,Coronary Artery Bypass Graft,test,low_fev1 | note_exam_missing,Needs clinical review,ELEVATED_CREATININE | SEVERE_OBSTRUCTION | NOTE_EXAM_INCOMPLETE,NOTIFY_RENAL_FUNCTION | OBTAIN_UPDATED_HP,RENAL_DOSING_PLAN | REVIEW_SEVERE_LUNG_DISEASE,NOTE_EXAM_INCOMPLETE
+S100,P100,Coronary Artery Bypass Graft,dev,glp1,Needs clinical review,GLP1_AGONIST,VERIFY_GLP1_LAST_DOSE,GLP1_ASPIRATION_REVIEW,

@@ -1,0 +1,120 @@
+imaging_id,surgery_id,patient_id,imaging_type,imaging_date,report,status
+I001,S001,P001,RUQ ultrasound,2026-10-14,Multiple gallstones; no gallbladder wall thickening or ductal dilation.,Final
+I002,S002,P002,RUQ ultrasound,2026-09-26,Multiple gallstones; no gallbladder wall thickening or ductal dilation.,Final
+I003,S003,P003,RUQ ultrasound,2026-10-08,Multiple gallstones; no gallbladder wall thickening or ductal dilation.,Final
+I004,S004,P004,RUQ ultrasound,2026-09-27,Multiple gallstones; no gallbladder wall thickening or ductal dilation.,Final
+I005,S005,P005,RUQ ultrasound,2026-11-02,Multiple gallstones; no gallbladder wall thickening or ductal dilation.,Final
+I006,S006,P006,RUQ ultrasound,2026-11-10,Multiple gallstones; no gallbladder wall thickening or ductal dilation.,Final
+I007,S007,P007,RUQ ultrasound,2026-10-29,Multiple gallstones; no gallbladder wall thickening or ductal dilation.,Final
+I008,S008,P008,RUQ ultrasound,2026-10-19,Multiple gallstones; no gallbladder wall thickening or ductal dilation.,Final
+I009,S009,P009,RUQ ultrasound,2026-09-17,Multiple gallstones; no gallbladder wall thickening or ductal dilation.,Final
+I010,S010,P010,RUQ ultrasound,2026-10-25,Multiple gallstones; no gallbladder wall thickening or ductal dilation.,Final
+I011,S011,P011,RUQ ultrasound,2026-10-19,Multiple gallstones; no gallbladder wall thickening or ductal dilation.,Final
+I012,S012,P012,RUQ ultrasound,2026-09-27,Multiple gallstones; no gallbladder wall thickening or ductal dilation.,Final
+I013,S013,P013,RUQ ultrasound,2026-10-03,Multiple gallstones; no gallbladder wall thickening or ductal dilation.,Final
+I014,S014,P014,RUQ ultrasound,2026-10-15,Multiple gallstones; no gallbladder wall thickening or ductal dilation.,Final
+I015,S015,P015,RUQ ultrasound,2026-11-03,Multiple gallstones; no gallbladder wall thickening or ductal dilation.,Final
+I016,S016,P016,RUQ ultrasound,2026-10-27,Multiple gallstones; no gallbladder wall thickening or ductal dilation.,Final
+I017,S017,P017,RUQ ultrasound,2026-10-16,Multiple gallstones; no gallbladder wall thickening or ductal dilation.,Final
+I018,S018,P018,RUQ ultrasound,2026-10-26,Multiple gallstones; no gallbladder wall thickening or ductal dilation.,Final
+I019,S019,P019,RUQ ultrasound,2026-10-30,Multiple gallstones; no gallbladder wall thickening or ductal dilation.,Final
+I020,S020,P020,RUQ ultrasound,2026-10-10,Multiple gallstones; no gallbladder wall thickening or ductal dilation.,Final
+I021,S021,P021,Breast MRI,2026-10-11,"2.8 cm enhancing mass, left breast, upper outer quadrant; biopsy-proven invasive ductal carcinoma.",Final
+I022,S022,P022,Breast MRI,2026-09-29,"2.8 cm enhancing mass, left breast, upper outer quadrant; biopsy-proven invasive ductal carcinoma.",Final
+I023,S023,P023,Breast MRI,2026-10-16,"2.8 cm enhancing mass, left breast, upper outer quadrant; biopsy-proven invasive ductal carcinoma.",Final
+I024,S024,P024,Breast MRI,2026-10-21,"2.8 cm enhancing mass, left breast, upper outer quadrant; biopsy-proven invasive ductal carcinoma.",Final
+I025,S025,P025,Breast MRI,2026-10-16,"2.8 cm enhancing mass, left breast, upper outer quadrant; biopsy-proven invasive ductal carcinoma.",Final
+I026,S026,P026,Breast MRI,2026-10-21,"2.8 cm enhancing mass, left breast, upper outer quadrant; biopsy-proven invasive ductal carcinoma.",Final
+I027,S027,P027,Breast MRI,2026-09-29,"2.8 cm enhancing mass, left breast, upper outer quadrant; biopsy-proven invasive ductal carcinoma.",Final
+I028,S028,P028,Breast MRI,2026-10-12,"2.8 cm enhancing mass, left breast, upper outer quadrant; biopsy-proven invasive ductal carcinoma.",Final
+I029,S029,P029,Breast MRI,2026-10-20,"2.8 cm enhancing mass, left breast, upper outer quadrant; biopsy-proven invasive ductal carcinoma.",Final
+I030,S030,P030,Breast MRI,2026-10-25,"2.8 cm enhancing mass, left breast, upper outer quadrant; biopsy-proven invasive ductal carcinoma.",Final
+I031,S031,P031,Breast MRI,2026-09-26,"2.8 cm enhancing mass, left breast, upper outer quadrant; biopsy-proven invasive ductal carcinoma.",Final
+I032,S032,P032,Breast MRI,2026-11-04,"2.8 cm enhancing mass, left breast, upper outer quadrant; biopsy-proven invasive ductal carcinoma.",Final
+I033,S033,P033,Breast MRI,2026-10-09,"2.8 cm enhancing mass, left breast, upper outer quadrant; biopsy-proven invasive ductal carcinoma.",Final
+I034,S034,P034,Breast MRI,2026-10-29,"2.8 cm enhancing mass, left breast, upper outer quadrant; biopsy-proven invasive ductal carcinoma.",Final
+I035,S035,P035,Breast MRI,2026-10-19,"2.8 cm enhancing mass, left breast, upper outer quadrant; biopsy-proven invasive ductal carcinoma.",Final
+I036,S036,P036,Breast MRI,2026-10-04,"2.8 cm enhancing mass, left breast, upper outer quadrant; biopsy-proven invasive ductal carcinoma.",Final
+I037,S037,P037,Breast MRI,2026-10-03,"2.8 cm enhancing mass, left breast, upper outer quadrant; biopsy-proven invasive ductal carcinoma.",Final
+I038,S038,P038,Breast MRI,2026-09-26,"2.8 cm enhancing mass, left breast, upper outer quadrant; biopsy-proven invasive ductal carcinoma.",Final
+I039,S039,P039,Breast MRI,2026-10-28,"2.8 cm enhancing mass, left breast, upper outer quadrant; biopsy-proven invasive ductal carcinoma.",Final
+I040,S040,P040,Breast MRI,2026-10-24,"2.8 cm enhancing mass, left breast, upper outer quadrant; biopsy-proven invasive ductal carcinoma.",Final
+I041,S041,P041,Knee MRI,2026-10-24,Complex tear of the posterior horn of the medial meniscus; no fracture.,Final
+I042,S042,P042,Knee MRI,2026-10-10,Complex tear of the posterior horn of the medial meniscus; no fracture.,Final
+I043,S043,P043,Knee MRI,2026-11-17,Complex tear of the posterior horn of the medial meniscus; no fracture.,Final
+I044,S044,P044,Knee MRI,2026-10-24,Complex tear of the posterior horn of the medial meniscus; no fracture.,Final
+I045,S045,P045,Knee MRI,2026-09-30,Complex tear of the posterior horn of the medial meniscus; no fracture.,Final
+I046,S046,P046,Knee MRI,2026-10-15,Complex tear of the posterior horn of the medial meniscus; no fracture.,Final
+I047,S047,P047,Knee MRI,2026-09-27,Complex tear of the posterior horn of the medial meniscus; no fracture.,Final
+I048,S048,P048,Knee MRI,2026-10-05,Complex tear of the posterior horn of the medial meniscus; no fracture.,Final
+I049,S049,P049,Knee MRI,2026-10-11,Complex tear of the posterior horn of the medial meniscus; no fracture.,Final
+I050,S050,P050,Knee MRI,2026-10-15,Complex tear of the posterior horn of the medial meniscus; no fracture.,Final
+I051,S051,P051,Knee MRI,2026-10-14,Complex tear of the posterior horn of the medial meniscus; no fracture.,Final
+I052,S052,P052,Knee MRI,2026-09-29,Complex tear of the posterior horn of the medial meniscus; no fracture.,Final
+I053,S053,P053,Knee MRI,2026-10-02,Complex tear of the posterior horn of the medial meniscus; no fracture.,Final
+I054,S054,P054,Knee MRI,2026-10-10,Complex tear of the posterior horn of the medial meniscus; no fracture.,Final
+I055,S055,P055,Knee MRI,2026-10-03,Complex tear of the posterior horn of the medial meniscus; no fracture.,Final
+I056,S056,P056,Knee MRI,2026-11-03,Complex tear of the posterior horn of the medial meniscus; no fracture.,Final
+I057,S057,P057,Knee MRI,2026-09-27,Complex tear of the posterior horn of the medial meniscus; no fracture.,Final
+I058,S058,P058,Knee MRI,2026-10-16,Complex tear of the posterior horn of the medial meniscus; no fracture.,Final
+I059,S059,P059,Knee MRI,2026-11-08,Complex tear of the posterior horn of the medial meniscus; no fracture.,Final
+I060,S060,P060,Knee MRI,2026-11-03,Complex tear of the posterior horn of the medial meniscus; no fracture.,Final
+I061,S061,P061,CT abdomen/pelvis,2026-10-21,6 mm proximal ureteral calculus with mild hydronephrosis.,Final
+I062,S062,P062,CT abdomen/pelvis,2026-09-18,6 mm proximal ureteral calculus with mild hydronephrosis.,Final
+I063,S063,P063,CT abdomen/pelvis,2026-10-28,6 mm proximal ureteral calculus with mild hydronephrosis.,Final
+I064,S064,P064,CT abdomen/pelvis,2026-09-25,6 mm proximal ureteral calculus with mild hydronephrosis.,Final
+I065,S065,P065,CT abdomen/pelvis,2026-10-22,6 mm proximal ureteral calculus with mild hydronephrosis.,Final
+I066,S066,P066,CT abdomen/pelvis,2026-10-28,6 mm proximal ureteral calculus with mild hydronephrosis.,Final
+I067,S067,P067,CT abdomen/pelvis,2026-10-16,6 mm proximal ureteral calculus with mild hydronephrosis.,Final
+I068,S068,P068,CT abdomen/pelvis,2026-10-07,6 mm proximal ureteral calculus with mild hydronephrosis.,Final
+I069,S069,P069,CT abdomen/pelvis,2026-11-02,6 mm proximal ureteral calculus with mild hydronephrosis.,Final
+I070,S070,P070,CT abdomen/pelvis,2026-10-05,6 mm proximal ureteral calculus with mild hydronephrosis.,Final
+I071,S071,P071,CT abdomen/pelvis,2026-10-18,6 mm proximal ureteral calculus with mild hydronephrosis.,Final
+I072,S072,P072,CT abdomen/pelvis,2026-09-26,6 mm proximal ureteral calculus with mild hydronephrosis.,Final
+I073,S073,P073,CT abdomen/pelvis,2026-09-25,6 mm proximal ureteral calculus with mild hydronephrosis.,Final
+I074,S074,P074,CT abdomen/pelvis,2026-09-27,6 mm proximal ureteral calculus with mild hydronephrosis.,Final
+I075,S075,P075,CT abdomen/pelvis,2026-10-25,6 mm proximal ureteral calculus with mild hydronephrosis.,Final
+I076,S076,P076,CT abdomen/pelvis,2026-11-06,6 mm proximal ureteral calculus with mild hydronephrosis.,Final
+I077,S077,P077,CT abdomen/pelvis,2026-11-01,6 mm proximal ureteral calculus with mild hydronephrosis.,Final
+I078,S078,P078,CT abdomen/pelvis,2026-10-25,6 mm proximal ureteral calculus with mild hydronephrosis.,Final
+I079,S079,P079,CT abdomen/pelvis,2026-10-02,6 mm proximal ureteral calculus with mild hydronephrosis.,Final
+I080,S080,P080,CT abdomen/pelvis,2026-10-30,6 mm proximal ureteral calculus with mild hydronephrosis.,Final
+I081,S081,P081,Cardiac catheterization,2026-10-15,"Three-vessel coronary artery disease: LAD 90%, circumflex 80%, RCA 75% stenosis.",Final
+I082,S081,P081,Chest X-ray,2026-10-31,No acute cardiopulmonary process.,Final
+I083,S082,P082,Cardiac catheterization,2026-10-22,"Three-vessel coronary artery disease: LAD 90%, circumflex 80%, RCA 75% stenosis.",Final
+I084,S082,P082,Chest X-ray,2026-11-05,No acute cardiopulmonary process.,Final
+I085,S083,P083,Cardiac catheterization,2026-10-16,"Three-vessel coronary artery disease: LAD 90%, circumflex 80%, RCA 75% stenosis.",Final
+I086,S083,P083,Chest X-ray,2026-11-11,No acute cardiopulmonary process.,Final
+I087,S084,P084,Cardiac catheterization,2026-10-11,"Three-vessel coronary artery disease: LAD 90%, circumflex 80%, RCA 75% stenosis.",Final
+I088,S084,P084,Chest X-ray,2026-11-11,No acute cardiopulmonary process.,Final
+I089,S085,P085,Cardiac catheterization,2026-10-09,"Three-vessel coronary artery disease: LAD 90%, circumflex 80%, RCA 75% stenosis.",Final
+I090,S085,P085,Chest X-ray,2026-11-26,No acute cardiopulmonary process.,Final
+I091,S086,P086,Cardiac catheterization,2026-10-17,"Three-vessel coronary artery disease: LAD 90%, circumflex 80%, RCA 75% stenosis.",Final
+I092,S086,P086,Chest X-ray,2026-11-18,No acute cardiopulmonary process.,Final
+I093,S087,P087,Cardiac catheterization,2026-10-17,"Three-vessel coronary artery disease: LAD 90%, circumflex 80%, RCA 75% stenosis.",Final
+I094,S087,P087,Chest X-ray,2026-10-24,No acute cardiopulmonary process.,Final
+I095,S088,P088,Cardiac catheterization,2026-10-29,"Three-vessel coronary artery disease: LAD 90%, circumflex 80%, RCA 75% stenosis.",Final
+I096,S088,P088,Chest X-ray,2026-11-04,No acute cardiopulmonary process.,Final
+I097,S089,P089,Cardiac catheterization,2026-09-24,"Three-vessel coronary artery disease: LAD 90%, circumflex 80%, RCA 75% stenosis.",Final
+I098,S089,P089,Chest X-ray,2026-11-03,No acute cardiopulmonary process.,Final
+I099,S090,P090,Cardiac catheterization,2026-10-10,"Three-vessel coronary artery disease: LAD 90%, circumflex 80%, RCA 75% stenosis.",Final
+I100,S090,P090,Chest X-ray,2026-11-09,No acute cardiopulmonary process. Hyperinflation consistent with COPD.,Final
+I101,S091,P091,Cardiac catheterization,2026-11-05,"Three-vessel coronary artery disease: LAD 90%, circumflex 80%, RCA 75% stenosis.",Final
+I102,S091,P091,Chest X-ray,2026-11-08,No acute cardiopulmonary process. Hyperinflation consistent with COPD.,Final
+I103,S092,P092,Cardiac catheterization,2026-10-24,"Three-vessel coronary artery disease: LAD 90%, circumflex 80%, RCA 75% stenosis.",Final
+I104,S092,P092,Chest X-ray,2026-11-09,No acute cardiopulmonary process.,Final
+I105,S093,P093,Cardiac catheterization,2026-10-15,"Three-vessel coronary artery disease: LAD 90%, circumflex 80%, RCA 75% stenosis.",Final
+I106,S093,P093,Chest X-ray,2026-11-12,No acute cardiopulmonary process. Hyperinflation consistent with COPD.,Final
+I107,S094,P094,Cardiac catheterization,2026-10-15,"Three-vessel coronary artery disease: LAD 90%, circumflex 80%, RCA 75% stenosis.",Final
+I108,S094,P094,Chest X-ray,2026-11-13,No acute cardiopulmonary process.,Final
+I109,S095,P095,Cardiac catheterization,2026-10-16,"Three-vessel coronary artery disease: LAD 90%, circumflex 80%, RCA 75% stenosis.",Final
+I110,S095,P095,Chest X-ray,2026-11-19,No acute cardiopulmonary process. Hyperinflation consistent with COPD.,Final
+I111,S096,P096,Cardiac catheterization,2026-10-07,"Three-vessel coronary artery disease: LAD 90%, circumflex 80%, RCA 75% stenosis.",Final
+I112,S096,P096,Chest X-ray,2026-10-27,No acute cardiopulmonary process.,Final
+I113,S097,P097,Cardiac catheterization,2026-09-18,"Three-vessel coronary artery disease: LAD 90%, circumflex 80%, RCA 75% stenosis.",Final
+I114,S098,P098,Cardiac catheterization,2026-10-31,"Three-vessel coronary artery disease: LAD 90%, circumflex 80%, RCA 75% stenosis.",Final
+I115,S098,P098,Chest X-ray,2026-11-14,No acute cardiopulmonary process.,Final
+I116,S099,P099,Cardiac catheterization,2026-09-29,"Three-vessel coronary artery disease: LAD 90%, circumflex 80%, RCA 75% stenosis.",Final
+I117,S099,P099,Chest X-ray,2026-10-31,No acute cardiopulmonary process. Hyperinflation consistent with COPD.,Final
+I118,S100,P100,Cardiac catheterization,2026-10-04,"Three-vessel coronary artery disease: LAD 90%, circumflex 80%, RCA 75% stenosis.",Final
+I119,S100,P100,Chest X-ray,2026-11-16,No acute cardiopulmonary process.,Final

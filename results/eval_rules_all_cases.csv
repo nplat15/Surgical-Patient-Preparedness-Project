@@ -1,0 +1,201 @@
+surgery_id,procedure,role,expected_status,predicted_status,tp,fp,fn,missed,extra,note_only_expected
+S001,Laparoscopic Cholecystectomy,nurse,Ready,Ready,0,0,0,,,
+S001,Laparoscopic Cholecystectomy,anesthesia,Ready,Ready,0,0,0,,,
+S002,Laparoscopic Cholecystectomy,nurse,Needs clinical review,Needs clinical review,1,0,1,RECONCILE_ALLERGIES,,RECONCILE_ALLERGIES
+S002,Laparoscopic Cholecystectomy,anesthesia,Needs clinical review,Needs clinical review,1,0,0,,,
+S003,Laparoscopic Cholecystectomy,nurse,Outstanding items,Outstanding items,3,0,1,RECONCILE_CONSENT_DOCUMENTATION,,RECONCILE_CONSENT_DOCUMENTATION
+S003,Laparoscopic Cholecystectomy,anesthesia,Outstanding items,Outstanding items,3,0,0,,,
+S004,Laparoscopic Cholecystectomy,nurse,Outstanding items,Outstanding items,2,0,0,,,
+S004,Laparoscopic Cholecystectomy,anesthesia,Outstanding items,Outstanding items,1,0,0,,,
+S005,Laparoscopic Cholecystectomy,nurse,Needs clinical review,Needs clinical review,2,0,0,,,
+S005,Laparoscopic Cholecystectomy,anesthesia,Needs clinical review,Needs clinical review,2,0,0,,,
+S006,Laparoscopic Cholecystectomy,nurse,Ready,Ready,0,0,0,,,
+S006,Laparoscopic Cholecystectomy,anesthesia,Ready,Ready,0,0,0,,,
+S007,Laparoscopic Cholecystectomy,nurse,Needs clinical review,Needs clinical review,1,0,1,OBTAIN_UPDATED_HP,,OBTAIN_UPDATED_HP
+S007,Laparoscopic Cholecystectomy,anesthesia,Needs clinical review,Needs clinical review,1,0,0,,,
+S008,Laparoscopic Cholecystectomy,nurse,Outstanding items,Ready,0,0,1,RECONCILE_ALLERGIES,,RECONCILE_ALLERGIES
+S008,Laparoscopic Cholecystectomy,anesthesia,Outstanding items,Ready,0,0,0,,,
+S009,Laparoscopic Cholecystectomy,nurse,Needs clinical review,Needs clinical review,3,0,0,,,
+S009,Laparoscopic Cholecystectomy,anesthesia,Needs clinical review,Needs clinical review,2,0,0,,,
+S010,Laparoscopic Cholecystectomy,nurse,Outstanding items,Outstanding items,1,0,0,,,
+S010,Laparoscopic Cholecystectomy,anesthesia,Outstanding items,Outstanding items,2,0,0,,,
+S011,Laparoscopic Cholecystectomy,nurse,Ready,Ready,0,0,0,,,
+S011,Laparoscopic Cholecystectomy,anesthesia,Ready,Ready,0,0,0,,,
+S012,Laparoscopic Cholecystectomy,nurse,Outstanding items,Outstanding items,2,0,1,NOTIFY_MH_RISK,,NOTIFY_MH_RISK
+S012,Laparoscopic Cholecystectomy,anesthesia,Outstanding items,Outstanding items,0,0,1,MH_PRECAUTIONS,,MH_PRECAUTIONS
+S013,Laparoscopic Cholecystectomy,nurse,Ready,Ready,2,0,0,,,
+S013,Laparoscopic Cholecystectomy,anesthesia,Ready,Ready,2,0,0,,,
+S014,Laparoscopic Cholecystectomy,nurse,Outstanding items,Outstanding items,1,0,0,,,
+S014,Laparoscopic Cholecystectomy,anesthesia,Outstanding items,Outstanding items,0,0,0,,,
+S015,Laparoscopic Cholecystectomy,nurse,Outstanding items,Outstanding items,1,0,0,,,
+S015,Laparoscopic Cholecystectomy,anesthesia,Outstanding items,Outstanding items,1,0,0,,,
+S016,Laparoscopic Cholecystectomy,nurse,Ready,Ready,0,0,0,,,
+S016,Laparoscopic Cholecystectomy,anesthesia,Ready,Ready,0,0,0,,,
+S017,Laparoscopic Cholecystectomy,nurse,Outstanding items,Outstanding items,2,0,1,RECONCILE_CONSENT_DOCUMENTATION,,RECONCILE_CONSENT_DOCUMENTATION
+S017,Laparoscopic Cholecystectomy,anesthesia,Outstanding items,Outstanding items,2,0,0,,,
+S018,Laparoscopic Cholecystectomy,nurse,Needs clinical review,Ready,1,0,1,NOTIFY_NEW_SYMPTOMS,,NOTIFY_NEW_SYMPTOMS
+S018,Laparoscopic Cholecystectomy,anesthesia,Needs clinical review,Ready,1,0,1,EVALUATE_NEW_SYMPTOMS,,EVALUATE_NEW_SYMPTOMS
+S019,Laparoscopic Cholecystectomy,nurse,Needs clinical review,Needs clinical review,1,0,0,,,
+S019,Laparoscopic Cholecystectomy,anesthesia,Needs clinical review,Needs clinical review,1,0,0,,,
+S020,Laparoscopic Cholecystectomy,nurse,Outstanding items,Outstanding items,2,0,0,,,
+S020,Laparoscopic Cholecystectomy,anesthesia,Outstanding items,Outstanding items,0,0,0,,,
+S021,Radical Mastectomy,nurse,Ready,Ready,0,0,0,,,
+S021,Radical Mastectomy,anesthesia,Ready,Ready,0,0,0,,,
+S022,Radical Mastectomy,nurse,Needs clinical review,Needs clinical review,1,0,1,VERIFY_ANTITHROMBOTIC_HOLD,,VERIFY_ANTITHROMBOTIC_HOLD
+S022,Radical Mastectomy,anesthesia,Needs clinical review,Needs clinical review,1,0,1,ANTITHROMBOTIC_PLAN,,ANTITHROMBOTIC_PLAN
+S023,Radical Mastectomy,nurse,Outstanding items,Outstanding items,1,0,0,,,
+S023,Radical Mastectomy,anesthesia,Outstanding items,Outstanding items,1,0,0,,,
+S024,Radical Mastectomy,nurse,Outstanding items,Outstanding items,2,0,0,,,
+S024,Radical Mastectomy,anesthesia,Outstanding items,Outstanding items,1,0,0,,,
+S025,Radical Mastectomy,nurse,Needs clinical review,Outstanding items,1,0,1,NOTIFY_NEW_SYMPTOMS,,NOTIFY_NEW_SYMPTOMS
+S025,Radical Mastectomy,anesthesia,Needs clinical review,Outstanding items,1,0,1,EVALUATE_NEW_SYMPTOMS,,EVALUATE_NEW_SYMPTOMS
+S026,Radical Mastectomy,nurse,Ready,Ready,1,0,0,,,
+S026,Radical Mastectomy,anesthesia,Ready,Ready,0,0,0,,,
+S027,Radical Mastectomy,nurse,Outstanding items,Outstanding items,1,0,1,RECONCILE_ALLERGIES,,RECONCILE_ALLERGIES
+S027,Radical Mastectomy,anesthesia,Outstanding items,Outstanding items,0,0,0,,,
+S028,Radical Mastectomy,nurse,Needs clinical review,Needs clinical review,1,0,1,VERIFY_ANTITHROMBOTIC_HOLD,,VERIFY_ANTITHROMBOTIC_HOLD
+S028,Radical Mastectomy,anesthesia,Needs clinical review,Needs clinical review,1,0,1,ANTITHROMBOTIC_PLAN,,ANTITHROMBOTIC_PLAN
+S029,Radical Mastectomy,nurse,Needs clinical review,Needs clinical review,4,0,0,,,
+S029,Radical Mastectomy,anesthesia,Needs clinical review,Needs clinical review,2,0,0,,,
+S030,Radical Mastectomy,nurse,Outstanding items,Outstanding items,3,0,0,,,
+S030,Radical Mastectomy,anesthesia,Outstanding items,Outstanding items,3,0,0,,,
+S031,Radical Mastectomy,nurse,Ready,Ready,0,0,0,,,
+S031,Radical Mastectomy,anesthesia,Ready,Ready,0,0,0,,,
+S032,Radical Mastectomy,nurse,Outstanding items,Outstanding items,1,0,1,VERIFY_ANTITHROMBOTIC_HOLD,,VERIFY_ANTITHROMBOTIC_HOLD
+S032,Radical Mastectomy,anesthesia,Outstanding items,Outstanding items,1,0,1,ANTITHROMBOTIC_PLAN,,ANTITHROMBOTIC_PLAN
+S033,Radical Mastectomy,nurse,Needs clinical review,Needs clinical review,2,0,1,VERIFY_ANTITHROMBOTIC_HOLD,,VERIFY_ANTITHROMBOTIC_HOLD
+S033,Radical Mastectomy,anesthesia,Needs clinical review,Needs clinical review,1,0,1,ANTITHROMBOTIC_PLAN,,ANTITHROMBOTIC_PLAN
+S034,Radical Mastectomy,nurse,Outstanding items,Outstanding items,1,0,0,,,
+S034,Radical Mastectomy,anesthesia,Outstanding items,Outstanding items,2,0,0,,,
+S035,Radical Mastectomy,nurse,Needs clinical review,Needs clinical review,2,0,1,NOTIFY_MH_RISK,,NOTIFY_MH_RISK
+S035,Radical Mastectomy,anesthesia,Needs clinical review,Needs clinical review,2,0,1,MH_PRECAUTIONS,,MH_PRECAUTIONS
+S036,Radical Mastectomy,nurse,Ready,Ready,0,0,0,,,
+S036,Radical Mastectomy,anesthesia,Ready,Ready,0,0,0,,,
+S037,Radical Mastectomy,nurse,Recommend hold,Recommend hold,2,0,0,,,
+S037,Radical Mastectomy,anesthesia,Recommend hold,Recommend hold,2,0,0,,,
+S038,Radical Mastectomy,nurse,Needs clinical review,Needs clinical review,1,0,0,,,
+S038,Radical Mastectomy,anesthesia,Needs clinical review,Needs clinical review,2,0,0,,,
+S039,Radical Mastectomy,nurse,Needs clinical review,Needs clinical review,2,0,0,,,
+S039,Radical Mastectomy,anesthesia,Needs clinical review,Needs clinical review,1,0,0,,,
+S040,Radical Mastectomy,nurse,Outstanding items,Outstanding items,1,0,0,,,
+S040,Radical Mastectomy,anesthesia,Outstanding items,Outstanding items,0,0,0,,,
+S041,Knee Arthroscopy,nurse,Ready,Ready,0,0,0,,,
+S041,Knee Arthroscopy,anesthesia,Ready,Ready,0,0,0,,,
+S042,Knee Arthroscopy,nurse,Outstanding items,Outstanding items,1,0,0,,,
+S042,Knee Arthroscopy,anesthesia,Outstanding items,Outstanding items,0,0,0,,,
+S043,Knee Arthroscopy,nurse,Ready,Ready,1,0,0,,,
+S043,Knee Arthroscopy,anesthesia,Ready,Ready,1,0,0,,,
+S044,Knee Arthroscopy,nurse,Recommend hold,Recommend hold,2,0,0,,,
+S044,Knee Arthroscopy,anesthesia,Recommend hold,Recommend hold,2,0,0,,,
+S045,Knee Arthroscopy,nurse,Outstanding items,Outstanding items,1,0,1,VERIFY_ANTITHROMBOTIC_HOLD,,VERIFY_ANTITHROMBOTIC_HOLD
+S045,Knee Arthroscopy,anesthesia,Outstanding items,Outstanding items,0,0,1,ANTITHROMBOTIC_PLAN,,ANTITHROMBOTIC_PLAN
+S046,Knee Arthroscopy,nurse,Ready,Ready,0,0,0,,,
+S046,Knee Arthroscopy,anesthesia,Ready,Ready,0,0,0,,,
+S047,Knee Arthroscopy,nurse,Outstanding items,Outstanding items,2,0,0,,,
+S047,Knee Arthroscopy,anesthesia,Outstanding items,Outstanding items,0,0,0,,,
+S048,Knee Arthroscopy,nurse,Ready,Ready,1,0,0,,,
+S048,Knee Arthroscopy,anesthesia,Ready,Ready,1,0,0,,,
+S049,Knee Arthroscopy,nurse,Outstanding items,Outstanding items,3,0,0,,,
+S049,Knee Arthroscopy,anesthesia,Outstanding items,Outstanding items,1,0,0,,,
+S050,Knee Arthroscopy,nurse,Outstanding items,Outstanding items,1,0,0,,,
+S050,Knee Arthroscopy,anesthesia,Outstanding items,Outstanding items,0,0,0,,,
+S051,Knee Arthroscopy,nurse,Ready,Ready,0,0,0,,,
+S051,Knee Arthroscopy,anesthesia,Ready,Ready,0,0,0,,,
+S052,Knee Arthroscopy,nurse,Outstanding items,Outstanding items,2,0,0,,,
+S052,Knee Arthroscopy,anesthesia,Outstanding items,Outstanding items,2,0,0,,,
+S053,Knee Arthroscopy,nurse,Outstanding items,Outstanding items,3,0,0,,,
+S053,Knee Arthroscopy,anesthesia,Outstanding items,Outstanding items,2,0,0,,,
+S054,Knee Arthroscopy,nurse,Ready,Ready,0,0,1,NOTIFY_MH_RISK,,NOTIFY_MH_RISK
+S054,Knee Arthroscopy,anesthesia,Ready,Ready,0,0,1,MH_PRECAUTIONS,,MH_PRECAUTIONS
+S055,Knee Arthroscopy,nurse,Needs clinical review,Needs clinical review,1,0,0,,,
+S055,Knee Arthroscopy,anesthesia,Needs clinical review,Needs clinical review,1,0,0,,,
+S056,Knee Arthroscopy,nurse,Ready,Ready,0,0,0,,,
+S056,Knee Arthroscopy,anesthesia,Ready,Ready,0,0,0,,,
+S057,Knee Arthroscopy,nurse,Needs clinical review,Needs clinical review,1,0,0,,,
+S057,Knee Arthroscopy,anesthesia,Needs clinical review,Needs clinical review,1,0,0,,,
+S058,Knee Arthroscopy,nurse,Outstanding items,Outstanding items,1,0,0,,,
+S058,Knee Arthroscopy,anesthesia,Outstanding items,Outstanding items,1,0,0,,,
+S059,Knee Arthroscopy,nurse,Needs clinical review,Ready,0,0,1,NOTIFY_NEW_SYMPTOMS,,NOTIFY_NEW_SYMPTOMS
+S059,Knee Arthroscopy,anesthesia,Needs clinical review,Ready,1,0,1,EVALUATE_NEW_SYMPTOMS,,EVALUATE_NEW_SYMPTOMS
+S060,Knee Arthroscopy,nurse,Needs clinical review,Needs clinical review,1,0,1,RECONCILE_ALLERGIES,,RECONCILE_ALLERGIES
+S060,Knee Arthroscopy,anesthesia,Needs clinical review,Needs clinical review,1,0,0,,,
+S061,Ureteroscopy with Stent Placement,nurse,Ready,Ready,0,0,0,,,
+S061,Ureteroscopy with Stent Placement,anesthesia,Ready,Ready,0,0,0,,,
+S062,Ureteroscopy with Stent Placement,nurse,Needs clinical review,Needs clinical review,2,0,1,NOTIFY_NEW_SYMPTOMS,,NOTIFY_NEW_SYMPTOMS
+S062,Ureteroscopy with Stent Placement,anesthesia,Needs clinical review,Needs clinical review,2,0,1,EVALUATE_NEW_SYMPTOMS,,EVALUATE_NEW_SYMPTOMS
+S063,Ureteroscopy with Stent Placement,nurse,Outstanding items,Outstanding items,1,0,0,,,
+S063,Ureteroscopy with Stent Placement,anesthesia,Outstanding items,Outstanding items,0,0,0,,,
+S064,Ureteroscopy with Stent Placement,nurse,Needs clinical review,Needs clinical review,3,0,1,RECONCILE_CONSENT_DOCUMENTATION,,RECONCILE_CONSENT_DOCUMENTATION
+S064,Ureteroscopy with Stent Placement,anesthesia,Needs clinical review,Needs clinical review,3,0,0,,,
+S065,Ureteroscopy with Stent Placement,nurse,Outstanding items,Ready,0,0,1,OBTAIN_UPDATED_HP,,OBTAIN_UPDATED_HP
+S065,Ureteroscopy with Stent Placement,anesthesia,Outstanding items,Ready,0,0,0,,,
+S066,Ureteroscopy with Stent Placement,nurse,Needs clinical review,Needs clinical review,1,0,0,,,
+S066,Ureteroscopy with Stent Placement,anesthesia,Needs clinical review,Needs clinical review,1,0,0,,,
+S067,Ureteroscopy with Stent Placement,nurse,Outstanding items,Outstanding items,2,0,0,,,
+S067,Ureteroscopy with Stent Placement,anesthesia,Outstanding items,Outstanding items,0,0,0,,,
+S068,Ureteroscopy with Stent Placement,nurse,Needs clinical review,Needs clinical review,2,0,0,,,
+S068,Ureteroscopy with Stent Placement,anesthesia,Needs clinical review,Needs clinical review,1,0,0,,,
+S069,Ureteroscopy with Stent Placement,nurse,Needs clinical review,Needs clinical review,2,0,0,,,
+S069,Ureteroscopy with Stent Placement,anesthesia,Needs clinical review,Needs clinical review,1,0,0,,,
+S070,Ureteroscopy with Stent Placement,nurse,Needs clinical review,Needs clinical review,2,0,0,,,
+S070,Ureteroscopy with Stent Placement,anesthesia,Needs clinical review,Needs clinical review,1,0,0,,,
+S071,Ureteroscopy with Stent Placement,nurse,Ready,Ready,0,0,0,,,
+S071,Ureteroscopy with Stent Placement,anesthesia,Ready,Ready,0,0,0,,,
+S072,Ureteroscopy with Stent Placement,nurse,Outstanding items,Outstanding items,2,0,0,,,
+S072,Ureteroscopy with Stent Placement,anesthesia,Outstanding items,Outstanding items,2,0,0,,,
+S073,Ureteroscopy with Stent Placement,nurse,Outstanding items,Outstanding items,1,0,0,,,
+S073,Ureteroscopy with Stent Placement,anesthesia,Outstanding items,Outstanding items,0,0,0,,,
+S074,Ureteroscopy with Stent Placement,nurse,Needs clinical review,Needs clinical review,3,0,0,,,
+S074,Ureteroscopy with Stent Placement,anesthesia,Needs clinical review,Needs clinical review,3,0,0,,,
+S075,Ureteroscopy with Stent Placement,nurse,Needs clinical review,Needs clinical review,2,0,0,,,
+S075,Ureteroscopy with Stent Placement,anesthesia,Needs clinical review,Needs clinical review,1,0,0,,,
+S076,Ureteroscopy with Stent Placement,nurse,Needs clinical review,Needs clinical review,2,0,0,,,
+S076,Ureteroscopy with Stent Placement,anesthesia,Needs clinical review,Needs clinical review,1,0,0,,,
+S077,Ureteroscopy with Stent Placement,nurse,Outstanding items,Ready,0,0,1,RECONCILE_ALLERGIES,,RECONCILE_ALLERGIES
+S077,Ureteroscopy with Stent Placement,anesthesia,Outstanding items,Ready,1,0,0,,,
+S078,Ureteroscopy with Stent Placement,nurse,Needs clinical review,Needs clinical review,4,0,0,,,
+S078,Ureteroscopy with Stent Placement,anesthesia,Needs clinical review,Needs clinical review,3,0,0,,,
+S079,Ureteroscopy with Stent Placement,nurse,Outstanding items,Outstanding items,2,0,0,,,
+S079,Ureteroscopy with Stent Placement,anesthesia,Outstanding items,Outstanding items,0,0,0,,,
+S080,Ureteroscopy with Stent Placement,nurse,Needs clinical review,Needs clinical review,2,0,1,NOTIFY_NEW_SYMPTOMS,,NOTIFY_NEW_SYMPTOMS
+S080,Ureteroscopy with Stent Placement,anesthesia,Needs clinical review,Needs clinical review,1,0,1,EVALUATE_NEW_SYMPTOMS,,EVALUATE_NEW_SYMPTOMS
+S081,Coronary Artery Bypass Graft,nurse,Ready,Ready,0,0,0,,,
+S081,Coronary Artery Bypass Graft,anesthesia,Ready,Ready,0,0,0,,,
+S082,Coronary Artery Bypass Graft,nurse,Needs clinical review,Needs clinical review,6,0,1,NOTIFY_NEW_SYMPTOMS,,NOTIFY_NEW_SYMPTOMS
+S082,Coronary Artery Bypass Graft,anesthesia,Needs clinical review,Needs clinical review,6,0,1,EVALUATE_NEW_SYMPTOMS,,EVALUATE_NEW_SYMPTOMS
+S083,Coronary Artery Bypass Graft,nurse,Needs clinical review,Needs clinical review,2,0,1,RECONCILE_CONSENT_DOCUMENTATION,,RECONCILE_CONSENT_DOCUMENTATION
+S083,Coronary Artery Bypass Graft,anesthesia,Needs clinical review,Needs clinical review,2,0,0,,,
+S084,Coronary Artery Bypass Graft,nurse,Needs clinical review,Needs clinical review,3,0,0,,,
+S084,Coronary Artery Bypass Graft,anesthesia,Needs clinical review,Needs clinical review,3,0,0,,,
+S085,Coronary Artery Bypass Graft,nurse,Needs clinical review,Needs clinical review,3,0,0,,,
+S085,Coronary Artery Bypass Graft,anesthesia,Needs clinical review,Needs clinical review,2,0,0,,,
+S086,Coronary Artery Bypass Graft,nurse,Ready,Ready,0,0,0,,,
+S086,Coronary Artery Bypass Graft,anesthesia,Ready,Ready,0,0,0,,,
+S087,Coronary Artery Bypass Graft,nurse,Recommend hold,Recommend hold,5,0,0,,,
+S087,Coronary Artery Bypass Graft,anesthesia,Recommend hold,Recommend hold,4,0,0,,,
+S088,Coronary Artery Bypass Graft,nurse,Outstanding items,Outstanding items,2,0,0,,,
+S088,Coronary Artery Bypass Graft,anesthesia,Outstanding items,Outstanding items,0,0,0,,,
+S089,Coronary Artery Bypass Graft,nurse,Needs clinical review,Needs clinical review,3,0,1,RECONCILE_CONSENT_DOCUMENTATION,,RECONCILE_CONSENT_DOCUMENTATION
+S089,Coronary Artery Bypass Graft,anesthesia,Needs clinical review,Needs clinical review,3,0,0,,,
+S090,Coronary Artery Bypass Graft,nurse,Needs clinical review,Needs clinical review,3,0,0,,,
+S090,Coronary Artery Bypass Graft,anesthesia,Needs clinical review,Needs clinical review,2,0,0,,,
+S091,Coronary Artery Bypass Graft,nurse,Ready,Ready,0,0,0,,,
+S091,Coronary Artery Bypass Graft,anesthesia,Ready,Ready,0,0,0,,,
+S092,Coronary Artery Bypass Graft,nurse,Recommend hold,Recommend hold,4,0,0,,,
+S092,Coronary Artery Bypass Graft,anesthesia,Recommend hold,Recommend hold,2,0,0,,,
+S093,Coronary Artery Bypass Graft,nurse,Recommend hold,Recommend hold,2,0,1,OBTAIN_UPDATED_HP,,OBTAIN_UPDATED_HP
+S093,Coronary Artery Bypass Graft,anesthesia,Recommend hold,Recommend hold,1,0,0,,,
+S094,Coronary Artery Bypass Graft,nurse,Needs clinical review,Needs clinical review,4,0,0,,,
+S094,Coronary Artery Bypass Graft,anesthesia,Needs clinical review,Needs clinical review,1,0,0,,,
+S095,Coronary Artery Bypass Graft,nurse,Outstanding items,Outstanding items,1,0,1,RECONCILE_ALLERGIES,,RECONCILE_ALLERGIES
+S095,Coronary Artery Bypass Graft,anesthesia,Outstanding items,Outstanding items,2,0,0,,,
+S096,Coronary Artery Bypass Graft,nurse,Needs clinical review,Needs clinical review,1,0,0,,,
+S096,Coronary Artery Bypass Graft,anesthesia,Needs clinical review,Needs clinical review,1,0,0,,,
+S097,Coronary Artery Bypass Graft,nurse,Needs clinical review,Needs clinical review,6,0,0,,,
+S097,Coronary Artery Bypass Graft,anesthesia,Needs clinical review,Needs clinical review,2,0,0,,,
+S098,Coronary Artery Bypass Graft,nurse,Outstanding items,Outstanding items,1,0,0,,,
+S098,Coronary Artery Bypass Graft,anesthesia,Outstanding items,Outstanding items,0,0,0,,,
+S099,Coronary Artery Bypass Graft,nurse,Needs clinical review,Needs clinical review,1,0,1,OBTAIN_UPDATED_HP,,OBTAIN_UPDATED_HP
+S099,Coronary Artery Bypass Graft,anesthesia,Needs clinical review,Needs clinical review,2,0,0,,,
+S100,Coronary Artery Bypass Graft,nurse,Needs clinical review,Needs clinical review,1,0,0,,,
+S100,Coronary Artery Bypass Graft,anesthesia,Needs clinical review,Needs clinical review,1,0,0,,,

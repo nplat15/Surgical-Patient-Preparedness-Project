@@ -1,0 +1,35 @@
+requirement_id,procedure,item_type,item,condition,validity_days,missing_actions,description
+R001,All,consent,Surgery consent,Always,,nurse:OBTAIN_SURGERY_CONSENT,Signed surgical consent
+R002,All,consent,Anesthesia consent,Always,,anesthesia:OBTAIN_ANESTHESIA_CONSENT | nurse:NOTIFY_ANESTHESIA_CONSENT,Signed anesthesia consent
+R003,All,note,H&P,Always,30,nurse:OBTAIN_UPDATED_HP,H&P within 30 days of surgery
+R004,All,lab,Pregnancy test,Female age 18-50,7,nurse:DRAW_PREGNANCY_TEST,Pregnancy test within 7 days for females age 18-50
+R005,All,lab,HbA1c,Patient has diabetes,90,nurse:DRAW_HBA1C,HbA1c within 90 days for patients with diabetes
+R006,All,diagnostic,EKG,Age >= 65 or cardiac history (non-cardiac surgery),90,nurse:OBTAIN_EKG,EKG within 90 days if age >= 65 or cardiac history
+R007,Laparoscopic Cholecystectomy,lab,CBC,Always,30,nurse:DRAW_CBC,CBC within 30 days
+R008,Laparoscopic Cholecystectomy,lab,BMP,Always,30,nurse:DRAW_BMP,BMP within 30 days
+R009,Laparoscopic Cholecystectomy,lab,Liver function tests,Always,30,nurse:DRAW_LFT,Liver function tests within 30 days
+R010,Radical Mastectomy,lab,CBC,Always,30,nurse:DRAW_CBC,CBC within 30 days
+R011,Radical Mastectomy,lab,BMP,Always,30,nurse:DRAW_BMP,BMP within 30 days
+R012,Ureteroscopy with Stent Placement,lab,CBC,Always,30,nurse:DRAW_CBC,CBC within 30 days
+R013,Ureteroscopy with Stent Placement,lab,BMP,Always,30,nurse:DRAW_BMP,BMP within 30 days
+R014,Ureteroscopy with Stent Placement,lab,Urinalysis,Always,30,nurse:DRAW_UA,Urinalysis within 30 days
+R015,Ureteroscopy with Stent Placement,lab,Urine culture,Always,30,nurse:DRAW_URINE_CULTURE,Urine culture within 30 days
+R016,Coronary Artery Bypass Graft,lab,CBC,Always,30,nurse:DRAW_CBC,CBC within 30 days
+R017,Coronary Artery Bypass Graft,lab,BMP,Always,30,nurse:DRAW_BMP,BMP within 30 days
+R018,Coronary Artery Bypass Graft,lab,Coagulation panel,Always,30,nurse:DRAW_COAGS,Coagulation panel within 30 days
+R019,Coronary Artery Bypass Graft,lab,Liver function tests,Always,30,nurse:DRAW_LFT,Liver function tests within 30 days
+R020,Coronary Artery Bypass Graft,lab,Albumin,Always,30,nurse:DRAW_ALBUMIN,Albumin within 30 days
+R021,Knee Arthroscopy,lab,BMP,Age >= 65 or HTN / diabetes / CKD,30,nurse:DRAW_BMP,BMP within 30 days if age >= 65 or HTN/diabetes/CKD
+R022,Radical Mastectomy,blood,Type and screen,Always,,nurse:DRAW_TYPE_AND_SCREEN,Type and screen valid on surgery date
+R023,Radical Mastectomy,consent,Blood consent,Always,,nurse:OBTAIN_BLOOD_CONSENT,Blood consent or documented refusal
+R024,Coronary Artery Bypass Graft,blood,Type and screen,Always,,nurse:DRAW_TYPE_AND_SCREEN,Type and screen valid on surgery date
+R025,Coronary Artery Bypass Graft,consent,Blood consent,Always,,nurse:OBTAIN_BLOOD_CONSENT,Blood consent or documented refusal
+R026,Coronary Artery Bypass Graft,blood,Crossmatched PRBC (2 units),Patient has not refused blood,,nurse:ORDER_CROSSMATCH | anesthesia:CONFIRM_BLOOD_PRODUCTS,2 units PRBC crossmatched unless patient refuses blood
+R027,Coronary Artery Bypass Graft,diagnostic,EKG,Always,30,nurse:OBTAIN_EKG,EKG within 30 days
+R028,Coronary Artery Bypass Graft,diagnostic,Echocardiogram,Always,365,anesthesia:REQUEST_ECHO,Echo within 12 months
+R029,Coronary Artery Bypass Graft,diagnostic,Pulmonary function test,Patient has COPD,365,anesthesia:REQUEST_PFT,PFTs within 12 months if COPD
+R030,Coronary Artery Bypass Graft,imaging,Chest X-ray,Always,30,nurse:OBTAIN_CHEST_XRAY,Chest X-ray within 30 days
+R031,Coronary Artery Bypass Graft,clearance,Cardiology assessment,Always,,anesthesia:REQUEST_CARDIOLOGY_CLEARANCE,Completed cardiology assessment
+R032,Laparoscopic Cholecystectomy,clearance,Pulmonary assessment,Patient has COPD,,anesthesia:REQUEST_PULMONARY_CLEARANCE,Completed pulmonary assessment if COPD
+R033,Radical Mastectomy,clearance,Pulmonary assessment,Patient has COPD,,anesthesia:REQUEST_PULMONARY_CLEARANCE,Completed pulmonary assessment if COPD
+R034,Coronary Artery Bypass Graft,clearance,Pulmonary assessment,Patient has COPD,,anesthesia:REQUEST_PULMONARY_CLEARANCE,Completed pulmonary assessment if COPD
