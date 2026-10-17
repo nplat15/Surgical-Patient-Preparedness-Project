@@ -121,16 +121,16 @@ ACTION_CATALOG = {
     "NOTIFY_NEW_SYMPTOMS": ("nurse", "Notify anesthesia and surgeon of new symptoms reported in the H&P."),
     # --- medications --------------------------------------------------------
     "ANTITHROMBOTIC_PLAN": ("anesthesia", "Blood thinner without a clear hold plan: decide hold/bridge timing with surgeon and prescriber."),
-    "VERIFY_ANTITHROMBOTIC_HOLD": ("nurse", "Call patient to verify blood-thinner hold instructions and last dose; document."),
-    "METFORMIN_HOLD_INSTRUCTIONS": ("nurse", "Give and document metformin hold instructions for day of surgery."),
+    "VERIFY_ANTITHROMBOTIC_HOLD": ("nurse", "Confirm with the patient the date of their last blood-thinner dose and that they followed the hold instructions; notify anesthesia and surgeon if not."),
+    "METFORMIN_HOLD_INSTRUCTIONS": ("nurse", "Confirm the patient held metformin as instructed and document the last dose; notify anesthesia if taken."),
     "INSULIN_DOSE_PLAN": ("anesthesia", "Write pre-op insulin dose adjustment orders."),
-    "INSULIN_INSTRUCTIONS": ("nurse", "Give and document insulin dose instructions for the night before / morning of surgery."),
+    "INSULIN_INSTRUCTIONS": ("nurse", "Confirm the insulin doses the patient took the night before and morning of surgery, check glucose, and notify anesthesia."),
     "GLP1_ASPIRATION_REVIEW": ("anesthesia", "GLP-1 agonist: review aspiration risk and hold timing; adjust fasting/airway plan."),
     "VERIFY_GLP1_LAST_DOSE": ("nurse", "Verify date of last GLP-1 agonist dose and document."),
-    "SGLT2_HOLD_INSTRUCTIONS": ("nurse", "Give and document SGLT2 inhibitor hold instructions (stop before surgery per protocol)."),
+    "SGLT2_HOLD_INSTRUCTIONS": ("nurse", "Confirm the SGLT2 inhibitor was stopped in time before surgery and document the last dose; notify anesthesia if not."),
     # --- history / safety ---------------------------------------------------
     "OSA_PRECAUTIONS": ("anesthesia", "Obstructive sleep apnea: plan OSA precautions (airway, opioid-sparing, post-op monitoring)."),
-    "BRING_CPAP": ("nurse", "Instruct patient to bring CPAP device on day of surgery."),
+    "BRING_CPAP": ("nurse", "Confirm the patient brought their CPAP machine, mask and settings; if not, notify anesthesia and request a hospital CPAP from respiratory therapy."),
     "MH_PRECAUTIONS": ("anesthesia", "Malignant hyperthermia risk: plan trigger-free anesthetic."),
     "NOTIFY_MH_RISK": ("nurse", "Notify OR charge nurse of malignant hyperthermia risk (prepare MH cart / trigger-free machine)."),
     "DIFFICULT_AIRWAY_PLAN": ("anesthesia", "History of difficult airway: prepare difficult airway plan and equipment."),
@@ -164,11 +164,12 @@ def _plan(what, where="anesthesia plan"):
             f"{where[0].upper() + where[1:]} documents how the {what} is handled")
 
 
-def _instruct(what):
-    return ([f"Call the patient and give {what}",
-             "Use teach-back to confirm the patient understands",
-             "Document the instructions given and the patient's response"],
-            "Instructions are documented in the chart")
+def _confirm_hold(drug, who):
+    # Day-of check: the PAT nurse gave the hold instructions days earlier.
+    return ([f"Ask the patient when they took their last dose of {drug}",
+             "Check it matches the hold instructions",
+             f"If it was taken too recently, tell {who} before the patient goes to the OR"],
+            f"Last {drug} dose is documented")
 
 
 ACTION_FOLLOW_UP = {
@@ -265,18 +266,22 @@ ACTION_FOLLOW_UP = {
     "ANTITHROMBOTIC_PLAN": (["Decide hold or bridge timing with the surgeon and prescriber",
                              "Write the hold instructions in the chart",
                              "Ask the nurse to give them to the patient"], "Blood-thinner hold plan is documented"),
-    "VERIFY_ANTITHROMBOTIC_HOLD": (["Call the patient", "Confirm the hold instructions and the date of the last dose",
-                                    "Tell anesthesia if the patient is still taking it"], "Last dose date is documented"),
-    "METFORMIN_HOLD_INSTRUCTIONS": _instruct("metformin hold instructions"),
+    "VERIFY_ANTITHROMBOTIC_HOLD": _confirm_hold("blood thinner", "anesthesia and the surgeon"),
+    "METFORMIN_HOLD_INSTRUCTIONS": _confirm_hold("metformin", "anesthesia"),
     "INSULIN_DOSE_PLAN": (["Write the pre-op insulin dose orders", "Ask the nurse to give them to the patient"],
                           "Insulin orders are in the chart"),
-    "INSULIN_INSTRUCTIONS": _instruct("insulin dose instructions"),
+    "INSULIN_INSTRUCTIONS": (["Ask which insulin doses the patient took the night before and this morning",
+                              "Check a fingerstick glucose",
+                              "Tell anesthesia the doses taken and the glucose result"], "Insulin doses and day-of glucose are documented"),
     "GLP1_ASPIRATION_REVIEW": _plan("GLP-1 medicine and aspiration risk"),
     "VERIFY_GLP1_LAST_DOSE": (["Call the patient", "Confirm the date of the last GLP-1 dose",
                                "Tell anesthesia if it was within the hold window"], "Last dose date is documented"),
-    "SGLT2_HOLD_INSTRUCTIONS": _instruct("SGLT2 inhibitor hold instructions"),
+    "SGLT2_HOLD_INSTRUCTIONS": _confirm_hold("SGLT2 inhibitor", "anesthesia"),
     "OSA_PRECAUTIONS": _plan("sleep apnea"),
-    "BRING_CPAP": _instruct("a reminder to bring their CPAP machine"),
+    "BRING_CPAP": (["Ask whether the patient brought their CPAP machine, mask and tubing",
+                    "Note the machine's pressure settings in the chart",
+                    "If not brought, tell anesthesia and request a hospital CPAP from respiratory therapy"],
+                   "Chart shows the patient's CPAP is with them or a hospital unit is arranged"),
     "MH_PRECAUTIONS": _plan("malignant hyperthermia risk"),
     "NOTIFY_MH_RISK": (["Call the OR charge nurse", "Confirm the MH cart and a trigger-free machine are set up",
                         "Add the risk to the OR huddle"], "OR confirms MH set-up"),

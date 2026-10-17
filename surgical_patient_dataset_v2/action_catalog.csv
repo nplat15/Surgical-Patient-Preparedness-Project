@@ -56,15 +56,15 @@ REVIEW_SEVERE_LUNG_DISEASE,anesthesia,"Severe obstruction on PFTs: plan for pulm
 EVALUATE_NEW_SYMPTOMS,anesthesia,New symptoms documented in the H&P: evaluate before surgery and consider postponing.
 NOTIFY_NEW_SYMPTOMS,nurse,Notify anesthesia and surgeon of new symptoms reported in the H&P.
 ANTITHROMBOTIC_PLAN,anesthesia,Blood thinner without a clear hold plan: decide hold/bridge timing with surgeon and prescriber.
-VERIFY_ANTITHROMBOTIC_HOLD,nurse,Call patient to verify blood-thinner hold instructions and last dose; document.
-METFORMIN_HOLD_INSTRUCTIONS,nurse,Give and document metformin hold instructions for day of surgery.
+VERIFY_ANTITHROMBOTIC_HOLD,nurse,Confirm with the patient the date of their last blood-thinner dose and that they followed the hold instructions; notify anesthesia and surgeon if not.
+METFORMIN_HOLD_INSTRUCTIONS,nurse,Confirm the patient held metformin as instructed and document the last dose; notify anesthesia if taken.
 INSULIN_DOSE_PLAN,anesthesia,Write pre-op insulin dose adjustment orders.
-INSULIN_INSTRUCTIONS,nurse,Give and document insulin dose instructions for the night before / morning of surgery.
+INSULIN_INSTRUCTIONS,nurse,"Confirm the insulin doses the patient took the night before and morning of surgery, check glucose, and notify anesthesia."
 GLP1_ASPIRATION_REVIEW,anesthesia,GLP-1 agonist: review aspiration risk and hold timing; adjust fasting/airway plan.
 VERIFY_GLP1_LAST_DOSE,nurse,Verify date of last GLP-1 agonist dose and document.
-SGLT2_HOLD_INSTRUCTIONS,nurse,Give and document SGLT2 inhibitor hold instructions (stop before surgery per protocol).
+SGLT2_HOLD_INSTRUCTIONS,nurse,Confirm the SGLT2 inhibitor was stopped in time before surgery and document the last dose; notify anesthesia if not.
 OSA_PRECAUTIONS,anesthesia,"Obstructive sleep apnea: plan OSA precautions (airway, opioid-sparing, post-op monitoring)."
-BRING_CPAP,nurse,Instruct patient to bring CPAP device on day of surgery.
+BRING_CPAP,nurse,"Confirm the patient brought their CPAP machine, mask and settings; if not, notify anesthesia and request a hospital CPAP from respiratory therapy."
 MH_PRECAUTIONS,anesthesia,Malignant hyperthermia risk: plan trigger-free anesthetic.
 NOTIFY_MH_RISK,nurse,Notify OR charge nurse of malignant hyperthermia risk (prepare MH cart / trigger-free machine).
 DIFFICULT_AIRWAY_PLAN,anesthesia,History of difficult airway: prepare difficult airway plan and equipment.
