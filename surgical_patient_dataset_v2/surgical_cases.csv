@@ -1,101 +1,101 @@
-surgery_id,patient_id,procedure,surgery_date,surgery_time,surgery_location,surgeon,planned_anesthesia,postoperative_location,case_class,split
-S001,P001,Laparoscopic Cholecystectomy,2026-11-12,12:30,General OR 4,Dr. Synth Alvarez (General Surgery),General,PACU,Elective,dev
-S002,P002,Laparoscopic Cholecystectomy,2026-11-16,09:00,General OR 4,Dr. Synth Alvarez (General Surgery),General,PACU,Elective,dev
-S003,P003,Laparoscopic Cholecystectomy,2026-11-18,14:00,General OR 3,Dr. Synth Alvarez (General Surgery),General,PACU,Elective,dev
-S004,P004,Laparoscopic Cholecystectomy,2026-11-23,09:00,General OR 4,Dr. Synth Alvarez (General Surgery),General,PACU,Elective,dev
-S005,P005,Laparoscopic Cholecystectomy,2026-11-24,07:30,General OR 4,Dr. Synth Alvarez (General Surgery),General,PACU,Elective,dev
-S006,P006,Laparoscopic Cholecystectomy,2026-11-27,07:30,General OR 1,Dr. Synth Alvarez (General Surgery),General,PACU,Elective,test
-S007,P007,Laparoscopic Cholecystectomy,2026-11-30,12:30,General OR 4,Dr. Synth Alvarez (General Surgery),General,PACU,Elective,dev
-S008,P008,Laparoscopic Cholecystectomy,2026-12-03,14:00,General OR 2,Dr. Synth Alvarez (General Surgery),General,PACU,Elective,test
-S009,P009,Laparoscopic Cholecystectomy,2026-11-10,14:00,General OR 1,Dr. Synth Alvarez (General Surgery),General,PACU,Elective,dev
-S010,P010,Laparoscopic Cholecystectomy,2026-11-13,10:45,General OR 2,Dr. Synth Alvarez (General Surgery),General,PACU,Elective,dev
-S011,P011,Laparoscopic Cholecystectomy,2026-11-16,12:30,General OR 2,Dr. Synth Alvarez (General Surgery),General,PACU,Elective,dev
-S012,P012,Laparoscopic Cholecystectomy,2026-11-19,10:45,General OR 1,Dr. Synth Alvarez (General Surgery),General,PACU,Elective,dev
-S013,P013,Laparoscopic Cholecystectomy,2026-11-23,14:00,General OR 1,Dr. Synth Alvarez (General Surgery),General,PACU,Elective,dev
-S014,P014,Laparoscopic Cholecystectomy,2026-11-25,09:00,General OR 3,Dr. Synth Alvarez (General Surgery),General,PACU,Elective,test
-S015,P015,Laparoscopic Cholecystectomy,2026-11-30,09:00,General OR 2,Dr. Synth Alvarez (General Surgery),General,PACU,Elective,dev
-S016,P016,Laparoscopic Cholecystectomy,2026-12-01,09:00,General OR 4,Dr. Synth Alvarez (General Surgery),General,PACU,Elective,dev
-S017,P017,Laparoscopic Cholecystectomy,2026-12-04,07:30,General OR 4,Dr. Synth Alvarez (General Surgery),General,PACU,Elective,dev
-S018,P018,Laparoscopic Cholecystectomy,2026-11-11,10:45,General OR 2,Dr. Synth Alvarez (General Surgery),General,PACU,Elective,dev
-S019,P019,Laparoscopic Cholecystectomy,2026-11-16,14:00,General OR 1,Dr. Synth Alvarez (General Surgery),General,PACU,Elective,test
-S020,P020,Laparoscopic Cholecystectomy,2026-11-17,12:30,General OR 2,Dr. Synth Alvarez (General Surgery),General,PACU,Elective,dev
-S021,P021,Radical Mastectomy,2026-11-20,12:30,Oncology OR 2,Dr. Synth Morrow (Surgical Oncology),General,Surgical ward,Elective,dev
-S022,P022,Radical Mastectomy,2026-11-23,10:45,Oncology OR 2,Dr. Synth Morrow (Surgical Oncology),General,Surgical ward,Elective,dev
-S023,P023,Radical Mastectomy,2026-11-26,10:45,Oncology OR 4,Dr. Synth Morrow (Surgical Oncology),General,Surgical ward,Elective,dev
-S024,P024,Radical Mastectomy,2026-11-30,14:00,Oncology OR 4,Dr. Synth Morrow (Surgical Oncology),General,Surgical ward,Elective,dev
-S025,P025,Radical Mastectomy,2026-12-02,14:00,Oncology OR 2,Dr. Synth Morrow (Surgical Oncology),General,Surgical ward,Elective,dev
-S026,P026,Radical Mastectomy,2026-11-09,10:45,Oncology OR 4,Dr. Synth Morrow (Surgical Oncology),General,Surgical ward,Elective,test
-S027,P027,Radical Mastectomy,2026-11-12,10:45,Oncology OR 2,Dr. Synth Morrow (Surgical Oncology),General,Surgical ward,Elective,dev
-S028,P028,Radical Mastectomy,2026-11-16,07:30,Oncology OR 4,Dr. Synth Morrow (Surgical Oncology),General,Surgical ward,Elective,test
-S029,P029,Radical Mastectomy,2026-11-18,07:30,Oncology OR 1,Dr. Synth Morrow (Surgical Oncology),General,Surgical ward,Elective,dev
-S030,P030,Radical Mastectomy,2026-11-23,14:00,Oncology OR 1,Dr. Synth Morrow (Surgical Oncology),General,Surgical ward,Elective,dev
-S031,P031,Radical Mastectomy,2026-11-24,14:00,Oncology OR 1,Dr. Synth Morrow (Surgical Oncology),General,Surgical ward,Elective,dev
-S032,P032,Radical Mastectomy,2026-11-27,10:45,Oncology OR 3,Dr. Synth Morrow (Surgical Oncology),General,Surgical ward,Elective,dev
-S033,P033,Radical Mastectomy,2026-11-30,09:00,Oncology OR 1,Dr. Synth Morrow (Surgical Oncology),General,Surgical ward,Elective,dev
-S034,P034,Radical Mastectomy,2026-12-03,12:30,Oncology OR 1,Dr. Synth Morrow (Surgical Oncology),General,Surgical ward,Elective,test
-S035,P035,Radical Mastectomy,2026-11-10,09:00,Oncology OR 4,Dr. Synth Morrow (Surgical Oncology),General,Surgical ward,Elective,dev
-S036,P036,Radical Mastectomy,2026-11-13,09:00,Oncology OR 3,Dr. Synth Morrow (Surgical Oncology),General,Surgical ward,Elective,dev
-S037,P037,Radical Mastectomy,2026-11-16,12:30,Oncology OR 4,Dr. Synth Morrow (Surgical Oncology),General,Surgical ward,Elective,dev
-S038,P038,Radical Mastectomy,2026-11-19,10:45,Oncology OR 2,Dr. Synth Morrow (Surgical Oncology),General,Surgical ward,Elective,dev
-S039,P039,Radical Mastectomy,2026-11-23,10:45,Oncology OR 3,Dr. Synth Morrow (Surgical Oncology),General,Surgical ward,Elective,test
-S040,P040,Radical Mastectomy,2026-11-25,12:30,Oncology OR 4,Dr. Synth Morrow (Surgical Oncology),General,Surgical ward,Elective,dev
-S041,P041,Knee Arthroscopy,2026-11-30,09:00,Ambulatory OR 2,Dr. Synth Patel (Orthopedics),General or spinal,PACU,Elective,dev
-S042,P042,Knee Arthroscopy,2026-12-01,12:30,Ambulatory OR 1,Dr. Synth Patel (Orthopedics),General or spinal,PACU,Elective,dev
-S043,P043,Knee Arthroscopy,2026-12-04,14:00,Ambulatory OR 3,Dr. Synth Patel (Orthopedics),General or spinal,PACU,Elective,dev
-S044,P044,Knee Arthroscopy,2026-11-11,07:30,Ambulatory OR 4,Dr. Synth Patel (Orthopedics),General or spinal,PACU,Elective,dev
-S045,P045,Knee Arthroscopy,2026-11-16,14:00,Ambulatory OR 3,Dr. Synth Patel (Orthopedics),General or spinal,PACU,Elective,dev
-S046,P046,Knee Arthroscopy,2026-11-17,14:00,Ambulatory OR 3,Dr. Synth Patel (Orthopedics),General or spinal,PACU,Elective,test
-S047,P047,Knee Arthroscopy,2026-11-20,12:30,Ambulatory OR 4,Dr. Synth Patel (Orthopedics),General or spinal,PACU,Elective,dev
-S048,P048,Knee Arthroscopy,2026-11-23,12:30,Ambulatory OR 3,Dr. Synth Patel (Orthopedics),General or spinal,PACU,Elective,test
-S049,P049,Knee Arthroscopy,2026-11-26,12:30,Ambulatory OR 4,Dr. Synth Patel (Orthopedics),General or spinal,PACU,Elective,dev
-S050,P050,Knee Arthroscopy,2026-11-30,09:00,Ambulatory OR 4,Dr. Synth Patel (Orthopedics),General or spinal,PACU,Elective,dev
-S051,P051,Knee Arthroscopy,2026-12-02,14:00,Ambulatory OR 1,Dr. Synth Patel (Orthopedics),General or spinal,PACU,Elective,dev
-S052,P052,Knee Arthroscopy,2026-11-09,07:30,Ambulatory OR 4,Dr. Synth Patel (Orthopedics),General or spinal,PACU,Elective,dev
-S053,P053,Knee Arthroscopy,2026-11-12,07:30,Ambulatory OR 3,Dr. Synth Patel (Orthopedics),General or spinal,PACU,Elective,dev
-S054,P054,Knee Arthroscopy,2026-11-16,14:00,Ambulatory OR 1,Dr. Synth Patel (Orthopedics),General or spinal,PACU,Elective,test
-S055,P055,Knee Arthroscopy,2026-11-18,14:00,Ambulatory OR 3,Dr. Synth Patel (Orthopedics),General or spinal,PACU,Elective,dev
-S056,P056,Knee Arthroscopy,2026-11-23,07:30,Ambulatory OR 2,Dr. Synth Patel (Orthopedics),General or spinal,PACU,Elective,dev
-S057,P057,Knee Arthroscopy,2026-11-24,14:00,Ambulatory OR 4,Dr. Synth Patel (Orthopedics),General or spinal,PACU,Elective,dev
-S058,P058,Knee Arthroscopy,2026-11-27,10:45,Ambulatory OR 4,Dr. Synth Patel (Orthopedics),General or spinal,PACU,Elective,dev
-S059,P059,Knee Arthroscopy,2026-11-30,12:30,Ambulatory OR 2,Dr. Synth Patel (Orthopedics),General or spinal,PACU,Elective,test
-S060,P060,Knee Arthroscopy,2026-12-03,12:30,Ambulatory OR 2,Dr. Synth Patel (Orthopedics),General or spinal,PACU,Elective,dev
-S061,P061,Ureteroscopy with Stent Placement,2026-11-10,12:30,Urology OR 1,Dr. Synth Greene (Urology),General,PACU,Elective,dev
-S062,P062,Ureteroscopy with Stent Placement,2026-11-13,10:45,Urology OR 1,Dr. Synth Greene (Urology),General,PACU,Elective,dev
-S063,P063,Ureteroscopy with Stent Placement,2026-11-16,09:00,Urology OR 2,Dr. Synth Greene (Urology),General,PACU,Elective,dev
-S064,P064,Ureteroscopy with Stent Placement,2026-11-19,09:00,Urology OR 1,Dr. Synth Greene (Urology),General,PACU,Elective,dev
-S065,P065,Ureteroscopy with Stent Placement,2026-11-23,09:00,Urology OR 2,Dr. Synth Greene (Urology),General,PACU,Elective,dev
-S066,P066,Ureteroscopy with Stent Placement,2026-11-25,09:00,Urology OR 3,Dr. Synth Greene (Urology),General,PACU,Elective,test
-S067,P067,Ureteroscopy with Stent Placement,2026-11-30,09:00,Urology OR 3,Dr. Synth Greene (Urology),General,PACU,Elective,dev
-S068,P068,Ureteroscopy with Stent Placement,2026-12-01,14:00,Urology OR 1,Dr. Synth Greene (Urology),General,PACU,Elective,test
-S069,P069,Ureteroscopy with Stent Placement,2026-12-04,14:00,Urology OR 2,Dr. Synth Greene (Urology),General,PACU,Elective,dev
-S070,P070,Ureteroscopy with Stent Placement,2026-11-11,10:45,Urology OR 2,Dr. Synth Greene (Urology),General,PACU,Elective,dev
-S071,P071,Ureteroscopy with Stent Placement,2026-11-16,12:30,Urology OR 3,Dr. Synth Greene (Urology),General,PACU,Elective,dev
-S072,P072,Ureteroscopy with Stent Placement,2026-11-17,09:00,Urology OR 3,Dr. Synth Greene (Urology),General,PACU,Elective,dev
-S073,P073,Ureteroscopy with Stent Placement,2026-11-20,10:45,Urology OR 2,Dr. Synth Greene (Urology),General,PACU,Elective,dev
-S074,P074,Ureteroscopy with Stent Placement,2026-11-23,07:30,Urology OR 3,Dr. Synth Greene (Urology),General,PACU,Elective,test
-S075,P075,Ureteroscopy with Stent Placement,2026-11-26,10:45,Urology OR 3,Dr. Synth Greene (Urology),General,PACU,Elective,dev
-S076,P076,Ureteroscopy with Stent Placement,2026-11-30,14:00,Urology OR 2,Dr. Synth Greene (Urology),General,PACU,Elective,dev
-S077,P077,Ureteroscopy with Stent Placement,2026-12-02,07:30,Urology OR 2,Dr. Synth Greene (Urology),General,PACU,Elective,dev
-S078,P078,Ureteroscopy with Stent Placement,2026-11-09,09:00,Urology OR 3,Dr. Synth Greene (Urology),General,PACU,Elective,dev
-S079,P079,Ureteroscopy with Stent Placement,2026-11-12,14:00,Urology OR 1,Dr. Synth Greene (Urology),General,PACU,Elective,test
-S080,P080,Ureteroscopy with Stent Placement,2026-11-16,12:30,Urology OR 1,Dr. Synth Greene (Urology),General,PACU,Elective,dev
-S081,P081,Coronary Artery Bypass Graft,2026-11-18,09:00,Cardiac OR 3,Dr. Synth Okonkwo (Cardiothoracic),General,Cardiac ICU,Elective,dev
-S082,P082,Coronary Artery Bypass Graft,2026-11-23,12:30,Cardiac OR 2,Dr. Synth Okonkwo (Cardiothoracic),General,Cardiac ICU,Elective,dev
-S083,P083,Coronary Artery Bypass Graft,2026-11-24,09:00,Cardiac OR 1,Dr. Synth Okonkwo (Cardiothoracic),General,Cardiac ICU,Elective,dev
-S084,P084,Coronary Artery Bypass Graft,2026-11-27,12:30,Cardiac OR 3,Dr. Synth Okonkwo (Cardiothoracic),General,Cardiac ICU,Elective,dev
-S085,P085,Coronary Artery Bypass Graft,2026-11-30,10:45,Cardiac OR 3,Dr. Synth Okonkwo (Cardiothoracic),General,Cardiac ICU,Elective,dev
-S086,P086,Coronary Artery Bypass Graft,2026-12-03,07:30,Cardiac OR 1,Dr. Synth Okonkwo (Cardiothoracic),General,Cardiac ICU,Elective,test
-S087,P087,Coronary Artery Bypass Graft,2026-11-10,09:00,Cardiac OR 4,Dr. Synth Okonkwo (Cardiothoracic),General,Cardiac ICU,Elective,dev
-S088,P088,Coronary Artery Bypass Graft,2026-11-13,12:30,Cardiac OR 3,Dr. Synth Okonkwo (Cardiothoracic),General,Cardiac ICU,Elective,test
-S089,P089,Coronary Artery Bypass Graft,2026-11-16,12:30,Cardiac OR 2,Dr. Synth Okonkwo (Cardiothoracic),General,Cardiac ICU,Elective,dev
-S090,P090,Coronary Artery Bypass Graft,2026-11-19,10:45,Cardiac OR 4,Dr. Synth Okonkwo (Cardiothoracic),General,Cardiac ICU,Elective,dev
-S091,P091,Coronary Artery Bypass Graft,2026-11-23,14:00,Cardiac OR 3,Dr. Synth Okonkwo (Cardiothoracic),General,Cardiac ICU,Elective,dev
-S092,P092,Coronary Artery Bypass Graft,2026-11-25,12:30,Cardiac OR 3,Dr. Synth Okonkwo (Cardiothoracic),General,Cardiac ICU,Elective,dev
-S093,P093,Coronary Artery Bypass Graft,2026-11-30,10:45,Cardiac OR 3,Dr. Synth Okonkwo (Cardiothoracic),General,Cardiac ICU,Elective,dev
-S094,P094,Coronary Artery Bypass Graft,2026-12-01,09:00,Cardiac OR 1,Dr. Synth Okonkwo (Cardiothoracic),General,Cardiac ICU,Elective,test
-S095,P095,Coronary Artery Bypass Graft,2026-12-04,14:00,Cardiac OR 1,Dr. Synth Okonkwo (Cardiothoracic),General,Cardiac ICU,Elective,dev
-S096,P096,Coronary Artery Bypass Graft,2026-11-11,12:30,Cardiac OR 2,Dr. Synth Okonkwo (Cardiothoracic),General,Cardiac ICU,Elective,dev
-S097,P097,Coronary Artery Bypass Graft,2026-11-16,10:45,Cardiac OR 1,Dr. Synth Okonkwo (Cardiothoracic),General,Cardiac ICU,Elective,dev
-S098,P098,Coronary Artery Bypass Graft,2026-11-17,12:30,Cardiac OR 1,Dr. Synth Okonkwo (Cardiothoracic),General,Cardiac ICU,Elective,dev
-S099,P099,Coronary Artery Bypass Graft,2026-11-20,07:30,Cardiac OR 4,Dr. Synth Okonkwo (Cardiothoracic),General,Cardiac ICU,Elective,test
-S100,P100,Coronary Artery Bypass Graft,2026-11-23,07:30,Cardiac OR 1,Dr. Synth Okonkwo (Cardiothoracic),General,Cardiac ICU,Elective,dev
+surgery_id,patient_id,procedure,laterality,surgery_date,surgery_time,surgery_location,surgeon,planned_anesthesia,postoperative_location,case_class,split
+S001,P001,Laparoscopic Cholecystectomy,,2026-11-12,12:30,General OR 4,Dr. Synth Alvarez (General Surgery),General,PACU,Elective,dev
+S002,P002,Laparoscopic Cholecystectomy,,2026-11-16,09:00,General OR 4,Dr. Synth Alvarez (General Surgery),General,PACU,Elective,dev
+S003,P003,Laparoscopic Cholecystectomy,,2026-11-18,14:00,General OR 3,Dr. Synth Alvarez (General Surgery),General,PACU,Elective,dev
+S004,P004,Laparoscopic Cholecystectomy,,2026-11-23,09:00,General OR 4,Dr. Synth Alvarez (General Surgery),General,PACU,Elective,dev
+S005,P005,Laparoscopic Cholecystectomy,,2026-11-24,07:30,General OR 4,Dr. Synth Alvarez (General Surgery),General,PACU,Elective,dev
+S006,P006,Laparoscopic Cholecystectomy,,2026-11-27,07:30,General OR 1,Dr. Synth Alvarez (General Surgery),General,PACU,Elective,test
+S007,P007,Laparoscopic Cholecystectomy,,2026-11-30,12:30,General OR 4,Dr. Synth Alvarez (General Surgery),General,PACU,Elective,dev
+S008,P008,Laparoscopic Cholecystectomy,,2026-12-03,14:00,General OR 2,Dr. Synth Alvarez (General Surgery),General,PACU,Elective,test
+S009,P009,Laparoscopic Cholecystectomy,,2026-11-10,14:00,General OR 1,Dr. Synth Alvarez (General Surgery),General,PACU,Elective,dev
+S010,P010,Laparoscopic Cholecystectomy,,2026-11-13,10:45,General OR 2,Dr. Synth Alvarez (General Surgery),General,PACU,Elective,dev
+S011,P011,Laparoscopic Cholecystectomy,,2026-11-16,12:30,General OR 2,Dr. Synth Alvarez (General Surgery),General,PACU,Elective,dev
+S012,P012,Laparoscopic Cholecystectomy,,2026-11-19,10:45,General OR 1,Dr. Synth Alvarez (General Surgery),General,PACU,Elective,dev
+S013,P013,Laparoscopic Cholecystectomy,,2026-11-23,14:00,General OR 1,Dr. Synth Alvarez (General Surgery),General,PACU,Elective,dev
+S014,P014,Laparoscopic Cholecystectomy,,2026-11-25,09:00,General OR 3,Dr. Synth Alvarez (General Surgery),General,PACU,Elective,test
+S015,P015,Laparoscopic Cholecystectomy,,2026-11-30,09:00,General OR 2,Dr. Synth Alvarez (General Surgery),General,PACU,Elective,dev
+S016,P016,Laparoscopic Cholecystectomy,,2026-12-01,09:00,General OR 4,Dr. Synth Alvarez (General Surgery),General,PACU,Elective,dev
+S017,P017,Laparoscopic Cholecystectomy,,2026-12-04,07:30,General OR 4,Dr. Synth Alvarez (General Surgery),General,PACU,Elective,dev
+S018,P018,Laparoscopic Cholecystectomy,,2026-11-11,10:45,General OR 2,Dr. Synth Alvarez (General Surgery),General,PACU,Elective,dev
+S019,P019,Laparoscopic Cholecystectomy,,2026-11-16,14:00,General OR 1,Dr. Synth Alvarez (General Surgery),General,PACU,Elective,test
+S020,P020,Laparoscopic Cholecystectomy,,2026-11-17,12:30,General OR 2,Dr. Synth Alvarez (General Surgery),General,PACU,Elective,dev
+S021,P021,Radical Mastectomy,Left,2026-11-20,12:30,Oncology OR 2,Dr. Synth Morrow (Surgical Oncology),General,Surgical ward,Elective,dev
+S022,P022,Radical Mastectomy,Left,2026-11-23,10:45,Oncology OR 2,Dr. Synth Morrow (Surgical Oncology),General,Surgical ward,Elective,dev
+S023,P023,Radical Mastectomy,Right,2026-11-26,10:45,Oncology OR 4,Dr. Synth Morrow (Surgical Oncology),General,Surgical ward,Elective,dev
+S024,P024,Radical Mastectomy,Left,2026-11-30,14:00,Oncology OR 4,Dr. Synth Morrow (Surgical Oncology),General,Surgical ward,Elective,dev
+S025,P025,Radical Mastectomy,Left,2026-12-02,14:00,Oncology OR 2,Dr. Synth Morrow (Surgical Oncology),General,Surgical ward,Elective,dev
+S026,P026,Radical Mastectomy,Left,2026-11-09,10:45,Oncology OR 4,Dr. Synth Morrow (Surgical Oncology),General,Surgical ward,Elective,test
+S027,P027,Radical Mastectomy,Right,2026-11-12,10:45,Oncology OR 2,Dr. Synth Morrow (Surgical Oncology),General,Surgical ward,Elective,dev
+S028,P028,Radical Mastectomy,Left,2026-11-16,07:30,Oncology OR 4,Dr. Synth Morrow (Surgical Oncology),General,Surgical ward,Elective,test
+S029,P029,Radical Mastectomy,Left,2026-11-18,07:30,Oncology OR 1,Dr. Synth Morrow (Surgical Oncology),General,Surgical ward,Elective,dev
+S030,P030,Radical Mastectomy,Right,2026-11-23,14:00,Oncology OR 1,Dr. Synth Morrow (Surgical Oncology),General,Surgical ward,Elective,dev
+S031,P031,Radical Mastectomy,Right,2026-11-24,14:00,Oncology OR 1,Dr. Synth Morrow (Surgical Oncology),General,Surgical ward,Elective,dev
+S032,P032,Radical Mastectomy,Right,2026-11-27,10:45,Oncology OR 3,Dr. Synth Morrow (Surgical Oncology),General,Surgical ward,Elective,dev
+S033,P033,Radical Mastectomy,Left,2026-11-30,09:00,Oncology OR 1,Dr. Synth Morrow (Surgical Oncology),General,Surgical ward,Elective,dev
+S034,P034,Radical Mastectomy,Left,2026-12-03,12:30,Oncology OR 1,Dr. Synth Morrow (Surgical Oncology),General,Surgical ward,Elective,test
+S035,P035,Radical Mastectomy,Left,2026-11-10,09:00,Oncology OR 4,Dr. Synth Morrow (Surgical Oncology),General,Surgical ward,Elective,dev
+S036,P036,Radical Mastectomy,Right,2026-11-13,09:00,Oncology OR 3,Dr. Synth Morrow (Surgical Oncology),General,Surgical ward,Elective,dev
+S037,P037,Radical Mastectomy,Left,2026-11-16,12:30,Oncology OR 4,Dr. Synth Morrow (Surgical Oncology),General,Surgical ward,Elective,dev
+S038,P038,Radical Mastectomy,Left,2026-11-19,10:45,Oncology OR 2,Dr. Synth Morrow (Surgical Oncology),General,Surgical ward,Elective,dev
+S039,P039,Radical Mastectomy,Left,2026-11-23,10:45,Oncology OR 3,Dr. Synth Morrow (Surgical Oncology),General,Surgical ward,Elective,test
+S040,P040,Radical Mastectomy,Left,2026-11-25,12:30,Oncology OR 4,Dr. Synth Morrow (Surgical Oncology),General,Surgical ward,Elective,dev
+S041,P041,Knee Arthroscopy,Left,2026-11-30,09:00,Ambulatory OR 2,Dr. Synth Patel (Orthopedics),General or spinal,PACU,Elective,dev
+S042,P042,Knee Arthroscopy,Left,2026-12-01,12:30,Ambulatory OR 1,Dr. Synth Patel (Orthopedics),General or spinal,PACU,Elective,dev
+S043,P043,Knee Arthroscopy,Right,2026-12-04,14:00,Ambulatory OR 3,Dr. Synth Patel (Orthopedics),General or spinal,PACU,Elective,dev
+S044,P044,Knee Arthroscopy,Right,2026-11-11,07:30,Ambulatory OR 4,Dr. Synth Patel (Orthopedics),General or spinal,PACU,Elective,dev
+S045,P045,Knee Arthroscopy,Right,2026-11-16,14:00,Ambulatory OR 3,Dr. Synth Patel (Orthopedics),General or spinal,PACU,Elective,dev
+S046,P046,Knee Arthroscopy,Left,2026-11-17,14:00,Ambulatory OR 3,Dr. Synth Patel (Orthopedics),General or spinal,PACU,Elective,test
+S047,P047,Knee Arthroscopy,Left,2026-11-20,12:30,Ambulatory OR 4,Dr. Synth Patel (Orthopedics),General or spinal,PACU,Elective,dev
+S048,P048,Knee Arthroscopy,Right,2026-11-23,12:30,Ambulatory OR 3,Dr. Synth Patel (Orthopedics),General or spinal,PACU,Elective,test
+S049,P049,Knee Arthroscopy,Left,2026-11-26,12:30,Ambulatory OR 4,Dr. Synth Patel (Orthopedics),General or spinal,PACU,Elective,dev
+S050,P050,Knee Arthroscopy,Left,2026-11-30,09:00,Ambulatory OR 4,Dr. Synth Patel (Orthopedics),General or spinal,PACU,Elective,dev
+S051,P051,Knee Arthroscopy,Left,2026-12-02,14:00,Ambulatory OR 1,Dr. Synth Patel (Orthopedics),General or spinal,PACU,Elective,dev
+S052,P052,Knee Arthroscopy,Left,2026-11-09,07:30,Ambulatory OR 4,Dr. Synth Patel (Orthopedics),General or spinal,PACU,Elective,dev
+S053,P053,Knee Arthroscopy,Right,2026-11-12,07:30,Ambulatory OR 3,Dr. Synth Patel (Orthopedics),General or spinal,PACU,Elective,dev
+S054,P054,Knee Arthroscopy,Right,2026-11-16,14:00,Ambulatory OR 1,Dr. Synth Patel (Orthopedics),General or spinal,PACU,Elective,test
+S055,P055,Knee Arthroscopy,Left,2026-11-18,14:00,Ambulatory OR 3,Dr. Synth Patel (Orthopedics),General or spinal,PACU,Elective,dev
+S056,P056,Knee Arthroscopy,Right,2026-11-23,07:30,Ambulatory OR 2,Dr. Synth Patel (Orthopedics),General or spinal,PACU,Elective,dev
+S057,P057,Knee Arthroscopy,Right,2026-11-24,14:00,Ambulatory OR 4,Dr. Synth Patel (Orthopedics),General or spinal,PACU,Elective,dev
+S058,P058,Knee Arthroscopy,Right,2026-11-27,10:45,Ambulatory OR 4,Dr. Synth Patel (Orthopedics),General or spinal,PACU,Elective,dev
+S059,P059,Knee Arthroscopy,Left,2026-11-30,12:30,Ambulatory OR 2,Dr. Synth Patel (Orthopedics),General or spinal,PACU,Elective,test
+S060,P060,Knee Arthroscopy,Left,2026-12-03,12:30,Ambulatory OR 2,Dr. Synth Patel (Orthopedics),General or spinal,PACU,Elective,dev
+S061,P061,Ureteroscopy with Stent Placement,Left,2026-11-10,12:30,Urology OR 1,Dr. Synth Greene (Urology),General,PACU,Elective,dev
+S062,P062,Ureteroscopy with Stent Placement,Right,2026-11-13,10:45,Urology OR 1,Dr. Synth Greene (Urology),General,PACU,Elective,dev
+S063,P063,Ureteroscopy with Stent Placement,Left,2026-11-16,09:00,Urology OR 2,Dr. Synth Greene (Urology),General,PACU,Elective,dev
+S064,P064,Ureteroscopy with Stent Placement,Left,2026-11-19,09:00,Urology OR 1,Dr. Synth Greene (Urology),General,PACU,Elective,dev
+S065,P065,Ureteroscopy with Stent Placement,Left,2026-11-23,09:00,Urology OR 2,Dr. Synth Greene (Urology),General,PACU,Elective,dev
+S066,P066,Ureteroscopy with Stent Placement,Right,2026-11-25,09:00,Urology OR 3,Dr. Synth Greene (Urology),General,PACU,Elective,test
+S067,P067,Ureteroscopy with Stent Placement,Left,2026-11-30,09:00,Urology OR 3,Dr. Synth Greene (Urology),General,PACU,Elective,dev
+S068,P068,Ureteroscopy with Stent Placement,Right,2026-12-01,14:00,Urology OR 1,Dr. Synth Greene (Urology),General,PACU,Elective,test
+S069,P069,Ureteroscopy with Stent Placement,Right,2026-12-04,14:00,Urology OR 2,Dr. Synth Greene (Urology),General,PACU,Elective,dev
+S070,P070,Ureteroscopy with Stent Placement,Right,2026-11-11,10:45,Urology OR 2,Dr. Synth Greene (Urology),General,PACU,Elective,dev
+S071,P071,Ureteroscopy with Stent Placement,Right,2026-11-16,12:30,Urology OR 3,Dr. Synth Greene (Urology),General,PACU,Elective,dev
+S072,P072,Ureteroscopy with Stent Placement,Right,2026-11-17,09:00,Urology OR 3,Dr. Synth Greene (Urology),General,PACU,Elective,dev
+S073,P073,Ureteroscopy with Stent Placement,Left,2026-11-20,10:45,Urology OR 2,Dr. Synth Greene (Urology),General,PACU,Elective,dev
+S074,P074,Ureteroscopy with Stent Placement,Left,2026-11-23,07:30,Urology OR 3,Dr. Synth Greene (Urology),General,PACU,Elective,test
+S075,P075,Ureteroscopy with Stent Placement,Right,2026-11-26,10:45,Urology OR 3,Dr. Synth Greene (Urology),General,PACU,Elective,dev
+S076,P076,Ureteroscopy with Stent Placement,Left,2026-11-30,14:00,Urology OR 2,Dr. Synth Greene (Urology),General,PACU,Elective,dev
+S077,P077,Ureteroscopy with Stent Placement,Left,2026-12-02,07:30,Urology OR 2,Dr. Synth Greene (Urology),General,PACU,Elective,dev
+S078,P078,Ureteroscopy with Stent Placement,Left,2026-11-09,09:00,Urology OR 3,Dr. Synth Greene (Urology),General,PACU,Elective,dev
+S079,P079,Ureteroscopy with Stent Placement,Left,2026-11-12,14:00,Urology OR 1,Dr. Synth Greene (Urology),General,PACU,Elective,test
+S080,P080,Ureteroscopy with Stent Placement,Left,2026-11-16,12:30,Urology OR 1,Dr. Synth Greene (Urology),General,PACU,Elective,dev
+S081,P081,Coronary Artery Bypass Graft,,2026-11-18,09:00,Cardiac OR 3,Dr. Synth Okonkwo (Cardiothoracic),General,Cardiac ICU,Elective,dev
+S082,P082,Coronary Artery Bypass Graft,,2026-11-23,12:30,Cardiac OR 2,Dr. Synth Okonkwo (Cardiothoracic),General,Cardiac ICU,Elective,dev
+S083,P083,Coronary Artery Bypass Graft,,2026-11-24,09:00,Cardiac OR 1,Dr. Synth Okonkwo (Cardiothoracic),General,Cardiac ICU,Elective,dev
+S084,P084,Coronary Artery Bypass Graft,,2026-11-27,12:30,Cardiac OR 3,Dr. Synth Okonkwo (Cardiothoracic),General,Cardiac ICU,Elective,dev
+S085,P085,Coronary Artery Bypass Graft,,2026-11-30,10:45,Cardiac OR 3,Dr. Synth Okonkwo (Cardiothoracic),General,Cardiac ICU,Elective,dev
+S086,P086,Coronary Artery Bypass Graft,,2026-12-03,07:30,Cardiac OR 1,Dr. Synth Okonkwo (Cardiothoracic),General,Cardiac ICU,Elective,test
+S087,P087,Coronary Artery Bypass Graft,,2026-11-10,09:00,Cardiac OR 4,Dr. Synth Okonkwo (Cardiothoracic),General,Cardiac ICU,Elective,dev
+S088,P088,Coronary Artery Bypass Graft,,2026-11-13,12:30,Cardiac OR 3,Dr. Synth Okonkwo (Cardiothoracic),General,Cardiac ICU,Elective,test
+S089,P089,Coronary Artery Bypass Graft,,2026-11-16,12:30,Cardiac OR 2,Dr. Synth Okonkwo (Cardiothoracic),General,Cardiac ICU,Elective,dev
+S090,P090,Coronary Artery Bypass Graft,,2026-11-19,10:45,Cardiac OR 4,Dr. Synth Okonkwo (Cardiothoracic),General,Cardiac ICU,Elective,dev
+S091,P091,Coronary Artery Bypass Graft,,2026-11-23,14:00,Cardiac OR 3,Dr. Synth Okonkwo (Cardiothoracic),General,Cardiac ICU,Elective,dev
+S092,P092,Coronary Artery Bypass Graft,,2026-11-25,12:30,Cardiac OR 3,Dr. Synth Okonkwo (Cardiothoracic),General,Cardiac ICU,Elective,dev
+S093,P093,Coronary Artery Bypass Graft,,2026-11-30,10:45,Cardiac OR 3,Dr. Synth Okonkwo (Cardiothoracic),General,Cardiac ICU,Elective,dev
+S094,P094,Coronary Artery Bypass Graft,,2026-12-01,09:00,Cardiac OR 1,Dr. Synth Okonkwo (Cardiothoracic),General,Cardiac ICU,Elective,test
+S095,P095,Coronary Artery Bypass Graft,,2026-12-04,14:00,Cardiac OR 1,Dr. Synth Okonkwo (Cardiothoracic),General,Cardiac ICU,Elective,dev
+S096,P096,Coronary Artery Bypass Graft,,2026-11-11,12:30,Cardiac OR 2,Dr. Synth Okonkwo (Cardiothoracic),General,Cardiac ICU,Elective,dev
+S097,P097,Coronary Artery Bypass Graft,,2026-11-16,10:45,Cardiac OR 1,Dr. Synth Okonkwo (Cardiothoracic),General,Cardiac ICU,Elective,dev
+S098,P098,Coronary Artery Bypass Graft,,2026-11-17,12:30,Cardiac OR 1,Dr. Synth Okonkwo (Cardiothoracic),General,Cardiac ICU,Elective,dev
+S099,P099,Coronary Artery Bypass Graft,,2026-11-20,07:30,Cardiac OR 4,Dr. Synth Okonkwo (Cardiothoracic),General,Cardiac ICU,Elective,test
+S100,P100,Coronary Artery Bypass Graft,,2026-11-23,07:30,Cardiac OR 1,Dr. Synth Okonkwo (Cardiothoracic),General,Cardiac ICU,Elective,dev

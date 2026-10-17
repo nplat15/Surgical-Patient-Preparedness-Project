@@ -67,6 +67,12 @@ def test_module1():
     assert any(r["item"] == "Crossmatched PRBC (2 units)" for r in m1["requirements"])
 
 
+
+def test_every_action_has_follow_up():
+    from preop import criteria as C
+    assert set(C.ACTION_FOLLOW_UP) == set(C.ACTION_CATALOG)
+
+
 if __name__ == "__main__":
     for name, fn in list(globals().items()):
         if name.startswith("test_"):

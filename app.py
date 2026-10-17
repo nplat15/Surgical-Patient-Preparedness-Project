@@ -50,7 +50,7 @@ cases = D.list_cases(split=None if split == "all" else split)
 proc_filter = st.sidebar.multiselect("Procedure", C.PROCEDURES)
 if proc_filter:
     cases = [c for c in cases if c["procedure"] in proc_filter]
-labels = {c["surgery_id"]: f"{c['surgery_date'][5:]} {c['surgery_time']} · {c['name']} · {c['procedure']}" for c in cases}
+labels = {c["surgery_id"]: f"{c['surgery_date'][5:]} {c['surgery_time']} · {c['name']} · {D.procedure_label(c)}" for c in cases}
 default_idx = next((i for i, c in enumerate(cases) if c["surgery_id"] == "S082"), 0)
 sid = st.sidebar.selectbox("Patient (OR schedule)", list(labels), index=default_idx, format_func=labels.get)
 st.sidebar.caption("Synthetic data · teaching rules, not clinical guidelines")
@@ -66,7 +66,7 @@ st.markdown(
     f"""<div style="border:1px solid #ccc;border-radius:8px;padding:10px 14px;margin-bottom:8px">
     <b style="font-size:1.25em">{p['name']}</b> &nbsp; {p['age']} y/o {p['sex']} &nbsp;·&nbsp; MRN {p['mrn']} &nbsp;·&nbsp;
     BMI {p['bmi']} &nbsp;·&nbsp; <span style="color:{allergy_color}"><b>Allergies:</b> {p['allergies']}</span><br>
-    <b>{c['procedure']}</b> · {c['surgery_date']} {c['surgery_time']} · {c['surgery_location']} · {c['surgeon']} ·
+    <b>{D.procedure_label(c)}</b> · {c['surgery_date']} {c['surgery_time']} · {c['surgery_location']} · {c['surgeon']} ·
     Anesthesia: {c['planned_anesthesia']} · Post-op: {c['postoperative_location']}</div>""",
     unsafe_allow_html=True)
 

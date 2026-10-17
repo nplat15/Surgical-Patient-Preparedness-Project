@@ -138,6 +138,154 @@ ACTION_CATALOG = {
     "LATEX_PRECAUTIONS": ("nurse", "Latex allergy: notify OR to set up a latex-free room."),
 }
 
+# ---------------------------------------------------------------------------
+# What happens after a suggestion is accepted (shown in the demo page).
+# code -> (follow-up steps, what in the chart closes it)
+# Accepting never closes an item: it stays open until the chart shows it.
+# ---------------------------------------------------------------------------
+def _lab(name):
+    return (["Get the order from the surgeon or anesthesia",
+             f"Collect {name} and send to the lab",
+             "Review the result and notify anesthesia if abnormal"],
+            f"{name} result is in the chart, dated within the required window")
+
+
+def _notify(who, what):
+    return ([f"Call or page {who} about the {what}",
+             "Document who was notified, when, and their response",
+             "Carry out any new orders"],
+            "Provider response is documented in the chart")
+
+
+def _plan(what, where="anesthesia plan"):
+    return ([f"Review the {what} with the chart and the patient",
+             "Discuss with the surgeon if the plan or timing changes",
+             f"Document the decision in the {where}"],
+            f"{where[0].upper() + where[1:]} documents how the {what} is handled")
+
+
+def _instruct(what):
+    return ([f"Call the patient and give {what}",
+             "Use teach-back to confirm the patient understands",
+             "Document the instructions given and the patient's response"],
+            "Instructions are documented in the chart")
+
+
+ACTION_FOLLOW_UP = {
+    "OBTAIN_SURGERY_CONSENT": (["Page the surgical team that the consent is not signed",
+                                "Confirm a time to see the patient before the OR",
+                                "Check the signed form is scanned into the chart"], "Signed surgical consent is in the chart"),
+    "NOTIFY_ANESTHESIA_CONSENT": (["Page anesthesia that the anesthesia consent is not signed",
+                                   "Confirm when they will see the patient"], "Signed anesthesia consent is in the chart"),
+    "OBTAIN_ANESTHESIA_CONSENT": (["Discuss the anesthetic plan, risks and alternatives with the patient",
+                                   "Have the patient sign the anesthesia consent"], "Signed anesthesia consent is in the chart"),
+    "OBTAIN_BLOOD_CONSENT": (["Review transfusion with the patient (or confirm a refusal)",
+                              "Have the patient sign the consent or refusal form"], "Signed blood consent or refusal form is in the chart"),
+    "VERIFY_BLOOD_REFUSAL_FORM": (["Confirm the refusal form is signed and current",
+                                   "Add the refusal to the OR safety flags and the huddle"], "Signed refusal is on file and flagged for the OR"),
+    "BLOOD_REFUSAL_PLAN": _plan("bloodless management approach"),
+    "RECONCILE_CONSENT_DOCUMENTATION": (["Compare the note with the consent records",
+                                         "Ask the patient and the surgical team which consents were signed",
+                                         "Correct the consent record"], "Consent records and notes agree"),
+    "OBTAIN_UPDATED_HP": (["Ask the surgical team for a current H&P with heart and lung exam",
+                           "Check the new H&P is dated within 30 days of surgery"], "Current, complete H&P is in the chart"),
+    "RECONCILE_ALLERGIES": (["Review allergies and reactions with the patient",
+                             "Update the allergy list in the chart",
+                             "Tell anesthesia and the OR if anything changed"], "Allergy list matches the H&P and the patient's report"),
+    "DRAW_CBC": _lab("CBC"),
+    "DRAW_BMP": _lab("BMP"),
+    "DRAW_COAGS": _lab("coagulation panel"),
+    "DRAW_LFT": _lab("liver function tests"),
+    "DRAW_ALBUMIN": _lab("albumin"),
+    "DRAW_HBA1C": _lab("HbA1c"),
+    "DRAW_UA": _lab("urinalysis"),
+    "DRAW_URINE_CULTURE": _lab("urine culture"),
+    "DRAW_PREGNANCY_TEST": _lab("pregnancy test"),
+    "DRAW_TYPE_AND_SCREEN": (["Get the order",
+                              "Draw a new type and screen and send to the blood bank",
+                              "Confirm it will not expire before the surgery date"], "Type and screen is in the chart and valid on the surgery date"),
+    "REPEAT_BMP": (["Get the order for a repeat BMP", "Draw and send to the lab",
+                    "Call anesthesia with the result"], "Repeat BMP result is in the chart"),
+    "POC_GLUCOSE_DAY_OF": (["Check fingerstick glucose when the patient arrives",
+                            "Call anesthesia if it is above the limit"], "Day-of glucose is documented"),
+    "OBTAIN_EKG": (["Get the order", "Perform a 12-lead EKG",
+                    "Send the tracing for reading and flag any new changes to anesthesia"], "EKG is in the chart, dated within the required window"),
+    "OBTAIN_CHEST_XRAY": (["Get the order", "Schedule the X-ray before the surgery date",
+                           "Check the report is back"], "Chest X-ray report is in the chart"),
+    "REQUEST_ECHO": (["Place the echocardiogram order", "Ask the nurse to schedule it before surgery",
+                      "Review the ejection fraction and valves when resulted"], "Echo report is in the chart"),
+    "REQUEST_PFT": (["Place the PFT order", "Ask the nurse to schedule it before surgery",
+                     "Review the results when back"], "PFT report is in the chart"),
+    "ORDER_CROSSMATCH": (["Get the order for 2 units PRBC crossmatch",
+                          "Call the blood bank to confirm they received the sample",
+                          "Check units are ready before the patient goes to the OR"], "2 crossmatched units are shown in the blood bank record"),
+    "CONFIRM_BLOOD_PRODUCTS": (["Check the blood bank record for crossmatched units",
+                                "Call the blood bank if fewer than planned"], "Planned units are confirmed available before incision"),
+    "CONTACT_BLOOD_BANK": (["Call the blood bank about the positive antibody screen",
+                            "Ask how long compatible units will take",
+                            "Tell anesthesia and the surgeon if it may delay the case"], "Blood bank confirms compatible units"),
+    "ANTIBODY_BLOOD_BANK": (["Talk with the blood bank about the antibody and compatible units",
+                             "Decide with the surgeon whether to delay if units are not ready"], "Compatible units confirmed or a delay decision is documented"),
+    "REQUEST_CARDIOLOGY_CLEARANCE": (["Place the cardiology referral", "Ask the nurse to track the appointment",
+                                      "Review the assessment when it comes back"], "Completed cardiology assessment is in the chart"),
+    "REQUEST_PULMONARY_CLEARANCE": (["Place the pulmonary referral", "Ask the nurse to track the appointment",
+                                     "Review the assessment when it comes back"], "Completed pulmonary assessment is in the chart"),
+    "FOLLOW_UP_CLEARANCE": (["Call the consulting office for the status",
+                             "Ask them to send the note before the surgery date",
+                             "Tell anesthesia if it will not be ready in time"], "Completed clearance is in the chart"),
+    "EVALUATE_ANEMIA": _plan("anemia"),
+    "NOTIFY_LOW_HGB": _notify("the surgeon and anesthesia", "low hemoglobin"),
+    "EVALUATE_THROMBOCYTOPENIA": _plan("low platelet count"),
+    "NOTIFY_LOW_PLATELETS": _notify("the surgeon and anesthesia", "low platelet count"),
+    "EVALUATE_ELEVATED_INR": (["Review anticoagulants and the cause of the high INR",
+                              "Agree on hold or reversal with the surgeon",
+                              "Order repeat coags before surgery"], "Repeat INR is in the chart and the plan is documented"),
+    "NOTIFY_ELEVATED_INR": _notify("the surgeon and anesthesia", "elevated INR"),
+    "CORRECT_POTASSIUM": (["Order potassium correction", "Repeat potassium (and EKG if indicated)"],
+                          "Repeat potassium is in the chart and in range"),
+    "EVALUATE_SODIUM": _plan("abnormal sodium"),
+    "RENAL_DOSING_PLAN": _plan("reduced kidney function"),
+    "NOTIFY_RENAL_FUNCTION": _notify("the surgeon and anesthesia", "elevated creatinine"),
+    "GLYCEMIC_PLAN": _plan("glucose control"),
+    "REVIEW_LOW_ALBUMIN": _plan("low albumin"),
+    "REVIEW_ELEVATED_LFTS": _plan("elevated liver tests"),
+    "NOTIFY_ELEVATED_LFTS": _notify("the surgeon and anesthesia", "elevated liver tests"),
+    "NOTIFY_SURGEON_POSITIVE_CULTURE": _notify("the surgeon", "positive urine test"),
+    "REVIEW_INFECTION_RISK": _plan("urinary infection"),
+    "NOTIFY_POSITIVE_PREGNANCY": (["Call the surgeon and anesthesia right away",
+                                   "Do not send the patient to the OR until they review it",
+                                   "Document who was notified and when"], "Surgeon and anesthesia decision is documented"),
+    "REVIEW_POSITIVE_PREGNANCY": _plan("positive pregnancy test"),
+    "EVALUATE_EKG_ABNORMALITY": _plan("new EKG finding"),
+    "NOTIFY_EKG_ABNORMALITY": _notify("anesthesia", "new EKG finding"),
+    "REVIEW_LOW_EF": _plan("reduced ejection fraction"),
+    "REVIEW_SEVERE_LUNG_DISEASE": _plan("lung disease"),
+    "EVALUATE_NEW_SYMPTOMS": _plan("new symptoms"),
+    "NOTIFY_NEW_SYMPTOMS": _notify("anesthesia and the surgeon", "new symptoms in the H&P"),
+    "ANTITHROMBOTIC_PLAN": (["Decide hold or bridge timing with the surgeon and prescriber",
+                             "Write the hold instructions in the chart",
+                             "Ask the nurse to give them to the patient"], "Blood-thinner hold plan is documented"),
+    "VERIFY_ANTITHROMBOTIC_HOLD": (["Call the patient", "Confirm the hold instructions and the date of the last dose",
+                                    "Tell anesthesia if the patient is still taking it"], "Last dose date is documented"),
+    "METFORMIN_HOLD_INSTRUCTIONS": _instruct("metformin hold instructions"),
+    "INSULIN_DOSE_PLAN": (["Write the pre-op insulin dose orders", "Ask the nurse to give them to the patient"],
+                          "Insulin orders are in the chart"),
+    "INSULIN_INSTRUCTIONS": _instruct("insulin dose instructions"),
+    "GLP1_ASPIRATION_REVIEW": _plan("GLP-1 medicine and aspiration risk"),
+    "VERIFY_GLP1_LAST_DOSE": (["Call the patient", "Confirm the date of the last GLP-1 dose",
+                               "Tell anesthesia if it was within the hold window"], "Last dose date is documented"),
+    "SGLT2_HOLD_INSTRUCTIONS": _instruct("SGLT2 inhibitor hold instructions"),
+    "OSA_PRECAUTIONS": _plan("sleep apnea"),
+    "BRING_CPAP": _instruct("a reminder to bring their CPAP machine"),
+    "MH_PRECAUTIONS": _plan("malignant hyperthermia risk"),
+    "NOTIFY_MH_RISK": (["Call the OR charge nurse", "Confirm the MH cart and a trigger-free machine are set up",
+                        "Add the risk to the OR huddle"], "OR confirms MH set-up"),
+    "DIFFICULT_AIRWAY_PLAN": _plan("difficult airway"),
+    "PONV_PROPHYLAXIS": _plan("nausea and vomiting history"),
+    "LATEX_PRECAUTIONS": (["Call the OR to request a latex-free room",
+                           "Add the allergy to the OR huddle"], "OR confirms latex-free set-up"),
+}
+
 # Finding category -> effect on readiness status.
 #   critical  -> "Recommend hold"
 #   clinical  -> "Needs clinical review"
@@ -331,83 +479,100 @@ def _rule_finding(code, detail, evidence, category=None):
     return _finding(code, category or cat, detail, nurse, anes, evidence)
 
 
+def requirement_status(chart, req):
+    """Status of one required item: ok / missing / outdated / pending, plus what is on file."""
+    sdate = chart["case"]["surgery_date"]
+    item, kind, valid = req["item"], req["item_type"], req["validity_days"]
+    status, evid, detail, on_file = "ok", [], "", ""
+    if kind == "lab":
+        rows = [r for r in chart["labs"] if TEST_TO_PANEL.get(r["test_name"]) == item]
+        last = latest(rows)
+        if not last:
+            status, detail = "missing", f"{item} not in chart"
+        else:
+            evid = [r["lab_id"] for r in rows if r["collection_date"] == last["collection_date"]]
+            on_file = f"Drawn {last['collection_date']}"
+            age = days_before(sdate, last["collection_date"])
+            if valid is not None and age > valid:
+                status, detail = "outdated", f"{item} drawn {last['collection_date']} ({age} days before surgery; must be within {valid})"
+    elif kind == "consent":
+        row = next((c for c in chart["consents"] if c["consent_type"] == item), None)
+        if row:
+            evid = [row["consent_id"]]
+            on_file = f"Signed {row['signed_date']}" if row.get("signed_date") else ""
+        if not row or row["status"] == "Missing":
+            status, detail = "missing", f"{item} not signed"
+    elif kind == "note":
+        notes = [n for n in chart["notes"] if n["note_type"] == "History and Physical"]
+        last = latest(notes, "note_date")
+        if not last:
+            status, detail = "missing", "No H&P in chart"
+        else:
+            evid = [last["note_id"]]
+            on_file = f"Dated {last['note_date']}"
+            age = days_before(sdate, last["note_date"])
+            if age > valid:
+                status, detail = "outdated", f"H&P dated {last['note_date']} ({age} days before surgery; must be within {valid})"
+    elif kind == "diagnostic":
+        last = latest([t for t in chart["diagnostics"] if t["test_type"] == item], "test_date")
+        if not last:
+            status, detail = "missing", f"No {item} in chart"
+        else:
+            evid = [last["test_id"]]
+            on_file = f"Done {last['test_date']}"
+            age = days_before(sdate, last["test_date"])
+            if age > valid:
+                status, detail = "outdated", f"{item} dated {last['test_date']} ({age} days before surgery; must be within {valid})"
+    elif kind == "imaging":
+        last = latest([t for t in chart["imaging"] if t["imaging_type"] == item], "imaging_date")
+        if not last:
+            status, detail = "missing", f"No {item} in chart"
+        else:
+            evid = [last["imaging_id"]]
+            on_file = f"Done {last['imaging_date']}"
+            age = days_before(sdate, last["imaging_date"])
+            if age > valid:
+                status, detail = "outdated", f"{item} dated {last['imaging_date']} ({age} days before surgery; must be within {valid})"
+    elif kind == "blood":
+        b = chart["blood"]
+        if b:
+            evid = [b["blood_record_id"]]
+        if item == "Type and screen":
+            if not b or not b.get("type_screen_date"):
+                status, detail = "missing", "No type and screen"
+            else:
+                on_file = f"Drawn {b['type_screen_date']}, expires {b['type_screen_expires']}"
+                if d(b["type_screen_expires"]) < d(sdate):
+                    status, detail = "outdated", f"Type and screen expires {b['type_screen_expires']}, before surgery {sdate}"
+        else:  # crossmatch
+            units = int(b["prbc_crossmatched_units"]) if b and b.get("prbc_crossmatched_units") else 0
+            on_file = f"{units} units PRBC crossmatched"
+            if units < 2:
+                status, detail = "missing", f"{units} units PRBC crossmatched (2 required)"
+    elif kind == "clearance":
+        row = next((c for c in chart["clearances"] if c["clearance_type"] == item), None)
+        if row:
+            evid = [row["clearance_id"]]
+            on_file = f"Completed {row['completed_date']}" if row.get("completed_date") else f"Requested {row['requested_date']}"
+        if row and row["status"] == "Pending":
+            status, detail = "pending", f"{item} pending (requested {row['requested_date']})"
+        elif not row or row["status"] != "Completed":
+            status, detail = "missing", f"{item} not requested/completed"
+    return dict(status=status, evidence_ids=evid, detail=detail, on_file=on_file)
+
+
 def check_requirements(chart):
     out = []
-    sdate = chart["case"]["surgery_date"]
     for req in applicable_requirements(chart):
-        item, kind, valid = req["item"], req["item_type"], req["validity_days"]
+        item = req["item"]
         nurse = [c for r, c in req["missing_actions"] if r == "nurse"]
         anes = [c for r, c in req["missing_actions"] if r == "anesthesia"]
-        status, evid, detail = "ok", [], ""
-        if kind == "lab":
-            rows = [r for r in chart["labs"] if TEST_TO_PANEL.get(r["test_name"]) == item]
-            last = latest(rows)
-            if not last:
-                status, detail = "missing", f"{item} not in chart"
-            else:
-                evid = [r["lab_id"] for r in rows if r["collection_date"] == last["collection_date"]]
-                age = days_before(sdate, last["collection_date"])
-                if valid is not None and age > valid:
-                    status, detail = "outdated", f"{item} drawn {last['collection_date']} ({age} days before surgery; must be within {valid})"
-        elif kind == "consent":
-            row = next((c for c in chart["consents"] if c["consent_type"] == item), None)
-            if row:
-                evid = [row["consent_id"]]
-            if not row or row["status"] == "Missing":
-                status, detail = "missing", f"{item} not signed"
-        elif kind == "note":
-            notes = [n for n in chart["notes"] if n["note_type"] == "History and Physical"]
-            last = latest(notes, "note_date")
-            if not last:
-                status, detail = "missing", "No H&P in chart"
-            else:
-                evid = [last["note_id"]]
-                age = days_before(sdate, last["note_date"])
-                if age > valid:
-                    status, detail = "outdated", f"H&P dated {last['note_date']} ({age} days before surgery; must be within {valid})"
-        elif kind == "diagnostic":
-            last = latest([t for t in chart["diagnostics"] if t["test_type"] == item], "test_date")
-            if not last:
-                status, detail = "missing", f"No {item} in chart"
-            else:
-                evid = [last["test_id"]]
-                age = days_before(sdate, last["test_date"])
-                if age > valid:
-                    status, detail = "outdated", f"{item} dated {last['test_date']} ({age} days before surgery; must be within {valid})"
-        elif kind == "imaging":
-            last = latest([t for t in chart["imaging"] if t["imaging_type"] == item], "imaging_date")
-            if not last:
-                status, detail = "missing", f"No {item} in chart"
-            else:
-                evid = [last["imaging_id"]]
-                age = days_before(sdate, last["imaging_date"])
-                if age > valid:
-                    status, detail = "outdated", f"{item} dated {last['imaging_date']} ({age} days before surgery; must be within {valid})"
-        elif kind == "blood":
-            b = chart["blood"]
-            if b:
-                evid = [b["blood_record_id"]]
-            if item == "Type and screen":
-                if not b or not b.get("type_screen_date"):
-                    status, detail = "missing", "No type and screen"
-                elif d(b["type_screen_expires"]) < d(sdate):
-                    status, detail = "outdated", f"Type and screen expires {b['type_screen_expires']}, before surgery {sdate}"
-            else:  # crossmatch
-                units = int(b["prbc_crossmatched_units"]) if b and b.get("prbc_crossmatched_units") else 0
-                if units < 2:
-                    status, detail = "missing", f"{units} units PRBC crossmatched (2 required)"
-        elif kind == "clearance":
-            row = next((c for c in chart["clearances"] if c["clearance_type"] == item), None)
-            if row:
-                evid = [row["clearance_id"]]
-            if row and row["status"] == "Pending":
-                out.append(_rule_finding("PENDING_CLEARANCE", f"{item} pending (requested {row['requested_date']})", evid))
-                continue
-            if not row or row["status"] != "Completed":
-                status, detail = "missing", f"{item} not requested/completed"
-        if status != "ok":
-            code = f"{'MISSING' if status == 'missing' else 'OUTDATED'}:{item}"
-            out.append(_finding(code, "missing", detail, nurse, anes, evid))
+        s = requirement_status(chart, req)
+        if s["status"] == "pending":
+            out.append(_rule_finding("PENDING_CLEARANCE", s["detail"], s["evidence_ids"]))
+        elif s["status"] != "ok":
+            code = f"{'MISSING' if s['status'] == 'missing' else 'OUTDATED'}:{item}"
+            out.append(_finding(code, "missing", s["detail"], nurse, anes, s["evidence_ids"]))
     return out
 
 

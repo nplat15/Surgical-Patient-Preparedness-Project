@@ -33,6 +33,12 @@ def load(data_dir=DEFAULT_DATA):
     return {name: _read(os.path.join(data_dir, f"{name}.csv")) for name in FILES}
 
 
+def procedure_label(case):
+    """Procedure with its side, e.g. 'Left Knee Arthroscopy' (side is blank for midline procedures)."""
+    side = case.get("laterality") or ""
+    return f"{side} {case['procedure']}".strip()
+
+
 def list_cases(data_dir=DEFAULT_DATA, split=None):
     db = load(data_dir)
     pts = {p["patient_id"]: p for p in db["patients"]}
@@ -85,7 +91,7 @@ def build_chart(surgery_id, data_dir=DEFAULT_DATA):
 def chart_to_packet(chart):
     """Turn the chart into compact text for the LLM. Every line keeps its record ID so answers can cite it."""
     c, p = chart["case"], chart["patient"]
-    L = [f"SCHEDULED SURGERY [{c['surgery_id']}]: {c['procedure']} on {c['surgery_date']} {c['surgery_time']}, "
+    L = [f"SCHEDULED SURGERY [{c['surgery_id']}]: {procedure_label(c)} on {c['surgery_date']} {c['surgery_time']}, "
          f"{c['surgery_location']}, surgeon {c['surgeon']}, planned anesthesia {c['planned_anesthesia']}, "
          f"post-op {c['postoperative_location']}",
          f"PATIENT [{p['patient_id']}]: {p['name']}, {p['age']} y/o {p['sex']}, BMI {p['bmi']}, smoking {p['smoking_status']}",

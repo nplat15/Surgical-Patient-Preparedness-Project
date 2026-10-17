@@ -51,11 +51,19 @@ PROC = {
     "Coronary Artery Bypass Graft": dict(loc="Cardiac OR", postop="Cardiac ICU", surgeon="Dr. Synth Okonkwo (Cardiothoracic)",
                                          indication="Multivessel coronary artery disease", ages=(52, 84), anes="General"),
 }
+SIDED = {"Radical Mastectomy", "Knee Arthroscopy", "Ureteroscopy with Stent Placement"}
+
+
+def side_for(sid, proc):
+    """Left/Right for one-sided procedures. Own RNG so the rest of the dataset is unchanged."""
+    return random.Random(f"{SEED}-{sid}-side").choice(["Left", "Right"]) if proc in SIDED else ""
+
+
 IMAGING = {
     "Laparoscopic Cholecystectomy": ("RUQ ultrasound", "Multiple gallstones; no gallbladder wall thickening or ductal dilation."),
-    "Radical Mastectomy": ("Breast MRI", "2.8 cm enhancing mass, left breast, upper outer quadrant; biopsy-proven invasive ductal carcinoma."),
-    "Knee Arthroscopy": ("Knee MRI", "Complex tear of the posterior horn of the medial meniscus; no fracture."),
-    "Ureteroscopy with Stent Placement": ("CT abdomen/pelvis", "6 mm proximal ureteral calculus with mild hydronephrosis."),
+    "Radical Mastectomy": ("Breast MRI", "2.8 cm enhancing mass, {side} breast, upper outer quadrant; biopsy-proven invasive ductal carcinoma."),
+    "Knee Arthroscopy": ("Knee MRI", "{Side} knee: complex tear of the posterior horn of the medial meniscus; no fracture."),
+    "Ureteroscopy with Stent Placement": ("CT abdomen/pelvis", "6 mm {side} proximal ureteral calculus with mild {side} hydronephrosis."),
     "Coronary Artery Bypass Graft": ("Cardiac catheterization", "Three-vessel coronary artery disease: LAD 90%, circumflex 80%, RCA 75% stenosis."),
 }
 OTHER_DX = ["Hypertension", "Type 2 diabetes mellitus", "Hyperlipidemia", "Asthma", "Obstructive sleep apnea",
@@ -244,7 +252,8 @@ def make_case(idx, proc, n):
         p["allergies"] = "No known drug allergies"
 
     female = sex == "Female"
-    case = dict(surgery_id=sid, patient_id=pid, procedure=proc, surgery_date=sdate.isoformat(),
+    side = side_for(sid, proc)
+    case = dict(surgery_id=sid, patient_id=pid, procedure=proc, laterality=side, surgery_date=sdate.isoformat(),
                 surgery_time=R.choice(["07:30", "09:00", "10:45", "12:30", "14:00"]), surgery_location=f"{info['loc']} {R.randint(1, 4)}",
                 surgeon=info["surgeon"], planned_anesthesia=info["anes"], postoperative_location=info["postop"],
                 case_class="Elective")
@@ -459,6 +468,7 @@ def make_case(idx, proc, n):
     # ---- imaging ---------------------------------------------------------------
     imgs = []
     it, rep = IMAGING[proc]
+    rep = rep.format(side=side.lower(), Side=side)
     imgs.append(dict(imaging_id=ID("I", 3), surgery_id=sid, patient_id=pid, imaging_type=it,
                      imaging_date=(sdate - timedelta(days=R.randint(14, 60))).isoformat(), report=rep, status="Final"))
     if cabg and "missing_cxr" not in inj:
@@ -533,9 +543,9 @@ def make_case(idx, proc, n):
         he = f"{'She' if female else 'He'}"
         hpi = {
             "Laparoscopic Cholecystectomy": f"{age}-year-old {sex.lower()} with recurrent postprandial RUQ pain; ultrasound shows cholelithiasis. Presents for elective laparoscopic cholecystectomy.",
-            "Radical Mastectomy": f"{age}-year-old female with biopsy-proven invasive ductal carcinoma of the left breast. Presents for radical mastectomy after multidisciplinary tumor board review.",
-            "Knee Arthroscopy": f"{age}-year-old {sex.lower()} with mechanical right knee pain and locking; MRI shows medial meniscus tear. Presents for elective arthroscopy.",
-            "Ureteroscopy with Stent Placement": f"{age}-year-old {sex.lower()} with intermittent left flank pain; CT shows 6 mm proximal ureteral stone. Presents for ureteroscopy and stent placement.",
+            "Radical Mastectomy": f"{age}-year-old female with biopsy-proven invasive ductal carcinoma of the {side.lower()} breast. Presents for radical mastectomy after multidisciplinary tumor board review.",
+            "Knee Arthroscopy": f"{age}-year-old {sex.lower()} with mechanical {side.lower()} knee pain and locking; MRI shows medial meniscus tear. Presents for elective arthroscopy.",
+            "Ureteroscopy with Stent Placement": f"{age}-year-old {sex.lower()} with intermittent {side.lower()} flank pain; CT shows 6 mm proximal ureteral stone. Presents for ureteroscopy and stent placement.",
             "Coronary Artery Bypass Graft": f"{age}-year-old {sex.lower()} with exertional angina; catheterization shows three-vessel coronary artery disease. Presents for elective CABG.",
         }[proc]
         ros = "Denies chest pain, shortness of breath, fever, or recent illness."
@@ -569,7 +579,7 @@ def make_case(idx, proc, n):
         if "note_exam_missing" in inj:
             exam = "Physical exam: deferred to day of surgery."
             note_findings.append(C.note_finding("NOTE_EXAM_INCOMPLETE", "H&P has no heart or lung exam", [nid]))
-        plan = f"Proceed with {proc.lower()} as scheduled pending pre-operative review."
+        plan = f"Proceed with {(side + ' ' if side else '').lower()}{proc.lower()} as scheduled pending pre-operative review."
         if "consent_conflict" in inj:
             plan += " Surgical and anesthesia consents signed and in chart."
             note_findings.append(C.note_finding("NOTE_CONSENT_CONFLICT",
@@ -623,7 +633,7 @@ def main():
     write("patients.csv", T("patient"), ["patient_id", "mrn", "name", "dob", "age", "sex", "height_cm", "weight_kg", "bmi",
                                          "smoking_status", "diagnoses", "allergies", "anesthesia_complication_history"])
     write("surgical_cases.csv", [dict(c["case"], split=c["split"]) for c in cases],
-          ["surgery_id", "patient_id", "procedure", "surgery_date", "surgery_time", "surgery_location", "surgeon",
+          ["surgery_id", "patient_id", "procedure", "laterality", "surgery_date", "surgery_time", "surgery_location", "surgeon",
            "planned_anesthesia", "postoperative_location", "case_class", "split"])
     write("medications.csv", T("meds"), ["medication_id", "patient_id", "medication_name", "dose", "route", "frequency",
                                          "preop_instruction", "status"])

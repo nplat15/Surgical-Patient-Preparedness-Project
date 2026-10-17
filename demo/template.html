@@ -1,3 +1,4 @@
+<meta charset="utf-8">
 <title>Pre-Op Readiness Board</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -61,6 +62,36 @@ button:focus-visible,select:focus-visible{outline:2px solid var(--accent);outlin
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px}
 .status{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;padding:10px 14px;border-radius:8px;font-weight:600}
 .st-Ready{background:var(--ok-bg);color:var(--ok)}
+.go{display:flex;gap:18px;align-items:center;padding:22px 24px;border-radius:10px;background:var(--ok-bg);border:1px solid var(--ok)}
+.go-mark{flex:none;width:64px;height:64px}
+.go-mark circle{fill:var(--ok)}
+.go-mark path{fill:none;stroke:var(--ok-bg);stroke-width:4.5;stroke-linecap:round;stroke-linejoin:round}
+.go-title{font-size:28px;font-weight:700;color:var(--ok);letter-spacing:-.01em;line-height:1.15}
+.go-sub{margin-top:2px;color:var(--ink)}
+.go-facts{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:8px;font-size:13px;color:var(--muted)}
+.go-facts b{color:var(--ink);font-weight:600}
+@media (max-width:560px){.go{padding:16px;gap:12px}.go-mark{width:44px;height:44px}.go-title{font-size:22px}}
+@media (prefers-reduced-motion:no-preference){.go-mark path{stroke-dasharray:40;stroke-dashoffset:40;animation:draw .5s .1s ease-out forwards}}
+@keyframes draw{to{stroke-dashoffset:0}}
+.resched{--c:var(--warn);--cb:var(--warn-bg);padding:20px 22px;border-radius:10px;background:var(--cb);border:1px solid var(--c);display:grid;gap:14px}
+.resched.hard{--c:var(--bad);--cb:var(--bad-bg)}
+.rs-top{display:flex;gap:16px;align-items:center}
+.rs-mark{flex:none;width:56px;height:56px;fill:none;stroke:var(--c);stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
+.rs-mark rect{fill:var(--panel)}
+.rs-title{font-size:26px;font-weight:700;color:var(--c);letter-spacing:-.01em;line-height:1.15}
+.rs-sub{margin-top:2px}
+.rs-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+@media (max-width:760px){.rs-grid{grid-template-columns:minmax(0,1fr)}}
+.rs-items{list-style:none;margin:4px 0 8px;padding:0;display:grid;gap:4px}
+.rs-items li{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline}
+.rs-items .ck{font-weight:600;font-size:12px}
+.rs-lead{font-size:12px;color:var(--muted)}
+.rs-lead.days{color:var(--bad);font-weight:600}
+.swap{display:grid;gap:6px;margin-top:4px}
+.swap button{display:flex;gap:12px;align-items:flex-start;text-align:left;width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--panel);cursor:pointer}
+.swap button:hover{border-color:var(--ok)}
+.swap .mono{font-size:12px;color:var(--muted);padding-top:2px}
+@media (max-width:560px){.resched{padding:16px}.rs-mark{width:42px;height:42px}.rs-title{font-size:21px}}
 .st-Outstanding{background:var(--warn-bg);color:var(--warn)}
 .st-Needs{background:var(--bad-bg);color:var(--bad)}
 .st-Recommend{background:var(--hold-bg);color:var(--hold)}
@@ -81,6 +112,20 @@ button:focus-visible,select:focus-visible{outline:2px solid var(--accent);outlin
 .dec button{border:1px solid var(--line);background:var(--panel);border-radius:6px;padding:3px 10px;cursor:pointer;font-size:13px}
 .dec button[aria-pressed="true"].acc{background:var(--ok-bg);color:var(--ok);border-color:var(--ok)}
 .dec button[aria-pressed="true"].dcl{background:var(--bad-bg);color:var(--bad);border-color:var(--bad)}
+.col{display:grid;gap:12px;min-width:0}
+.todo-grp{margin-bottom:10px}
+.todo{list-style:none;margin:2px 0 0;padding:0;display:grid;gap:2px}
+.todo label{display:flex;gap:8px;align-items:flex-start;cursor:pointer;padding:2px 0}
+.todo input{margin-top:3px;accent-color:var(--accent);flex:none}
+.todo label.done{color:var(--muted);text-decoration:line-through}
+.follow{border-top:1px solid var(--soft);padding-top:8px;display:grid;gap:4px;font-size:13px}
+.follow ol{margin:0;padding-left:20px}
+.follow .clears{color:var(--muted)}
+.follow .clears b{color:var(--ink);font-weight:600}
+.follow select{max-width:280px}
+.tag{justify-self:start;font-size:12px;font-weight:600;border-radius:4px;padding:1px 8px}
+.tag.acc{background:var(--warn-bg);color:var(--warn)}
+.tag.dcl{background:var(--soft);color:var(--muted)}
 .ask{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .btn{border:0;border-radius:6px;padding:8px 14px;font-weight:600;cursor:pointer;background:var(--accent);color:var(--accent-ink)}
 .btn.ghost{background:none;color:var(--accent);border:1px solid var(--accent)}
@@ -95,6 +140,10 @@ td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:now
 td.wrap{white-space:normal}
 .badtxt{color:var(--bad);font-weight:600}
 pre.note{white-space:pre-wrap;font-family:var(--mono);font-size:12.5px;line-height:1.55;margin:0;max-width:85ch}
+.ck-head{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;justify-content:space-between;margin-bottom:4px}
+.ck-head h3{margin-bottom:0}
+td.ck{font-weight:600;white-space:nowrap}
+.ck-ok{color:var(--ok)} .ck-missing{color:var(--bad)} .ck-outdated{color:var(--warn)} .ck-pending{color:var(--warn)}
 .grade{font-size:13px;display:grid;gap:4px}
 .grade b{font-weight:600}
 .disclaimer{color:var(--muted);font-size:12px;margin-top:4px}
@@ -104,7 +153,7 @@ details summary{cursor:pointer;color:var(--accent);font-weight:600}
 
 <div class="top">
   <h1>Pre-Op Readiness Board</h1>
-  <span class="note">100 synthetic patients · teaching rules, not clinical guidelines · not for patient care</span>
+  <span class="note">Fictional patients · not for patient care</span>
 </div>
 
 <div class="shell">
@@ -112,7 +161,7 @@ details summary{cursor:pointer;color:var(--accent);font-weight:600}
     <div class="rail-head">
       <label class="label" for="proc">Procedure</label>
       <select id="proc"><option value="">All procedures</option></select>
-      <label class="label" for="statusFilter">Rules status</label>
+      <label class="label" for="statusFilter">Readiness</label>
       <select id="statusFilter"><option value="">Any status</option><option>Ready</option><option>Outstanding items</option><option>Needs clinical review</option><option>Recommend hold</option></select>
     </div>
     <div class="list" id="list" role="list"></div>
@@ -150,12 +199,20 @@ const KEY_TESTS = {
   anesthesia:["Hemoglobin","Platelets","PT","INR","PTT","Sodium","Potassium","Creatinine","eGFR","Glucose","POC glucose","HbA1c","Albumin","AST","ALT","Total bilirubin"]
 };
 
-const state = {id:"S082", role:"nurse", tab:"Readiness", ai:{}, decisions:{}, busy:null};
+const state = {id:"S082", role:"nurse", tab:"Readiness", ai:{}, decisions:{}, notes:{}, todo:{}, busy:null};
+try{ Object.assign(state.todo, JSON.parse(localStorage.getItem("preop-todo")||"{}")); }catch(e){}
 try{ Object.assign(state.decisions, JSON.parse(localStorage.getItem("preop-decisions")||"{}")); }catch(e){}
+try{ Object.assign(state.notes, JSON.parse(localStorage.getItem("preop-decision-notes")||"{}")); }catch(e){}
+function saveDecisions(){
+  try{ localStorage.setItem("preop-decisions", JSON.stringify(state.decisions));
+       localStorage.setItem("preop-decision-notes", JSON.stringify(state.notes));
+       localStorage.setItem("preop-todo", JSON.stringify(state.todo)); }catch(e){}
+}
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const cur = () => CASES.find(c => c.id === state.id);
 const stClass = s => "st-" + String(s).split(" ")[0];
+const procLabel = k => (k.laterality ? k.laterality + " " : "") + k.procedure;
 const latestLab = (c, t) => c.labs.filter(l => l.test_name === t).sort((a,b)=>b.collection_date.localeCompare(a.collection_date))[0];
 
 let sample = null;
@@ -171,7 +228,7 @@ function renderList(){
     .sort((a,b) => (a.case.surgery_date + a.case.surgery_time).localeCompare(b.case.surgery_date + b.case.surgery_time));
   $("#list").innerHTML = rows.map(c => `<button class="row" role="listitem" data-id="${c.id}" aria-current="${c.id===state.id}">
       <span class="t">${esc(c.case.surgery_date.slice(5))}<br>${esc(c.case.surgery_time)}</span>
-      <span class="n">${esc(c.patient.name)}</span><span class="p">${esc(c.case.procedure)}</span></button>`).join("") || `<p style="padding:12px" class="src">No cases match.</p>`;
+      <span class="n">${esc(c.patient.name)}</span><span class="p">${esc(procLabel(c.case))}</span></button>`).join("") || `<p style="padding:12px" class="src">No cases match.</p>`;
   $("#list").querySelectorAll(".row").forEach(b => b.onclick = () => { state.id = b.dataset.id; render(); });
 }
 
@@ -190,9 +247,9 @@ function render(){
   $("#banner").innerHTML = `<div class="who"><b>${esc(p.name)}</b><span>${esc(p.age)} y/o ${esc(p.sex)}</span>
       <span class="mono">MRN ${esc(p.mrn)}</span><span>BMI ${esc(p.bmi)}</span>
       <span class="${nka?"":"allergy"}">Allergies: ${esc(p.allergies)}</span></div>
-    <div class="meta"><span><b>${esc(k.procedure)}</b></span><span class="mono">${esc(k.surgery_date)} ${esc(k.surgery_time)}</span>
+    <div class="meta"><span><b>${esc(procLabel(k))}</b></span><span class="mono">${esc(k.surgery_date)} ${esc(k.surgery_time)}</span>
       <span>${esc(k.surgery_location)}</span><span>${esc(k.surgeon)}</span><span>Anesthesia: ${esc(k.planned_anesthesia)}</span><span>Post-op: ${esc(k.postoperative_location)}</span></div>`;
-  $("#engineNote").textContent = sample ? "Claude can run the readiness review on your Claude account." : "Showing the rules-only check. Open on claude.ai to run Claude.";
+  $("#engineNote").textContent = "";
   const v = $("#view");
   ({ "Readiness":viewReady, "Labs":viewLabs, "Medications":viewMeds, "Tests & imaging":viewTests,
      "Consents & blood":viewConsents, "H&P":viewHP })[state.tab](v, c);
@@ -205,51 +262,143 @@ function viewReady(v, c){
   const res = ai && !ai.error ? ai : null;
   const steps = res ? res : c.rules[state.role];
   const status = steps.status;
-  const headline = res ? res.headline : "Rules-only check on structured data. It cannot read the H&P.";
+  const n = steps.actions.length;
+  const headline = res ? res.headline : (n ? `${n} item${n===1?"":"s"} to address before surgery.` : "All pre-op items complete.");
   const sections = res ? res.sections : null;
   const busy = state.busy === key;
+  const clear = !n && status === "Ready";
+  const k = c.case, ckDone = c.reqs.filter(r => r.status === "ok").length;
+  const open = c.reqs.filter(r => r.status !== "ok");
+  const top = !clear && open.length >= 2 ? rescheduleCard(c, status, open) : clear ? `
+    <div class="go" role="status">
+      <svg class="go-mark" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22"/><path d="M14 24.5l7 7 13-14"/></svg>
+      <div>
+        <div class="go-title">Ready for surgery</div>
+        <div class="go-sub">Nothing outstanding for the ${ROLE_LABEL[state.role].toLowerCase()}${res && res.headline ? ` · ${esc(res.headline)}` : ""}</div>
+        <div class="go-facts"><span><b>${esc(procLabel(k))}</b></span><span class="mono">${esc(k.surgery_date)} ${esc(k.surgery_time)}</span>
+          <span>${esc(k.surgery_location)}</span><span>Checklist ${ckDone} of ${c.reqs.length} complete</span></div>
+      </div>
+    </div>`
+    : `<div class="status ${stClass(status)}"><span>${esc(status)}</span><span class="why">${esc(headline)}</span></div>`;
   v.innerHTML = `
-    <div class="status ${stClass(status)}"><span>${esc(status)}</span><span class="why">${esc(headline)}</span></div>
+    ${top}
     <div class="ask" style="margin:10px 0">
       ${sample ? `<button class="btn" id="run" ${busy?"disabled":""}>${busy ? "Claude is reading the chart…" : (res ? "Run the review again" : `Run Claude review for the ${ROLE_LABEL[state.role].toLowerCase()}`)}</button>` : ""}
-      <span class="src">${res ? `Source: Claude (${esc(res.tier||"default")}) · ${ROLE_LABEL[state.role]} view` : `Source: rules engine · ${ROLE_LABEL[state.role]} view`}</span>
+      ${res ? `<span class="src">Summary by Claude · ${ROLE_LABEL[state.role]} view</span>` : ""}
       ${ai && ai.error ? `<span class="badtxt">${esc(ai.error)}</span>` : ""}
     </div>
     <div class="grid2">
+      <div class="col">
+      ${clear ? "" : todoList(c, steps)}
       <div class="panel">
-        <h3>Summary</h3>
-        ${sections ? sections.map(s => `<div class="sec"><div class="label">${esc(s.title)}</div><ul>${(s.bullets||[]).map(b => `<li>${esc(b)}</li>`).join("")}</ul></div>`).join("")
-          : `<p class="src">${sample ? "Run the Claude review to get a written summary for this role." : "Written summaries need Claude."}</p>`}
-        <h3 style="margin-top:12px">Key values for the ${ROLE_LABEL[state.role].toLowerCase()}</h3>
+        ${sections ? `<h3>Summary</h3>` + sections.map(s => `<div class="sec"><div class="label">${esc(s.title)}</div><ul>${(s.bullets||[]).map(b => `<li>${esc(b)}</li>`).join("")}</ul></div>`).join("") : ""}
+        <h3 ${sections ? `style="margin-top:12px"` : ""}>Key values</h3>
         ${keyValues(c)}
+      </div>
       </div>
       <div class="panel">
         <h3>Next steps · ${ROLE_LABEL[state.role]}</h3>
-        ${steps.actions.length ? steps.actions.map((a,i) => actionCard(c, a, i)).join("") : `<p>No actions for this role.</p>`}
+        ${steps.actions.length ? steps.actions.map((a,i) => actionCard(c, a, i)).join("") : `<p>Nothing outstanding.</p>`}
         ${res && res.other_considerations && res.other_considerations.length ? `<div class="sec"><div class="label">Other considerations</div><ul>${res.other_considerations.map(o=>`<li>${esc(o)}</li>`).join("")}</ul></div>` : ""}
-        ${gradeBlock(c, steps)}
       </div>
     </div>
-    <details class="panel" style="margin-top:12px"><summary>Requirements that apply to this case (Module 1)</summary>
-      <div class="tbl"><table><tr><th>Item</th><th>Type</th><th>When</th><th>Valid (days)</th></tr>
-      ${c.reqs.map(r => `<tr><td>${esc(r.item)}</td><td>${esc(r.type)}</td><td>${esc(r.when)}</td><td class="num">${r.days ?? "–"}</td></tr>`).join("")}</table></div></details>
+    ${checklist(c)}
     <p class="disclaimer">Every suggestion needs human review. Decisions are saved in this browser only.</p>`;
   const run = $("#run"); if (run) run.onclick = () => runClaude(c);
+  v.querySelectorAll(".swap button").forEach(b => b.onclick = () => { state.id = b.dataset.id; render(); });
   v.querySelectorAll(".dec button").forEach(b => b.onclick = () => {
     const dk = `${c.id}|${state.role}|${b.dataset.code}`;
     state.decisions[dk] = state.decisions[dk] === b.dataset.v ? undefined : b.dataset.v;
-    try{ localStorage.setItem("preop-decisions", JSON.stringify(state.decisions)); }catch(e){}
-    render();
+    state.notes[dk] = state.decisions[dk] ? {t: new Date().toLocaleString([], {month:"short", day:"numeric", hour:"numeric", minute:"2-digit"})} : undefined;
+    saveDecisions(); render();
+  });
+  v.querySelectorAll(".todo input").forEach(x => x.onchange = () => {
+    state.todo[x.dataset.k] = x.checked || undefined;
+    saveDecisions(); render();
+  });
+  v.querySelectorAll("select.reason").forEach(s => s.onchange = () => {
+    const dk = `${c.id}|${state.role}|${s.dataset.code}`;
+    state.notes[dk] = {...(state.notes[dk]||{}), reason: s.value};
+    saveDecisions();
   });
 }
+const DECLINE_REASONS = ["Already done elsewhere","Not indicated for this patient","Patient declined","Covered by another order","Other"];
 function actionCard(c, a, i){
-  const text = DATA.catalog[a.code] ? DATA.catalog[a.code].text : a.code;
-  const d = state.decisions[`${c.id}|${state.role}|${a.code}`];
-  return `<div class="act"><div class="head"><span class="pri ${esc(a.priority)}" title="${esc(a.priority)} priority"></span><div><b>${esc(text)}</b>
+  const cat = DATA.catalog[a.code] || {text:a.code, steps:[], done:""};
+  const dk = `${c.id}|${state.role}|${a.code}`, d = state.decisions[dk], m = state.notes[dk] || {};
+  const when = m.t ? ` · ${esc(m.t)}` : "";
+  let follow = "";
+  if (d === "acc") follow = `<div class="follow"><div class="tag acc">Accepted${when} · still open · tasks added to your to-do list</div>
+      <div class="clears"><b>Closes when:</b> ${esc(cat.done)}</div></div>`;
+  else if (d === "dcl") follow = `<div class="follow"><div class="tag dcl">Declined${when}</div>
+      <label class="label" for="r-${esc(a.code)}">Reason</label>
+      <select class="reason" id="r-${esc(a.code)}" data-code="${esc(a.code)}"><option value="">Choose a reason…</option>
+      ${DECLINE_REASONS.map(r => `<option ${m.reason===r?"selected":""}>${esc(r)}</option>`).join("")}</select></div>`;
+  return `<div class="act"><div class="head"><span class="pri ${esc(a.priority)}" title="${esc(a.priority)} priority"></span><div><b>${esc(cat.text)}</b>
       <div class="why">${esc(a.reason)}</div>
-      <div>${(a.evidence_ids||[]).map(e => `<span class="chip">${esc(e)}</span>`).join("")}<span class="chip">${esc(a.code)}</span></div></div></div>
+      <div>${(a.evidence_ids||[]).map(e => `<span class="chip">${esc(e)}</span>`).join("")}</div></div></div>
     <div class="dec"><button class="acc" data-code="${esc(a.code)}" data-v="acc" aria-pressed="${d==="acc"}">Accept</button>
-      <button class="dcl" data-code="${esc(a.code)}" data-v="dcl" aria-pressed="${d==="dcl"}">Decline</button></div></div>`;
+      <button class="dcl" data-code="${esc(a.code)}" data-v="dcl" aria-pressed="${d==="dcl"}">Decline</button></div>${follow}</div>`;
+}
+// Items that usually take days to arrange (appointments, outside testing) vs. ones that can be done on the day.
+const takesDays = r => r.type === "clearance" || (r.type === "diagnostic" && r.item !== "EKG");
+const isClear = (x, role) => !x.rules[role].actions.length && x.rules[role].status === "Ready";
+function rescheduleCard(c, status, open){
+  const k = c.case, slow = open.filter(takesDays), hold = status === "Recommend hold", resched = hold || slow.length > 0;
+  const sameDay = CASES.filter(x => x.id !== c.id && x.case.surgery_date === k.surgery_date && isClear(x, state.role))
+    .sort((a,b) => (b.case.surgeon === k.surgeon) - (a.case.surgeon === k.surgeon) || a.case.surgery_time.localeCompare(b.case.surgery_time));
+  return `<div class="resched ${resched ? "hard" : "soft"}" role="status">
+    <div class="rs-top">
+      <svg class="rs-mark" viewBox="0 0 48 48" aria-hidden="true"><rect x="5" y="9" width="38" height="34" rx="5"/><path d="M5 19h38M15 5v8M33 5v8"/>${resched
+        ? `<path class="x" d="M18 26l12 11M30 26L18 37"/>` : `<path class="x" d="M24 24v7l5 4"/>`}</svg>
+      <div>
+        <div class="rs-title">${resched ? "Consider rescheduling" : "Consider moving later today"}</div>
+        <div class="rs-sub">${open.length} pre-op items are not ready for ${esc(procLabel(k))} at <span class="mono">${esc(k.surgery_date)} ${esc(k.surgery_time)}</span> · ${esc(status)}</div>
+      </div>
+    </div>
+    <div class="rs-grid">
+      <div>
+        <div class="label">Not ready</div>
+        <ul class="rs-items">${open.map(r => `<li><span class="ck ck-${r.status}">${CK[r.status][1]}</span> <b>${esc(r.item)}</b>
+          <span class="rs-lead ${takesDays(r) ? "days" : ""}">${takesDays(r) ? "Usually needs days" : "Can be done today"}</span></li>`).join("")}</ul>
+        <p class="src">${hold && !slow.length ? "A clinical finding recommends holding this case. Review with the surgeon and anesthesia before choosing a new date."
+          : resched ? `${slow.map(r => esc(r.item)).join(" and ")} ${slow.length === 1 ? "is" : "are"} unlikely to be ready in time. Talk with the surgeon about a new date.`
+          : "Everything can be done on the day. A later slot gives time to finish before the patient goes to the OR."}</p>
+      </div>
+      <div>
+        <div class="label">Ready patients on ${esc(k.surgery_date)} who could take this slot</div>
+        ${sameDay.length ? `<div class="swap">${sameDay.slice(0, 4).map(x => `<button data-id="${x.id}"><span class="mono">${esc(x.case.surgery_time)}</span>
+          <span><b>${esc(x.patient.name)}</b><br><span class="src">${esc(procLabel(x.case))} · ${esc(x.case.surgery_location)}${x.case.surgeon === k.surgeon ? " · same surgeon" : ""}</span></span></button>`).join("")}</div>`
+          : `<p class="src">No other patients that day are fully ready.</p>`}
+      </div>
+    </div>
+  </div>`;
+}
+function todoList(c, steps){
+  const accepted = steps.actions.filter(a => state.decisions[`${c.id}|${state.role}|${a.code}`] === "acc");
+  const groups = accepted.map(a => {
+    const cat = DATA.catalog[a.code] || {text:a.code, steps:[]};
+    const items = cat.steps.map((s, i) => { const k = `${c.id}|${state.role}|${a.code}|${i}`; return {s, k, on: !!state.todo[k]}; });
+    return {a, cat, items};
+  });
+  const all = groups.flatMap(g => g.items), done = all.filter(t => t.on).length;
+  const body = groups.length ? groups.map(g => {
+    const left = g.items.filter(t => !t.on).length;
+    return `<div class="todo-grp"><div class="label">${esc(g.cat.text)}</div>
+      <ul class="todo">${g.items.map(t => `<li><label class="${t.on?"done":""}"><input type="checkbox" data-k="${esc(t.k)}" ${t.on?"checked":""}> ${esc(t.s)}</label></li>`).join("")}</ul>
+      ${left ? "" : `<div class="src">Tasks done · waiting for the chart: ${esc(g.cat.done)}</div>`}</div>`;
+  }).join("") : `<p class="src">Accept a next step to add its tasks here.</p>`;
+  return `<div class="panel"><div class="ck-head"><h3>To-do · ${ROLE_LABEL[state.role]}</h3>
+    ${all.length ? `<span class="src">${done} of ${all.length} done</span>` : ""}</div>${body}</div>`;
+}
+const CK = {ok:["✓","Complete"], missing:["✗","Missing"], outdated:["!","Expired"], pending:["…","Pending"]};
+function checklist(c){
+  const done = c.reqs.filter(r => r.status === "ok").length;
+  return `<div class="panel" style="margin-top:12px">
+    <div class="ck-head"><h3>Pre-op checklist</h3><span class="src">${done} of ${c.reqs.length} complete</span></div>
+    <div class="tbl"><table><tr><th>Status</th><th>Item</th><th>On file</th><th>Needed because</th></tr>
+    ${c.reqs.map(r => `<tr><td class="ck ck-${r.status}"><span aria-hidden="true">${CK[r.status][0]}</span> ${CK[r.status][1]}</td>
+      <td><b>${esc(r.item)}</b></td><td class="wrap">${esc(r.note)}</td><td class="src">${esc(r.why)}</td></tr>`).join("")}</table></div></div>`;
 }
 function keyValues(c){
   const rows = [];
@@ -258,16 +407,6 @@ function keyValues(c){
   if (!rows.length) return `<p class="src">No values in chart.</p>`;
   return `<div class="tbl"><table><tr><th>Test</th><th>Value</th><th>Flag</th><th>Date</th></tr>${rows.map(r =>
     `<tr><td>${esc(r[0])}</td><td class="num wrap">${esc(r[1])}</td><td class="flag">${esc(r[2])}</td><td class="num">${esc(r[3])}</td></tr>`).join("")}</table></div>`;
-}
-function gradeBlock(c, steps){
-  const exp = new Set(c.key[state.role]), got = new Set(steps.actions.map(a=>a.code));
-  const hit = [...exp].filter(x=>got.has(x)), miss = [...exp].filter(x=>!got.has(x)), extra = [...got].filter(x=>!exp.has(x));
-  return `<details style="margin-top:8px"><summary>Compare with the answer key</summary><div class="grade" style="margin-top:6px">
-    <span>Expected status: <b>${esc(c.key.status)}</b> · shown: <b>${esc(steps.status)}</b></span>
-    <span>Matched ${hit.length} of ${exp.size} expected actions</span>
-    ${miss.length ? `<span class="badtxt">Missed: ${miss.map(esc).join(", ")}</span>` : ""}
-    ${extra.length ? `<span>Extra: ${extra.map(esc).join(", ")}</span>` : ""}
-    <span class="src">The answer key is never sent to Claude. Case is in the ${esc(c.split)} split.</span></div></details>`;
 }
 
 async function runClaude(c){
