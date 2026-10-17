@@ -66,7 +66,7 @@ st.markdown(
     f"""<div style="border:1px solid #ccc;border-radius:8px;padding:10px 14px;margin-bottom:8px">
     <b style="font-size:1.25em">{p['name']}</b> &nbsp; {p['age']} y/o {p['sex']} &nbsp;·&nbsp; MRN {p['mrn']} &nbsp;·&nbsp;
     BMI {p['bmi']} &nbsp;·&nbsp; <span style="color:{allergy_color}"><b>Allergies:</b> {p['allergies']}</span><br>
-    <b>{D.procedure_label(c)}</b> · {c['surgery_date']} {c['surgery_time']} · {c['surgery_location']} · {c['surgeon']} ·
+    <b>{D.procedure_label(c)}</b> · {c['surgery_date']} {c['surgery_time']} ({c.get('duration_min', '?')} min) · {c['surgery_location']} · {c['surgeon']} ·
     Anesthesia: {c['planned_anesthesia']} · Post-op: {c['postoperative_location']}</div>""",
     unsafe_allow_html=True)
 

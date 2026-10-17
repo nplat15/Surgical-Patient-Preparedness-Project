@@ -65,16 +65,16 @@ T0063,S089,P089,EKG,2026-11-05,,,"Sinus rhythm, 72 bpm; Q waves in II, III, aVF 
 T0064,S089,P089,Echocardiogram,2026-10-19,54,% EF,"LVEF 54%; normal LV size, mild inferior hypokinesis",No prior,Final
 T0065,S090,P090,EKG,2026-11-03,,,"Sinus rhythm, 72 bpm; Q waves in II, III, aVF consistent with old inferior infarct",No change,Final
 T0066,S090,P090,Echocardiogram,2026-10-12,53,% EF,"LVEF 53%; normal LV size, mild inferior hypokinesis",No prior,Final
-T0067,S091,P091,EKG,2026-11-18,,,"Sinus rhythm, 72 bpm; Q waves in II, III, aVF consistent with old inferior infarct",No change,Final
-T0068,S091,P091,Echocardiogram,2026-09-17,51,% EF,"LVEF 51%; normal LV size, mild inferior hypokinesis",No prior,Final
-T0069,S091,P091,Pulmonary function test,2026-10-30,58,% predicted FEV1,"FEV1 58% predicted, FEV1/FVC 0.66; moderate obstruction",No prior,Final
+T0067,S091,P091,EKG,2026-11-19,,,"Sinus rhythm, 72 bpm; Q waves in II, III, aVF consistent with old inferior infarct",No change,Final
+T0068,S091,P091,Echocardiogram,2026-09-18,51,% EF,"LVEF 51%; normal LV size, mild inferior hypokinesis",No prior,Final
+T0069,S091,P091,Pulmonary function test,2026-10-31,58,% predicted FEV1,"FEV1 58% predicted, FEV1/FVC 0.66; moderate obstruction",No prior,Final
 T0070,S092,P092,EKG,2026-09-16,,,"Sinus rhythm, 72 bpm; Q waves in II, III, aVF consistent with old inferior infarct",No change,Final
 T0071,S092,P092,Echocardiogram,2026-09-17,54,% EF,"LVEF 54%; normal LV size, mild inferior hypokinesis",No prior,Final
-T0072,S093,P093,EKG,2026-11-22,,,"Sinus rhythm, 72 bpm; Q waves in II, III, aVF consistent with old inferior infarct",No change,Final
-T0073,S093,P093,Echocardiogram,2026-09-12,58,% EF,"LVEF 58%; normal LV size, mild inferior hypokinesis",No prior,Final
-T0074,S093,P093,Pulmonary function test,2026-08-21,63,% predicted FEV1,"FEV1 63% predicted, FEV1/FVC 0.56; moderate obstruction",No prior,Final
-T0075,S094,P094,EKG,2026-10-01,,,"Sinus rhythm, 72 bpm; Q waves in II, III, aVF consistent with old inferior infarct",No change,Final
-T0076,S094,P094,Echocardiogram,2026-11-01,58,% EF,"LVEF 58%; normal LV size, mild inferior hypokinesis",No prior,Final
+T0072,S093,P093,EKG,2026-11-23,,,"Sinus rhythm, 72 bpm; Q waves in II, III, aVF consistent with old inferior infarct",No change,Final
+T0073,S093,P093,Echocardiogram,2026-09-13,58,% EF,"LVEF 58%; normal LV size, mild inferior hypokinesis",No prior,Final
+T0074,S093,P093,Pulmonary function test,2026-08-22,63,% predicted FEV1,"FEV1 63% predicted, FEV1/FVC 0.56; moderate obstruction",No prior,Final
+T0075,S094,P094,EKG,2026-10-02,,,"Sinus rhythm, 72 bpm; Q waves in II, III, aVF consistent with old inferior infarct",No change,Final
+T0076,S094,P094,Echocardiogram,2026-11-02,58,% EF,"LVEF 58%; normal LV size, mild inferior hypokinesis",No prior,Final
 T0077,S095,P095,EKG,2026-11-27,,,"Sinus rhythm, 72 bpm; Q waves in II, III, aVF consistent with old inferior infarct",No change,Final
 T0078,S095,P095,Echocardiogram,2026-09-05,58,% EF,"LVEF 58%; normal LV size, mild inferior hypokinesis",No prior,Final
 T0079,S095,P095,Pulmonary function test,2026-06-13,68,% predicted FEV1,"FEV1 68% predicted, FEV1/FVC 0.58; moderate obstruction",No prior,Final

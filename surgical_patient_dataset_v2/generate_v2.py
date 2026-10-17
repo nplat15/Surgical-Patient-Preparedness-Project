@@ -59,6 +59,73 @@ def side_for(sid, proc):
     return random.Random(f"{SEED}-{sid}-side").choice(["Left", "Right"]) if proc in SIDED else ""
 
 
+# Scheduled case length in minutes (min, max), rounded to 15. Long cases go first in the day.
+DURATION = {"Laparoscopic Cholecystectomy": (75, 120), "Radical Mastectomy": (150, 210), "Knee Arthroscopy": (45, 90),
+            "Ureteroscopy with Stent Placement": (45, 90), "Coronary Artery Bypass Graft": (240, 360)}
+FIRST_CASE = {"Radical Mastectomy", "Coronary Artery Bypass Graft"}
+DAY_START, DAY_END, TURNOVER = 7 * 60 + 30, 17 * 60 + 30, 30
+
+
+def hhmm(m):
+    return f"{m // 60:02d}:{m % 60:02d}"
+
+
+def case_length(sid, proc):
+    lo, hi = DURATION[proc]
+    return random.Random(f"{SEED}-{sid}-dur").randrange(lo, hi + 1, 15)
+
+
+def preferred_date(idx):
+    d = date(2026, 11, 9) + timedelta(days=(idx * 3) % 26)
+    while d.weekday() >= 5:
+        d += timedelta(days=1)
+    return d
+
+
+def assign_dates(plan):
+    """One OR per specialty: keep each case's preferred weekday if the room's day (07:30-17:30, 30 min turnover)
+    still has time, otherwise use the nearest weekday that does. plan = [(idx, proc, sid)] -> {sid: date}."""
+    first = date(2026, 11, 9)
+    days = [first + timedelta(days=i) for i in range(60) if (first + timedelta(days=i)).weekday() < 5]
+    window = [d for d in days if d <= date(2026, 12, 4)]
+    load, out = {}, {}
+    for idx, proc, sid in plan:
+        dur, want = case_length(sid, proc), preferred_date(idx)
+        near = sorted(window, key=lambda d: (abs((d - want).days), d < want)) + [d for d in days if d not in window]
+        for d in near:
+            used = load.get((d, proc))
+            if (used or 0) + (TURNOVER if used else 0) + dur <= DAY_END - DAY_START:
+                load[(d, proc)] = (used or 0) + (TURNOVER if used else 0) + dur
+                out[sid] = d
+                break
+    return out
+
+
+def schedule_rooms(cases):
+    """One room per specialty. Cases in the room run back to back (30 min turnover, done by 17:30);
+    long cases start at 07:30, shorter ones keep their drawn time when it fits."""
+    by_room = {}
+    for c in cases:
+        k = c["case"]
+        k["duration_min"] = case_length(k["surgery_id"], k["procedure"])
+        k["surgery_location"] = PROC[k["procedure"]]["loc"]
+        by_room.setdefault((k["surgery_date"], k["surgery_location"]), []).append(k)
+    for (day, room), ks in by_room.items():
+        ks.sort(key=lambda k: (k["surgery_time"], k["surgery_id"]))
+        want = lambda k: DAY_START if k["procedure"] in FIRST_CASE else int(k["surgery_time"][:2]) * 60 + int(k["surgery_time"][3:])
+        for packed in (False, True):  # try drawn times first, then pack from 07:30
+            end, starts = None, []
+            for k in ks:
+                st = DAY_START if packed and end is None else want(k) if end is None else max(want(k) if not packed else 0, end + TURNOVER)
+                starts.append(st)
+                end = st + k["duration_min"]
+            if end <= DAY_END:
+                break
+        assert end <= DAY_END, (day, room)
+        for k, st in zip(ks, starts):
+            k["surgery_time"] = hhmm(st)
+
+
 IMAGING = {
     "Laparoscopic Cholecystectomy": ("RUQ ultrasound", "Multiple gallstones; no gallbladder wall thickening or ductal dilation."),
     "Radical Mastectomy": ("Breast MRI", "2.8 cm enhancing mass, {side} breast, upper outer quadrant; biopsy-proven invasive ductal carcinoma."),
@@ -191,12 +258,9 @@ def apply_dx_effects(inj, p):
 # ---------------------------------------------------------------------------
 # build one case
 # ---------------------------------------------------------------------------
-def make_case(idx, proc, n):
+def make_case(idx, proc, n, sdate):
     info = PROC[proc]
     pid, sid = f"P{idx:03d}", f"S{idx:03d}"
-    sdate = date(2026, 11, 9) + timedelta(days=(idx * 3) % 26)
-    while sdate.weekday() >= 5:
-        sdate += timedelta(days=1)
     sex = "Female" if proc == "Radical Mastectomy" else R.choice(["Female", "Male"])
     if proc == "Coronary Artery Bypass Graft" and n == 1:
         sex = "Male"
@@ -621,19 +685,21 @@ def write(name, rows, fields):
 def main():
     TEST_N = {5, 7, 13, 18}  # 4 per procedure -> 20 held-out cases (one clean)
     cases = []
+    dates = assign_dates([(i * 20 + n + 1, proc, f"S{i * 20 + n + 1:03d}") for i, proc in enumerate(C.PROCEDURES) for n in range(20)])
     idx = 0
     for proc in C.PROCEDURES:
         for n in range(20):
             idx += 1
-            c = make_case(idx, proc, n)
+            c = make_case(idx, proc, n, dates[f"S{idx:03d}"])
             c["split"] = "test" if n in TEST_N else "dev"
             cases.append(c)
+    schedule_rooms(cases)
 
     T = lambda key: [r for c in cases for r in (c[key] if isinstance(c[key], list) else ([c[key]] if c[key] else []))]
     write("patients.csv", T("patient"), ["patient_id", "mrn", "name", "dob", "age", "sex", "height_cm", "weight_kg", "bmi",
                                          "smoking_status", "diagnoses", "allergies", "anesthesia_complication_history"])
     write("surgical_cases.csv", [dict(c["case"], split=c["split"]) for c in cases],
-          ["surgery_id", "patient_id", "procedure", "laterality", "surgery_date", "surgery_time", "surgery_location", "surgeon",
+          ["surgery_id", "patient_id", "procedure", "laterality", "surgery_date", "surgery_time", "duration_min", "surgery_location", "surgeon",
            "planned_anesthesia", "postoperative_location", "case_class", "split"])
     write("medications.csv", T("meds"), ["medication_id", "patient_id", "medication_name", "dose", "route", "frequency",
                                          "preop_instruction", "status"])

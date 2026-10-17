@@ -181,8 +181,8 @@ S092,ELEVATED_CREATININE,clinical,structured,Creatinine 1.99,NOTIFY_RENAL_FUNCTI
 S093,ABNORMAL_POTASSIUM,critical,structured,Potassium 3.0,REPEAT_BMP,CORRECT_POTASSIUM,L1409
 S093,LATEX_ALLERGY,safety,structured,Latex allergy,LATEX_PRECAUTIONS,,P093
 S093,NOTE_EXAM_INCOMPLETE,missing,note,H&P has no heart or lung exam,OBTAIN_UPDATED_HP,,N089
-S094,OUTDATED:H&P,missing,structured,H&P dated 2026-09-30 (62 days before surgery; must be within 30),OBTAIN_UPDATED_HP,,N090
-S094,OUTDATED:EKG,missing,structured,EKG dated 2026-10-01 (61 days before surgery; must be within 30),OBTAIN_EKG,,T0075
+S094,OUTDATED:H&P,missing,structured,H&P dated 2026-10-01 (62 days before surgery; must be within 30),OBTAIN_UPDATED_HP,,N090
+S094,OUTDATED:EKG,missing,structured,EKG dated 2026-10-02 (61 days before surgery; must be within 30),OBTAIN_EKG,,T0075
 S094,POSITIVE_ANTIBODY_SCREEN,clinical,structured,Antibody screen positive,CONTACT_BLOOD_BANK,ANTIBODY_BLOOD_BANK,B034
 S094,METFORMIN_NO_INSTRUCTION,missing,structured,Metformin with no pre-op instruction,METFORMIN_HOLD_INSTRUCTIONS,,M0226
 S095,MISSING:Crossmatched PRBC (2 units),missing,structured,0 units PRBC crossmatched (2 required),ORDER_CROSSMATCH,CONFIRM_BLOOD_PRODUCTS,B035

@@ -54,6 +54,8 @@ select{width:100%;padding:6px 8px;border:1px solid var(--line);border-radius:6px
 .banner .who{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline}
 .banner .who b{font-size:18px}
 .banner .meta{display:flex;flex-wrap:wrap;gap:4px 14px;color:var(--muted);font-size:13px}
+.banner .sugg{display:flex;flex-wrap:wrap;gap:2px 10px;align-items:baseline;padding:6px 10px;border-radius:6px;background:var(--cb);border-left:4px solid var(--c)}
+.banner .sugg .label{color:var(--c)}
 .allergy{color:var(--bad);font-weight:600}
 .controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
 .seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--panel)}
@@ -85,22 +87,50 @@ button:focus-visible,select:focus-visible{outline:2px solid var(--accent);outlin
 .sched-ctl select{width:auto}
 .legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--muted)}
 .legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px;background:var(--c)}
-.sched-changes ul{margin:0;padding-left:18px;display:grid;gap:3px;font-size:13px}
+.sched-body{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:12px;align-items:start}
+@media (max-width:1000px){.sched-body{grid-template-columns:minmax(0,1fr)}}
+.sched-side h3{margin-bottom:0}
+.blk{display:grid;gap:1px;width:100%;text-align:left;cursor:pointer;border:0;border-left:4px solid var(--c);background:var(--cb);border-radius:6px;padding:5px 6px;font-size:12px;line-height:1.25;overflow-wrap:anywhere}
+.blk:hover{box-shadow:0 0 0 1px var(--c)}
+.blk .st{font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--c)}
+.blk b{color:var(--ink)} .blk .pl{color:var(--muted)}
+.blk .mv{font-size:11px;font-style:italic;color:var(--ink)}
+.day-title{font-size:17px;font-weight:700}
+.cal-nav{border:1px solid var(--line);background:var(--panel);border-radius:6px;width:28px;height:28px;cursor:pointer;font-size:16px;line-height:1}
+.cal-nav:disabled{opacity:.35;cursor:default}
+.cal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;text-align:center}
+.cal-w{font-size:10.5px;font-weight:600;color:var(--muted)}
+.cal-d{position:relative;display:grid;place-items:center;aspect-ratio:1;border-radius:6px;font-size:12.5px;line-height:1.05}
+button.cal-d{border:1px solid var(--line);background:var(--panel);cursor:pointer;font-weight:600}
+button.cal-d:hover{border-color:var(--accent)}
+.cal-d small{font-size:9.5px;font-weight:400;color:var(--muted)}
+.cal-d.sel{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.cal-d.sel small{color:var(--accent-ink)}
+.cal-d i{position:absolute;top:3px;right:3px;width:6px;height:6px;border-radius:50%;background:var(--c)}
+.cal-d.off{color:var(--muted);opacity:.55}
+.cal-d.off.we{background:var(--soft)}
+.cal-key{margin-top:6px}
+.cal-key i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--c);margin:0 3px 0 6px}
+.cal-key i:first-child{margin-left:0}
+.sg-list{list-style:none;margin:6px 0;padding:0;display:grid;gap:8px}
+.sg-list li{border-left:4px solid var(--c);padding:2px 0 2px 10px;font-size:13px}
+.sg-name{border:0;background:none;padding:0;font-weight:700;color:var(--accent);cursor:pointer;text-align:left;font-size:13px}
+.sg-name:hover{text-decoration:underline}
+.sg-text{font-weight:600;color:var(--ink)}
 .og-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--panel)}
 .og{display:grid;min-width:max-content}
 .og .hd{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:8px;border-left:1px solid var(--soft);background:var(--soft)}
 .og .hd:first-child{border-left:0}
 .og .tm{font-family:var(--mono);font-size:12px;color:var(--muted);padding:8px;border-top:1px solid var(--line)}
-.og .cell{border-left:1px solid var(--soft);border-top:1px solid var(--line);padding:6px;min-height:86px;display:grid;gap:4px;align-content:start}
+.og.tl{--q:13px;position:relative}
+.og.tl .tm{padding:0 6px;border-top:1px solid var(--line);line-height:1;padding-top:2px;font-size:11px}
+.og.tl .hd{grid-row:1}
+.og .lane{border-left:1px solid var(--soft);background:repeating-linear-gradient(to bottom,var(--line) 0 1px,transparent 1px calc(var(--q) * 2),var(--soft) calc(var(--q) * 2) calc(var(--q) * 2 + 1px),transparent calc(var(--q) * 2 + 1px) calc(var(--q) * 4))}
+.og.tl .blk{margin:1px 3px;overflow:hidden;align-content:start;z-index:1}
+.blk .tt{font-family:var(--mono);font-size:10.5px;color:var(--ink)}
 .s-ready{--c:var(--ok);--cb:var(--ok-bg)} .s-open{--c:var(--muted);--cb:var(--soft)} .s-later{--c:var(--warn);--cb:var(--warn-bg)}
 .s-resched{--c:var(--bad);--cb:var(--bad-bg)} .s-hold{--c:var(--hold);--cb:var(--hold-bg)}
-.blk{display:grid;gap:1px;width:100%;text-align:left;cursor:pointer;border:0;border-left:4px solid var(--c);background:var(--cb);border-radius:6px;padding:6px 8px;font-size:12.5px;line-height:1.3}
-.blk:hover{box-shadow:0 0 0 1px var(--c)}
-.blk .st{font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--c)}
-.blk b{color:var(--ink)} .blk .pl{color:var(--muted)}
-.blk .mv{font-size:11px;font-style:italic;color:var(--ink)}
-.slot-free{border:1.5px dashed var(--line);border-radius:6px;padding:8px;font-size:12px;color:var(--muted);text-align:center}
-.dbl{font-size:11px;font-weight:700;color:var(--bad)}
 .resched{--c:var(--warn);--cb:var(--warn-bg);padding:20px 22px;border-radius:10px;background:var(--cb);border:1px solid var(--c);display:grid;gap:14px}
 .resched.hard{--c:var(--bad);--cb:var(--bad-bg)}
 .rs-top{display:flex;gap:16px;align-items:center}
@@ -108,17 +138,12 @@ button:focus-visible,select:focus-visible{outline:2px solid var(--accent);outlin
 .rs-mark rect{fill:var(--panel)}
 .rs-title{font-size:26px;font-weight:700;color:var(--c);letter-spacing:-.01em;line-height:1.15}
 .rs-sub{margin-top:2px}
-.rs-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
-@media (max-width:760px){.rs-grid{grid-template-columns:minmax(0,1fr)}}
+.rs-grid{display:grid;gap:16px}
 .rs-items{list-style:none;margin:4px 0 8px;padding:0;display:grid;gap:4px}
 .rs-items li{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline}
 .rs-items .ck{font-weight:600;font-size:12px}
 .rs-lead{font-size:12px;color:var(--muted)}
 .rs-lead.days{color:var(--bad);font-weight:600}
-.swap{display:grid;gap:6px;margin-top:4px}
-.swap button{display:flex;gap:12px;align-items:flex-start;text-align:left;width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--panel);cursor:pointer}
-.swap button:hover{border-color:var(--ok)}
-.swap .mono{font-size:12px;color:var(--muted);padding-top:2px}
 @media (max-width:560px){.resched{padding:16px}.rs-mark{width:42px;height:42px}.rs-title{font-size:21px}}
 .st-Outstanding{background:var(--warn-bg);color:var(--warn)}
 .st-Needs{background:var(--bad-bg);color:var(--bad)}
@@ -234,7 +259,7 @@ const KEY_TESTS = {
   anesthesia:["Hemoglobin","Platelets","PT","INR","PTT","Sodium","Potassium","Creatinine","eGFR","Glucose","POC glucose","HbA1c","Albumin","AST","ALT","Total bilirubin"]
 };
 
-const state = {id:"S082", role:"nurse", tab:"Readiness", view:"chart", day:null, plan:"current", ai:{}, decisions:{}, notes:{}, todo:{}, busy:null};
+const state = {id:"S082", role:"nurse", tab:"Readiness", view:"chart", day:null, month:null, ai:{}, decisions:{}, notes:{}, todo:{}, busy:null};
 try{ Object.assign(state.todo, JSON.parse(localStorage.getItem("preop-todo")||"{}")); }catch(e){}
 try{ Object.assign(state.decisions, JSON.parse(localStorage.getItem("preop-decisions")||"{}")); }catch(e){}
 try{ Object.assign(state.notes, JSON.parse(localStorage.getItem("preop-decision-notes")||"{}")); }catch(e){}
@@ -271,7 +296,7 @@ function renderList(){
 
 // ---------- view switch ----------
 $("#v-chart").onclick = () => { state.view = "chart"; render(); };
-$("#v-sched").onclick = () => { state.view = "schedule"; state.day = cur().case.surgery_date; render(); };
+$("#v-sched").onclick = () => { state.view = "schedule"; state.day = cur().case.surgery_date; state.month = state.day.slice(0, 7); render(); };
 
 // ---------- role + tabs ----------
 ["nurse","anesthesia"].forEach(r => $("#r-"+r).onclick = () => { state.role = r; render(); });
@@ -292,8 +317,10 @@ function render(){
   $("#banner").innerHTML = `<div class="who"><b>${esc(p.name)}</b><span>${esc(p.age)} y/o ${esc(p.sex)}</span>
       <span class="mono">MRN ${esc(p.mrn)}</span><span>BMI ${esc(p.bmi)}</span>
       <span class="${nka?"":"allergy"}">Allergies: ${esc(p.allergies)}</span></div>
-    <div class="meta"><span><b>${esc(procLabel(k))}</b></span><span class="mono">${esc(k.surgery_date)} ${esc(k.surgery_time)}</span>
-      <span>${esc(k.surgery_location)}</span><span>${esc(k.surgeon)}</span><span>Anesthesia: ${esc(k.planned_anesthesia)}</span><span>Post-op: ${esc(k.postoperative_location)}</span></div>`;
+    <div class="meta"><span><b>${esc(procLabel(k))}</b></span><span class="mono">${esc(k.surgery_date)} ${esc(span(toMin(k.surgery_time), +k.duration_min))}</span><span>${esc(durLabel(+k.duration_min))}</span>
+      <span>${esc(k.surgery_location)}</span><span>${esc(k.surgeon)}</span><span>Anesthesia: ${esc(k.planned_anesthesia)}</span><span>Post-op: ${esc(k.postoperative_location)}</span></div>
+    ${(sg => sg ? `<div class="sugg s-${sg.cls}"><span class="label">Suggested new time</span>
+      <b>${esc(fmtDay(sg.date))} · <span class="mono">${esc(sg.time)}</span> · ${esc(sg.room)}</b><span class="src">${esc(sg.why)}</span></div>` : "")(suggestedTime(c))}`;
   $("#engineNote").textContent = "";
   const v = $("#view");
   ({ "Readiness":viewReady, "Labs":viewLabs, "Medications":viewMeds, "Tests & imaging":viewTests,
@@ -320,7 +347,7 @@ function viewReady(v, c){
       <div>
         <div class="go-title">Ready for surgery</div>
         <div class="go-sub">Nothing outstanding for the ${ROLE_LABEL[state.role].toLowerCase()}${res && res.headline ? ` · ${esc(res.headline)}` : ""}</div>
-        <div class="go-facts"><span><b>${esc(procLabel(k))}</b></span><span class="mono">${esc(k.surgery_date)} ${esc(k.surgery_time)}</span>
+        <div class="go-facts"><span><b>${esc(procLabel(k))}</b></span><span class="mono">${esc(k.surgery_date)} ${esc(span(toMin(k.surgery_time), +k.duration_min))}</span>
           <span>${esc(k.surgery_location)}</span><span>Checklist ${ckDone} of ${c.reqs.length} complete</span></div>
       </div>
     </div>`
@@ -350,7 +377,6 @@ function viewReady(v, c){
     ${checklist(c)}
     <p class="disclaimer">Every suggestion needs human review. Decisions are saved in this browser only.</p>`;
   const run = $("#run"); if (run) run.onclick = () => runClaude(c);
-  v.querySelectorAll(".swap button").forEach(b => b.onclick = () => { state.id = b.dataset.id; render(); });
   v.querySelectorAll(".dec button").forEach(b => b.onclick = () => {
     const dk = `${c.id}|${state.role}|${b.dataset.code}`;
     state.decisions[dk] = state.decisions[dk] === b.dataset.v ? undefined : b.dataset.v;
@@ -402,94 +428,196 @@ const SCHED = {ready:"Ready", open:"Items outstanding", later:"Move later", resc
 // Distinct next steps across both roles, shown as the list icon for "Items outstanding".
 const openCount = x => new Set(ROLES.flatMap(r => x.rules[r].actions.map(a => a.code))).size;
 const ICON = {ready:"✓", open:"•", later:"↻", resched:"✕", hold:"‖"};
-const TIMES = ["07:30","09:00","10:45","12:30","14:00"];
+// Times are minutes after midnight. Each case has a start (surgery_time) and a scheduled length (duration_min).
+const toMin = t => +t.slice(0, 2) * 60 + +t.slice(3, 5);
+const hhmm = m => `${String(Math.floor(m / 60)).padStart(2, "0")}:${String(m % 60).padStart(2, "0")}`;
+const DAY_START = toMin("07:30"), DAY_END = toMin("17:30"), TURNOVER = 30;
+const durOf = x => +x.case.duration_min, startOf = x => toMin(x.case.surgery_time), endOf = x => startOf(x) + durOf(x);
+const span = (start, dur) => `${hhmm(start)}–${hhmm(start + dur)}`;
+const durLabel = m => [Math.floor(m / 60) ? `${Math.floor(m / 60)} h` : "", m % 60 ? `${m % 60} min` : ""].filter(Boolean).join(" ");
+// A case fits if it ends by DAY_END and keeps TURNOVER minutes from every busy [start, end] in the room.
+const fits = (busy, st, dur) => st >= DAY_START && st + dur <= DAY_END && busy.every(([a, b]) => st + dur + TURNOVER <= a || st >= b + TURNOVER);
+const firstFit = (busy, dur, from) => { for (let st = Math.max(from, DAY_START); st + dur <= DAY_END; st += 15) if (fits(busy, st, dur)) return st; return null; };
 const service = loc => loc.replace(/ OR \d+$/, "");
 
-// Proposed day: holds and reschedules come off, ready cases fill the earliest slots in their service,
-// cases that need same-day work go to the latest free time in their room.
+// Suggested new time shown in the patient header. Lead time is a teaching assumption:
+// about a week for an outside assessment or a clinical review, 5 days for PFTs or an echo.
+const leadDays = x => {
+  const items = x.reqs.filter(r => r.status !== "ok");
+  const hold = ROLES.some(r => x.rules[r].status === "Recommend hold");
+  return Math.max(hold ? 7 : 0, ...items.map(r => r.type === "clearance" ? 7 : takesDays(r) ? 5 : 1));
+};
+const addDays = (d, n) => { const t = new Date(d + "T12:00Z"); t.setUTCDate(t.getUTCDate() + n); return t.toISOString().slice(0, 10); };
+const weekday = d => { while ([0, 6].includes(new Date(d + "T12:00Z").getUTCDay())) d = addDays(d, 1); return d; };
+const fmtDay = d => new Date(d + "T12:00").toLocaleDateString([], {weekday:"short", month:"short", day:"numeric"});
+let PLAN = null;
+function reschedPlan(){
+  if (PLAN) return PLAN;
+  PLAN = {};
+  const busy = {};
+  CASES.forEach(x => (busy[`${x.case.surgery_date}|${x.case.surgery_location}`] ||= []).push([startOf(x), endOf(x)]));
+  CASES.filter(x => schedState(x) === "resched")
+    .sort((a,b) => (a.case.surgery_date + a.case.surgery_time).localeCompare(b.case.surgery_date + b.case.surgery_time))
+    .forEach(x => {
+      const k = x.case, dur = durOf(x), svc = service(k.surgery_location);
+      const rooms = [k.surgery_location, ...[...new Set(CASES.map(y => y.case.surgery_location))].filter(r => r !== k.surgery_location && service(r) === svc).sort()];
+      for (let d = weekday(addDays(k.surgery_date, leadDays(x))), i = 0; i < 40 && !PLAN[x.id]; d = weekday(addDays(d, 1)), i++)
+        for (const room of rooms) {
+          const b = busy[`${d}|${room}`] ||= [];
+          const st = fits(b, startOf(x), dur) ? startOf(x) : firstFit(b, dur, DAY_START);
+          if (st !== null) { PLAN[x.id] = {date:d, room, start:st, dur, lead:leadDays(x)}; b.push([st, st + dur]); break; }
+        }
+    });
+  return PLAN;
+}
+function suggestedTime(c){
+  const st = schedState(c), k = c.case;
+  if (st === "resched") {
+    const s = reschedPlan()[c.id];
+    return s && {cls:"resched", date:s.date, time:span(s.start, s.dur), room:s.room,
+      why:`allows ${s.lead >= 7 ? "about a week" : `about ${s.lead} days`} to finish outstanding items`};
+  }
+  if (st === "later") {
+    const p = proposeDay(k.surgery_date).placed.find(p => p.x.id === c.id);
+    return p && p.start > startOf(c) && {cls:"later", date:k.surgery_date, time:span(p.start, durOf(c)), room:p.room, why:"first time later today that fits the case"};
+  }
+  return null;
+}
+
+// Proposed day, room by room: holds and reschedules come off, cases after a freed block move up into it,
+// and cases that need same-day work move to the first time at least 2 hours later that still fits the day.
 function proposeDay(date){
   const day = CASES.filter(x => x.case.surgery_date === date), placed = [], off = [];
-  const groups = {};
-  day.forEach(x => (groups[service(x.case.surgery_location)] ||= []).push(x));
-  Object.values(groups).forEach(g => {
-    const slots = [...new Map(g.map(x => [x.case.surgery_location + "|" + x.case.surgery_time, {room:x.case.surgery_location, time:x.case.surgery_time}])).values()]
-      .sort((a,b) => a.time.localeCompare(b.time) || a.room.localeCompare(b.room));
+  const byRoom = {};
+  day.forEach(x => (byRoom[x.case.surgery_location] ||= []).push(x));
+  Object.entries(byRoom).forEach(([room, g]) => {
     const keep = g.filter(x => ["resched","hold"].includes(schedState(x)) ? (off.push(x), false) : true);
-    if (keep.length === g.length && slots.length === g.length && !keep.some(x => schedState(x) === "later")) {
-      g.forEach(x => placed.push({x, room:x.case.surgery_location, time:x.case.surgery_time})); return;
-    }
-    const rank = {ready:0, open:1, later:2};
-    keep.sort((a,b) => rank[schedState(a)] - rank[schedState(b)] || a.case.surgery_time.localeCompare(b.case.surgery_time));
-    keep.forEach((x, i) => {
-      let s = slots[i];
-      if (!s) {  // more cases than slots (double-booked): next free time in the same room
-        const room = x.case.surgery_location, used = new Set(placed.filter(p => p.room === room).map(p => p.time));
-        s = {room, time: TIMES.find(t => t > x.case.surgery_time && !used.has(t)) || TIMES.find(t => !used.has(t))};
-      }
-      placed.push({x, room:s.room, time:s.time});
+    const freedFrom = Math.min(...off.filter(y => y.case.surgery_location === room).map(startOf));
+    const byStart = (a, b) => startOf(a) - startOf(b);
+    let cur = null;
+    keep.filter(x => schedState(x) !== "later").sort(byStart).forEach(x => {
+      const earliest = startOf(x) > freedFrom ? Math.min(startOf(x), freedFrom) : startOf(x);
+      const st = cur === null ? earliest : Math.max(earliest, cur + TURNOVER);
+      placed.push({x, room, start:st}); cur = st + durOf(x);
     });
-  });
-  placed.filter(p => schedState(p.x) === "later").forEach(p => {
-    const used = new Set(placed.filter(q => q.room === p.room).map(q => q.time));
-    const t = [...TIMES].reverse().find(t => t > p.time && !used.has(t));
-    if (t) p.time = t;
+    keep.filter(x => schedState(x) === "later").sort(byStart).forEach(x => {
+      const busy = placed.filter(p => p.room === room).map(p => [p.start, p.start + durOf(p.x)]);
+      const st = firstFit(busy, durOf(x), startOf(x) + 120);
+      placed.push({x, room, start: st ?? startOf(x), stuck: st === null});
+    });
   });
   return {placed, off};
 }
 
+const shortRoom = r => r.replace(" OR ", " ");
+const whyNot = x => { const o = x.reqs.filter(r => r.status !== "ok"); return o.length ? o.map(r => r.item).join(", ") : "clinical finding needs review"; };
+
+// Suggested adjustments for one day, from the proposed day. They are only listed; the grid shows the real schedule.
+function daySuggestions(date){
+  const {placed, off} = proposeDay(date), sug = {};
+  off.forEach(x => {
+    const plan = reschedPlan()[x.id];
+    sug[x.id] = schedState(x) === "hold"
+      ? {x, tag:"Hold", text:"Hold for clinical review", reason:whyNot(x)}
+      : {x, tag:"Reschedule", text: plan ? `Reschedule to ${fmtDay(plan.date)}, ${span(plan.start, plan.dur)} in ${shortRoom(plan.room)}` : "Reschedule", reason:`not ready: ${whyNot(x)}`};
+  });
+  placed.filter(p => p.stuck).forEach(p => {
+    sug[p.x.id] = {x:p.x, tag:"Reschedule", text:`No later time today fits a ${durLabel(durOf(p.x))} case; consider rescheduling`, reason:`not ready: ${whyNot(p.x)}`};
+  });
+  placed.filter(p => !p.stuck && p.start !== startOf(p.x)).forEach(p => {
+    const st = schedState(p.x), up = p.start < startOf(p.x);
+    const freedBy = off.find(y => y.case.surgery_location === p.room && startOf(y) <= p.start && p.start < endOf(y));
+    sug[p.x.id] = {x:p.x, tag: up ? "Move up" : "Move later",
+      text:`Move ${up ? "up" : "later"}: ${p.x.case.surgery_time} → ${span(p.start, durOf(p.x))}`,
+      reason: st === "later" ? `time to finish ${whyNot(p.x)}` : freedBy ? `uses time freed by ${freedBy.patient.name}` : "follows the case before it"};
+  });
+  return sug;
+}
+
+function monthCalendar(caseDays, date){
+  const [y, m] = state.month.split("-").map(Number);
+  const first = `${state.month}-01`, lead = (new Date(first + "T12:00Z").getUTCDay() + 6) % 7;
+  const nDays = new Date(Date.UTC(y, m, 0)).getUTCDate();
+  const months = [...new Set(caseDays.map(d => d.slice(0, 7)))].sort(), mi = months.indexOf(state.month);
+  const label = new Date(first + "T12:00Z").toLocaleDateString([], {month:"long", year:"numeric", timeZone:"UTC"});
+  const cells = [...Array(lead).fill(`<span></span>`), ...[...Array(nDays)].map((_, i) => {
+    const d = `${state.month}-${String(i + 1).padStart(2, "0")}`, n = CASES.filter(x => x.case.surgery_date === d).length;
+    const we = [0, 6].includes(new Date(d + "T12:00Z").getUTCDay());
+    if (!n) return `<span class="cal-d off ${we ? "we" : ""}">${i + 1}</span>`;
+    const sts = CASES.filter(x => x.case.surgery_date === d).map(schedState);
+    const flag = sts.some(s => s === "resched" || s === "hold") ? "s-resched" : sts.includes("later") ? "s-later" : "";
+    return `<button class="cal-d ${d === date ? "sel" : ""}" data-day="${d}" aria-pressed="${d === date}" aria-label="${esc(fmtDay(d))}, ${n} cases${flag ? ", has suggested adjustments" : ""}">
+      ${i + 1}<small>${n}</small>${flag ? `<i class="${flag}"></i>` : ""}</button>`;
+  })];
+  return `<div class="cal">
+    <div class="cal-head"><button class="cal-nav" data-m="${months[mi - 1] || ""}" ${mi > 0 ? "" : "disabled"} aria-label="Previous month">‹</button>
+      <b>${esc(label)}</b><button class="cal-nav" data-m="${months[mi + 1] || ""}" ${mi < months.length - 1 ? "" : "disabled"} aria-label="Next month">›</button></div>
+    <div class="cal-grid">${["M","T","W","T","F","S","S"].map(w => `<span class="cal-w">${w}</span>`).join("")}${cells.join("")}</div>
+    <div class="src cal-key"><i class="s-resched"></i>reschedule or hold <i class="s-later"></i>move later · number = cases</div>
+  </div>`;
+}
+
 function renderSchedule(){
-  const days = [...new Set(CASES.map(x => x.case.surgery_date))].sort();
-  if (!state.day) state.day = days[0];
-  const date = state.day, prop = state.plan === "proposed";
+  const caseDays = [...new Set(CASES.map(x => x.case.surgery_date))].sort();
+  if (!state.day) state.day = caseDays[0];
+  const date = state.day, di = caseDays.indexOf(date);
+  if (!state.month) state.month = date.slice(0, 7);
   const day = CASES.filter(x => x.case.surgery_date === date);
-  const fmt = d => new Date(d + "T12:00").toLocaleDateString([], {weekday:"short", month:"short", day:"numeric"});
-  const {placed, off} = prop ? proposeDay(date) : {placed: day.map(x => ({x, room:x.case.surgery_location, time:x.case.surgery_time})), off: []};
   const rooms = [...new Set(day.map(x => x.case.surgery_location))].sort();
-  const origSlots = new Set(day.map(x => x.case.surgery_location + "|" + x.case.surgery_time));
   const counts = Object.keys(SCHED).map(s => [s, day.filter(x => schedState(x) === s).length]).filter(([,n]) => n);
-  const moved = p => p.room !== p.x.case.surgery_location || p.time !== p.x.case.surgery_time;
-  const shortRoom = r => r.replace(" OR ", " ");
-  const block = p => {
-    const s = schedState(p.x);
-    return `<button class="blk s-${s}" data-id="${p.x.id}"><span class="st">${SCHED[s]}</span><b>${esc(p.x.patient.name)}</b>
-      <span class="pl">${esc(procLabel(p.x.case))}</span>
-      ${prop && moved(p) ? `<span class="mv">Moved from ${esc(p.x.case.surgery_time)}${p.room !== p.x.case.surgery_location ? ", " + esc(shortRoom(p.x.case.surgery_location)) : ""}</span>` : ""}</button>`;
+  const sug = daySuggestions(date);
+  const items = Object.values(sug).sort((a,b) => startOf(a.x) - startOf(b.x));
+  // Timeline: one row per 15 minutes from 07:00 to 18:00, a label on every hour.
+  const G0 = toMin("07:00"), G1 = toMin("18:00"), STEP = 15, ROWS = (G1 - G0) / STEP;
+  const row = m => 2 + (m - G0) / STEP;
+  const overlaps = x => day.some(y => y !== x && y.case.surgery_location === x.case.surgery_location && startOf(y) < endOf(x) && startOf(x) < endOf(y));
+  const block = x => {
+    const st = schedState(x), g = sug[x.id], col = rooms.indexOf(x.case.surgery_location) + 2;
+    return `<button class="blk s-${st}" data-id="${x.id}" style="grid-column:${col};grid-row:${row(startOf(x))} / span ${durOf(x) / STEP}"
+      title="${esc(`${x.patient.name} · ${procLabel(x.case)} · ${span(startOf(x), durOf(x))} (${durLabel(durOf(x))}) · ${SCHED[st]}`)}">
+      <span class="tt">${span(startOf(x), durOf(x))}</span><span class="st">${SCHED[st]}${overlaps(x) ? " · overlap" : ""}</span><b>${esc(x.patient.name)}</b>
+      <span class="pl">${esc(procLabel(x.case))}</span>${g ? `<span class="mv">Suggested: ${esc(g.tag.toLowerCase())}</span>` : ""}</button>`;
   };
-  const cells = TIMES.map(t => `<div class="tm">${t}</div>` + rooms.map(r => {
-    const here = placed.filter(p => p.room === r && p.time === t);
-    const freed = prop && !here.length && origSlots.has(r + "|" + t);
-    return `<div class="cell">${here.length > 1 ? `<span class="dbl">Double-booked</span>` : ""}${here.map(block).join("")}${freed ? `<div class="slot-free">Open slot</div>` : ""}</div>`;
-  }).join("")).join("");
-  const why = x => { const o = x.reqs.filter(r => r.status !== "ok"); return o.length ? o.map(r => r.item).join(", ") : "Clinical finding needs review"; };
-  const changes = prop ? [
-    ...off.map(x => `<li><b>${esc(x.patient.name)}</b> (${esc(x.case.surgery_time)}, ${esc(shortRoom(x.case.surgery_location))}) · ${schedState(x) === "hold" ? "hold for clinical review" : "needs a new date"} · <span class="src">${esc(why(x))}</span></li>`),
-    ...placed.filter(moved).map(p => `<li><b>${esc(p.x.patient.name)}</b> · ${esc(p.x.case.surgery_time)} → ${esc(p.time)}${p.room !== p.x.case.surgery_location ? ` in ${esc(shortRoom(p.room))}` : ""}
-      · <span class="src">${schedState(p.x) === "later" ? "time to finish " + esc(why(p.x)) : schedState(p.x) === "ready" ? "ready, moved into an earlier slot" : "slot change"}</span></li>`)] : [];
+  const hours = [...Array((G1 - G0) / 60)].map((_, i) => G0 + i * 60);
+  const cells = hours.map(m => `<div class="tm" style="grid-column:1;grid-row:${row(m)} / span 4">${hhmm(m)}</div>`).join("")
+    + rooms.map((r, i) => `<div class="lane" style="grid-column:${i + 2};grid-row:2 / span ${ROWS}"></div>`).join("")
+    + day.map(block).join("");
+
   $("#sched").innerHTML = `
     <div class="sched-bar">
       <div class="sched-ctl">
-        <label class="label" for="day">Day</label>
-        <select id="day">${days.map(d => `<option value="${d}" ${d===date?"selected":""}>${fmt(d)} · ${CASES.filter(x => x.case.surgery_date === d).length} cases</option>`).join("")}</select>
-        <div class="seg" role="group" aria-label="Schedule version">
-          <button data-plan="current" aria-pressed="${!prop}">Current</button><button data-plan="proposed" aria-pressed="${prop}">Proposed</button>
-        </div>
+        <button class="cal-nav" id="dprev" ${di > 0 ? "" : "disabled"} aria-label="Previous surgery day">‹</button>
+        <h2 class="day-title">${esc(new Date(date + "T12:00").toLocaleDateString([], {weekday:"long", month:"long", day:"numeric"}))}</h2>
+        <button class="cal-nav" id="dnext" ${di < caseDays.length - 1 ? "" : "disabled"} aria-label="Next surgery day">›</button>
+        <span class="src">${day.length} cases</span>
       </div>
       <div class="legend">${counts.map(([s,n]) => `<span><i class="s-${s}"></i>${SCHED[s]} ${n}</span>`).join("")}</div>
     </div>
-    ${prop ? `<div class="panel sched-changes"><h3>Proposed changes · ${fmt(date)}</h3>
-      ${changes.length ? `<ul>${changes.join("")}</ul><p class="src">Suggestions only. Confirm with the surgeons, anesthesia and the patients before changing the schedule.</p>` : `<p class="src">No changes suggested. Every case on this day can go as scheduled.</p>`}</div>` : ""}
-    <div class="og-wrap"><div class="og" style="grid-template-columns:64px repeat(${rooms.length}, minmax(150px, 1fr))">
-      <div class="hd"></div>${rooms.map(r => `<div class="hd">${esc(r)}</div>`).join("")}${cells}
-    </div></div>`;
-  $("#day").onchange = e => { state.day = e.target.value; render(); };
-  $("#sched").querySelectorAll("[data-plan]").forEach(b => b.onclick = () => { state.plan = b.dataset.plan; render(); });
-  $("#sched").querySelectorAll(".blk").forEach(b => b.onclick = () => { state.id = b.dataset.id; state.view = "chart"; state.tab = "Readiness"; render(); });
+    <div class="sched-body">
+      <div class="og-wrap"><div class="og tl" style="grid-template-columns:52px repeat(${rooms.length}, minmax(112px, 1fr));grid-template-rows:auto repeat(${ROWS}, var(--q))">
+        <div class="hd"></div>${rooms.map((r, i) => `<div class="hd" style="grid-column:${i + 2}">${esc(shortRoom(r))}</div>`).join("")}${cells}
+      </div></div>
+      <aside class="sched-side">
+        <div class="panel">${monthCalendar(caseDays, date)}</div>
+        <div class="panel"><h3>Suggested adjustments</h3><div class="src">${esc(fmtDay(date))} · based on readiness</div>
+          ${items.length ? `<ul class="sg-list">${items.map(g => `<li class="s-${schedState(g.x)}">
+              <button class="sg-name" data-id="${g.x.id}">${esc(g.x.patient.name)}</button> <span class="mono src">${esc(span(startOf(g.x), durOf(g.x)))} · ${esc(shortRoom(g.x.case.surgery_location))}</span>
+              <div class="sg-text">${esc(g.text)}</div><div class="src">${esc(g.reason)}</div></li>`).join("")}</ul>`
+            : `<p>No adjustments needed. Every case can go as scheduled.</p>`}
+          <p class="src">Suggestions only. Confirm with the surgeons, anesthesia and the patients before changing the schedule.</p>
+        </div>
+      </aside>
+    </div>`;
+  const go = d => { state.day = d; state.month = d.slice(0, 7); render(); };
+  $("#dprev").onclick = () => go(caseDays[di - 1]);
+  $("#dnext").onclick = () => go(caseDays[di + 1]);
+  $("#sched").querySelectorAll(".cal-d[data-day]").forEach(b => b.onclick = () => go(b.dataset.day));
+  $("#sched").querySelectorAll(".cal-head .cal-nav").forEach(b => b.onclick = () => { state.month = b.dataset.m; render(); });
+  $("#sched").querySelectorAll(".sg-name, .blk").forEach(b => b.onclick = () => { state.id = b.dataset.id; state.view = "chart"; state.tab = "Readiness"; render(); });
 }
 
 function rescheduleCard(c, status, open){
   const k = c.case, slow = open.filter(takesDays), hold = status === "Recommend hold", resched = hold || schedState(c) === "resched";
-  const sameDay = CASES.filter(x => x.id !== c.id && x.case.surgery_date === k.surgery_date && isClear(x, state.role))
-    .sort((a,b) => (b.case.surgeon === k.surgeon) - (a.case.surgeon === k.surgeon) || a.case.surgery_time.localeCompare(b.case.surgery_time));
   return `<div class="resched ${resched ? "hard" : "soft"}" role="status">
     <div class="rs-top">
       <svg class="rs-mark" viewBox="0 0 48 48" aria-hidden="true"><rect x="5" y="9" width="38" height="34" rx="5"/><path d="M5 19h38M15 5v8M33 5v8"/>${resched
@@ -507,12 +635,6 @@ function rescheduleCard(c, status, open){
         <p class="src">${hold && !slow.length ? "A clinical finding recommends holding this case. Review with the surgeon and anesthesia before choosing a new date."
           : resched ? `${slow.map(r => esc(r.item)).join(" and ")} ${slow.length === 1 ? "is" : "are"} unlikely to be ready in time. Talk with the surgeon about a new date.`
           : "Everything can be done on the day. A later slot gives time to finish before the patient goes to the OR."}</p>
-      </div>
-      <div>
-        <div class="label">Ready patients on ${esc(k.surgery_date)} who could take this slot</div>
-        ${sameDay.length ? `<div class="swap">${sameDay.slice(0, 4).map(x => `<button data-id="${x.id}"><span class="mono">${esc(x.case.surgery_time)}</span>
-          <span><b>${esc(x.patient.name)}</b><br><span class="src">${esc(procLabel(x.case))} · ${esc(x.case.surgery_location)}${x.case.surgeon === k.surgeon ? " · same surgeon" : ""}</span></span></button>`).join("")}</div>`
-          : `<p class="src">No other patients that day are fully ready.</p>`}
       </div>
     </div>
   </div>`;

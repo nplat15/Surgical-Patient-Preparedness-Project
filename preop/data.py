@@ -91,7 +91,8 @@ def build_chart(surgery_id, data_dir=DEFAULT_DATA):
 def chart_to_packet(chart):
     """Turn the chart into compact text for the LLM. Every line keeps its record ID so answers can cite it."""
     c, p = chart["case"], chart["patient"]
-    L = [f"SCHEDULED SURGERY [{c['surgery_id']}]: {procedure_label(c)} on {c['surgery_date']} {c['surgery_time']}, "
+    length = f" (scheduled {c['duration_min']} min)" if c.get("duration_min") else ""
+    L = [f"SCHEDULED SURGERY [{c['surgery_id']}]: {procedure_label(c)} on {c['surgery_date']} {c['surgery_time']}{length}, "
          f"{c['surgery_location']}, surgeon {c['surgeon']}, planned anesthesia {c['planned_anesthesia']}, "
          f"post-op {c['postoperative_location']}",
          f"PATIENT [{p['patient_id']}]: {p['name']}, {p['age']} y/o {p['sex']}, BMI {p['bmi']}, smoking {p['smoking_status']}",

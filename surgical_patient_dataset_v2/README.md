@@ -11,7 +11,7 @@ steps based on *what the values are*, not only whether a document exists.
 | File | Contents |
 |---|---|
 | `patients.csv` | name, MRN, DOB, age, sex, height/weight/BMI, smoking, diagnoses, allergies, anesthesia history |
-| `surgical_cases.csv` | procedure, `laterality` (Left/Right for mastectomy, knee arthroscopy and ureteroscopy; blank otherwise), date/time, OR, surgeon, planned anesthesia, post-op unit, `split` (dev/test - bookkeeping, hidden from the AI) |
+| `surgical_cases.csv` | procedure, `laterality` (Left/Right for mastectomy, knee arthroscopy and ureteroscopy; blank otherwise), date/start time, `duration_min` (scheduled case length: CABG 4-6 h, mastectomy 2.5-3.5 h, cholecystectomy 75-120 min, knee arthroscopy and ureteroscopy 45-90 min; long cases start first, 30 min turnover, rooms done by 17:30), OR, surgeon, planned anesthesia, post-op unit, `split` (dev/test - bookkeeping, hidden from the AI) |
 | `medications.csv` | drug, dose, route, frequency, **pre-op instruction** (blank = none documented) |
 | `lab_results.csv` | CBC, BMP (+eGFR), coags (PT/INR/PTT), LFTs, albumin, HbA1c, POC glucose, urinalysis, urine culture, serum hCG |
 | `diagnostic_tests.csv` | EKG (with change from prior), echocardiogram (EF), PFTs (FEV1 % predicted) |
