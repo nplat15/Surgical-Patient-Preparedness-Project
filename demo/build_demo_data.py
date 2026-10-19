@@ -3,30 +3,8 @@ import csv, json, os, sys
 sys.path.insert(0, os.getcwd())
 from preop import criteria as C, data as D
 from preop.pipeline import rules_next_steps
+from preop.schedule import checklist_row
 key = {r["surgery_id"]: r for r in csv.DictReader(open("surgical_patient_dataset_v2/answer_key/ground_truth_cases.csv"))}
-WHY = {"always": "All surgical patients", "female_18_50": "Female, age 18-50", "diabetes": "Diabetic", "copd": "COPD",
-       "not_refusing_blood": "Blood may be needed",
-       "age65_or_cardiac_noncabg": "Age 65+ or cardiac history", "knee_bmp": "Age 65+ or HTN / diabetes / CKD"}
-
-def why(r, ch):
-    if r["condition"] == "always" and r["procedure"] != "All":
-        return f"Standard for {ch['case']['procedure']}"
-    return WHY.get(r["condition"], C.CONDITION_TEXT[r["condition"]])
-
-def checklist_row(r, ch):
-    s = C.requirement_status(ch, r)
-    st, on, valid = s["status"], s["on_file"], r["validity_days"]
-    if st == "ok":
-        note = on
-    elif st == "outdated":
-        note = f"{on} · expires before surgery" if r["item"] == "Type and screen" else f"{on} · older than {valid} days"
-    elif st == "pending":
-        note = on
-    elif r["item_type"] == "blood" and on:
-        note = f"{on} (2 needed)"
-    else:
-        note = "Not signed" if r["item_type"] == "consent" else "Not in chart"
-    return dict(item=r["item"], type=r["item_type"], status=st, note=note, why=why(r, ch))
 cases = []
 for c in D.list_cases():
     sid = c["surgery_id"]; ch = D.build_chart(sid)
