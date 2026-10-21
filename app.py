@@ -18,6 +18,7 @@ from html import escape as esc
 
 import pandas as pd
 import streamlit as st
+from streamlit.errors import StreamlitSecretNotFoundError
 
 from preop import criteria as C
 from preop import data as D
@@ -26,6 +27,16 @@ from preop.llm import LLM, default_provider
 from preop.pipeline import action_text, run_case
 
 st.set_page_config(page_title="Pre-Op Readiness", page_icon="🩺", layout="wide")
+
+# Streamlit Community Cloud exposes configured credentials through st.secrets,
+# while the LLM client reads environment variables.
+try:
+    app_secrets = st.secrets
+except StreamlitSecretNotFoundError:
+    app_secrets = {}
+for setting in ("PREOP_LLM_PROVIDER", "PREOP_LLM_MODEL", "ANTHROPIC_API_KEY", "OPENAI_API_KEY"):
+    if not os.environ.get(setting) and setting in app_secrets:
+        os.environ[setting] = str(app_secrets[setting])
 
 ROLE_LABEL = {"nurse": "Pre-op nurse", "anesthesia": "Anesthesiologist"}
 STATUS_CLS = {"Ready": "ready", "Outstanding items": "later", "Needs clinical review": "resched", "Recommend hold": "hold"}
