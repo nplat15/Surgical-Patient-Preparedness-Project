@@ -1,0 +1,22 @@
+# Softer palette and fonts from the demo page (demo/template.html) in place of Streamlit's
+# pure white / black with a red accent. The app follows the system light or dark setting.
+[theme]
+font = "Libre Franklin:https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap"
+codeFont = "IBM Plex Mono:https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap"
+baseRadius = "medium"
+
+[theme.light]
+primaryColor = "#0d6b73"
+backgroundColor = "#f3f6f6"
+secondaryBackgroundColor = "#e8eff0"
+textColor = "#18272c"
+linkColor = "#0d6b73"
+borderColor = "#d6e0e1"
+
+[theme.dark]
+primaryColor = "#4fb3bb"
+backgroundColor = "#0f1719"
+secondaryBackgroundColor = "#1d2b2f"
+textColor = "#e3ecee"
+linkColor = "#4fb3bb"
+borderColor = "#2a3a3e"
