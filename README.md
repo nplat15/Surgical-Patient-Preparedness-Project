@@ -45,6 +45,29 @@ python tests/test_pipeline.py
 LLM outputs are cached in `results/cache/` so re-running does not re-bill. Delete the cache after changing prompts.
 Cost guide: one case = 1 QA call + 2 calls per role (5 calls for both roles).
 
+## Deploy to Streamlit Community Cloud
+
+1. Push this repository to GitHub.
+2. Sign in at [share.streamlit.io](https://share.streamlit.io/) with GitHub and choose **Create app**.
+3. Select this repository, the `master` branch, and `app.py` as the main file path, then deploy.
+4. The app works without credentials using the rules-only engine. To enable AI reviews, open the app's **Settings → Secrets** and add one provider's settings:
+
+   ```toml
+   ANTHROPIC_API_KEY = "your-key"
+   ```
+
+   Or for OpenAI:
+
+   ```toml
+   PREOP_LLM_PROVIDER = "openai"
+   PREOP_LLM_MODEL = "your-model-name"
+   OPENAI_API_KEY = "your-key"
+   ```
+
+   Secrets are read by the app at startup. Do not commit API keys or a local `.streamlit/secrets.toml`.
+
+This is a public class-project prototype with no sign-in or access control. Use only its fictional data; do not upload real patient information. Streamlit Community Cloud's local filesystem is not durable, so saved decisions and cached LLM results may be lost when the app restarts. They are not a persistent shared workflow or audit log.
+
 ## Folder layout
 
 ```

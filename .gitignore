@@ -4,3 +4,4 @@ results/cache/
 results/cache_test/
 results/decisions.csv
 .env
+.streamlit/secrets.toml
