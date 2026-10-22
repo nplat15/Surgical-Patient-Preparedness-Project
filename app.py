@@ -39,11 +39,14 @@ CK = {"ok": ("✓", "Complete"), "missing": ("✗", "Missing"), "outdated": ("!"
 DECLINE_REASONS = ["Already done elsewhere", "Not indicated for this patient", "Patient declined", "Covered by another order", "Other"]
 DECISIONS = os.path.join(D.ROOT, "results", "decisions.csv")
 
-# Colors read on both Streamlit's light and dark themes: mid-tone ink, translucent fills.
+# Status colors from the demo page; the dark set matches the dark theme in .streamlit/config.toml.
 st.markdown("""<style>
-:root{--ok:#2e9e64;--warn:#c8820f;--bad:#d0473b;--hold:#9a4fc4;--muted:rgba(128,128,128,.95);--line:rgba(128,128,128,.3);--soft:rgba(128,128,128,.1)}
-.s-ready{--c:var(--ok);--cb:rgba(46,158,100,.14)} .s-open{--c:var(--muted);--cb:var(--soft)} .s-later{--c:var(--warn);--cb:rgba(200,130,15,.15)}
-.s-resched{--c:var(--bad);--cb:rgba(208,71,59,.14)} .s-hold{--c:var(--hold);--cb:rgba(154,79,196,.15)}
+:root{--ok:#1d7a4e;--warn:#a8650a;--bad:#b83a2f;--hold:#6d2f8f;--ok-bg:#e3f2ea;--warn-bg:#fbf0dc;--bad-bg:#f9e4e1;--hold-bg:#f0e5f6;
+  --accent:#0d6b73;--muted:#5b6d72;--line:#d6e0e1;--soft:#e8eff0}
+@media (prefers-color-scheme: dark){:root{--ok:#5cc28e;--warn:#e3a649;--bad:#ef7a6e;--hold:#c08ae0;--ok-bg:#183126;--warn-bg:#352a15;
+  --bad-bg:#3a1f1c;--hold-bg:#2d1f37;--accent:#4fb3bb;--muted:#93a6ab;--line:#2a3a3e;--soft:#1d2b2f}}
+.s-ready{--c:var(--ok);--cb:var(--ok-bg)} .s-open{--c:var(--muted);--cb:var(--soft)} .s-later{--c:var(--warn);--cb:var(--warn-bg)}
+.s-resched{--c:var(--bad);--cb:var(--bad-bg)} .s-hold{--c:var(--hold);--cb:var(--hold-bg)}
 .banner{border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin-bottom:8px;line-height:1.6}
 .banner .nm{font-size:1.3em;font-weight:700;margin-right:10px} .banner .mt{color:var(--muted);font-size:.92em}
 .allergy{color:var(--bad);font-weight:600}
@@ -71,18 +74,24 @@ table.ck th{font-size:.75em;letter-spacing:.06em;text-transform:uppercase;color:
 .cal{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;text-align:center;font-size:.85em}
 .cal .w{font-size:.75em;font-weight:600;color:var(--muted)}
 .cal .d{position:relative;border-radius:6px;padding:4px 0;line-height:1.1}
-.cal .d.has{border:1px solid var(--line);font-weight:600} .cal .d.sel{background:#0d6b73;color:#fff;border-color:#0d6b73}
+.cal .d.has{border:1px solid var(--line);font-weight:600} .cal .d.sel{background:var(--accent);color:#fff;border-color:var(--accent)}
 .cal .d small{display:block;font-size:.72em;font-weight:400;opacity:.75} .cal .d.off{opacity:.45}
 .cal .d i{position:absolute;top:3px;right:3px;width:6px;height:6px;border-radius:50%;background:var(--c)}
 .sg{border-left:4px solid var(--c);padding:2px 0 2px 10px;margin:8px 0;font-size:.92em}
 .src{color:var(--muted);font-size:.85em}
+.st-key-plist [data-testid="stVerticalBlock"]{gap:3px}
+.st-key-plist button{justify-content:flex-start;padding:6px 10px;min-height:0}
+.st-key-plist button p{text-align:left;font-size:.86em;line-height:1.35}
 </style>""", unsafe_allow_html=True)
 
-BOARD = S.by_id()
-DAYS = sorted({x["case"]["surgery_date"] for x in BOARD.values()})
 ss = st.session_state
+ss.setdefault("moves", {})  # demo schedule changes for this browser session: sid -> (date, time, room, kind)
+MOVES = tuple(sorted((sid, *mv) for sid, mv in ss.moves.items()))
+BOARD = {x["id"]: x for x in S.cases(MOVES)}
+DAYS = sorted({x["case"]["surgery_date"] for x in BOARD.values()})
 ss.setdefault("sid", "S082")
 ss.setdefault("view", "Patient chart")
+ss.setdefault("role", "nurse")
 ss.setdefault("day", BOARD[ss.sid]["case"]["surgery_date"])
 ss.setdefault("results", {})
 ss.setdefault("dec_time", {})
@@ -97,41 +106,57 @@ def open_day(day):
     ss.day = day
 
 
+def pick(sid):
+    ss.sid = sid
+
+
+def apply_move(sid, to):
+    ss.moves[sid] = (to["date"], to["time"], to["room"], to["kind"])
+
+
+def apply_all(items):
+    for g in items:
+        if g["to"]:
+            apply_move(g["x"]["id"], g["to"])
+
+
+def undo_move(sid):
+    ss.moves.pop(sid, None)
+
+
+def moved_text(x):
+    """'Rescheduled from Mon Oct 19, 07:30 in Cardiac 1' and the like, or ''."""
+    m = x.get("moved")
+    if not m:
+        return ""
+    if m["kind"] == "hold":
+        return f"Taken off the schedule (was {S.fmt_day(m['date'])}, {m['time']})"
+    verb = {"resched": "Rescheduled", "later": "Moved later", "up": "Moved up"}[m["kind"]]
+    src = f"{S.fmt_day(m['date'])}, {m['time']}" if m["date"] != x["case"]["surgery_date"] else m["time"]
+    room = f" in {S.short_room(m['room'])}" if m["room"] != x["case"]["surgery_location"] else ""
+    return f"{verb} from {src}{room}"
+
+
+def keep(k, fallback):
+    """Segmented controls can be clicked off; keep the last choice instead of None."""
+    if ss.get(k) is None:
+        ss[k] = ss.get(f"_{k}", fallback)
+    ss[f"_{k}"] = ss[k]
+
+
 def html(s):
     st.markdown(s, unsafe_allow_html=True)
 
 
 # ---------------------------------------------------------------------------
-# Sidebar
+# Header: title and view switch, as on the demo page
 # ---------------------------------------------------------------------------
-st.sidebar.title("🩺 Pre-Op Readiness")
-view = st.sidebar.radio("View", ["Patient chart", "OR schedule"], key="view", horizontal=True)
-role = st.sidebar.radio("I am the…", list(ROLE_LABEL), format_func=ROLE_LABEL.get, key="role")
+top = st.columns([3, 2], vertical_alignment="center")
+top[0].markdown("### 🩺 Pre-Op Readiness Board")
+view = top[1].segmented_control("View", ["Patient chart", "OR schedule"], key="view", label_visibility="collapsed",
+                                on_change=keep, args=("view", "Patient chart"))
+st.caption("Fictional patients · teaching rules, not clinical guidelines · not for patient care")
 provider = default_provider()
-engines = ["AI (LLM)", "Rules only"] if provider != "mock" else ["Rules only", "AI (LLM)"]
-engine = "llm" if st.sidebar.selectbox("Engine", engines).startswith("AI") else "rules"
-if engine == "llm" and provider == "mock":
-    st.sidebar.warning("No API key found. AI mode will show the rules-only output.")
-
-if view == "Patient chart":
-    st.sidebar.divider()
-    sf = st.sidebar.selectbox("Readiness", [""] + list(S.SCHED), format_func=lambda s: S.SCHED.get(s, "Any status"))
-    pf = st.sidebar.multiselect("Procedure", C.PROCEDURES)
-    split = st.sidebar.selectbox("Cases", ["all", "dev", "test"])
-    rows = [x for x in BOARD.values() if (not sf or x["state"] == sf) and (not pf or x["case"]["procedure"] in pf)
-            and (split == "all" or x["split"] == split)]
-    ids = [x["id"] for x in sorted(rows, key=lambda x: (x["case"]["surgery_date"], x["case"]["surgery_time"]))]
-    if ss.sid not in ids:
-        ids.insert(0, ss.sid)
-
-    def label(sid):
-        x = BOARD[sid]
-        tag = f"{S.open_count(x)} open" if x["state"] == "open" else S.SCHED[x["state"]]
-        return f"{ICON[x['state']]} {x['case']['surgery_date'][5:]} {x['case']['surgery_time']} · {x['patient']['name']} · {tag}"
-
-    st.sidebar.selectbox(f"Patient ({len(rows)} cases)", ids, key="sid", format_func=label)
-    st.sidebar.caption("🟢 Ready · ⚪ items outstanding · 🟠 move later · 🔴 reschedule · 🟣 clinical hold")
-st.sidebar.caption("Fictional patients · teaching rules, not clinical guidelines · not for patient care")
 
 
 # ---------------------------------------------------------------------------
@@ -141,7 +166,8 @@ def month_calendar(day):
     y, m = int(day[:4]), int(day[5:7])
     by_day = {}
     for x in BOARD.values():
-        by_day.setdefault(x["case"]["surgery_date"], []).append(x["state"])
+        if not x.get("off"):
+            by_day.setdefault(x["case"]["surgery_date"], []).append(x["state"])
     cells = [f"<span class='w'>{w}</span>" for w in "MTWTFSS"]
     cells += ["<span></span>"] * calendar.monthrange(y, m)[0]
     for i in range(1, calendar.monthrange(y, m)[1] + 1):
@@ -177,7 +203,8 @@ def timeline(cases, sugg):
             f"grid-row:{row(S.start(x))} / span {S.dur(x) // step}'><span class='tt'>{S.span(S.start(x), S.dur(x))}</span>"
             f"<span class='st'>{S.SCHED[stt]}{' · overlap' if overlaps(x) else ''}</span><b>{esc(x['patient']['name'])}</b>"
             f"<span class='pl'>{esc(D.procedure_label(x['case']))}</span>"
-            + (f"<span class='mv'>Suggested: {esc(g['tag'].lower())}</span>" if g else "") + "</div>")
+            + (f"<span class='mv'>Suggested: {esc(g['tag'].lower())}</span>" if g else "")
+            + (f"<span class='mv'>↪ {esc(moved_text(x))}</span>" if x.get("moved") else "") + "</div>")
     return (f"<div class='og-wrap'><div class='og' style='grid-template-columns:52px repeat({len(rooms)}, minmax(118px, 1fr));"
             f"grid-template-rows:auto repeat({nrows}, var(--q))'>{''.join(parts)}</div></div>")
 
@@ -186,8 +213,8 @@ def schedule_view():
     if ss.day not in DAYS:
         ss.day = DAYS[0]
     di = DAYS.index(ss.day)
-    cases = [x for x in BOARD.values() if x["case"]["surgery_date"] == ss.day]
-    items = S.day_suggestions(ss.day)
+    cases = [x for x in BOARD.values() if x["case"]["surgery_date"] == ss.day and not x.get("off")]
+    items = S.day_suggestions(ss.day, MOVES)
     sugg = {g["x"]["id"]: g for g in items}
 
     nav = st.columns([0.6, 5, 0.6, 3], vertical_alignment="center")
@@ -196,7 +223,7 @@ def schedule_view():
     nav[2].button("›", disabled=di == len(DAYS) - 1, on_click=open_day, args=(DAYS[min(di + 1, len(DAYS) - 1)],), help="Next surgery day")
 
     def day_label(d):
-        sts = [x["state"] for x in BOARD.values() if x["case"]["surgery_date"] == d]
+        sts = [x["state"] for x in BOARD.values() if x["case"]["surgery_date"] == d and not x.get("off")]
         flag = " 🔴" if {"resched", "hold"} & set(sts) else " 🟠" if "later" in sts else ""
         return f"{S.fmt_day(d)} · {len(sts)} cases{flag}"
     nav[3].selectbox("Go to day", DAYS, key="day", format_func=day_label, label_visibility="collapsed")
@@ -222,13 +249,31 @@ def schedule_view():
             st.caption(f"{S.fmt_day(ss.day)} · based on readiness")
             if not items:
                 st.write("No adjustments needed. Every case can go as scheduled.")
+            elif sum(bool(g["to"]) for g in items) > 1:
+                st.button(f"Apply all {sum(bool(g['to']) for g in items)} suggestions", type="primary", width="stretch",
+                          on_click=apply_all, args=(items,))
             for g in items:
                 x = g["x"]
                 html(f"<div class='sg s-{x['state']}'><b>{esc(x['patient']['name'])}</b> "
                      f"<span class='src'>{S.span(S.start(x), S.dur(x))} · {esc(S.short_room(x['case']['surgery_location']))}</span>"
                      f"<div><b>{esc(g['text'])}</b></div><div class='src'>{esc(g['reason'])}</div></div>")
-                st.button("Open chart", key=f"sg_{x['id']}", on_click=open_chart, args=(x["id"],))
+                b = st.columns(2)
+                if g["to"]:
+                    b[0].button("Take off schedule" if g["to"]["kind"] == "hold" else g["tag"], key=f"ap_{x['id']}",
+                                on_click=apply_move, args=(x["id"], g["to"]), width="stretch")
+                b[1].button("Open chart", key=f"sg_{x['id']}", on_click=open_chart, args=(x["id"],), width="stretch")
             st.caption("Suggestions only. Confirm with the surgeons, anesthesia and the patients before changing the schedule.")
+        done = [x for x in BOARD.values() if x.get("moved") and ss.day in (x["case"]["surgery_date"], x["moved"]["date"])]
+        if done:
+            with st.container(border=True):
+                st.markdown("**Changes made**")
+                for x in sorted(done, key=S.start):
+                    r = st.columns([3, 1], vertical_alignment="center")
+                    r[0].markdown(f"**{x['patient']['name']}** · {S.fmt_day(x['case']['surgery_date'])} {x['case']['surgery_time']}  \n"
+                                  f"<span class='src'>{esc(moved_text(x))}</span>", unsafe_allow_html=True)
+                    r[1].button("Undo", key=f"un_{x['id']}", on_click=undo_move, args=(x["id"],))
+        if ss.moves:
+            st.button(f"Reset all schedule changes ({len(ss.moves)})", on_click=ss.moves.clear)
 
 
 if view == "OR schedule":
@@ -236,205 +281,249 @@ if view == "OR schedule":
     st.stop()
 
 # ---------------------------------------------------------------------------
-# Patient chart
+# Patient chart: scrolling patient list on the left, chart on the right
 # ---------------------------------------------------------------------------
-sid = ss.sid
-x = BOARD[sid]
-chart = D.build_chart(sid)
-c, p = chart["case"], chart["patient"]
-proc = D.procedure_label(c)
-when = f"{c['surgery_date']} {S.span(S.start(x), S.dur(x))}"
-
-sg = S.suggested_time(x)
-html(f"""<div class="banner"><span class="nm">{esc(p['name'])}</span>{esc(p['age'])} y/o {esc(p['sex'])} · MRN {esc(p['mrn'])} · BMI {esc(p['bmi'])} ·
-  <span class="{'' if p['allergies'].startswith('No known') else 'allergy'}">Allergies: {esc(p['allergies'])}</span><br>
-  <span class="mt"><b>{esc(proc)}</b> · {when} ({S.dur_label(S.dur(x))}) · {esc(c['surgery_location'])} · {esc(c['surgeon'])} ·
-  Anesthesia: {esc(c['planned_anesthesia'])} · Post-op: {esc(c['postoperative_location'])}</span>
-  {f'''<div class="sugg s-{sg['cls']}"><span class="lb">Suggested new time</span><b>{S.fmt_day(sg['date'])} · {sg['time']} · {esc(sg['room'])}</b>
-  <span class="src"> {esc(sg['why'])}</span></div>''' if sg else ''}</div>""")
-
-tabs = st.tabs(["Pre-Op Readiness", "Labs", "Medications", "Tests & Imaging", "Consents & Blood", "H&P"])
-
-
-def top_card(status, n, headline):
-    """Ready card, reschedule card, or a plain status bar, as on the demo page."""
-    open_items = S.open_reqs(x)
-    done = len(x["reqs"]) - len(open_items)
-    if not n and status == "Ready":
-        return (f"<div class='card s-ready'><div class='ti'>✓ Ready for surgery</div>"
-                f"<div class='sub'>Nothing outstanding for the {ROLE_LABEL[role].lower()}</div>"
-                f"<div class='fx'><b>{esc(proc)}</b> · {when} · {esc(c['surgery_location'])} · Checklist {done} of {len(x['reqs'])} complete</div></div>")
-    if len(open_items) >= 2:
-        slow = [r for r in open_items if S.takes_days(r)]
-        hold = status == "Recommend hold"
-        hard = hold or x["state"] == "resched"
-        note = ("A clinical finding recommends holding this case. Review with the surgeon and anesthesia before choosing a new date."
-                if hold and not slow else
-                f"{' and '.join(r['item'] for r in slow)} {'is' if len(slow) == 1 else 'are'} unlikely to be ready in time. Talk with the surgeon about a new date."
-                if hard else "Everything can be done on the day. A later slot gives time to finish before the patient goes to the OR.")
-        items = "".join(f"<li><span class='ck-{r['status']}'>{CK[r['status']][1]}</span> <b>{esc(r['item'])}</b>"
-                        f"<span class='lead {'days' if S.takes_days(r) else ''}'>{'Usually needs days' if S.takes_days(r) else 'Can be done today'}</span></li>"
-                        for r in open_items)
-        return (f"<div class='card s-{'resched' if hard else 'later'}'><div class='ti'>{'Consider rescheduling' if hard else 'Consider moving later today'}</div>"
-                f"<div class='sub'>{len(open_items)} pre-op items are not ready for {esc(proc)} at {c['surgery_date']} {c['surgery_time']} · {esc(status)}</div>"
-                f"<ul>{items}</ul><div class='src'>{esc(note)}</div></div>")
-    return f"<div class='bar s-{STATUS_CLS.get(status, 'open')}'>{esc(status)} <span>· {esc(headline)}</span></div>"
-
-
-def checklist_html():
-    done = sum(r["status"] == "ok" for r in x["reqs"])
-    rows = "".join(f"<tr><td class='ck-{r['status']}'><b>{CK[r['status']][0]} {CK[r['status']][1]}</b></td><td><b>{esc(r['item'])}</b></td>"
-                   f"<td>{esc(r['note'])}</td><td class='src'>{esc(r['why'])}</td></tr>" for r in x["reqs"])
-    return (f"<b>Pre-op checklist</b> <span class='src'>· {done} of {len(x['reqs'])} complete</span>"
-            f"<table class='ck'><tr><th>Status</th><th>Item</th><th>On file</th><th>Needed because</th></tr>{rows}</table>")
-
-
-def stamp(dk):
-    ss.dec_time[dk] = datetime.now().strftime("%b %d %H:%M")
-
-
-with tabs[0]:
-    key = (sid, role, engine)
-    if key not in ss.results and not (engine == "llm" and provider != "mock"):
-        ss.results[key] = run_case(sid, role=role, engine=engine)
-    res = ss.results.get(key)
-    if engine == "llm" and provider != "mock":
-        if st.button("Run the AI review again" if res else f"Run AI readiness review for the {ROLE_LABEL[role].lower()}", type="primary"):
-            with st.spinner("Reading the chart (Modules 2-4)…"):
-                ss.results[key] = res = run_case(sid, role=role, engine="llm", llm=LLM(), use_cache=res is None)
-    if res is None:
-        res = run_case(sid, role=role, engine="rules")
-        st.caption("Showing the rules-only check until the AI review is run.")
-    steps, summ = res["next_steps"], res["summary"]
-    n = len(steps["actions"])
-    html(top_card(steps["status"], n, summ.get("headline") or f"{n} item{'s' * (n != 1)} to address before surgery."))
-    st.caption(f"{ROLE_LABEL[role]} view · engine: {res['engine']} · {steps.get('status_reason', '')}")
-
-    dkey = lambda code: f"dec|{sid}|{role}|{code}"
-    left, right = st.columns([1, 1.15])
-    with left:
-        accepted = [a for a in steps["actions"] if ss.get(dkey(a["code"])) == "Accept"]
-        if n:
-            with st.container(border=True):
-                tasks = [(a, i, s) for a in accepted for i, s in enumerate(C.ACTION_FOLLOW_UP.get(a["code"], ([], ""))[0])]
-                done = sum(bool(ss.get(f"todo|{sid}|{role}|{a['code']}|{i}")) for a, i, _ in tasks)
-                st.markdown(f"**To-do · {ROLE_LABEL[role]}**" + (f" <span class='src'>· {done} of {len(tasks)} done</span>" if tasks else ""),
-                            unsafe_allow_html=True)
-                if not accepted:
-                    st.caption("Accept a next step to add its tasks here.")
-                for a in accepted:
-                    todo_steps, closes = C.ACTION_FOLLOW_UP.get(a["code"], ([], ""))
-                    st.markdown(f"<span class='src'><b>{esc(action_text(a['code']))}</b></span>", unsafe_allow_html=True)
-                    for i, s in enumerate(todo_steps):
-                        st.checkbox(s, key=f"todo|{sid}|{role}|{a['code']}|{i}")
-                    if all(ss.get(f"todo|{sid}|{role}|{a['code']}|{i}") for i in range(len(todo_steps))):
-                        st.caption(f"Tasks done · waiting for the chart: {closes}")
-        with st.container(border=True):
-            for sec in summ.get("sections", []):
-                st.markdown(f"**{sec['title']}**")
-                for b in sec.get("bullets", []):
-                    st.markdown(f"- {b}")
-            st.markdown("**Key values**")
-            rows = []
-            for t in KEY_TESTS[role]:
-                lab = C.latest_lab(chart, t)
-                if lab:
-                    rows.append(dict(Test=t, Value=f"{lab['result_value']} {'' if lab['unit'] == 'text' else lab['unit']}",
-                                     Flag=lab["flag"], Date=lab["collection_date"], ID=lab["lab_id"]))
-            for d in chart["diagnostics"]:
-                if role == "anesthesia" or d["test_type"] == "EKG":
-                    rows.append(dict(Test=d["test_type"], Value=(f"{d['result_value']} {d['result_unit']}".strip() or d["interpretation"]),
-                                     Flag="New" if d["compared_to_prior"] == "New finding" else "", Date=d["test_date"], ID=d["test_id"]))
-            if rows:
-                st.dataframe(pd.DataFrame(rows).style.map(lambda v: "color:#d0473b;font-weight:600" if v in ("H", "L", "Critical", "Abnormal", "New") else "",
-                                                          subset=["Flag"]), hide_index=True, width="stretch")
-            else:
-                st.caption("No values in chart.")
-
-    with right:
-        st.markdown(f"**Next steps · {ROLE_LABEL[role]}**")
-        if not n:
-            st.success("Nothing outstanding.")
-        for a in steps["actions"]:
-            dk = dkey(a["code"])
-            badge = {"high": "🔴", "medium": "🟠", "low": "🟢"}.get(a.get("priority"), "⚪")
-            with st.container(border=True):
-                st.markdown(f"{badge} **{action_text(a['code'])}**")
-                st.caption(f"{a.get('reason', '')} · Evidence: {', '.join(a.get('evidence_ids', [])) or '-'}")
-                dec = st.radio("Decision", ["Pending", "Accept", "Decline"], horizontal=True, key=dk,
-                               label_visibility="collapsed", on_change=stamp, args=(dk,))
-                t = f" · {ss.dec_time[dk]}" if dk in ss.dec_time else ""
-                if dec == "Accept":
-                    st.markdown(f"<span class='s-later' style='color:var(--c);font-weight:600'>Accepted{t} · still open · tasks added to your to-do list</span>"
-                                f"<br><span class='src'><b>Closes when:</b> {esc(C.ACTION_FOLLOW_UP.get(a['code'], ([], ''))[1])}</span>",
-                                unsafe_allow_html=True)
-                elif dec == "Decline":
-                    st.caption(f"Declined{t}")
-                    st.selectbox("Reason", [""] + DECLINE_REASONS, key=f"why|{dk}", format_func=lambda r: r or "Choose a reason…")
-        if steps.get("other_considerations"):
-            st.markdown("**Other considerations**")
-            for o in steps["other_considerations"]:
-                st.markdown(f"- {o}")
-        if n and st.button("Save decisions"):
-            os.makedirs(os.path.dirname(DECISIONS), exist_ok=True)
-            new = not os.path.exists(DECISIONS)
-            with open(DECISIONS, "a", newline="") as f:
-                w = csv.writer(f)
-                if new:
-                    w.writerow(["timestamp", "surgery_id", "role", "engine", "action_code", "decision", "decline_reason"])
-                for a in steps["actions"]:
-                    dk = dkey(a["code"])
-                    w.writerow([datetime.now().isoformat(timespec="seconds"), sid, role, res["engine"], a["code"],
-                                ss.get(dk, "Pending"), ss.get(f"why|{dk}", "")])
-            st.success(f"Decisions saved to {os.path.relpath(DECISIONS, D.ROOT)}.")
-
+rail, main = st.columns([1, 3.2], gap="medium")
+with rail:
     with st.container(border=True):
-        html(checklist_html())
-    if res.get("qa"):
-        with st.expander("Module 2 answers (question answering, with evidence)"):
-            for a in res["qa"].get("answers", []):
-                st.markdown(f"**{a.get('question_id')}** {a.get('answer')}  \n`{', '.join(a.get('evidence_ids', []))}`")
-    st.caption("Every suggestion needs human review.")
+        pf = st.selectbox("Procedure", [""] + list(C.PROCEDURES), format_func=lambda s: s or "All procedures")
+        sf = st.selectbox("Readiness", [""] + list(S.SCHED), format_func=lambda s: S.SCHED.get(s, "Any status"))
+        rows = sorted((x for x in BOARD.values() if (not pf or x["case"]["procedure"] == pf) and (not sf or x["state"] == sf)),
+                      key=lambda x: (x["case"]["surgery_date"], x["case"]["surgery_time"]))
+        st.caption(f"{len(rows)} cases")
+        with st.container(height=720, border=False, key="plist"):
+            for x in rows:
+                tag = f"{S.open_count(x)} open" if x["state"] == "open" else S.SCHED[x["state"]]
+                tag += " · off schedule" if x.get("off") else " · ↪ moved" if x.get("moved") else ""
+                st.button(f"{ICON[x['state']]} **{x['patient']['name']}** · {x['case']['surgery_date'][5:]} {x['case']['surgery_time']} · "
+                          f"{D.procedure_label(x['case'])} · {tag}", key=f"pt_{x['id']}", on_click=pick, args=(x["id"],),
+                          type="primary" if x["id"] == ss.sid else "secondary", width="stretch")
+            if not rows:
+                st.caption("No cases match.")
+        st.caption("🟢 Ready · ⚪ items outstanding · 🟠 move later · 🔴 reschedule · 🟣 clinical hold")
 
-# ---------------------------------------------------------------------------
-# Chart tabs
-# ---------------------------------------------------------------------------
-def show(rows, cols, hl=None, title=None):
-    if title:
-        st.markdown(f"**{title}**")
-    if not rows:
-        st.caption("None in chart.")
-        return
-    df = pd.DataFrame(rows)[cols]
-    if hl:
-        bad = {"H", "L", "Critical", "Abnormal", "Missing", "Refused", "Pending", "Positive", "New finding"}
-        df = df.style.map(lambda v: "color:#d0473b;font-weight:600" if v in bad else "", subset=hl)
-    st.dataframe(df, hide_index=True, width="stretch")
+with main:
+    sid = ss.sid
+    x = BOARD[sid]
+    chart = D.build_chart(sid)
+    c = dict(chart["case"], **{k: x["case"][k] for k in ("surgery_date", "surgery_time", "surgery_location")})  # after any move
+    p = chart["patient"]
+    proc = D.procedure_label(c)
+    when = f"{c['surgery_date']} {S.span(S.start(x), S.dur(x))}"
+
+    sg = S.suggested_time(x, MOVES)
+    html(f"""<div class="banner"><span class="nm">{esc(p['name'])}</span>{esc(p['age'])} y/o {esc(p['sex'])} · MRN {esc(p['mrn'])} · BMI {esc(p['bmi'])} ·
+      <span class="{'' if p['allergies'].startswith('No known') else 'allergy'}">Allergies: {esc(p['allergies'])}</span><br>
+      <span class="mt"><b>{esc(proc)}</b> · {when} ({S.dur_label(S.dur(x))}) · {esc(c['surgery_location'])} · {esc(c['surgeon'])} ·
+      Anesthesia: {esc(c['planned_anesthesia'])} · Post-op: {esc(c['postoperative_location'])}</span>
+      {f'''<div class="sugg s-{sg['cls']}"><span class="lb">Suggested new time</span><b>{S.fmt_day(sg['date'])} · {sg['time']} · {esc(sg['room'])}</b>
+      <span class="src"> {esc(sg['why'])}</span></div>''' if sg else ''}
+      {f'''<div class="sugg s-{x['state']}"><span class="lb">Schedule changed</span><b>{esc(moved_text(x))}</b></div>''' if x.get('moved') else ''}</div>""")
+    act = st.columns([1.6, 1.6, 3])
+    if sg:
+        act[0].button(f"Reschedule to {S.fmt_day(sg['date'])}, {sg['to']['time']}" if sg["cls"] == "resched" else f"Move to {sg['to']['time']} today",
+                      key="sg_apply", type="primary", on_click=apply_move, args=(sid, sg["to"]), width="stretch")
+    elif x["state"] == "hold" and not x.get("moved"):
+        act[0].button("Take off schedule (hold)", key="sg_hold", on_click=apply_move,
+                      args=(sid, dict(date=None, time=None, room=None, kind="hold")), width="stretch")
+    if x.get("moved"):
+        act[0].button("Undo schedule change", key="sg_undo", on_click=undo_move, args=(sid,), width="stretch")
+    if sg or x.get("moved"):
+        act[1].button("See it on the OR schedule", key="sg_sched", width="stretch",
+                      on_click=lambda: ss.update(view="OR schedule", day=x["case"]["surgery_date"]))
+
+    ctl = st.columns([2, 1.3], vertical_alignment="center")
+    role = ctl[0].segmented_control("Role", list(ROLE_LABEL), format_func=ROLE_LABEL.get, key="role",
+                                    label_visibility="collapsed", on_change=keep, args=("role", "nurse"))
+    ai = ctl[1].toggle("AI review (LLM)", value=provider != "mock", key="ai")
+    engine = "llm" if ai else "rules"
+    if ai and provider == "mock":
+        ctl[1].caption("No API key found. Showing the rules-only check.")
+
+    tabs = st.tabs(["Pre-Op Readiness", "Labs", "Medications", "Tests & Imaging", "Consents & Blood", "H&P"])
 
 
-with tabs[1]:
-    show(sorted(chart["labs"], key=lambda r: (r["panel"], r["test_name"])),
-         ["panel", "test_name", "result_value", "unit", "reference_low", "reference_high", "flag", "collection_date", "lab_id"], ["flag"])
-with tabs[2]:
-    show([dict(m, preop_instruction=m["preop_instruction"] or "⚠ none documented") for m in chart["meds"]],
-         ["medication_name", "dose", "route", "frequency", "preop_instruction", "medication_id"])
-with tabs[3]:
-    show(chart["diagnostics"], ["test_type", "test_date", "result_value", "result_unit", "interpretation", "compared_to_prior", "test_id"],
-         ["compared_to_prior"], title="Diagnostic tests")
-    show(chart["imaging"], ["imaging_type", "imaging_date", "report", "imaging_id"], title="Imaging")
-    show(chart["clearances"], ["clearance_type", "status", "requested_date", "completed_date", "assessment_note", "clearance_id"], ["status"],
-         title="Clearances")
-with tabs[4]:
-    show(chart["consents"], ["consent_type", "status", "signed_date", "consent_id"], ["status"], title="Consents")
-    if chart["blood"]:
-        show([chart["blood"]], ["abo_rh", "antibody_screen", "type_screen_date", "type_screen_expires", "prbc_crossmatched_units",
-                                "ffp_units_available", "platelet_units_available"], ["antibody_screen"], title="Blood bank")
-    else:
-        st.caption("No blood bank record (not required for this procedure).")
-with tabs[5]:
-    if chart["notes"]:
-        for note in chart["notes"]:
-            st.text(note["note_text"])
-    else:
-        st.warning("No H&P in chart.")
-    st.caption(f"Anesthesia history: {p['anesthesia_complication_history']}")
+    def top_card(status, n, headline):
+        """Ready card, reschedule card, or a plain status bar, as on the demo page."""
+        open_items = S.open_reqs(x)
+        done = len(x["reqs"]) - len(open_items)
+        if not n and status == "Ready":
+            return (f"<div class='card s-ready'><div class='ti'>✓ Ready for surgery</div>"
+                    f"<div class='sub'>Nothing outstanding for the {ROLE_LABEL[role].lower()}</div>"
+                    f"<div class='fx'><b>{esc(proc)}</b> · {when} · {esc(c['surgery_location'])} · Checklist {done} of {len(x['reqs'])} complete</div></div>")
+        if len(open_items) >= 2:
+            slow = [r for r in open_items if S.takes_days(r)]
+            hold = status == "Recommend hold"
+            hard = hold or x["state"] == "resched"
+            note = ("A clinical finding recommends holding this case. Review with the surgeon and anesthesia before choosing a new date."
+                    if hold and not slow else
+                    f"{' and '.join(r['item'] for r in slow)} {'is' if len(slow) == 1 else 'are'} unlikely to be ready in time. Talk with the surgeon about a new date."
+                    if hard else "Everything can be done on the day. A later slot gives time to finish before the patient goes to the OR.")
+            items = "".join(f"<li><span class='ck-{r['status']}'>{CK[r['status']][1]}</span> <b>{esc(r['item'])}</b>"
+                            f"<span class='lead {'days' if S.takes_days(r) else ''}'>{'Usually needs days' if S.takes_days(r) else 'Can be done today'}</span></li>"
+                            for r in open_items)
+            title = ({"resched": "Rescheduled", "later": "Moved later today", "up": "Moved up", "hold": "Off the schedule"}[x["moved"]["kind"]]
+                     if x.get("moved") else "Consider rescheduling" if hard else "Consider moving later today")
+            return (f"<div class='card s-{'resched' if hard else 'later'}'><div class='ti'>{title}</div>"
+                    f"<div class='sub'>{len(open_items)} pre-op items are not ready for {esc(proc)} at {c['surgery_date']} {c['surgery_time']} · {esc(status)}</div>"
+                    f"<ul>{items}</ul><div class='src'>{esc(note)}</div></div>")
+        return f"<div class='bar s-{STATUS_CLS.get(status, 'open')}'>{esc(status)} <span>· {esc(headline)}</span></div>"
+
+
+    def checklist_html():
+        done = sum(r["status"] == "ok" for r in x["reqs"])
+        rows = "".join(f"<tr><td class='ck-{r['status']}'><b>{CK[r['status']][0]} {CK[r['status']][1]}</b></td><td><b>{esc(r['item'])}</b></td>"
+                       f"<td>{esc(r['note'])}</td><td class='src'>{esc(r['why'])}</td></tr>" for r in x["reqs"])
+        return (f"<b>Pre-op checklist</b> <span class='src'>· {done} of {len(x['reqs'])} complete</span>"
+                f"<table class='ck'><tr><th>Status</th><th>Item</th><th>On file</th><th>Needed because</th></tr>{rows}</table>")
+
+
+    def stamp(dk):
+        ss.dec_time[dk] = datetime.now().strftime("%b %d %H:%M")
+
+
+    with tabs[0]:
+        key = (sid, role, engine)
+        if key not in ss.results and not (engine == "llm" and provider != "mock"):
+            ss.results[key] = run_case(sid, role=role, engine=engine)
+        res = ss.results.get(key)
+        if engine == "llm" and provider != "mock":
+            if st.button("Run the AI review again" if res else f"Run AI readiness review for the {ROLE_LABEL[role].lower()}", type="primary"):
+                with st.spinner("Reading the chart (Modules 2-4)…"):
+                    ss.results[key] = res = run_case(sid, role=role, engine="llm", llm=LLM(), use_cache=res is None)
+        if res is None:
+            res = run_case(sid, role=role, engine="rules")
+            st.caption("Showing the rules-only check until the AI review is run.")
+        steps, summ = res["next_steps"], res["summary"]
+        n = len(steps["actions"])
+        html(top_card(steps["status"], n, summ.get("headline") or f"{n} item{'s' * (n != 1)} to address before surgery."))
+        st.caption(f"{ROLE_LABEL[role]} view · engine: {res['engine']} · {steps.get('status_reason', '')}")
+
+        dkey = lambda code: f"dec|{sid}|{role}|{code}"
+        left, right = st.columns([1, 1.15])
+        with left:
+            accepted = [a for a in steps["actions"] if ss.get(dkey(a["code"])) == "Accept"]
+            if n:
+                with st.container(border=True):
+                    tasks = [(a, i, s) for a in accepted for i, s in enumerate(C.ACTION_FOLLOW_UP.get(a["code"], ([], ""))[0])]
+                    done = sum(bool(ss.get(f"todo|{sid}|{role}|{a['code']}|{i}")) for a, i, _ in tasks)
+                    st.markdown(f"**To-do · {ROLE_LABEL[role]}**" + (f" <span class='src'>· {done} of {len(tasks)} done</span>" if tasks else ""),
+                                unsafe_allow_html=True)
+                    if not accepted:
+                        st.caption("Accept a next step to add its tasks here.")
+                    for a in accepted:
+                        todo_steps, closes = C.ACTION_FOLLOW_UP.get(a["code"], ([], ""))
+                        st.markdown(f"<span class='src'><b>{esc(action_text(a['code']))}</b></span>", unsafe_allow_html=True)
+                        for i, s in enumerate(todo_steps):
+                            st.checkbox(s, key=f"todo|{sid}|{role}|{a['code']}|{i}")
+                        if all(ss.get(f"todo|{sid}|{role}|{a['code']}|{i}") for i in range(len(todo_steps))):
+                            st.caption(f"Tasks done · waiting for the chart: {closes}")
+            with st.container(border=True):
+                for sec in summ.get("sections", []):
+                    st.markdown(f"**{sec['title']}**")
+                    for b in sec.get("bullets", []):
+                        st.markdown(f"- {b}")
+                st.markdown("**Key values**")
+                rows = []
+                for t in KEY_TESTS[role]:
+                    lab = C.latest_lab(chart, t)
+                    if lab:
+                        rows.append(dict(Test=t, Value=f"{lab['result_value']} {'' if lab['unit'] == 'text' else lab['unit']}",
+                                         Flag=lab["flag"], Date=lab["collection_date"], ID=lab["lab_id"]))
+                for d in chart["diagnostics"]:
+                    if role == "anesthesia" or d["test_type"] == "EKG":
+                        rows.append(dict(Test=d["test_type"], Value=(f"{d['result_value']} {d['result_unit']}".strip() or d["interpretation"]),
+                                         Flag="New" if d["compared_to_prior"] == "New finding" else "", Date=d["test_date"], ID=d["test_id"]))
+                if rows:
+                    st.dataframe(pd.DataFrame(rows).style.map(lambda v: "color:#d0473b;font-weight:600" if v in ("H", "L", "Critical", "Abnormal", "New") else "",
+                                                              subset=["Flag"]), hide_index=True, width="stretch")
+                else:
+                    st.caption("No values in chart.")
+
+        with right:
+            st.markdown(f"**Next steps · {ROLE_LABEL[role]}**")
+            if not n:
+                st.success("Nothing outstanding.")
+            for a in steps["actions"]:
+                dk = dkey(a["code"])
+                badge = {"high": "🔴", "medium": "🟠", "low": "🟢"}.get(a.get("priority"), "⚪")
+                with st.container(border=True):
+                    st.markdown(f"{badge} **{action_text(a['code'])}**")
+                    st.caption(f"{a.get('reason', '')} · Evidence: {', '.join(a.get('evidence_ids', [])) or '-'}")
+                    dec = st.radio("Decision", ["Pending", "Accept", "Decline"], horizontal=True, key=dk,
+                                   label_visibility="collapsed", on_change=stamp, args=(dk,))
+                    t = f" · {ss.dec_time[dk]}" if dk in ss.dec_time else ""
+                    if dec == "Accept":
+                        st.markdown(f"<span class='s-later' style='color:var(--c);font-weight:600'>Accepted{t} · still open · tasks added to your to-do list</span>"
+                                    f"<br><span class='src'><b>Closes when:</b> {esc(C.ACTION_FOLLOW_UP.get(a['code'], ([], ''))[1])}</span>",
+                                    unsafe_allow_html=True)
+                    elif dec == "Decline":
+                        st.caption(f"Declined{t}")
+                        st.selectbox("Reason", [""] + DECLINE_REASONS, key=f"why|{dk}", format_func=lambda r: r or "Choose a reason…")
+            if steps.get("other_considerations"):
+                st.markdown("**Other considerations**")
+                for o in steps["other_considerations"]:
+                    st.markdown(f"- {o}")
+            if n and st.button("Save decisions"):
+                os.makedirs(os.path.dirname(DECISIONS), exist_ok=True)
+                new = not os.path.exists(DECISIONS)
+                with open(DECISIONS, "a", newline="") as f:
+                    w = csv.writer(f)
+                    if new:
+                        w.writerow(["timestamp", "surgery_id", "role", "engine", "action_code", "decision", "decline_reason"])
+                    for a in steps["actions"]:
+                        dk = dkey(a["code"])
+                        w.writerow([datetime.now().isoformat(timespec="seconds"), sid, role, res["engine"], a["code"],
+                                    ss.get(dk, "Pending"), ss.get(f"why|{dk}", "")])
+                st.success(f"Decisions saved to {os.path.relpath(DECISIONS, D.ROOT)}.")
+
+        with st.container(border=True):
+            html(checklist_html())
+        if res.get("qa"):
+            with st.expander("Module 2 answers (question answering, with evidence)"):
+                for a in res["qa"].get("answers", []):
+                    st.markdown(f"**{a.get('question_id')}** {a.get('answer')}  \n`{', '.join(a.get('evidence_ids', []))}`")
+        st.caption("Every suggestion needs human review.")
+
+    # ---------------------------------------------------------------------------
+    # Chart tabs
+    # ---------------------------------------------------------------------------
+    def show(rows, cols, hl=None, title=None):
+        if title:
+            st.markdown(f"**{title}**")
+        if not rows:
+            st.caption("None in chart.")
+            return
+        df = pd.DataFrame(rows)[cols]
+        if hl:
+            bad = {"H", "L", "Critical", "Abnormal", "Missing", "Refused", "Pending", "Positive", "New finding"}
+            df = df.style.map(lambda v: "color:#d0473b;font-weight:600" if v in bad else "", subset=hl)
+        st.dataframe(df, hide_index=True, width="stretch")
+
+
+    with tabs[1]:
+        show(sorted(chart["labs"], key=lambda r: (r["panel"], r["test_name"])),
+             ["panel", "test_name", "result_value", "unit", "reference_low", "reference_high", "flag", "collection_date", "lab_id"], ["flag"])
+    with tabs[2]:
+        show([dict(m, preop_instruction=m["preop_instruction"] or "⚠ none documented") for m in chart["meds"]],
+             ["medication_name", "dose", "route", "frequency", "preop_instruction", "medication_id"])
+    with tabs[3]:
+        show(chart["diagnostics"], ["test_type", "test_date", "result_value", "result_unit", "interpretation", "compared_to_prior", "test_id"],
+             ["compared_to_prior"], title="Diagnostic tests")
+        show(chart["imaging"], ["imaging_type", "imaging_date", "report", "imaging_id"], title="Imaging")
+        show(chart["clearances"], ["clearance_type", "status", "requested_date", "completed_date", "assessment_note", "clearance_id"], ["status"],
+             title="Clearances")
+    with tabs[4]:
+        show(chart["consents"], ["consent_type", "status", "signed_date", "consent_id"], ["status"], title="Consents")
+        if chart["blood"]:
+            show([chart["blood"]], ["abo_rh", "antibody_screen", "type_screen_date", "type_screen_expires", "prbc_crossmatched_units",
+                                    "ffp_units_available", "platelet_units_available"], ["antibody_screen"], title="Blood bank")
+        else:
+            st.caption("No blood bank record (not required for this procedure).")
+    with tabs[5]:
+        if chart["notes"]:
+            for note in chart["notes"]:
+                st.text(note["note_text"])
+        else:
+            st.warning("No H&P in chart.")
+        st.caption(f"Anesthesia history: {p['anesthesia_complication_history']}")

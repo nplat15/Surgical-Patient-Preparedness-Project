@@ -104,6 +104,29 @@ def by_id():
     return {x["id"]: x for x in board()}
 
 
+@lru_cache(maxsize=64)
+def cases(moves=()):
+    """board() with schedule changes applied (the app's demo moves).
+
+    moves: sorted tuple of (id, date, time, room, kind). kind is resched / later / up, or hold to take the
+    case off the schedule. A moved case keeps its readiness state and is not suggested again.
+    """
+    if not moves:
+        return board()
+    m = {mv[0]: mv for mv in moves}
+    out = []
+    for x in board():
+        if x["id"] in m:
+            _, d, t, room, kind = m[x["id"]]
+            k = x["case"]
+            x = dict(x, case=dict(k, surgery_date=d or k["surgery_date"], surgery_time=t or k["surgery_time"],
+                                  surgery_location=room or k["surgery_location"]),
+                     moved=dict(kind=kind, date=k["surgery_date"], time=k["surgery_time"], room=k["surgery_location"]),
+                     off=kind == "hold")
+        out.append(x)
+    return out
+
+
 # ---------------------------------------------------------------------------
 # Times are minutes after midnight. Each case has a start (surgery_time) and a length (duration_min).
 # ---------------------------------------------------------------------------
@@ -189,14 +212,15 @@ def lead_days(x):
     return max([7 if is_hold(x) else 0] + [7 if r["type"] == "clearance" else 5 if takes_days(r) else 1 for r in open_reqs(x)])
 
 
-@lru_cache(maxsize=1)
-def resched_plan():
-    cases = board()
+@lru_cache(maxsize=64)
+def resched_plan(moves=()):
+    cs = [x for x in cases(moves) if not x.get("off")]
     busy, plan = {}, {}
-    for x in cases:
+    for x in cs:
         busy.setdefault((x["case"]["surgery_date"], x["case"]["surgery_location"]), []).append((start(x), end(x)))
-    all_rooms = sorted({x["case"]["surgery_location"] for x in cases})
-    todo = sorted((x for x in cases if x["state"] == "resched"), key=lambda x: (x["case"]["surgery_date"], x["case"]["surgery_time"]))
+    all_rooms = sorted({x["case"]["surgery_location"] for x in cs})
+    todo = sorted((x for x in cs if x["state"] == "resched" and not x.get("moved")),
+                  key=lambda x: (x["case"]["surgery_date"], x["case"]["surgery_time"]))
     for x in todo:
         k, d = x["case"], dur(x)
         rooms = [k["surgery_location"]] + [r for r in all_rooms if r != k["surgery_location"] and service(r) == service(k["surgery_location"])]
@@ -215,65 +239,78 @@ def resched_plan():
     return plan
 
 
-def propose_day(day):
+def propose_day(day, moves=()):
     """Room by room: holds and reschedules come off, cases after a freed block move up into it,
-    and cases that need same-day work move to the first time at least 2 hours later that still fits."""
-    cases = [x for x in board() if x["case"]["surgery_date"] == day]
+    and cases that need same-day work move to the first time at least 2 hours later that still fits.
+    Cases already moved stay where they were put."""
+    cs = [x for x in cases(moves) if x["case"]["surgery_date"] == day and not x.get("off")]
     placed, off, rooms = [], [], {}
-    for x in cases:
+    for x in cs:
         rooms.setdefault(x["case"]["surgery_location"], []).append(x)
     for room, g in rooms.items():
         keep = []
         for x in g:
-            (off if x["state"] in ("resched", "hold") else keep).append(x)
+            (off if x["state"] in ("resched", "hold") and not x.get("moved") else keep).append(x)
+        fixed = [(start(x), end(x)) for x in keep if x.get("moved")]
+        placed += [dict(x=x, room=room, start=start(x)) for x in keep if x.get("moved")]
         freed_from = min((start(y) for y in off if y["case"]["surgery_location"] == room), default=float("inf"))
         cur = None
-        for x in sorted((x for x in keep if x["state"] != "later"), key=start):
+        for x in sorted((x for x in keep if x["state"] != "later" and not x.get("moved")), key=start):
             earliest = min(start(x), freed_from) if start(x) > freed_from else start(x)
             st = earliest if cur is None else max(earliest, cur + TURNOVER)
+            if fixed and not fits(fixed, st, dur(x)):
+                st = first_fit(fixed, dur(x), st)
+                st = start(x) if st is None else st
             placed.append(dict(x=x, room=room, start=int(st)))
             cur = st + dur(x)
-        for x in sorted((x for x in keep if x["state"] == "later"), key=start):
+        for x in sorted((x for x in keep if x["state"] == "later" and not x.get("moved")), key=start):
             busy = [(p["start"], p["start"] + dur(p["x"])) for p in placed if p["room"] == room]
             st = first_fit(busy, dur(x), start(x) + 120)
             placed.append(dict(x=x, room=room, start=start(x) if st is None else st, stuck=st is None))
     return placed, off
 
 
-def suggested_time(x):
-    """Suggested new time for the patient header, or None."""
+def suggested_time(x, moves=()):
+    """Suggested new time for the patient header, or None. `to` is what the app applies as a move."""
     st, k = x["state"], x["case"]
+    if x.get("moved"):
+        return None
     if st == "resched":
-        s = resched_plan().get(x["id"])
+        s = resched_plan(moves).get(x["id"])
         if s:
             lead = "about a week" if s["lead"] >= 7 else f"about {s['lead']} days"
             return dict(cls="resched", date=s["date"], time=span(s["start"], s["dur"]), room=s["room"],
-                        why=f"allows {lead} to finish outstanding items")
+                        why=f"allows {lead} to finish outstanding items",
+                        to=dict(date=s["date"], time=hhmm(s["start"]), room=s["room"], kind="resched"))
     if st == "later":
-        p = next((p for p in propose_day(k["surgery_date"])[0] if p["x"]["id"] == x["id"]), None)
+        p = next((p for p in propose_day(k["surgery_date"], moves)[0] if p["x"]["id"] == x["id"]), None)
         if p and p["start"] > start(x):
             return dict(cls="later", date=k["surgery_date"], time=span(p["start"], dur(x)), room=p["room"],
-                        why="first time later today that fits the case")
+                        why="first time later today that fits the case",
+                        to=dict(date=k["surgery_date"], time=hhmm(p["start"]), room=p["room"], kind="later"))
     return None
 
 
-def day_suggestions(day):
-    """Suggested adjustments for one day. Only listed; the timeline shows the real schedule."""
-    placed, off = propose_day(day)
+def day_suggestions(day, moves=()):
+    """Suggested adjustments for one day. Only listed; the timeline shows the real schedule.
+    `to` is the move the app applies (None when there is nothing to apply)."""
+    placed, off = propose_day(day, moves)
     sug = {}
     for x in off:
-        plan = resched_plan().get(x["id"])
+        plan = resched_plan(moves).get(x["id"])
         if x["state"] == "hold":
-            sug[x["id"]] = dict(x=x, tag="Hold", text="Hold for clinical review", reason=why_not(x))
+            sug[x["id"]] = dict(x=x, tag="Hold", text="Hold for clinical review", reason=why_not(x),
+                                to=dict(date=None, time=None, room=None, kind="hold"))
         else:
             text = (f"Reschedule to {fmt_day(plan['date'])}, {span(plan['start'], plan['dur'])} in {short_room(plan['room'])}"
                     if plan else "Reschedule")
-            sug[x["id"]] = dict(x=x, tag="Reschedule", text=text, reason=f"not ready: {why_not(x)}")
+            sug[x["id"]] = dict(x=x, tag="Reschedule", text=text, reason=f"not ready: {why_not(x)}",
+                                to=plan and dict(date=plan["date"], time=hhmm(plan["start"]), room=plan["room"], kind="resched"))
     for p in placed:
         x = p["x"]
         if p.get("stuck"):
             sug[x["id"]] = dict(x=x, tag="Reschedule", text=f"No later time today fits a {dur_label(dur(x))} case; consider rescheduling",
-                                reason=f"not ready: {why_not(x)}")
+                                reason=f"not ready: {why_not(x)}", to=None)
         elif p["start"] != start(x):
             up = p["start"] < start(x)
             freed = next((y for y in off if y["case"]["surgery_location"] == p["room"] and start(y) <= p["start"] < end(y)), None)
@@ -281,5 +318,5 @@ def day_suggestions(day):
                       else f"uses time freed by {freed['patient']['name']}" if freed else "follows the case before it")
             sug[x["id"]] = dict(x=x, tag="Move up" if up else "Move later",
                                 text=f"Move {'up' if up else 'later'}: {x['case']['surgery_time']} → {span(p['start'], dur(x))}",
-                                reason=reason)
+                                reason=reason, to=dict(date=day, time=hhmm(p["start"]), room=p["room"], kind="up" if up else "later"))
     return sorted(sug.values(), key=lambda g: start(g["x"]))
