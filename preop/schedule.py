@@ -54,8 +54,27 @@ def takes_days(r):
     return r["type"] == "clearance" or (r["type"] == "diagnostic" and r["item"] != "EKG")
 
 
+def done_in_preop(r):
+    """Quick items finished in pre-op holding before the case (signing a consent, the surgeon's H&P or its update,
+    a 12-lead EKG). They never move a case. Labs, imaging and blood bank work are done on the day but wait on results."""
+    return r["type"] in ("consent", "note") or r["item"] == "EKG"
+
+
+def lead_label(r):
+    return "Usually needs days" if takes_days(r) else "Can be done in pre-op" if done_in_preop(r) else "Needs results today"
+
+
 def open_reqs(x):
     return [r for r in x["reqs"] if r["status"] != "ok"]
+
+
+def slow_reqs(x):
+    return [r for r in open_reqs(x) if not done_in_preop(r)]
+
+
+def latex(x):
+    """Latex allergy: first case of the day in the room, before any latex has been used in it."""
+    return "latex" in (x["patient"].get("allergies") or "").lower()
 
 
 def is_hold(x):
@@ -67,14 +86,24 @@ def is_clear(x, role):
 
 
 def sched_state(x):
-    o = open_reqs(x)
-    if len(o) >= 2 and (is_hold(x) or any(takes_days(r) for r in o)):
+    """Quick pre-op items don't count. Anything that takes days means a new date. Two or more items waiting on
+    results, or one lab, mean a later slot today. A latex allergy has to stay the first case: one lab is drawn on
+    arrival, more than that means a new date."""
+    slow = slow_reqs(x)
+    if any(takes_days(r) for r in slow) or (is_hold(x) and slow):
         return "resched"
     if is_hold(x):
         return "hold"
-    if len(o) >= 2:
+    if len(slow) >= 2:
+        return "resched" if latex(x) else "later"
+    if any(r["type"] == "lab" for r in slow) and not latex(x):
         return "later"
     return "ready" if all(is_clear(x, r) for r in C.ROLES) else "open"
+
+
+def wait_min(x):
+    """How much later a 'later' case moves: about an hour for one lab's results, two hours for more."""
+    return 60 if len(slow_reqs(x)) == 1 else 120
 
 
 def open_count(x):
@@ -199,6 +228,11 @@ def fmt_day(d, long=False):
     return f"{x:%A}, {x:%B} {x.day}" if long else f"{x:%a} {x:%b} {x.day}"
 
 
+def results_for(x):
+    """'CBC results' or 'HbA1c and Chest X-ray results': what a 'later' case is waiting on."""
+    return f"{' and '.join(r['item'] for r in slow_reqs(x))} results"
+
+
 def why_not(x):
     o = open_reqs(x)
     return ", ".join(r["item"] for r in o) if o else "clinical finding needs review"
@@ -215,9 +249,11 @@ def lead_days(x):
 @lru_cache(maxsize=64)
 def resched_plan(moves=()):
     cs = [x for x in cases(moves) if not x.get("off")]
-    busy, plan = {}, {}
+    busy, plan, first = {}, {}, {}  # first: (day, room) -> end of a latex case that has to stay first
     for x in cs:
         busy.setdefault((x["case"]["surgery_date"], x["case"]["surgery_location"]), []).append((start(x), end(x)))
+        if latex(x):
+            first[(x["case"]["surgery_date"], x["case"]["surgery_location"])] = end(x)
     all_rooms = sorted({x["case"]["surgery_location"] for x in cs})
     todo = sorted((x for x in cs if x["state"] == "resched" and not x.get("moved")),
                   key=lambda x: (x["case"]["surgery_date"], x["case"]["surgery_time"]))
@@ -228,10 +264,16 @@ def resched_plan(moves=()):
         for _ in range(40):
             for room in rooms:
                 b = busy.setdefault((day, room), [])
-                st = start(x) if fits(b, start(x), d) else first_fit(b, d, DAY_START)
+                if latex(x):  # only a day when the room's first slot is free
+                    st = DAY_START if (day, room) not in first and fits(b, DAY_START, d) else None
+                else:
+                    frm = first.get((day, room), DAY_START)
+                    st = start(x) if start(x) >= frm and fits(b, start(x), d) else first_fit(b, d, frm)
                 if st is not None:
                     plan[x["id"]] = dict(date=day, room=room, start=st, dur=d, lead=lead_days(x))
                     b.append((st, st + d))
+                    if latex(x):
+                        first[(day, room)] = st + d
                     break
             if x["id"] in plan:
                 break
@@ -239,10 +281,11 @@ def resched_plan(moves=()):
     return plan
 
 
-def propose_day(day, moves=()):
-    """Room by room: holds and reschedules come off, cases after a freed block move up into it,
-    and cases that need same-day work move to the first time at least 2 hours later that still fits.
-    Cases already moved stay where they were put."""
+def propose_day(day, moves=(), pull=True):
+    """Room by room: holds and reschedules come off, a latex-allergy case moves to the room's first slot and the
+    cases before it follow it, cases after a freed block move up into it, and cases that need same-day work move
+    to the first time that still fits after their results are back (wait_min). Cases already moved stay where they were put.
+    pull=False leaves holds and reschedules where they are (the latex move on its own, for the patient chart)."""
     cs = [x for x in cases(moves) if x["case"]["surgery_date"] == day and not x.get("off")]
     placed, off, rooms = [], [], {}
     for x in cs:
@@ -250,13 +293,14 @@ def propose_day(day, moves=()):
     for room, g in rooms.items():
         keep = []
         for x in g:
-            (off if x["state"] in ("resched", "hold") and not x.get("moved") else keep).append(x)
+            (off if pull and x["state"] in ("resched", "hold") and not x.get("moved") else keep).append(x)
         fixed = [(start(x), end(x)) for x in keep if x.get("moved")]
         placed += [dict(x=x, room=room, start=start(x)) for x in keep if x.get("moved")]
         freed_from = min((start(y) for y in off if y["case"]["surgery_location"] == room), default=float("inf"))
+        room_start = min(start(y) for y in g)
         cur = None
-        for x in sorted((x for x in keep if x["state"] != "later" and not x.get("moved")), key=start):
-            earliest = min(start(x), freed_from) if start(x) > freed_from else start(x)
+        for x in sorted((x for x in keep if x["state"] != "later" and not x.get("moved")), key=lambda x: (not latex(x), start(x))):
+            earliest = room_start if latex(x) else min(start(x), freed_from) if start(x) > freed_from else start(x)
             st = earliest if cur is None else max(earliest, cur + TURNOVER)
             if fixed and not fits(fixed, st, dur(x)):
                 st = first_fit(fixed, dur(x), st)
@@ -265,20 +309,37 @@ def propose_day(day, moves=()):
             cur = st + dur(x)
         for x in sorted((x for x in keep if x["state"] == "later" and not x.get("moved")), key=start):
             busy = [(p["start"], p["start"] + dur(p["x"])) for p in placed if p["room"] == room]
-            st = first_fit(busy, dur(x), start(x) + 120)
+            st = first_fit(busy, dur(x), start(x) + wait_min(x))
             placed.append(dict(x=x, room=room, start=start(x) if st is None else st, stuck=st is None))
     return placed, off
 
 
+def bumped_by_latex(placed, p):
+    """Moves for the cases a latex case p goes ahead of in its room: (id, move) pairs to apply along with it."""
+    return [(q["x"]["id"], dict(date=q["x"]["case"]["surgery_date"], time=hhmm(q["start"]), room=q["room"], kind="later"))
+            for q in placed if q["room"] == p["room"] and q["x"] is not p["x"] and not q["x"].get("moved")
+            and start(q["x"]) < start(p["x"]) and q["start"] > start(q["x"])]
+
+
 def suggested_time(x, moves=()):
-    """Suggested new time for the patient header, or None. `to` is what the app applies as a move."""
+    """Suggested new time for the patient header, or None. `to` is what the app applies as a move,
+    `also` any moves of other cases that go with it."""
     st, k = x["state"], x["case"]
     if x.get("moved"):
         return None
+    if latex(x) and st not in ("resched", "hold"):
+        placed = propose_day(k["surgery_date"], moves, pull=False)[0]
+        p = next((p for p in placed if p["x"]["id"] == x["id"]), None)
+        if p and p["start"] < start(x):
+            also = bumped_by_latex(placed, p)
+            return dict(cls="later", date=k["surgery_date"], time=span(p["start"], dur(x)), room=p["room"], first=True,
+                        why="latex allergy: first case in the room, before any latex is used that day"
+                            + (f" · {len(also)} case{'s' * (len(also) != 1)} before it move{'s' * (len(also) == 1)} later" if also else ""),
+                        to=dict(date=k["surgery_date"], time=hhmm(p["start"]), room=p["room"], kind="up"), also=also)
     if st == "resched":
         s = resched_plan(moves).get(x["id"])
         if s:
-            lead = "about a week" if s["lead"] >= 7 else f"about {s['lead']} days"
+            lead = "about a week" if s["lead"] >= 7 else "a day" if s["lead"] == 1 else f"about {s['lead']} days"
             return dict(cls="resched", date=s["date"], time=span(s["start"], s["dur"]), room=s["room"],
                         why=f"allows {lead} to finish outstanding items",
                         to=dict(date=s["date"], time=hhmm(s["start"]), room=s["room"], kind="resched"))
@@ -286,7 +347,7 @@ def suggested_time(x, moves=()):
         p = next((p for p in propose_day(k["surgery_date"], moves)[0] if p["x"]["id"] == x["id"]), None)
         if p and p["start"] > start(x):
             return dict(cls="later", date=k["surgery_date"], time=span(p["start"], dur(x)), room=p["room"],
-                        why="first time later today that fits the case",
+                        why=f"time for {results_for(x)}, first time later today that fits the case",
                         to=dict(date=k["surgery_date"], time=hhmm(p["start"]), room=p["room"], kind="later"))
     return None
 
@@ -313,10 +374,19 @@ def day_suggestions(day, moves=()):
                                 reason=f"not ready: {why_not(x)}", to=None)
         elif p["start"] != start(x):
             up = p["start"] < start(x)
+            to = dict(date=day, time=hhmm(p["start"]), room=p["room"], kind="up" if up else "later")
+            if latex(x) and up:
+                sug[x["id"]] = dict(x=x, tag="Make first case", text=f"First case: {x['case']['surgery_time']} → {span(p['start'], dur(x))}",
+                                    reason="latex allergy: first case in the room, before any latex is used that day",
+                                    to=to, also=bumped_by_latex(placed, p))
+                continue
             freed = next((y for y in off if y["case"]["surgery_location"] == p["room"] and start(y) <= p["start"] < end(y)), None)
-            reason = (f"time to finish {why_not(x)}" if x["state"] == "later"
+            ahead = next((q["x"] for q in placed if q["room"] == p["room"] and latex(q["x"]) and q["start"] < start(q["x"])
+                          and start(x) < start(q["x"]) and not up), None)
+            reason = (f"time for {results_for(x)}" if x["state"] == "later"
+                      else f"makes room for {ahead['patient']['name']} (latex allergy) as the first case" if ahead
                       else f"uses time freed by {freed['patient']['name']}" if freed else "follows the case before it")
             sug[x["id"]] = dict(x=x, tag="Move up" if up else "Move later",
                                 text=f"Move {'up' if up else 'later'}: {x['case']['surgery_time']} → {span(p['start'], dur(x))}",
-                                reason=reason, to=dict(date=day, time=hhmm(p["start"]), room=p["room"], kind="up" if up else "later"))
+                                reason=reason, to=to)
     return sorted(sug.values(), key=lambda g: start(g["x"]))

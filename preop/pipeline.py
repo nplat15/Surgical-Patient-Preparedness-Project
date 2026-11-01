@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import json
 import os
+import threading
 
 from . import criteria as C
 from . import data as D
@@ -52,16 +53,26 @@ def _cache_path(llm, surgery_id, name):
     return os.path.join(CACHE_DIR, safe, f"{surgery_id}_{name}.json")
 
 
+_locks, _locks_guard = {}, threading.Lock()
+
+
 def _cached(llm, surgery_id, name, fn, use_cache=True):
+    """One call per cache file at a time: when several app users ask for the same case at once, the first one
+    calls the model and the rest wait and read its result. Written to a temp file first so no one reads half a file."""
     path = _cache_path(llm, surgery_id, name)
-    if use_cache and os.path.exists(path):
-        with open(path) as f:
-            return json.load(f)
-    out = fn()
-    os.makedirs(os.path.dirname(path), exist_ok=True)
-    with open(path, "w") as f:
-        json.dump(out, f, indent=1)
-    return out
+    with _locks_guard:
+        lock = _locks.setdefault(path, threading.Lock())
+    with lock:
+        if use_cache and os.path.exists(path):
+            with open(path) as f:
+                return json.load(f)
+        out = fn()
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        tmp = f"{path}.{threading.get_ident()}.tmp"
+        with open(tmp, "w") as f:
+            json.dump(out, f, indent=1)
+        os.replace(tmp, path)
+        return out
 
 
 def module2_qa(llm, packet):
