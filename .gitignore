@@ -6,3 +6,4 @@ results/decisions.csv
 results/decisions_*.csv
 .env
 .streamlit/secrets.toml
+~$*
