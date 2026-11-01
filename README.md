@@ -66,7 +66,24 @@ Cost guide: one case = 1 QA call + 2 calls per role (5 calls for both roles).
 
    Secrets are read by the app at startup. Do not commit API keys or a local `.streamlit/secrets.toml`.
 
-This is a public class-project prototype with no sign-in or access control. Use only its fictional data; do not upload real patient information. Streamlit Community Cloud's local filesystem is not durable, so saved decisions and cached LLM results may be lost when the app restarts. They are not a persistent shared workflow or audit log.
+This is a public class-project prototype with no passwords or access control (the name sign-in only hands out example cases). Use only its fictional data; do not upload real patient information. Streamlit Community Cloud's local filesystem is not durable, so saved decisions and cached LLM results may be lost when the app restarts. They are not a persistent shared workflow or audit log.
+
+## In-class demo
+
+Share the app link. Each student enters a name and gets their own example patient (⭐ in the patient list), handed
+out in turn across procedures and starting with cases that have a schedule suggestion. S082 is kept out of the pool for
+the presenter's walkthrough. A "What to try" list walks students through the board in about 3 minutes.
+
+* Every student has their own copy of the board: schedule changes, decisions and to-do items only show on their screen.
+* The student's sign-in is in the URL (`?u=...`), so a page refresh keeps the same patient. Unsaved clicks are lost on refresh.
+* Assignments are kept in memory. If the app restarts, students sign in again and may get a different patient.
+* AI reviews: at most 4 run at once and the rest wait their turn. Students on the same case and role share one model call.
+  If the AI review fails (for example, rate limits), the page shows an error and keeps the rules-only check.
+* Saved decisions go to `results/decisions.csv` with the student's name.
+* **Project team reset:** add `PREOP_TEAM_CODE = "your-passcode"` to the app's secrets (or a local
+  `.streamlit/secrets.toml`). The passcode unlocks **Project team** in the sidebar, where **Reset demo for everyone** signs
+  everyone out and clears their changes, so the next students start fresh from the first case. Open screens go back to
+  sign-in within about 10 seconds. It can also set aside the saved decisions file. Cached AI results are kept.
 
 ## Folder layout
 
@@ -76,6 +93,7 @@ preop/data.py         loads CSVs, builds a patient "chart", Module 1, chart -> t
 preop/prompts.py      Module 2/3/4 prompts
 preop/llm.py          Anthropic / OpenAI / mock client
 preop/pipeline.py     runs Modules 1-4 (LLM or rules-only)
+preop/classroom.py    in-class demo: gives each signed-in student their own example case
 app.py                Streamlit mock EHR "Pre-Op Readiness" tab with Nurse / Anesthesiologist switch
 evaluate.py           scores output against the answer key (precision, recall, note-only recall, status accuracy)
 surgical_patient_dataset_v2/   richer synthetic dataset (see its README)

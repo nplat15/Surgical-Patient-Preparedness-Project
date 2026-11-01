@@ -3,5 +3,6 @@ __pycache__/
 results/cache/
 results/cache_test/
 results/decisions.csv
+results/decisions_*.csv
 .env
 .streamlit/secrets.toml

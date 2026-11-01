@@ -12,7 +12,9 @@ from __future__ import annotations
 
 import calendar
 import csv
+import hmac
 import os
+import threading
 from datetime import datetime
 from html import escape as esc
 
@@ -23,16 +25,17 @@ from streamlit.errors import StreamlitSecretNotFoundError
 from preop import criteria as C
 from preop import data as D
 from preop import schedule as S
+from preop.classroom import Roster
 from preop.llm import LLM, default_provider
 from preop.pipeline import action_text, run_case
 
-st.set_page_config(page_title="Pre-Op Readiness", page_icon="🩺", layout="wide")
+st.set_page_config(page_title="Pre-Op Readiness", page_icon="🩺", layout="wide", initial_sidebar_state="collapsed")
 
 # Streamlit Community Cloud exposes configured credentials through st.secrets,
 # while the LLM client reads environment variables. st.secrets loads lazily, so a missing
 # secrets.toml (a local run) raises on first lookup, not on access.
 try:
-    for setting in ("PREOP_LLM_PROVIDER", "PREOP_LLM_MODEL", "ANTHROPIC_API_KEY", "OPENAI_API_KEY"):
+    for setting in ("PREOP_LLM_PROVIDER", "PREOP_LLM_MODEL", "ANTHROPIC_API_KEY", "OPENAI_API_KEY", "PREOP_TEAM_CODE"):
         if not os.environ.get(setting) and setting in st.secrets:
             os.environ[setting] = str(st.secrets[setting])
 except StreamlitSecretNotFoundError:
@@ -95,12 +98,102 @@ table.ck th{font-size:.75em;letter-spacing:.06em;text-transform:uppercase;color:
 .st-key-plist button p{text-align:left;font-size:.86em;line-height:1.35}
 </style>""", unsafe_allow_html=True)
 
+@st.cache_resource
+def shared():
+    """One per server, shared by every browser session: the class roster, a lock for the decisions log,
+    and a cap on AI reviews running at once (the rest wait their turn)."""
+    return Roster(), threading.Lock(), threading.Semaphore(4)
+
+
+ROSTER, DECISIONS_LOCK, AI_SLOTS = shared()
 ss = st.session_state
+
+
+def sign_in():
+    _, mid, _ = st.columns([1, 1.4, 1])
+    with mid:
+        st.markdown("### 🩺 Pre-Op Readiness Board")
+        st.write("Enter your first name or a nickname to get your own example patient. "
+                 "Anything you change only shows on your screen.")
+        with st.form("join"):
+            name = st.text_input("Your name", max_chars=40, placeholder="e.g. Sam")
+            if st.form_submit_button("Get my patient", type="primary", width="stretch"):
+                st.query_params["u"] = ROSTER.join(name.strip() or "Guest")  # in the URL so a refresh keeps the patient
+                st.rerun()
+        st.caption("Fictional patients · teaching rules, not clinical guidelines · not for patient care")
+
+
+def start_clean():
+    """Forget this tab's student work, but keep a project team unlock."""
+    team = ss.get("team")
+    ss.clear()
+    if team:
+        ss.team = True
+
+
+def sign_out():
+    st.query_params.clear()
+    start_clean()
+
+
+def reset_demo(archive):
+    ROSTER.reset()
+    if archive and os.path.exists(DECISIONS):
+        with DECISIONS_LOCK:
+            os.replace(DECISIONS, DECISIONS.replace(".csv", f"_{datetime.now():%Y%m%d_%H%M%S}.csv"))
+    ss.reset_done = f"Reset at {datetime.now():%H:%M}. Open screens go back to sign-in within about 10 seconds."
+
+
+def team_panel():
+    """Sidebar controls for the project team, unlocked with PREOP_TEAM_CODE."""
+    with st.sidebar:
+        st.markdown("**Project team**")
+        code = os.environ.get("PREOP_TEAM_CODE", "")
+        if not code:
+            st.caption("Add PREOP_TEAM_CODE to the app's secrets to turn on the team controls.")
+            return
+        if not ss.get("team"):
+            entered = st.text_input("Team passcode", type="password")
+            if entered and hmac.compare_digest(entered, code):
+                ss.team = True
+                st.rerun()
+            elif entered:
+                st.caption("Wrong passcode.")
+            return
+        st.caption(f"{len(ROSTER)} signed in")
+        sure = st.checkbox("Sign everyone out and clear their changes")
+        archive = st.checkbox("Also set aside saved decisions", help="Renames results/decisions.csv with today's date and time.")
+        st.button("Reset demo for everyone", type="primary", disabled=not sure, on_click=reset_demo, args=(archive,), width="stretch")
+        if ss.get("reset_done"):
+            st.success(ss.reset_done)
+
+
+@st.fragment(run_every=10)
+def watch_for_reset():
+    """Sends this screen back to sign-in soon after the team resets the demo, instead of waiting for a click."""
+    if ROSTER.get(TOKEN) is None:
+        st.rerun()
+
+
+team_panel()
+
+# Who is this? The token in the URL names the student and their assigned case.
+TOKEN = st.query_params.get("u", "")
+USER = ROSTER.get(TOKEN)
+if USER is None:
+    sign_in()
+    st.stop()
+if ss.get("me") != TOKEN:  # new student in this browser tab: start clean
+    start_clean()
+    ss.me = TOKEN
+ME = USER["sid"]
+watch_for_reset()
+
 ss.setdefault("moves", {})  # demo schedule changes for this browser session: sid -> (date, time, room, kind)
 MOVES = tuple(sorted((sid, *mv) for sid, mv in ss.moves.items()))
 BOARD = {x["id"]: x for x in S.cases(MOVES)}
 DAYS = sorted({x["case"]["surgery_date"] for x in BOARD.values()})
-ss.setdefault("sid", "S082")
+ss.setdefault("sid", ME)
 ss.setdefault("view", "Patient chart")
 ss.setdefault("role", "nurse")
 ss.setdefault("day", BOARD[ss.sid]["case"]["surgery_date"])
@@ -121,14 +214,16 @@ def pick(sid):
     ss.sid = sid
 
 
-def apply_move(sid, to):
-    ss.moves[sid] = (to["date"], to["time"], to["room"], to["kind"])
+def apply_move(sid, to, also=()):
+    """Apply one move, plus any that go with it (the cases a latex-allergy case goes ahead of)."""
+    for i, t in [(sid, to), *also]:
+        ss.moves[i] = (t["date"], t["time"], t["room"], t["kind"])
 
 
 def apply_all(items):
     for g in items:
         if g["to"]:
-            apply_move(g["x"]["id"], g["to"])
+            apply_move(g["x"]["id"], g["to"], g.get("also", ()))
 
 
 def undo_move(sid):
@@ -166,6 +261,21 @@ top = st.columns([3, 2], vertical_alignment="center")
 top[0].markdown("### 🩺 Pre-Op Readiness Board")
 view = top[1].segmented_control("View", ["Patient chart", "OR schedule"], key="view", label_visibility="collapsed",
                                 on_change=keep, args=("view", "Patient chart"))
+mine = BOARD[ME]
+me = st.columns([5, 1.3, 0.8], vertical_alignment="center")
+me[0].markdown(f"👤 <b>{esc(USER['name'])}</b> · Your patient: <b>⭐ {esc(mine['patient']['name'])}</b> · "
+               f"{esc(D.procedure_label(mine['case']))} · {S.fmt_day(mine['case']['surgery_date'])} {mine['case']['surgery_time']}",
+               unsafe_allow_html=True)
+me[1].button("Open my patient", on_click=open_chart, args=(ME,), width="stretch",
+             disabled=ss.sid == ME and view == "Patient chart")
+me[2].button("Sign out", on_click=sign_out, width="stretch")
+with st.expander("What to try (about 3 minutes)", expanded=ss.sid == ME and not ss.moves):
+    st.markdown(
+        "1. Read the card at the top of your patient's **Pre-Op Readiness** tab: is the patient ready for surgery?\n"
+        "2. Switch between **Pre-op nurse** and **Anesthesiologist**. What does each one need to do?\n"
+        "3. **Accept** or **Decline** each next step. Accepted steps add tasks to your to-do list.\n"
+        "4. If a new time is suggested, apply it, then open the **OR schedule** to see the change.\n\n"
+        "Your changes only show on your screen. Classmates each have their own copy of the board.")
 st.caption("Fictional patients · teaching rules, not clinical guidelines · not for patient care")
 provider = default_provider()
 
@@ -250,7 +360,7 @@ def schedule_view():
         for i, x in enumerate(order):
             if i % 4 == 0:
                 cols = st.columns(4)
-            cols[i % 4].button(f"{ICON[x['state']]} {x['case']['surgery_time']} {x['patient']['name']}", key=f"go_{x['id']}",
+            cols[i % 4].button(f"{ICON[x['state']]} {x['case']['surgery_time']} {'⭐ ' * (x['id'] == ME)}{x['patient']['name']}", key=f"go_{x['id']}",
                                on_click=open_chart, args=(x["id"],), width="stretch")
     with side:
         with st.container(border=True):
@@ -271,7 +381,7 @@ def schedule_view():
                 b = st.columns(2)
                 if g["to"]:
                     b[0].button("Take off schedule" if g["to"]["kind"] == "hold" else g["tag"], key=f"ap_{x['id']}",
-                                on_click=apply_move, args=(x["id"], g["to"]), width="stretch")
+                                on_click=apply_move, args=(x["id"], g["to"], g.get("also", ())), width="stretch")
                 b[1].button("Open chart", key=f"sg_{x['id']}", on_click=open_chart, args=(x["id"],), width="stretch")
             st.caption("Suggestions only. Confirm with the surgeons, anesthesia and the patients before changing the schedule.")
         done = [x for x in BOARD.values() if x.get("moved") and ss.day in (x["case"]["surgery_date"], x["moved"]["date"])]
@@ -306,12 +416,12 @@ with rail:
             for x in rows:
                 tag = f"{S.open_count(x)} open" if x["state"] == "open" else S.SCHED[x["state"]]
                 tag += " · off schedule" if x.get("off") else " · ↪ moved" if x.get("moved") else ""
-                st.button(f"{ICON[x['state']]} **{x['patient']['name']}** · {x['case']['surgery_date'][5:]} {x['case']['surgery_time']} · "
+                st.button(f"{ICON[x['state']]} {'⭐ ' * (x['id'] == ME)}**{x['patient']['name']}** ·{x['case']['surgery_date'][5:]} {x['case']['surgery_time']} · "
                           f"{D.procedure_label(x['case'])} · {tag}", key=f"pt_{x['id']}", on_click=pick, args=(x["id"],),
                           type="primary" if x["id"] == ss.sid else "secondary", width="stretch")
             if not rows:
                 st.caption("No cases match.")
-        st.caption("🟢 Ready · ⚪ items outstanding · 🟠 move later · 🔴 reschedule · 🟣 clinical hold")
+        st.caption("⭐ your patient · 🟢 Ready · ⚪ items outstanding · 🟠 move later · 🔴 reschedule · 🟣 clinical hold")
 
 with main:
     sid = ss.sid
@@ -332,8 +442,9 @@ with main:
       {f'''<div class="sugg s-{x['state']}"><span class="lb">Schedule changed</span><b>{esc(moved_text(x))}</b></div>''' if x.get('moved') else ''}</div>""")
     act = st.columns([1.6, 1.6, 3])
     if sg:
-        act[0].button(f"Reschedule to {S.fmt_day(sg['date'])}, {sg['to']['time']}" if sg["cls"] == "resched" else f"Move to {sg['to']['time']} today",
-                      key="sg_apply", type="primary", on_click=apply_move, args=(sid, sg["to"]), width="stretch")
+        act[0].button(f"Reschedule to {S.fmt_day(sg['date'])}, {sg['to']['time']}" if sg["cls"] == "resched"
+                      else f"Make first case ({sg['to']['time']})" if sg.get("first") else f"Move to {sg['to']['time']} today",
+                      key="sg_apply", type="primary", on_click=apply_move, args=(sid, sg["to"], sg.get("also", ())), width="stretch")
     elif x["state"] == "hold" and not x.get("moved"):
         act[0].button("Take off schedule (hold)", key="sg_hold", on_click=apply_move,
                       args=(sid, dict(date=None, time=None, room=None, kind="hold")), width="stretch")
@@ -362,21 +473,25 @@ with main:
             return (f"<div class='card s-ready'><div class='ti'>✓ Ready for surgery</div>"
                     f"<div class='sub'>Nothing outstanding for the {ROLE_LABEL[role].lower()}</div>"
                     f"<div class='fx'><b>{esc(proc)}</b> · {when} · {esc(c['surgery_location'])} · Checklist {done} of {len(x['reqs'])} complete</div></div>")
-        if len(open_items) >= 2:
+        if x["state"] in ("resched", "later") and open_items:
             slow = [r for r in open_items if S.takes_days(r)]
             hold = status == "Recommend hold"
-            hard = hold or x["state"] == "resched"
+            hard = x["state"] == "resched"
             note = ("A clinical finding recommends holding this case. Review with the surgeon and anesthesia before choosing a new date."
                     if hold and not slow else
                     f"{' and '.join(r['item'] for r in slow)} {'is' if len(slow) == 1 else 'are'} unlikely to be ready in time. Talk with the surgeon about a new date."
-                    if hard else "Everything can be done on the day. A later slot gives time to finish before the patient goes to the OR.")
+                    if slow else
+                    "Latex allergy: the patient has to be the first case of the day, so there is no time to wait for results. "
+                    "Choose a day when they can go first." if hard else
+                    "Everything can be done on the day. A later slot gives time for results before the patient goes to the OR.")
             items = "".join(f"<li><span class='ck-{r['status']}'>{CK[r['status']][1]}</span> <b>{esc(r['item'])}</b>"
-                            f"<span class='lead {'days' if S.takes_days(r) else ''}'>{'Usually needs days' if S.takes_days(r) else 'Can be done today'}</span></li>"
+                            f"<span class='lead {'days' if S.takes_days(r) else ''}'>{S.lead_label(r)}</span></li>"
                             for r in open_items)
             title = ({"resched": "Rescheduled", "later": "Moved later today", "up": "Moved up", "hold": "Off the schedule"}[x["moved"]["kind"]]
                      if x.get("moved") else "Consider rescheduling" if hard else "Consider moving later today")
+            k = len(open_items)
             return (f"<div class='card s-{'resched' if hard else 'later'}'><div class='ti'>{title}</div>"
-                    f"<div class='sub'>{len(open_items)} pre-op items are not ready for {esc(proc)} at {c['surgery_date']} {c['surgery_time']} · {esc(status)}</div>"
+                    f"<div class='sub'>{k} pre-op item{'s' * (k != 1)} {'is' if k == 1 else 'are'} not ready for {esc(proc)} at {c['surgery_date']} {c['surgery_time']} · {esc(status)}</div>"
                     f"<ul>{items}</ul><div class='src'>{esc(note)}</div></div>")
         return f"<div class='bar s-{STATUS_CLS.get(status, 'open')}'>{esc(status)} <span>· {esc(headline)}</span></div>"
 
@@ -400,8 +515,12 @@ with main:
         res = ss.results.get(key)
         if engine == "llm" and provider != "mock":
             if st.button("Run the AI review again" if res else f"Run AI readiness review for the {ROLE_LABEL[role].lower()}", type="primary"):
-                with st.spinner("Reading the chart (Modules 2-4)…"):
-                    ss.results[key] = res = run_case(sid, role=role, engine="llm", llm=LLM(), use_cache=res is None)
+                with st.spinner("Reading the chart (Modules 2-4). This can take a minute when many people run reviews at once…"):
+                    try:
+                        with AI_SLOTS:
+                            ss.results[key] = res = run_case(sid, role=role, engine="llm", llm=LLM(), use_cache=res is None)
+                    except Exception as e:  # rate limit or network error after retries: keep the page usable
+                        st.error(f"The AI review did not finish ({type(e).__name__}). Try again in a minute.")
         if res is None:
             res = run_case(sid, role=role, engine="rules")
             st.caption("Showing the rules-only check until the AI review is run.")
@@ -477,15 +596,16 @@ with main:
                     st.markdown(f"- {o}")
             if n and st.button("Save decisions"):
                 os.makedirs(os.path.dirname(DECISIONS), exist_ok=True)
-                new = not os.path.exists(DECISIONS)
-                with open(DECISIONS, "a", newline="") as f:
-                    w = csv.writer(f)
-                    if new:
-                        w.writerow(["timestamp", "surgery_id", "role", "engine", "action_code", "decision", "decline_reason"])
-                    for a in steps["actions"]:
-                        dk = dkey(a["code"])
-                        w.writerow([datetime.now().isoformat(timespec="seconds"), sid, role, res["engine"], a["code"],
-                                    ss.get(dk, "Pending"), ss.get(f"why|{dk}", "")])
+                with DECISIONS_LOCK:  # one writer at a time so rows from different users don't interleave
+                    new = not os.path.exists(DECISIONS)
+                    with open(DECISIONS, "a", newline="") as f:
+                        w = csv.writer(f)
+                        if new:
+                            w.writerow(["timestamp", "user", "surgery_id", "role", "engine", "action_code", "decision", "decline_reason"])
+                        for a in steps["actions"]:
+                            dk = dkey(a["code"])
+                            w.writerow([datetime.now().isoformat(timespec="seconds"), USER["name"], sid, role, res["engine"], a["code"],
+                                        ss.get(dk, "Pending"), ss.get(f"why|{dk}", "")])
                 st.success(f"Decisions saved to {os.path.relpath(DECISIONS, D.ROOT)}.")
 
         with st.container(border=True):
