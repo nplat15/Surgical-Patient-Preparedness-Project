@@ -1,7 +1,7 @@
 # Team review: how do we show the AI in our Nov 4 demo?
 
-> Temporary file for team input. We'll delete it once we've decided.
-> **Please add your answer by Monday night (Nov 2)** so we have Tuesday to rehearse.
+> Temporary file for the team to read before we talk it through. We'll delete it once we've decided.
+> **Please read it before we meet** so we can decide by Monday night (Nov 2) and rehearse on Tuesday.
 
 ## The situation
 
@@ -38,19 +38,3 @@ Not everyone has Claude, which is why we built the Streamlit app. **Students nev
 
 - Who presents which slides? The speaker notes have a `[Presenter: ____]` on each slide.
 - Who keeps the team passcode and resets the demo right before class?
-
-## How to respond
-
-1. On GitHub, click the pencil icon (**Edit this file**) at the top right of this page.
-2. Under your name below, write your pick (A, B, C or D), any concerns, and which slides you'd like to present.
-3. Scroll down, click **Commit changes**, and keep "Commit directly to the `april/preop-prototype` branch" selected.
-
-## Team responses
-
-**Mombo:**
-
-**Nikolas:**
-
-**Willie:**
-
-**April:**
