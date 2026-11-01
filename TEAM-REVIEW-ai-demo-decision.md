@@ -1,40 +1,30 @@
-# Team review: how do we show the AI in our Nov 4 demo?
+# Team review: should we also show the AI once in our Nov 4 demo?
 
 > Temporary file for the team to read before we talk it through. We'll delete it once we've decided.
 > **Please read it before we meet** so we can decide by Monday night (Nov 2) and rehearse on Tuesday.
 
-## The situation
+## The plan as it stands
 
-- The class app works for everyone at once, and each student gets their own patient. But **we have no API key set up**, so students only get the rules-only check. If someone turns on "AI review", the app says "No API key found".
-- The slides currently assume students run the AI themselves (activity step 3 and discussion question 1). Those need to change.
-- The rubric gives 2 points for "uses the team's real AI prototype in appropriate context with examples," and our results slide still has blank AI scores because we haven't run the AI evaluation yet.
+The demo stays the way it works now: rules-only, no AI calls, no cost.
 
-## Who pays for the AI
+- Each student signs in with their name and gets their own fictional patient. Nothing they change affects anyone else.
+- They read the readiness card, switch between the pre-op nurse and anesthesiologist views, accept or decline next steps, and apply a suggested OR time.
+- New "be the AI" step: students open the H&P tab and look for anything the checklist didn't flag (a new symptom, an allergy missing from the allergy list, a blood thinner the patient never stopped). That's exactly the gap our AI modules are built to catch, so it sets up why the AI matters without running it.
+- The slides explain the AI design (Modules 2–4) and show the rules baseline catching 0 of the problems that only appear in the note.
 
-Not everyone has Claude, which is why we built the Streamlit app. **Students never need a Claude account in any option below.** Any AI use runs on April's account: in A, her claude.ai plan; in B, an API key she (or someone else) pays for. The API is billed separately from a claude.ai subscription. So the less AI we run live, the less it depends on one person.
+The guidelines don't require the AI to run live. The rubric item is "uses the team's real AI prototype in appropriate context with examples," and the plan above covers it with the real app plus the slides.
 
-## Options
+## The open question
 
-**A. Students use rules only; the presenter shows the AI once using April's Claude account (no cost)**
-- Students get a "be the AI" task: open the H&P tab and find anything the checklist missed (new symptoms, a blood thinner the patient didn't stop, and so on).
-- Then the presenter runs the AI review on our showcase patient S082 on the projector, using the "Run Claude review" button in `demo/preop_demo.html` opened inside claude.ai.
-- Downside: it depends on April's account in class, and that demo page still uses the old OR schedule rules.
+**Should the presenter also show the AI catching something once, on the projector?** It would make that rubric item stronger, but it's optional. Students never need a Claude account either way.
 
-**B. Same as A, but the presenter runs the AI in our Streamlit app with an Anthropic API key**
-- Someone sets up an Anthropic API account with a small amount of credit and adds the key to the Streamlit Cloud secrets.
-- One review is 3 API calls. With the same key we can also score the AI on the 20 test cases once (about 100 calls) and fill in the results slide.
-- Downside: someone has to set up billing.
+**Option 1: No, keep it rules-only.** Free and simple, and nothing can go wrong live. The results slide keeps blank AI scores (or we say "AI evaluation is our next step").
 
-**C. No live AI; the demo is rules only, and we explain the AI with slides**
-- Free and simple.
-- Downside: weakest for the rubric, and the results slide stays empty.
+**Option 2: Yes, use April's Claude account.** After the activity, the presenter runs the AI review on showcase patient S082 using the "Run Claude review" button in `demo/preop_demo.html` opened inside claude.ai. That patient's chest pressure at rest is only in the H&P, so the rules miss it. Free, but it depends on April's account in class, and that page uses the older OR schedule rules (we'd only show the review part).
 
-**D. Every student runs the AI themselves**
-- Needs a key and a budget for many calls at once, with a risk of slowdowns or rate limits during class.
+**Option 3: Yes, with an Anthropic API key.** Someone sets up a key with a small amount of credit and adds it to the Streamlit secrets, so the presenter runs the AI right in our app. One review is 3 calls. The same key could also score the AI on the 20 test cases once (about 100 calls) and fill in the results slide and the final report. The API is billed separately from a claude.ai subscription.
 
-**Suggested approach (open to change):** A or B, leaning B if someone can set up a key, because it also gives us AI scores for the results slide and the final report.
-
-## Also needs owners
+## Also to settle when we meet
 
 - Who presents which slides? The speaker notes have a `[Presenter: ____]` on each slide.
 - Who keeps the team passcode and resets the demo right before class?
