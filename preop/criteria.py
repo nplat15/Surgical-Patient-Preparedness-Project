@@ -106,6 +106,7 @@ ACTION_CATALOG = {
     "RENAL_DOSING_PLAN": ("anesthesia", "Reduced kidney function: adjust renally cleared drugs and avoid nephrotoxins."),
     "NOTIFY_RENAL_FUNCTION": ("nurse", "Notify surgeon and anesthesia of the elevated creatinine."),
     "GLYCEMIC_PLAN": ("anesthesia", "Poor glucose control: create perioperative glucose/insulin plan; consider postponing elective surgery if severe."),
+    "UPDATE_ANESTHESIA_PLAN": ("anesthesia", "Review flagged day-of lab values alongside prior results and update the anesthesia plan as appropriate."),
     "REVIEW_LOW_ALBUMIN": ("anesthesia", "Low albumin: note malnutrition/healing risk and discuss optimization with surgeon."),
     "REVIEW_ELEVATED_LFTS": ("anesthesia", "Elevated liver tests: evaluate hepatic function and adjust drug choices."),
     "NOTIFY_ELEVATED_LFTS": ("nurse", "Notify surgeon and anesthesia of the elevated liver tests."),
@@ -131,6 +132,7 @@ ACTION_CATALOG = {
     # --- history / safety ---------------------------------------------------
     "OSA_PRECAUTIONS": ("anesthesia", "Obstructive sleep apnea: plan OSA precautions (airway, opioid-sparing, post-op monitoring)."),
     "BRING_CPAP": ("nurse", "Confirm the patient brought their CPAP machine, mask and settings; if not, notify anesthesia and request a hospital CPAP from respiratory therapy."),
+    "CPAP_NOT_BROUGHT": ("anesthesia", "Patient did not bring CPAP: notify respiratory therapy and arrange a hospital CPAP; plan OSA precautions."),
     "MH_PRECAUTIONS": ("anesthesia", "Malignant hyperthermia risk: plan trigger-free anesthetic."),
     "NOTIFY_MH_RISK": ("nurse", "Notify OR charge nurse of malignant hyperthermia risk (prepare MH cart / trigger-free machine)."),
     "DIFFICULT_AIRWAY_PLAN": ("anesthesia", "History of difficult airway: prepare difficult airway plan and equipment."),
@@ -270,6 +272,9 @@ ACTION_FOLLOW_UP = {
     "METFORMIN_HOLD_INSTRUCTIONS": _confirm_hold("metformin", "anesthesia"),
     "INSULIN_DOSE_PLAN": (["Write the pre-op insulin dose orders", "Ask the nurse to give them to the patient"],
                           "Insulin orders are in the chart"),
+    "UPDATE_ANESTHESIA_PLAN": (["Review the latest day-of values and compare them with prior results and the patient's history",
+                                "Document any anesthesia plan adjustments based on the day-of results"],
+                               "Anesthesia plan reviewed against flagged day-of values"),
     "INSULIN_INSTRUCTIONS": (["Ask which insulin doses the patient took the night before and this morning",
                               "Check a fingerstick glucose",
                               "Tell anesthesia the doses taken and the glucose result"], "Insulin doses and day-of glucose are documented"),
@@ -282,6 +287,9 @@ ACTION_FOLLOW_UP = {
                     "Note the machine's pressure settings in the chart",
                     "If not brought, tell anesthesia and request a hospital CPAP from respiratory therapy"],
                    "Chart shows the patient's CPAP is with them or a hospital unit is arranged"),
+    "CPAP_NOT_BROUGHT": (["Request a hospital CPAP from respiratory therapy",
+                          "Confirm the device and settings will be available before surgery"],
+                         "Hospital CPAP availability is confirmed"),
     "MH_PRECAUTIONS": _plan("malignant hyperthermia risk"),
     "NOTIFY_MH_RISK": (["Call the OR charge nurse", "Confirm the MH cart and a trigger-free machine are set up",
                         "Add the risk to the OR huddle"], "OR confirms MH set-up"),
@@ -450,7 +458,7 @@ def days_before(surgery_date, other):
 
 def latest(rows, key="collection_date"):
     rows = [r for r in rows if r.get(key)]
-    return max(rows, key=lambda r: r[key]) if rows else None
+    return max(rows, key=lambda r: (r[key], bool(r.get("session_day_of")))) if rows else None
 
 
 def latest_lab(chart, test):
@@ -462,6 +470,11 @@ def num(x):
         return float(x)
     except (TypeError, ValueError):
         return None
+
+
+def lab_num(row):
+    """Use a normalized value for rule evaluation while preserving the reported value and unit."""
+    return num(row.get("rule_value", row.get("result_value")))
 
 
 def applicable_requirements(chart):
@@ -488,6 +501,8 @@ def requirement_status(chart, req):
     """Status of one required item: ok / missing / outdated / pending, plus what is on file."""
     sdate = chart["case"]["surgery_date"]
     item, kind, valid = req["item"], req["item_type"], req["validity_days"]
+    if (kind, item) in chart.get("session_completed_requirements", ()):
+        return dict(status="ok", evidence_ids=[], detail="", on_file="Completed in this session")
     status, evid, detail, on_file = "ok", [], "", ""
     if kind == "lab":
         rows = [r for r in chart["labs"] if TEST_TO_PANEL.get(r["test_name"]) == item]
@@ -587,42 +602,44 @@ def check_values(chart):
     p = chart["patient"]
 
     h = lab("Hemoglobin")
-    if h and num(h["result_value"]) is not None and num(h["result_value"]) < 10:
-        v = num(h["result_value"])
+    if h and lab_num(h) is not None and lab_num(h) < 10:
+        v = lab_num(h)
         out.append(_rule_finding("LOW_HEMOGLOBIN", f"Hemoglobin {v} g/dL", [h["lab_id"]], "critical" if v < 7 else None))
     pl = lab("Platelets")
-    if pl and num(pl["result_value"]) is not None and num(pl["result_value"]) < 100:
-        out.append(_rule_finding("LOW_PLATELETS", f"Platelets {pl['result_value']}", [pl["lab_id"]]))
+    if pl and lab_num(pl) is not None and lab_num(pl) < 100:
+        out.append(_rule_finding("LOW_PLATELETS", f"Platelets {pl['result_value']} {pl['unit']}", [pl["lab_id"]]))
     inr = lab("INR")
-    if inr and num(inr["result_value"]) is not None and num(inr["result_value"]) > 1.5:
-        out.append(_rule_finding("ELEVATED_INR", f"INR {inr['result_value']}", [inr["lab_id"]]))
+    if inr and lab_num(inr) is not None and lab_num(inr) > 1.5:
+        out.append(_rule_finding("ELEVATED_INR", f"INR {inr['result_value']} {inr['unit']}", [inr["lab_id"]]))
     k = lab("Potassium")
-    if k and num(k["result_value"]) is not None:
-        v = num(k["result_value"])
+    if k and lab_num(k) is not None:
+        v = lab_num(k)
         if v > 5.5 or v < 3.3:
-            out.append(_rule_finding("ABNORMAL_POTASSIUM", f"Potassium {v}", [k["lab_id"]],
+            out.append(_rule_finding("ABNORMAL_POTASSIUM", f"Potassium {k['result_value']} {k['unit']}", [k["lab_id"]],
                                      "critical" if (v >= 6.0 or v <= 3.0) else None))
     na = lab("Sodium")
-    if na and num(na["result_value"]) is not None and not (130 <= num(na["result_value"]) <= 150):
-        out.append(_rule_finding("ABNORMAL_SODIUM", f"Sodium {na['result_value']}", [na["lab_id"]]))
+    if na and lab_num(na) is not None and not (130 <= lab_num(na) <= 150):
+        out.append(_rule_finding("ABNORMAL_SODIUM", f"Sodium {na['result_value']} {na['unit']}", [na["lab_id"]]))
     cr = lab("Creatinine")
-    if cr and num(cr["result_value"]) is not None and num(cr["result_value"]) > 1.5:
-        out.append(_rule_finding("ELEVATED_CREATININE", f"Creatinine {cr['result_value']}", [cr["lab_id"]]))
+    if cr and lab_num(cr) is not None and lab_num(cr) > 1.5:
+        out.append(_rule_finding("ELEVATED_CREATININE", f"Creatinine {cr['result_value']} {cr['unit']}", [cr["lab_id"]]))
     hyper = []
     for t, lim in (("Glucose", 200), ("POC glucose", 200), ("HbA1c", 8.5)):
         r = lab(t)
-        if r and num(r["result_value"]) is not None and num(r["result_value"]) > lim:
+        if r and lab_num(r) is not None and lab_num(r) > lim:
             hyper.append(r)
     if hyper:
-        out.append(_rule_finding("HYPERGLYCEMIA", "; ".join(f"{r['test_name']} {r['result_value']}" for r in hyper),
+        out.append(_rule_finding("HYPERGLYCEMIA", "; ".join(
+            f"{r['test_name']} {r['result_value']} {r['unit']}" for r in hyper),
                                  [r["lab_id"] for r in hyper]))
     alb = lab("Albumin")
-    if alb and num(alb["result_value"]) is not None and num(alb["result_value"]) < 3.0:
-        out.append(_rule_finding("LOW_ALBUMIN", f"Albumin {alb['result_value']}", [alb["lab_id"]]))
+    if alb and lab_num(alb) is not None and lab_num(alb) < 3.0:
+        out.append(_rule_finding("LOW_ALBUMIN", f"Albumin {alb['result_value']} {alb['unit']}", [alb["lab_id"]]))
     lft = [r for r, lim in ((lab("AST"), 120), (lab("ALT"), 120), (lab("Total bilirubin"), 2.0))
-           if r and num(r["result_value"]) is not None and num(r["result_value"]) > lim]
+           if r and lab_num(r) is not None and lab_num(r) > lim]
     if lft:
-        out.append(_rule_finding("ELEVATED_LFTS", "; ".join(f"{r['test_name']} {r['result_value']}" for r in lft),
+        out.append(_rule_finding("ELEVATED_LFTS", "; ".join(
+            f"{r['test_name']} {r['result_value']} {r['unit']}" for r in lft),
                                  [r["lab_id"] for r in lft]))
     uc, nit = lab("Urine culture"), lab("UA nitrite")
     uti = [r for r in (uc, nit) if r and r["result_value"] not in ("No growth", "Negative", "")]
@@ -668,7 +685,18 @@ def check_values(chart):
 
     hist = (p.get("anesthesia_complication_history") or "").lower()
     if _has(p, "Obstructive sleep apnea"):
-        out.append(_rule_finding("OBSTRUCTIVE_SLEEP_APNEA", "Obstructive sleep apnea", [p["patient_id"]]))
+        cpap_status = chart.get("session_cpap_status")
+        detail = {
+            "brought": "Obstructive sleep apnea; patient reports bringing their CPAP machine, mask and settings",
+            "not_brought": "Obstructive sleep apnea; patient did not bring CPAP",
+        }.get(cpap_status, "Obstructive sleep apnea")
+        nurse_actions = ["BRING_CPAP"] if cpap_status is None else []
+        out.append(_finding("OBSTRUCTIVE_SLEEP_APNEA", "routine", detail, nurse_actions, ["OSA_PRECAUTIONS"],
+                            [p["patient_id"]]))
+        if cpap_status == "not_brought":
+            out.append(_finding("CPAP_NOT_BROUGHT", "routine",
+                                "Patient did not bring CPAP; request a hospital CPAP from respiratory therapy",
+                                [], ["CPAP_NOT_BROUGHT"], [p["patient_id"]]))
     if "malignant hyperthermia" in hist:
         out.append(_rule_finding("MALIGNANT_HYPERTHERMIA_RISK", p["anesthesia_complication_history"], [p["patient_id"]]))
     if "difficult airway" in hist:
@@ -677,6 +705,19 @@ def check_values(chart):
         out.append(_rule_finding("PONV_HISTORY", p["anesthesia_complication_history"], [p["patient_id"]]))
     if "latex" in (p.get("allergies") or "").lower():
         out.append(_rule_finding("LATEX_ALLERGY", "Latex allergy", [p["patient_id"]]))
+    day_of_ids = {row["lab_id"] for row in chart.get("session_day_of_labs", [])}
+    flagged_day_of = [finding for finding in out
+                      if day_of_ids.intersection(finding["evidence_ids"])
+                      and finding["actions"]["anesthesia"]]
+    if flagged_day_of:
+        flagged_ids = set().union(*(day_of_ids.intersection(f["evidence_ids"])
+                                     for f in flagged_day_of))
+        details = "; ".join(
+            f"{row['test_name']} {row['result_value']} {row['unit']}"
+            for row in chart["session_day_of_labs"] if row["lab_id"] in flagged_ids
+        )
+        out.append(_finding("DAY_OF_VALUES_REVIEW", "routine", f"Day-of values to review: {details}",
+                            [], ["UPDATE_ANESTHESIA_PLAN"], sorted(flagged_ids)))
     return out
 
 

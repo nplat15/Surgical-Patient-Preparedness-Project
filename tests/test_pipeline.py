@@ -123,6 +123,148 @@ def test_roster_gives_students_their_own_case():
     assert SHOWCASE not in sids and all(S.by_id()[s]["state"] != "ready" for s in sids)
 
 
+def test_completed_anesthesia_consent_updates_session_chart_and_checklist():
+    from preop import schedule as S
+    from preop import workflow as W
+
+    chart = D.build_chart("S052")
+    req = next(r for r in C.applicable_requirements(chart) if r["item"] == "Anesthesia consent")
+    assert C.requirement_status(chart, req)["status"] == "missing"
+
+    updated = W.apply_completed_actions(chart, {("anesthesia", "OBTAIN_ANESTHESIA_CONSENT")})
+
+    assert C.requirement_status(updated, req)["status"] == "ok"
+    assert S.checklist_row(req, updated)["status"] == "ok"
+    consent = next(c for c in updated["consents"] if c["consent_type"] == "Anesthesia consent")
+    assert consent["status"] == "Signed (this session)"
+    assert C.requirement_status(chart, req)["status"] == "missing"
+
+
+def test_anesthesia_consent_completion_survives_role_switch():
+    from streamlit.testing.v1 import AppTest
+
+    app = os.path.join(D.ROOT, "app.py")
+    student = AppTest.from_file(app, default_timeout=60).run()
+    student.text_input[0].input("Consent QA")
+    student.button[0].click().run()
+    student.button(key="pt_S052").click().run()
+    student.segmented_control[1].set_value("anesthesia").run()
+    student.radio(key="dec|S052|anesthesia|OBTAIN_ANESTHESIA_CONSENT").set_value("Accept").run()
+
+    student.checkbox(key="todo|S052|anesthesia|OBTAIN_ANESTHESIA_CONSENT|0").check().run()
+    student.checkbox(key="todo|S052|anesthesia|OBTAIN_ANESTHESIA_CONSENT|1").check().run()
+    assert any("Completed in this session" in item.value for item in student.markdown)
+
+    student.segmented_control[1].set_value("nurse").run()
+    checklist = next(item.value for item in student.markdown if "Pre-op checklist" in item.value)
+    assert "<td><b>Anesthesia consent</b></td><td>Completed in this session</td>" in checklist
+    assert not student.exception, student.exception
+
+
+def test_cpap_response_updates_role_specific_findings():
+    from preop import workflow as W
+
+    chart = D.build_chart("S078")
+    finding = next(f for f in C.evaluate_structured(chart)
+                   if f["finding_code"] == "OBSTRUCTIVE_SLEEP_APNEA")
+    assert finding["actions"]["nurse"] == ["BRING_CPAP"]
+
+    brought = PL.rules_next_steps(
+        W.apply_completed_actions(chart, {("nurse", "BRING_CPAP")}, "brought"),
+        "anesthesia",
+    )
+    assert "CPAP_NOT_BROUGHT" not in {a["code"] for a in brought["actions"]}
+
+    not_brought_chart = W.apply_completed_actions(chart, {("nurse", "BRING_CPAP")}, "not_brought")
+    anesthesia = PL.rules_next_steps(not_brought_chart, "anesthesia")
+    action = next(a for a in anesthesia["actions"] if a["code"] == "CPAP_NOT_BROUGHT")
+    assert "did not bring CPAP" in action["reason"]
+    assert "hospital CPAP" in action["reason"]
+    nurse = PL.rules_next_steps(not_brought_chart, "nurse")
+    assert "BRING_CPAP" not in {a["code"] for a in nurse["actions"]}
+
+
+def test_cpap_not_brought_is_shown_to_anesthesia_in_app():
+    from streamlit.testing.v1 import AppTest
+
+    app = os.path.join(D.ROOT, "app.py")
+    student = AppTest.from_file(app, default_timeout=60).run()
+    student.text_input[0].input("CPAP QA")
+    student.button[0].click().run()
+    student.button(key="pt_S078").click().run()
+    student.radio(key="dec|S078|nurse|BRING_CPAP").set_value("Accept").run()
+    student.radio(key="cpap|S078").set_value("not_brought").run()
+
+    assert student.session_state["completed|S078|nurse|BRING_CPAP"]
+    assert student.session_state["cpap_status|S078"] == "not_brought"
+    student.segmented_control[1].set_value("anesthesia").run()
+    assert any("Rule finding: Patient did not bring CPAP" in item.value
+               for item in student.warning)
+    assert any(item.key == "dec|S078|anesthesia|CPAP_NOT_BROUGHT"
+               for item in student.radio)
+    assert not student.exception, student.exception
+
+
+def test_day_of_values_use_project_thresholds_and_prompt_anesthesia_review():
+    from preop import workflow as W
+
+    chart = D.build_chart("S078")
+    updated = W.apply_completed_actions(
+        chart, set(), day_of_values={"POC glucose": {"value": 11.2, "unit": "mmol/L"}})
+    newest = C.latest_lab(updated, "POC glucose")
+    assert newest["result_value"] == "11.2" and newest["unit"] == "mmol/L"
+    assert newest["prior_value"] and newest["prior_date"]
+    assert newest["rule_value"] > 200
+
+    anesthesia = PL.rules_next_steps(updated, "anesthesia")
+    actions = {action["code"] for action in anesthesia["actions"]}
+    assert "UPDATE_ANESTHESIA_PLAN" in actions
+    assert "GLYCEMIC_PLAN" in actions
+    review = next(f for f in anesthesia["findings"] if f["finding_code"] == "DAY_OF_VALUES_REVIEW")
+    assert "11.2 mmol/L" in review["detail"]
+
+    within_rule_threshold = W.apply_completed_actions(
+        chart, set(), day_of_values={"POC glucose": {"value": 10.0, "unit": "mmol/L"}})
+    findings = C.evaluate_structured(within_rule_threshold)
+    assert "DAY_OF_VALUES_REVIEW" not in {finding["finding_code"] for finding in findings}
+
+
+def test_day_of_value_flag_uses_reference_range_not_day_of_label():
+    from preop import workflow as W
+
+    chart = D.build_chart("S078")
+    for value, expected in ((240, "H"), (50, "L"), (100, "")):
+        updated = W.apply_completed_actions(
+            chart, set(), day_of_values={"POC glucose": {"value": value, "unit": "mg/dL"}})
+        newest = C.latest_lab(updated, "POC glucose")
+        assert newest["flag"] == expected
+
+
+def test_day_of_value_entry_appears_in_anesthesia_review():
+    from streamlit.testing.v1 import AppTest
+
+    app = os.path.join(D.ROOT, "app.py")
+    student = AppTest.from_file(app, default_timeout=60).run()
+    student.text_input[0].input("Day-of QA")
+    student.button[0].click().run()
+    student.button(key="pt_S078").click().run()
+    student.radio(key="dec|S078|nurse|INSULIN_INSTRUCTIONS").set_value("Accept").run()
+
+    assert any(item.key == "dayof-value|S078|POC glucose" for item in student.number_input)
+    student.number_input(key="dayof-value|S078|POC glucose").set_value(240)
+    student.button(key="FormSubmitter:dayof-form|S078|POC glucose-Record POC glucose").click().run()
+
+    student.segmented_control[1].set_value("anesthesia").run()
+    assert any(item.key == "dec|S078|anesthesia|UPDATE_ANESTHESIA_PLAN"
+               for item in student.radio)
+    assert any("Day-of values to review" in item.value for item in student.warning)
+    key_values = next(item.value.to_string() for item in student.dataframe
+                      if "DAYOF-S078-POC-glucose" in item.value.to_string())
+    assert "240.0 mg/dL" in key_values and "261 mg/dL" in key_values
+    assert "H" in key_values
+    assert not student.exception, student.exception
+
+
 def test_simultaneous_llm_requests_call_the_model_once():
     import threading
     import time

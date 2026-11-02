@@ -25,9 +25,10 @@ from streamlit.errors import StreamlitSecretNotFoundError
 from preop import criteria as C
 from preop import data as D
 from preop import schedule as S
+from preop import workflow as W
 from preop.classroom import Roster
 from preop.llm import LLM, default_provider
-from preop.pipeline import action_text, run_case
+from preop.pipeline import action_text, rules_next_steps, rules_summary, run_case
 
 st.set_page_config(page_title="Pre-Op Readiness", page_icon="🩺", layout="wide", initial_sidebar_state="collapsed")
 
@@ -107,6 +108,78 @@ def shared():
 
 ROSTER, DECISIONS_LOCK, AI_SLOTS = shared()
 ss = st.session_state
+
+
+def completed_actions(sid):
+    """Actions whose accepted follow-up tasks were completed in this browser session."""
+    completed = set()
+    for code, (tasks, _) in C.ACTION_FOLLOW_UP.items():
+        role = C.ACTION_CATALOG[code][0]
+        day_of_values = ss.get(f"dayof|{sid}", {})
+        if (ss.get(f"completed|{sid}|{role}|{code}")
+                or (code == "POC_GLUCOSE_DAY_OF" and "POC glucose" in day_of_values)):
+            completed.add((role, code))
+    return completed
+
+
+def mark_action_complete(sid, role, code):
+    """Keep completion outside checkbox widget state, which Streamlit removes when switching roles."""
+    tasks, _ = C.ACTION_FOLLOW_UP[code]
+    decision = f"dec|{sid}|{role}|{code}"
+    completed_key = f"completed|{sid}|{role}|{code}"
+    if (ss.get(decision) == "Accept"
+            and all(ss.get(f"todo|{sid}|{role}|{code}|{i}") for i in range(len(tasks)))):
+        ss[completed_key] = True
+    else:
+        ss.pop(completed_key, None)
+
+
+def mark_cpap_status(sid):
+    status = ss.get(f"cpap|{sid}")
+    ss[f"cpap_status|{sid}"] = status
+    completed_key = f"completed|{sid}|nurse|BRING_CPAP"
+    if status in ("brought", "not_brought"):
+        ss[completed_key] = True
+    else:
+        ss.pop(f"cpap_status|{sid}", None)
+        ss.pop(completed_key, None)
+
+
+def day_of_value_form(sid, test):
+    """Record a day-of result without changing the source dataset."""
+    panel, default_unit, unit_factors = W.DAY_OF_TESTS[test]
+    saved = ss.get(f"dayof|{sid}", {}).get(test)
+    latest = C.latest_lab(D.build_chart(sid), test)
+    if latest:
+        st.caption(f"{panel} · Most recent chart value: {latest['result_value']} {latest['unit']} · {latest['collection_date']}")
+    else:
+        st.caption(panel)
+    form_key = f"dayof-form|{sid}|{test}"
+    with st.form(form_key):
+        value_col, unit_col = st.columns([1, 1])
+        value = value_col.number_input(
+            f"{test} day-of value",
+            value=float(saved["value"]) if saved else None,
+            step=0.1,
+            key=f"dayof-value|{sid}|{test}",
+        )
+        units = list(unit_factors)
+        unit = unit_col.selectbox(
+            "Unit",
+            units,
+            index=units.index(saved["unit"]) if saved else units.index(default_unit),
+            key=f"dayof-unit|{sid}|{test}",
+        )
+        if st.form_submit_button(f"Record {test}"):
+            if value is None:
+                st.error(f"Enter a day-of value for {test} before recording it.")
+            else:
+                values = dict(ss.get(f"dayof|{sid}", {}))
+                values[test] = dict(value=value, unit=unit)
+                ss[f"dayof|{sid}"] = values
+                st.rerun()
+    if saved:
+        st.caption(f"Recorded day-of value: {saved['value']:g} {saved['unit']}")
 
 
 def sign_in():
@@ -192,6 +265,25 @@ watch_for_reset()
 ss.setdefault("moves", {})  # demo schedule changes for this browser session: sid -> (date, time, room, kind)
 MOVES = tuple(sorted((sid, *mv) for sid, mv in ss.moves.items()))
 BOARD = {x["id"]: x for x in S.cases(MOVES)}
+for case_id, case in list(BOARD.items()):
+    completed = completed_actions(case_id)
+    day_of_values = ss.get(f"dayof|{case_id}", {})
+    if completed or day_of_values:
+        chart_with_work = W.apply_completed_actions(
+            D.build_chart(case_id), completed, ss.get(f"cpap_status|{case_id}"), day_of_values)
+        case = dict(case)
+        case["reqs"] = [S.checklist_row(req, chart_with_work)
+                        for req in C.applicable_requirements(chart_with_work)]
+        case["rules"] = {
+            role: (lambda result: dict(
+                status=result["status"],
+                actions=[dict(code=a["code"], reason=a["reason"], evidence_ids=a["evidence_ids"],
+                              priority=a["priority"]) for a in result["actions"]],
+            ))(rules_next_steps(chart_with_work, role))
+            for role in C.ROLES
+        }
+        case["state"] = S.sched_state(case)
+        BOARD[case_id] = case
 DAYS = sorted({x["case"]["surgery_date"] for x in BOARD.values()})
 ss.setdefault("sid", ME)
 ss.setdefault("view", "Patient chart")
@@ -426,7 +518,9 @@ with rail:
 with main:
     sid = ss.sid
     x = BOARD[sid]
-    chart = D.build_chart(sid)
+    completed = completed_actions(sid)
+    chart = W.apply_completed_actions(
+        D.build_chart(sid), completed, ss.get(f"cpap_status|{sid}"), ss.get(f"dayof|{sid}", {}))
     c = dict(chart["case"], **{k: x["case"][k] for k in ("surgery_date", "surgery_time", "surgery_location")})  # after any move
     p = chart["patient"]
     proc = D.procedure_label(c)
@@ -503,6 +597,12 @@ with main:
         return (f"<b>Pre-op checklist</b> <span class='src'>· {done} of {len(x['reqs'])} complete</span>"
                 f"<table class='ck'><tr><th>Status</th><th>Item</th><th>On file</th><th>Needed because</th></tr>{rows}</table>")
 
+    def show_session_work(item_types):
+        items = [row["item"] for row in chart.get("session_completed_items", [])
+                 if row["type"] in item_types]
+        if items:
+            st.caption("Completed in this session (not saved to the source dataset): " + ", ".join(items))
+
 
     def stamp(dk):
         ss.dec_time[dk] = datetime.now().strftime("%b %d %H:%M")
@@ -521,33 +621,114 @@ with main:
                             ss.results[key] = res = run_case(sid, role=role, engine="llm", llm=LLM(), use_cache=res is None)
                     except Exception as e:  # rate limit or network error after retries: keep the page usable
                         st.error(f"The AI review did not finish ({type(e).__name__}). Try again in a minute.")
-        if res is None:
-            res = run_case(sid, role=role, engine="rules")
+        if engine == "rules" or provider == "mock":
+            steps = rules_next_steps(chart, role)
+            res = dict(engine="rules" if engine == "rules" else "mock (no API key: rules output shown)",
+                       summary=rules_summary(chart, role, steps), next_steps=steps)
+        elif res is None:
+            steps = rules_next_steps(chart, role)
+            res = dict(engine="rules", summary=rules_summary(chart, role, steps), next_steps=steps)
             st.caption("Showing the rules-only check until the AI review is run.")
-        steps, summ = res["next_steps"], res["summary"]
+        res = dict(res)
+        steps = dict(res["next_steps"])
+        session_findings = []
+        if role == "anesthesia" and chart.get("session_day_of_labs"):
+            day_of_ids = {row["lab_id"] for row in chart["session_day_of_labs"]}
+            rule_steps = rules_next_steps(chart, role)
+            session_findings = [finding for finding in rule_steps.get("findings", [])
+                                if day_of_ids.intersection(finding["evidence_ids"])]
+            existing_findings = {finding.get("finding_code") for finding in steps.get("findings", [])}
+            steps["findings"] = [
+                *steps.get("findings", []),
+                *(finding for finding in session_findings
+                  if finding.get("finding_code") not in existing_findings),
+            ]
+            existing_actions = {action["code"] for action in steps.get("actions", [])}
+            steps["actions"] = [
+                *steps.get("actions", []),
+                *(action for action in rule_steps["actions"]
+                  if action["code"] not in existing_actions
+                  and day_of_ids.intersection(action["evidence_ids"])),
+            ]
+            if steps.get("findings"):
+                steps["status"] = max(
+                    [steps.get("status", "Ready"),
+                     C.status_from_findings(steps["findings"])],
+                    key=C.STATUS_ORDER.index,
+                )
+        if role == "anesthesia" and ss.get(f"cpap_status|{sid}") == "not_brought":
+            rule_steps = rules_next_steps(chart, role)
+            session_findings = [f for f in rule_steps.get("findings", [])
+                                if f["finding_code"] == "CPAP_NOT_BROUGHT"]
+            steps["findings"] = [*steps.get("findings", []), *session_findings]
+            known_codes = {a["code"] for a in steps["actions"]}
+            steps["actions"] = [*steps["actions"],
+                                *(a for a in rule_steps["actions"]
+                                  if a["code"] == "CPAP_NOT_BROUGHT" and a["code"] not in known_codes)]
+        completed_for_role = {code for completed_role, code in completed if completed_role == role}
+        steps["actions"] = [a for a in steps["actions"] if a["code"] not in completed_for_role]
+        res["next_steps"] = steps
+        summ = res["summary"]
         n = len(steps["actions"])
         html(top_card(steps["status"], n, summ.get("headline") or f"{n} item{'s' * (n != 1)} to address before surgery."))
         st.caption(f"{ROLE_LABEL[role]} view · engine: {res['engine']} · {steps.get('status_reason', '')}")
+        for finding in session_findings:
+            st.warning(f"Rule finding: {finding['detail']}")
 
         dkey = lambda code: f"dec|{sid}|{role}|{code}"
         left, right = st.columns([1, 1.15])
         with left:
             accepted = [a for a in steps["actions"] if ss.get(dkey(a["code"])) == "Accept"]
-            if n:
+            if n or completed_for_role:
                 with st.container(border=True):
-                    tasks = [(a, i, s) for a in accepted for i, s in enumerate(C.ACTION_FOLLOW_UP.get(a["code"], ([], ""))[0])]
-                    done = sum(bool(ss.get(f"todo|{sid}|{role}|{a['code']}|{i}")) for a, i, _ in tasks)
-                    st.markdown(f"**To-do · {ROLE_LABEL[role]}**" + (f" <span class='src'>· {done} of {len(tasks)} done</span>" if tasks else ""),
+                    task_count = sum(1 if a["code"] == "BRING_CPAP" else
+                                     len(C.ACTION_FOLLOW_UP.get(a["code"], ([], ""))[0]) for a in accepted)
+                    done = sum(bool(ss.get(f"completed|{sid}|{role}|{a['code']}"))
+                               if a["code"] == "BRING_CPAP" else
+                               sum(bool(ss.get(f"todo|{sid}|{role}|{a['code']}|{i}"))
+                                   for i in range(len(C.ACTION_FOLLOW_UP.get(a["code"], ([], ""))[0])))
+                               for a in accepted)
+                    st.markdown(f"**To-do · {ROLE_LABEL[role]}**" + (f" <span class='src'>· {done} of {task_count} done</span>" if task_count else ""),
                                 unsafe_allow_html=True)
+                    if completed_for_role:
+                        st.markdown("**Completed in this session**")
+                        for code in sorted(completed_for_role):
+                            st.markdown(f"- ✓ {esc(action_text(code))}")
                     if not accepted:
                         st.caption("Accept a next step to add its tasks here.")
                     for a in accepted:
                         todo_steps, closes = C.ACTION_FOLLOW_UP.get(a["code"], ([], ""))
                         st.markdown(f"<span class='src'><b>{esc(action_text(a['code']))}</b></span>", unsafe_allow_html=True)
-                        for i, s in enumerate(todo_steps):
-                            st.checkbox(s, key=f"todo|{sid}|{role}|{a['code']}|{i}")
+                        if a["code"] == "BRING_CPAP":
+                            st.radio("Did the patient bring their CPAP machine, mask and settings?",
+                                     ["brought", "not_brought"], index=None,
+                                     format_func=lambda value: {
+                                         "brought": "Yes — patient brought CPAP",
+                                         "not_brought": "No — patient did not bring CPAP",
+                                     }[value],
+                                     key=f"cpap|{sid}", on_change=mark_cpap_status, args=(sid,))
+                            cpap_status = ss.get(f"cpap_status|{sid}")
+                            if cpap_status == "brought":
+                                st.caption("Recorded: patient brought CPAP.")
+                            elif cpap_status == "not_brought":
+                                st.caption("Recorded: patient did not bring CPAP. Anesthesia will see a rule finding.")
+                        else:
+                            for i, s in enumerate(todo_steps):
+                                st.checkbox(s, key=f"todo|{sid}|{role}|{a['code']}|{i}",
+                                            on_change=mark_action_complete, args=(sid, role, a["code"]))
                         if all(ss.get(f"todo|{sid}|{role}|{a['code']}|{i}") for i in range(len(todo_steps))):
-                            st.caption(f"Tasks done · waiting for the chart: {closes}")
+                            if a["code"] != "BRING_CPAP":
+                                st.caption(f"Tasks done · waiting for the chart: {closes}")
+                    if role == "nurse":
+                        day_of_tests = dict.fromkeys(
+                            test for action in accepted
+                            for test in W.DAY_OF_LAB_ACTIONS.get(action["code"], ())
+                        )
+                        if day_of_tests:
+                            st.markdown("**Day-of lab values**")
+                            st.caption("Values are session-only. Existing teaching-rule thresholds flag results for anesthesia review.")
+                            for test in day_of_tests:
+                                day_of_value_form(sid, test)
             with st.container(border=True):
                 for sec in summ.get("sections", []):
                     st.markdown(f"**{sec['title']}**")
@@ -559,7 +740,10 @@ with main:
                     lab = C.latest_lab(chart, t)
                     if lab:
                         rows.append(dict(Test=t, Value=f"{lab['result_value']} {'' if lab['unit'] == 'text' else lab['unit']}",
-                                         Flag=lab["flag"], Date=lab["collection_date"], ID=lab["lab_id"]))
+                                         Flag=lab["flag"], Date=lab["collection_date"],
+                                         Prior=(f"{lab['prior_value']} {lab['prior_unit']} · {lab['prior_date']}"
+                                                if lab.get("session_day_of") and lab.get("prior_value") else ""),
+                                         ID=lab["lab_id"]))
                 for d in chart["diagnostics"]:
                     if role == "anesthesia" or d["test_type"] == "EKG":
                         rows.append(dict(Test=d["test_type"], Value=(f"{d['result_value']} {d['result_unit']}".strip() or d["interpretation"]),
@@ -635,6 +819,7 @@ with main:
     with tabs[1]:
         show(sorted(chart["labs"], key=lambda r: (r["panel"], r["test_name"])),
              ["panel", "test_name", "result_value", "unit", "reference_low", "reference_high", "flag", "collection_date", "lab_id"], ["flag"])
+        show_session_work({"lab"})
     with tabs[2]:
         show([dict(m, preop_instruction=m["preop_instruction"] or "⚠ none documented") for m in chart["meds"]],
              ["medication_name", "dose", "route", "frequency", "preop_instruction", "medication_id"])
@@ -644,8 +829,10 @@ with main:
         show(chart["imaging"], ["imaging_type", "imaging_date", "report", "imaging_id"], title="Imaging")
         show(chart["clearances"], ["clearance_type", "status", "requested_date", "completed_date", "assessment_note", "clearance_id"], ["status"],
              title="Clearances")
+        show_session_work({"diagnostic", "imaging", "clearance"})
     with tabs[4]:
         show(chart["consents"], ["consent_type", "status", "signed_date", "consent_id"], ["status"], title="Consents")
+        show_session_work({"consent", "blood"})
         if chart["blood"]:
             show([chart["blood"]], ["abo_rh", "antibody_screen", "type_screen_date", "type_screen_expires", "prbc_crossmatched_units",
                                     "ffp_units_available", "platelet_units_available"], ["antibody_screen"], title="Blood bank")
@@ -657,4 +844,5 @@ with main:
                 st.text(note["note_text"])
         else:
             st.warning("No H&P in chart.")
+        show_session_work({"note"})
         st.caption(f"Anesthesia history: {p['anesthesia_complication_history']}")

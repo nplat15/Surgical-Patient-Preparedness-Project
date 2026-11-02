@@ -75,6 +75,9 @@ out in turn across procedures and starting with cases that have a schedule sugge
 the presenter's walkthrough. A "What to try" list walks students through the board in about 3 minutes.
 
 * Every student has their own copy of the board: schedule changes, decisions and to-do items only show on their screen.
+* Completing all follow-up tasks updates the matching checklist and chart status in that student's session only; these demo updates are not written to the source patient records.
+* For the CPAP check, the nurse records whether the patient brought their machine. If not, anesthesia sees a rule finding to arrange a hospital CPAP with respiratory therapy.
+* Nurses can enter day-of values for the supported lab follow-ups. The app applies the existing synthetic teaching-rule thresholds, shows the prior value for context, and adds an anesthesia plan-review task when a day-of value triggers a rule. Entries stay in that student's session and are not clinical notifications or saved lab records.
 * The student's sign-in is in the URL (`?u=...`), so a page refresh keeps the same patient. Unsaved clicks are lost on refresh.
 * Assignments are kept in memory. If the app restarts, students sign in again and may get a different patient.
 * AI reviews: at most 4 run at once and the rest wait their turn. Students on the same case and role share one model call.
