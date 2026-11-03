@@ -38,12 +38,48 @@ def _actions_for_requirement(req, status):
     return set(req["missing_actions"])
 
 
-def apply_completed_actions(chart, completed_actions, cpap_status=None, day_of_values=None):
+def apply_completed_actions(chart, completed_actions, cpap_status=None, day_of_values=None,
+                            consent_status=None, ekg_machine_reading=None, ekg_nurse_note=None,
+                            medication_doses=None, track_medication_doses=False):
     """Return a chart view with requirements completed in this browser session reflected."""
     completed_actions = set(completed_actions)
     updated = dict(chart)
+    if track_medication_doses:
+        updated["session_track_medication_doses"] = True
+    updated["session_medication_doses"] = [
+        dict(medication_id=med_id, **entry)
+        for med_id, entry in (medication_doses or {}).items()
+    ]
     if cpap_status is not None:
         updated["session_cpap_status"] = cpap_status
+    updated["diagnostics"] = [dict(row) for row in chart["diagnostics"]]
+    updated["session_machine_ekgs"] = []
+    if ekg_machine_reading:
+        if ekg_machine_reading not in C.COMPUTERIZED_EKG_GUIDANCE:
+            raise ValueError(f"Unknown computerized EKG reading {ekg_machine_reading!r}")
+        nurse_action, anesthesia_action = C.COMPUTERIZED_EKG_GUIDANCE[ekg_machine_reading]
+        test_id = f"SESSION-EKG-{chart['case']['surgery_id']}"
+        interpretation = f"Computerized reading from the machine (not a clinician interpretation): {ekg_machine_reading}"
+        if ekg_nurse_note and ekg_nurse_note.strip():
+            interpretation += f". Nurse note: {ekg_nurse_note.strip()}"
+        row = {
+            "test_id": test_id,
+            "surgery_id": chart["case"]["surgery_id"],
+            "patient_id": chart["case"]["patient_id"],
+            "test_type": "EKG",
+            "test_date": chart["case"]["surgery_date"],
+            "result_value": "",
+            "result_unit": "",
+            "interpretation": interpretation,
+            "compared_to_prior": "Not assessed",
+            "status": "Session-only",
+            "machine_reading": ekg_machine_reading,
+            "nurse_note": ekg_nurse_note.strip() if ekg_nurse_note else "",
+            "nurse_action": nurse_action,
+            "anesthesia_action": anesthesia_action,
+        }
+        updated["diagnostics"].append(row)
+        updated["session_machine_ekgs"] = [row]
     day_of_values = day_of_values or {}
     if day_of_values:
         updated["labs"] = [dict(row) for row in chart["labs"]]
@@ -85,10 +121,25 @@ def apply_completed_actions(chart, completed_actions, cpap_status=None, day_of_v
     updated["consents"] = [dict(row) for row in chart["consents"]]
     completed_requirements = set(chart.get("session_completed_requirements", ()))
     completed_items = list(chart.get("session_completed_items", ()))
+    if consent_status in ("signed", "refused"):
+        row = next((r for r in updated["consents"]
+                    if r["consent_type"] == "Anesthesia consent"), None)
+        if row is None:
+            row = dict(consent_type="Anesthesia consent", consent_id="Session response")
+            updated["consents"].append(row)
+        if consent_status == "signed":
+            row.update(status="Signed (this session)", signed_date="Completed in this session")
+            completed_requirements.add(("consent", "Anesthesia consent"))
+            completed_items.append(dict(type="consent", item="Anesthesia consent"))
+        else:
+            row.update(status="Refused", signed_date="")
+        updated["session_consent_status"] = consent_status
 
     for req in C.applicable_requirements(updated):
         status = C.requirement_status(updated, req)
         if status["status"] == "ok":
+            continue
+        if req["item"] == "Anesthesia consent" and consent_status == "refused":
             continue
         required_actions = _actions_for_requirement(req, status)
         if not required_actions or not required_actions.issubset(completed_actions):

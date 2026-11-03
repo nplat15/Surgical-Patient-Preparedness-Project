@@ -14,8 +14,9 @@ import calendar
 import csv
 import hmac
 import os
+import re
 import threading
-from datetime import datetime
+from datetime import date, datetime
 from html import escape as esc
 
 import pandas as pd
@@ -50,7 +51,8 @@ KEY_TESTS = {
                    "eGFR", "Glucose", "POC glucose", "HbA1c", "Albumin", "AST", "ALT", "Total bilirubin"],
 }
 ICON = {"ready": "🟢", "open": "⚪", "later": "🟠", "resched": "🔴", "hold": "🟣"}
-CK = {"ok": ("✓", "Complete"), "missing": ("✗", "Missing"), "outdated": ("!", "Expired"), "pending": ("…", "Pending")}
+CK = {"ok": ("✓", "Complete"), "missing": ("✗", "Missing"), "outdated": ("!", "Expired"),
+      "pending": ("…", "Pending"), "refused": ("✗", "Refused")}
 DECLINE_REASONS = ["Already done elsewhere", "Not indicated for this patient", "Patient declined", "Covered by another order", "Other"]
 DECISIONS = os.path.join(D.ROOT, "results", "decisions.csv")
 
@@ -74,7 +76,7 @@ st.markdown("""<style>
 .lead{font-size:.85em;color:var(--muted);margin-left:6px} .lead.days{color:var(--bad);font-weight:600}
 .bar{padding:8px 14px;border-radius:6px;font-weight:600;background:var(--cb);color:var(--c);margin-bottom:10px}
 .bar span{font-weight:400;color:inherit;opacity:.9}
-.ck-ok{color:var(--ok)} .ck-missing{color:var(--bad)} .ck-outdated,.ck-pending{color:var(--warn)}
+.ck-ok{color:var(--ok)} .ck-missing,.ck-refused{color:var(--bad)} .ck-outdated,.ck-pending{color:var(--warn)}
 table.ck{border-collapse:collapse;width:100%;font-size:.9em} table.ck td,table.ck th{text-align:left;padding:5px 8px;border-bottom:1px solid var(--soft);vertical-align:top}
 table.ck th{font-size:.75em;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .legend span{margin-right:14px;font-size:.88em;white-space:nowrap} .legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;background:var(--c)}
@@ -111,24 +113,87 @@ ss = st.session_state
 
 
 def completed_actions(sid):
-    """Actions whose accepted follow-up tasks were completed in this browser session."""
+    """Actions with all checkboxes and required session inputs completed."""
     completed = set()
-    for code, (tasks, _) in C.ACTION_FOLLOW_UP.items():
+    chart = D.build_chart(sid)
+    medication_doses = ss.get(f"med-dose|{sid}", {})
+    chart = W.apply_completed_actions(
+        chart, set(), day_of_values=ss.get(f"dayof|{sid}", {}),
+        ekg_machine_reading=ss.get(f"session_ekg|{sid}", {}).get("reading"),
+        ekg_nurse_note=ss.get(f"session_ekg|{sid}", {}).get("note"),
+        medication_doses=medication_doses, track_medication_doses=True,
+    )
+    for code in C.ACTION_FOLLOW_UP:
         role = C.ACTION_CATALOG[code][0]
-        day_of_values = ss.get(f"dayof|{sid}", {})
-        if (ss.get(f"completed|{sid}|{role}|{code}")
-                or (code == "POC_GLUCOSE_DAY_OF" and "POC glucose" in day_of_values)):
+        if action_is_complete(sid, role, code, chart):
             completed.add((role, code))
     return completed
 
 
+def medication_ids_for_action(chart, code):
+    if code != "VERIFY_MEDICATION_LAST_DOSE":
+        return []
+    return [
+        row["medication_id"] for row in chart["meds"]
+        if (row.get("preop_instruction") or "").strip()
+        and any(word in row["preop_instruction"].lower() for word in ("hold", "stop"))
+    ]
+
+
+def action_tasks_for(sid, role, code, chart=None):
+    tasks, closes = C.ACTION_FOLLOW_UP.get(code, ([], ""))
+    if code in {"NOTIFY_EKG_ABNORMALITY", "REVIEW_COMPUTERIZED_EKG"}:
+        reading = ss.get(f"session_ekg|{sid}", {}).get("reading")
+        if reading in C.COMPUTERIZED_EKG_GUIDANCE:
+            nurse_action, anesthesia_action = C.COMPUTERIZED_EKG_GUIDANCE[reading]
+            if code == "NOTIFY_EKG_ABNORMALITY":
+                tasks = [nurse_action, "Notify anesthesia of this reading and document the handoff"]
+            else:
+                tasks = [anesthesia_action, "Document anesthesia review and any plan changes"]
+    return tasks, closes
+
+
+def action_inputs_ready(sid, code, chart=None):
+    if code in C.ACTION_CATALOG and code in C.ACTION_FOLLOW_UP:
+        tests = W.DAY_OF_LAB_ACTIONS.get(code, ())
+        if tests and any(test not in ss.get(f"dayof|{sid}", {}) for test in tests):
+            return False
+        if code in {"OBTAIN_EKG", "NOTIFY_EKG_ABNORMALITY", "REVIEW_COMPUTERIZED_EKG"}:
+            if (not ss.get(f"session_ekg|{sid}", {}).get("reading")
+                    or ss.get(f"session_ekg_pending|{sid}")):
+                return False
+        if code == "VERIFY_MEDICATION_LAST_DOSE":
+            chart = chart or D.build_chart(sid)
+            saved = ss.get(f"med-dose|{sid}", {})
+            med_ids = medication_ids_for_action(chart, code)
+            if not med_ids or any(
+                med_id not in saved or saved[med_id].get("within_hold_period") not in (True, False)
+                for med_id in med_ids
+            ):
+                return False
+    return True
+
+
+def action_is_complete(sid, role, code, chart=None):
+    decision = f"dec|{sid}|{role}|{code}"
+    if ss.get(decision) != "Accept":
+        return False
+    if code == "OBTAIN_ANESTHESIA_CONSENT":
+        return ss.get(f"consent_status|{sid}") in ("signed", "refused")
+    if code == "BRING_CPAP":
+        return ss.get(f"cpap_status|{sid}") in ("brought", "not_brought")
+    tasks, _ = action_tasks_for(sid, role, code, chart)
+    checkboxes_done = all(
+        ss.get(f"todo|{sid}|{role}|{code}|{index}")
+        for index in range(len(tasks))
+    )
+    return checkboxes_done and action_inputs_ready(sid, code, chart)
+
+
 def mark_action_complete(sid, role, code):
-    """Keep completion outside checkbox widget state, which Streamlit removes when switching roles."""
-    tasks, _ = C.ACTION_FOLLOW_UP[code]
     decision = f"dec|{sid}|{role}|{code}"
     completed_key = f"completed|{sid}|{role}|{code}"
-    if (ss.get(decision) == "Accept"
-            and all(ss.get(f"todo|{sid}|{role}|{code}|{i}") for i in range(len(tasks)))):
+    if action_is_complete(sid, role, code):
         ss[completed_key] = True
     else:
         ss.pop(completed_key, None)
@@ -145,6 +210,199 @@ def mark_cpap_status(sid):
         ss.pop(completed_key, None)
 
 
+def mark_consent_answer(sid):
+    answer = ss.get(f"consent-answer|{sid}")
+    outcome_key = f"consent-outcome-value|{sid}"
+    if answer in ("yes", "no"):
+        ss[f"consent-answer-value|{sid}"] = answer
+    status_key = f"consent_status|{sid}"
+    if answer == "yes":
+        ss.pop(outcome_key, None)
+        ss[status_key] = "signed"
+    elif answer == "no" and ss.get(outcome_key) == "refused":
+        ss[status_key] = "refused"
+    else:
+        ss.pop(status_key, None)
+
+
+def mark_consent_outcome(sid):
+    ss[f"consent-outcome-value|{sid}"] = ss.get(f"consent-outcome|{sid}", "")
+    mark_consent_answer(sid)
+
+
+def reset_action_checkboxes(sid, role, code):
+    tasks, _ = action_tasks_for(sid, role, code)
+    for index in range(len(tasks)):
+        ss.pop(f"todo|{sid}|{role}|{code}|{index}", None)
+    ss.pop(f"completed|{sid}|{role}|{code}", None)
+
+
+def append_change_history(sid, field, old_value, new_value):
+    if old_value == new_value:
+        return
+    history_key = f"history|{sid}|{field}"
+    history = list(ss.get(history_key, []))
+    user = globals().get("USER") or {}
+    history.append({
+        "timestamp": datetime.now().isoformat(timespec="seconds"),
+        "user": user.get("name", "Student"),
+        "role": ss.get("role", "nurse"),
+        "old_value": old_value,
+        "new_value": new_value,
+    })
+    ss[history_key] = history
+
+
+def open_session_edit(sid, field):
+    ss[f"edit|{sid}|{field}"] = True
+
+
+def record_ekg_form(sid, reading, note):
+    old_entry = ss.get(f"session_ekg|{sid}", {})
+    new_entry = {"reading": reading, "note": note.strip()} if reading else {}
+    if old_entry:
+        append_change_history(sid, "ekg", old_entry, new_entry)
+    changed_existing = bool(old_entry and old_entry != new_entry)
+    if reading:
+        ss[f"session_ekg|{sid}"] = new_entry
+        ss.pop(f"edit|{sid}|ekg", None)
+        ss.pop(f"session_ekg_pending|{sid}", None)
+        if changed_existing:
+            for code in ("OBTAIN_EKG", "NOTIFY_EKG_ABNORMALITY", "REVIEW_COMPUTERIZED_EKG"):
+                role = C.ACTION_CATALOG[code][0]
+                reset_action_checkboxes(sid, role, code)
+        for code in ("OBTAIN_EKG", "NOTIFY_EKG_ABNORMALITY", "REVIEW_COMPUTERIZED_EKG"):
+            role = C.ACTION_CATALOG[code][0]
+            mark_action_complete(sid, role, code)
+    else:
+        if old_entry:
+            for code in ("OBTAIN_EKG", "NOTIFY_EKG_ABNORMALITY", "REVIEW_COMPUTERIZED_EKG"):
+                role = C.ACTION_CATALOG[code][0]
+                reset_action_checkboxes(sid, role, code)
+        ss.pop(f"session_ekg|{sid}", None)
+        ss.pop(f"edit|{sid}|ekg", None)
+
+
+def save_day_of_value(sid, test, value, unit):
+    values = dict(ss.get(f"dayof|{sid}", {}))
+    old_entry = values.get(test)
+    new_entry = dict(value=value, unit=unit)
+    if old_entry and old_entry != new_entry:
+        append_change_history(sid, f"lab:{test}", old_entry, new_entry)
+        for code, tests in W.DAY_OF_LAB_ACTIONS.items():
+            if test in tests:
+                reset_action_checkboxes(sid, "nurse", code)
+    values[test] = new_entry
+    ss[f"dayof|{sid}"] = values
+    ss.pop(f"edit|{sid}|lab:{test}", None)
+    pending = dict(ss.get(f"dayof_pending|{sid}", {}))
+    pending.pop(test, None)
+    ss[f"dayof_pending|{sid}"] = pending
+    for code, tests in W.DAY_OF_LAB_ACTIONS.items():
+        if test in tests:
+            mark_action_complete(sid, "nurse", code)
+
+
+def mark_lab_pending(sid, test):
+    pending = dict(ss.get(f"dayof_pending|{sid}", {}))
+    pending[test] = True
+    ss[f"dayof_pending|{sid}"] = pending
+
+
+def medication_dose_form(sid, medication, surgery_date):
+    med_id = medication["medication_id"]
+    saved = ss.get(f"med-dose|{sid}", {}).get(med_id, {})
+    instruction = medication.get("preop_instruction") or "No hold instruction documented"
+    surgery_day = date.fromisoformat(surgery_date)
+    dose_match = re.match(r"\s*(\d+(?:\.\d+)?)\s*(.*)", medication.get("dose", ""))
+    default_amount = float(dose_match.group(1)) if dose_match else 0.0
+    default_unit = dose_match.group(2).strip() if dose_match else "dose"
+    if saved and not ss.get(f"edit|{sid}|medication:{med_id}"):
+        st.caption(f"Recorded last dose: {saved['amount']:g} {saved['unit']} · {saved['date']}")
+        st.button(
+            f"Make edit to {medication['medication_name']} last dose",
+            key=f"edit-medication|{sid}|{med_id}",
+            on_click=open_session_edit,
+            args=(sid, f"medication:{med_id}"),
+        )
+        history = ss.get(f"history|{sid}|medication:{med_id}", [])
+        if history:
+            with st.popover(f"🕘 Change history · {medication['medication_name']}"):
+                for change in history:
+                    st.write(f"{change['timestamp']} · {change['user']} ({change['role']})")
+                    st.write(f"{change['old_value']} → {change['new_value']}")
+        return
+    with st.form(f"med-dose-form|{sid}|{med_id}"):
+        st.caption(f"Instruction: {instruction}")
+        amount_col, unit_col = st.columns([1, 1])
+        amount = amount_col.number_input(
+            "Last dose amount",
+            min_value=0.0,
+            value=float(saved["amount"]) if saved else default_amount,
+            step=0.5,
+            key=f"med-dose-amount|{sid}|{med_id}",
+        )
+        unit = unit_col.text_input(
+            "Dose unit",
+            value=saved.get("unit", default_unit),
+            key=f"med-dose-unit|{sid}|{med_id}",
+        )
+        taken_date = st.date_input(
+            "Date of last dose",
+            value=date.fromisoformat(saved["date"]) if saved else min(date.today(), surgery_day),
+            key=f"med-dose-date|{sid}|{med_id}",
+        )
+        within_options = ["yes", "no"]
+        saved_within = ("yes" if saved["within_hold_period"] else "no") if saved else None
+        within = st.radio(
+            "Was it taken within the documented hold period?",
+            within_options,
+            index=within_options.index(saved_within) if saved_within else None,
+            format_func=lambda value: {
+                "yes": "Yes — notify anesthesia",
+                "no": "No — followed the hold timing",
+            }[value],
+            key=f"med-dose-within|{sid}|{med_id}",
+        )
+        submitted = st.form_submit_button("Record last dose")
+    if submitted:
+        if amount <= 0 or not unit.strip():
+            st.error("Enter a positive dose amount and its unit.")
+        elif not within:
+            st.error("Choose whether the dose was taken within the documented hold period.")
+        elif taken_date > surgery_day:
+            st.error("The last-dose date cannot be after the scheduled surgery date.")
+        else:
+            values = dict(ss.get(f"med-dose|{sid}", {}))
+            entry = {
+                "medication_name": medication["medication_name"],
+                "amount": amount,
+                "unit": unit.strip(),
+                "date": taken_date.isoformat(),
+                "within_hold_period": within == "yes",
+            }
+            old_entry = values.get(med_id)
+            if old_entry and old_entry != entry:
+                append_change_history(sid, f"medication:{med_id}", old_entry, entry)
+                reset_action_checkboxes(sid, "nurse", "VERIFY_MEDICATION_LAST_DOSE")
+            values[med_id] = entry
+            ss[f"med-dose|{sid}"] = values
+            ss.pop(f"edit|{sid}|medication:{med_id}", None)
+            mark_action_complete(sid, "nurse", "VERIFY_MEDICATION_LAST_DOSE")
+            st.rerun()
+    if saved:
+        history = ss.get(f"history|{sid}|medication:{med_id}", [])
+        if history:
+            with st.popover(f"🕘 Change history · {medication['medication_name']}"):
+                for change in history:
+                    st.write(f"{change['timestamp']} · {change['user']} ({change['role']})")
+                    st.write(f"{change['old_value']} → {change['new_value']}")
+
+
+def select_chart_tab(tab_name):
+    ss["chart-section"] = tab_name
+
+
 def day_of_value_form(sid, test):
     """Record a day-of result without changing the source dataset."""
     panel, default_unit, unit_factors = W.DAY_OF_TESTS[test]
@@ -154,6 +412,22 @@ def day_of_value_form(sid, test):
         st.caption(f"{panel} · Most recent chart value: {latest['result_value']} {latest['unit']} · {latest['collection_date']}")
     else:
         st.caption(panel)
+    if saved and not ss.get(f"edit|{sid}|lab:{test}"):
+        line, edit_col, history_col = st.columns([3, 1, 1])
+        line.caption(f"Recorded day-of value: {saved['value']:g} {saved['unit']}")
+        edit_col.button(
+            "Make edit",
+            key=f"edit-lab|{sid}|{test}",
+            on_click=open_session_edit,
+            args=(sid, f"lab:{test}"),
+        )
+        history = ss.get(f"history|{sid}|lab:{test}", [])
+        if history:
+            with history_col.popover("🕘 Change history"):
+                for change in history:
+                    st.write(f"{change['timestamp']} · {change['user']} ({change['role']})")
+                    st.write(f"{change['old_value']} → {change['new_value']}")
+        return
     form_key = f"dayof-form|{sid}|{test}"
     with st.form(form_key):
         value_col, unit_col = st.columns([1, 1])
@@ -174,12 +448,87 @@ def day_of_value_form(sid, test):
             if value is None:
                 st.error(f"Enter a day-of value for {test} before recording it.")
             else:
-                values = dict(ss.get(f"dayof|{sid}", {}))
-                values[test] = dict(value=value, unit=unit)
-                ss[f"dayof|{sid}"] = values
+                save_day_of_value(sid, test, value, unit)
                 st.rerun()
     if saved:
-        st.caption(f"Recorded day-of value: {saved['value']:g} {saved['unit']}")
+        history = ss.get(f"history|{sid}|lab:{test}", [])
+        if history:
+            with st.popover("🕘 Change history"):
+                for change in history:
+                    st.write(f"{change['timestamp']} · {change['user']} ({change['role']})")
+                    st.write(f"{change['old_value']} → {change['new_value']}")
+    elif ss.get(f"dayof_pending|{sid}", {}).get(test):
+        st.warning("Lab team has drawn this test; result pending. The to-do stays open until the result is entered.")
+    if not saved:
+        st.button(
+            f"Lab team has drawn {test}; result pending",
+            key=f"lab-pending|{sid}|{test}",
+            on_click=mark_lab_pending,
+            args=(sid, test),
+            disabled=bool(ss.get(f"dayof_pending|{sid}", {}).get(test)),
+        )
+
+
+def session_ekg_form(sid):
+    """Record a session-only, machine-generated reading and an optional nurse note."""
+    saved = ss.get(f"session_ekg|{sid}", {})
+    if saved and not ss.get(f"edit|{sid}|ekg"):
+        entry_col, edit_col, history_col = st.columns([3, 1, 1])
+        entry_col.caption(f"EKG · Computerized reading: {saved['reading']}")
+        edit_col.button(
+            "Make edit",
+            key=f"edit-ekg|{sid}",
+            on_click=open_session_edit,
+            args=(sid, "ekg"),
+        )
+        history = ss.get(f"history|{sid}|ekg", [])
+        if history:
+            with history_col.popover("🕘 Change history"):
+                for change in history:
+                    st.write(f"{change['timestamp']} · {change['user']} ({change['role']})")
+                    st.write(f"{change['old_value']} → {change['new_value']}")
+        return
+    options = [""] + list(C.COMPUTERIZED_EKG_GUIDANCE)
+    with st.form(f"ekg-form|{sid}"):
+        reading = st.selectbox(
+            "Computerized reading from the EKG machine (not a clinician interpretation)",
+            options,
+            index=options.index(saved.get("reading", "")),
+            format_func=lambda value: value or "Select a machine reading…",
+            key=f"ekg-reading|{sid}",
+        )
+        note = st.text_area(
+            "Optional pre-op nurse notation for anesthesia",
+            value=saved.get("note", ""),
+            max_chars=500,
+            key=f"ekg-note|{sid}",
+        )
+        submitted = st.form_submit_button("Record EKG reading")
+    if submitted:
+        if reading:
+            record_ekg_form(sid, reading, note)
+            st.success("Machine reading recorded for this session.")
+            st.rerun()
+        if saved:
+            record_ekg_form(sid, "", "")
+            st.info("Session EKG reading cleared.")
+            st.rerun()
+        st.error("Choose a computerized machine reading before recording.")
+    if saved:
+        history = ss.get(f"history|{sid}|ekg", [])
+        if history:
+            with st.popover("🕘 Change history"):
+                for change in history:
+                    st.write(f"{change['timestamp']} · {change['user']} ({change['role']})")
+                    st.write(f"{change['old_value']} → {change['new_value']}")
+    if ss.get(f"session_ekg_pending|{sid}") and not saved:
+        st.warning("EKG performed; machine reading pending. The to-do stays open until the reading is entered.")
+    st.button(
+        "EKG performed; machine reading pending",
+        key=f"ekg-pending|{sid}",
+        on_click=lambda: ss.__setitem__(f"session_ekg_pending|{sid}", True),
+        disabled=bool(saved) or bool(ss.get(f"session_ekg_pending|{sid}")),
+    )
 
 
 def sign_in():
@@ -268,22 +617,25 @@ BOARD = {x["id"]: x for x in S.cases(MOVES)}
 for case_id, case in list(BOARD.items()):
     completed = completed_actions(case_id)
     day_of_values = ss.get(f"dayof|{case_id}", {})
-    if completed or day_of_values:
-        chart_with_work = W.apply_completed_actions(
-            D.build_chart(case_id), completed, ss.get(f"cpap_status|{case_id}"), day_of_values)
-        case = dict(case)
-        case["reqs"] = [S.checklist_row(req, chart_with_work)
-                        for req in C.applicable_requirements(chart_with_work)]
-        case["rules"] = {
-            role: (lambda result: dict(
-                status=result["status"],
-                actions=[dict(code=a["code"], reason=a["reason"], evidence_ids=a["evidence_ids"],
-                              priority=a["priority"]) for a in result["actions"]],
-            ))(rules_next_steps(chart_with_work, role))
-            for role in C.ROLES
-        }
-        case["state"] = S.sched_state(case)
-        BOARD[case_id] = case
+    consent_status = ss.get(f"consent_status|{case_id}")
+    ekg = ss.get(f"session_ekg|{case_id}", {})
+    chart_with_work = W.apply_completed_actions(
+        D.build_chart(case_id), completed, ss.get(f"cpap_status|{case_id}"), day_of_values,
+        consent_status, ekg.get("reading"), ekg.get("note"),
+        ss.get(f"med-dose|{case_id}", {}), track_medication_doses=True)
+    case = dict(case)
+    case["reqs"] = [S.checklist_row(req, chart_with_work)
+                    for req in C.applicable_requirements(chart_with_work)]
+    case["rules"] = {
+        role: (lambda result: dict(
+            status=result["status"],
+            actions=[dict(code=a["code"], reason=a["reason"], evidence_ids=a["evidence_ids"],
+                          priority=a["priority"]) for a in result["actions"]],
+        ))(rules_next_steps(chart_with_work, role))
+        for role in C.ROLES
+    }
+    case["state"] = S.sched_state(case)
+    BOARD[case_id] = case
 DAYS = sorted({x["case"]["surgery_date"] for x in BOARD.values()})
 ss.setdefault("sid", ME)
 ss.setdefault("view", "Patient chart")
@@ -519,21 +871,40 @@ with main:
     sid = ss.sid
     x = BOARD[sid]
     completed = completed_actions(sid)
+    consent_status = ss.get(f"consent_status|{sid}")
+    ekg = ss.get(f"session_ekg|{sid}", {})
     chart = W.apply_completed_actions(
-        D.build_chart(sid), completed, ss.get(f"cpap_status|{sid}"), ss.get(f"dayof|{sid}", {}))
+        D.build_chart(sid), completed, ss.get(f"cpap_status|{sid}"), ss.get(f"dayof|{sid}", {}),
+        consent_status, ekg.get("reading"), ekg.get("note"),
+        ss.get(f"med-dose|{sid}", {}), track_medication_doses=True)
     c = dict(chart["case"], **{k: x["case"][k] for k in ("surgery_date", "surgery_time", "surgery_location")})  # after any move
     p = chart["patient"]
     proc = D.procedure_label(c)
     when = f"{c['surgery_date']} {S.span(S.start(x), S.dur(x))}"
 
     sg = S.suggested_time(x, MOVES)
-    html(f"""<div class="banner"><span class="nm">{esc(p['name'])}</span>{esc(p['age'])} y/o {esc(p['sex'])} · MRN {esc(p['mrn'])} · BMI {esc(p['bmi'])} ·
-      <span class="{'' if p['allergies'].startswith('No known') else 'allergy'}">Allergies: {esc(p['allergies'])}</span><br>
-      <span class="mt"><b>{esc(proc)}</b> · {when} ({S.dur_label(S.dur(x))}) · {esc(c['surgery_location'])} · {esc(c['surgeon'])} ·
-      Anesthesia: {esc(c['planned_anesthesia'])} · Post-op: {esc(c['postoperative_location'])}</span>
-      {f'''<div class="sugg s-{sg['cls']}"><span class="lb">Suggested new time</span><b>{S.fmt_day(sg['date'])} · {sg['time']} · {esc(sg['room'])}</b>
-      <span class="src"> {esc(sg['why'])}</span></div>''' if sg else ''}
-      {f'''<div class="sugg s-{x['state']}"><span class="lb">Schedule changed</span><b>{esc(moved_text(x))}</b></div>''' if x.get('moved') else ''}</div>""")
+    suggestion_html = (
+        f'<div class="sugg s-{sg["cls"]}"><span class="lb">Suggested new time</span>'
+        f'<b>{S.fmt_day(sg["date"])} · {sg["time"]} · {esc(sg["room"])}</b>'
+        f'<span class="src"> {esc(sg["why"])}</span></div>'
+        if sg else ""
+    )
+    schedule_change_html = (
+        f'<div class="sugg s-{x["state"]}"><span class="lb">Schedule changed</span>'
+        f'<b>{esc(moved_text(x))}</b></div>'
+        if x.get("moved") else ""
+    )
+    banner_html = (
+        f'<div class="banner"><span class="nm">{esc(p["name"])}</span>{esc(p["age"])} y/o '
+        f'{esc(p["sex"])} · MRN {esc(p["mrn"])} · BMI {esc(p["bmi"])} · '
+        f'<span class="{"" if p["allergies"].startswith("No known") else "allergy"}">'
+        f'Allergies: {esc(p["allergies"])}</span><br>'
+        f'<span class="mt"><b>{esc(proc)}</b> · {when} ({S.dur_label(S.dur(x))}) · '
+        f'{esc(c["surgery_location"])} · {esc(c["surgeon"])} · '
+        f'Anesthesia: {esc(c["planned_anesthesia"])} · Post-op: '
+        f'{esc(c["postoperative_location"])}</span>{suggestion_html}{schedule_change_html}</div>'
+    )
+    html(banner_html)
     act = st.columns([1.6, 1.6, 3])
     if sg:
         act[0].button(f"Reschedule to {S.fmt_day(sg['date'])}, {sg['to']['time']}" if sg["cls"] == "resched"
@@ -556,7 +927,18 @@ with main:
     if ai and provider == "mock":
         ctl[1].caption("No API key found. Showing the rules-only check.")
 
-    tabs = st.tabs(["Pre-Op Readiness", "Labs", "Medications", "Tests & Imaging", "Consents & Blood", "H&P"])
+    chart_sections = ["Pre-Op Readiness", "Labs", "Medications", "Tests & Imaging", "Consents & Blood", "H&P"]
+    ss.setdefault("chart-section", chart_sections[0])
+    nav_columns = st.columns([1.5, 0.6, 1, 1.35, 1.4, 0.5], gap="small")
+    for column, section in zip(nav_columns, chart_sections):
+        column.button(
+            section,
+            key=f"chart-nav|{sid}|{section}",
+            type="primary" if ss["chart-section"] == section else "secondary",
+            width="stretch",
+            on_click=select_chart_tab,
+            args=(section,),
+        )
 
 
     def top_card(status, n, headline):
@@ -566,8 +948,9 @@ with main:
         if not n and status == "Ready":
             return (f"<div class='card s-ready'><div class='ti'>✓ Ready for surgery</div>"
                     f"<div class='sub'>Nothing outstanding for the {ROLE_LABEL[role].lower()}</div>"
-                    f"<div class='fx'><b>{esc(proc)}</b> · {when} · {esc(c['surgery_location'])} · Checklist {done} of {len(x['reqs'])} complete</div></div>")
-        if x["state"] in ("resched", "later") and open_items:
+                    f"<div class='fx'><b>{esc(proc)}</b> · Surgery: {when} · {esc(c['surgery_location'])} · "
+                    f"Checklist {done} of {len(x['reqs'])} complete</div></div>")
+        if (x["state"] in ("resched", "later", "hold") and open_items) or status == "Recommend hold":
             slow = [r for r in open_items if S.takes_days(r)]
             hold = status == "Recommend hold"
             hard = x["state"] == "resched"
@@ -582,12 +965,20 @@ with main:
                             f"<span class='lead {'days' if S.takes_days(r) else ''}'>{S.lead_label(r)}</span></li>"
                             for r in open_items)
             title = ({"resched": "Rescheduled", "later": "Moved later today", "up": "Moved up", "hold": "Off the schedule"}[x["moved"]["kind"]]
-                     if x.get("moved") else "Consider rescheduling" if hard else "Consider moving later today")
+                     if x.get("moved") else "Clinical hold — team review required" if hold else
+                     "Consider rescheduling" if hard else "Consider moving later today")
             k = len(open_items)
-            return (f"<div class='card s-{'resched' if hard else 'later'}'><div class='ti'>{title}</div>"
+            card_class = "hold" if hold else "resched" if hard else "later"
+            schedule_text = (
+                f"Suggested new time: {S.fmt_day(sg['date'])} · {sg['time']} · {esc(sg['room'])}"
+                if hard and sg else f"Surgery: {when} · {esc(c['surgery_location'])}"
+            )
+            return (f"<div class='card s-{card_class}'><div class='ti'>{title}</div>"
                     f"<div class='sub'>{k} pre-op item{'s' * (k != 1)} {'is' if k == 1 else 'are'} not ready for {esc(proc)} at {c['surgery_date']} {c['surgery_time']} · {esc(status)}</div>"
+                    f"<div class='fx'><b>{schedule_text}</b></div>"
                     f"<ul>{items}</ul><div class='src'>{esc(note)}</div></div>")
-        return f"<div class='bar s-{STATUS_CLS.get(status, 'open')}'>{esc(status)} <span>· {esc(headline)}</span></div>"
+        return (f"<div class='bar s-{STATUS_CLS.get(status, 'open')}'>{esc(status)} "
+                f"<span>· {esc(headline)} · Surgery: {when} · {esc(c['surgery_location'])}</span></div>")
 
 
     def checklist_html():
@@ -608,7 +999,7 @@ with main:
         ss.dec_time[dk] = datetime.now().strftime("%b %d %H:%M")
 
 
-    with tabs[0]:
+    if ss["chart-section"] == "Pre-Op Readiness":
         key = (sid, role, engine)
         if key not in ss.results and not (engine == "llm" and provider != "mock"):
             ss.results[key] = run_case(sid, role=role, engine=engine)
@@ -632,23 +1023,44 @@ with main:
         res = dict(res)
         steps = dict(res["next_steps"])
         session_findings = []
-        if role == "anesthesia" and chart.get("session_day_of_labs"):
-            day_of_ids = {row["lab_id"] for row in chart["session_day_of_labs"]}
+        session_ids = set()
+        if role == "anesthesia":
+            session_ids.update(row["lab_id"] for row in chart.get("session_day_of_labs", []))
+        session_ids.update(row["test_id"] for row in chart.get("session_machine_ekgs", []))
+        held_med_ids = medication_ids_for_action(chart, "VERIFY_MEDICATION_LAST_DOSE")
+        session_ids.update(held_med_ids)
+        if session_ids or consent_status in ("signed", "refused"):
             rule_steps = rules_next_steps(chart, role)
-            session_findings = [finding for finding in rule_steps.get("findings", [])
-                                if day_of_ids.intersection(finding["evidence_ids"])]
+            session_findings = [
+                finding for finding in rule_steps.get("findings", [])
+                if session_ids.intersection(finding["evidence_ids"])
+                or (role == "anesthesia"
+                    and finding.get("finding_code") == "ANESTHESIA_CONSENT_REFUSED")
+            ]
             existing_findings = {finding.get("finding_code") for finding in steps.get("findings", [])}
+            base_findings = [
+                finding for finding in steps.get("findings", [])
+                if not (consent_status == "signed"
+                        and finding.get("finding_code") == "MISSING:Anesthesia consent")
+            ]
             steps["findings"] = [
-                *steps.get("findings", []),
+                *base_findings,
                 *(finding for finding in session_findings
                   if finding.get("finding_code") not in existing_findings),
             ]
             existing_actions = {action["code"] for action in steps.get("actions", [])}
+            base_actions = [
+                action for action in steps.get("actions", [])
+                if not (consent_status == "signed"
+                        and action["code"] in {"OBTAIN_ANESTHESIA_CONSENT", "NOTIFY_ANESTHESIA_CONSENT"})
+            ]
             steps["actions"] = [
-                *steps.get("actions", []),
+                *base_actions,
                 *(action for action in rule_steps["actions"]
                   if action["code"] not in existing_actions
-                  and day_of_ids.intersection(action["evidence_ids"])),
+                  and (session_ids.intersection(action["evidence_ids"])
+                       or (role == "anesthesia" and consent_status == "refused"
+                           and action["code"] == "RESCHEDULE_AFTER_CONSENT_REFUSAL"))),
             ]
             if steps.get("findings"):
                 steps["status"] = max(
@@ -656,24 +1068,60 @@ with main:
                      C.status_from_findings(steps["findings"])],
                     key=C.STATUS_ORDER.index,
                 )
+            elif consent_status == "signed" and steps.get("status") == "Outstanding items":
+                steps["status"] = rule_steps["status"]
         if role == "anesthesia" and ss.get(f"cpap_status|{sid}") == "not_brought":
             rule_steps = rules_next_steps(chart, role)
-            session_findings = [f for f in rule_steps.get("findings", [])
-                                if f["finding_code"] == "CPAP_NOT_BROUGHT"]
-            steps["findings"] = [*steps.get("findings", []), *session_findings]
+            cpap_findings = [f for f in rule_steps.get("findings", [])
+                             if f["finding_code"] == "CPAP_NOT_BROUGHT"]
+            steps["findings"] = [*steps.get("findings", []), *cpap_findings]
+            session_findings.extend(cpap_findings)
             known_codes = {a["code"] for a in steps["actions"]}
             steps["actions"] = [*steps["actions"],
                                 *(a for a in rule_steps["actions"]
                                   if a["code"] == "CPAP_NOT_BROUGHT" and a["code"] not in known_codes)]
         completed_for_role = {code for completed_role, code in completed if completed_role == role}
         steps["actions"] = [a for a in steps["actions"] if a["code"] not in completed_for_role]
+        existing_codes = {action["code"] for action in steps["actions"]}
+        for code, (action_role, text) in C.ACTION_CATALOG.items():
+            if (action_role == role and ss.get(f"dec|{sid}|{role}|{code}") == "Accept"
+                    and code not in completed_for_role and code not in existing_codes):
+                evidence = []
+                if code == "OBTAIN_EKG":
+                    evidence = [row["test_id"] for row in chart.get("session_machine_ekgs", [])]
+                elif code in {"NOTIFY_EKG_ABNORMALITY", "REVIEW_COMPUTERIZED_EKG"}:
+                    evidence = [row["test_id"] for row in chart.get("session_machine_ekgs", [])]
+                elif code == "VERIFY_MEDICATION_LAST_DOSE":
+                    evidence = held_med_ids
+                steps["actions"].append(dict(
+                    code=code, reason=text, evidence_ids=evidence, priority="medium",
+                ))
         res["next_steps"] = steps
         summ = res["summary"]
         n = len(steps["actions"])
         html(top_card(steps["status"], n, summ.get("headline") or f"{n} item{'s' * (n != 1)} to address before surgery."))
         st.caption(f"{ROLE_LABEL[role]} view · engine: {res['engine']} · {steps.get('status_reason', '')}")
         for finding in session_findings:
-            st.warning(f"Rule finding: {finding['detail']}")
+            if finding.get("finding_code") == "COMPUTERIZED_EKG_REVIEW":
+                reading = next(
+                    (row["machine_reading"] for row in chart.get("session_machine_ekgs", [])
+                     if row["test_id"] in finding["evidence_ids"]),
+                    "available",
+                )
+                st.info(f"New EKG reading: {reading}")
+                st.button(
+                    "View details in Tests & Imaging",
+                    key=f"view-ekg|{sid}",
+                    on_click=select_chart_tab,
+                    args=("Tests & Imaging",),
+                )
+            elif finding.get("finding_code") == "MEDICATION_DOSE_WITHIN_HOLD":
+                medication_ids = set(finding["evidence_ids"])
+                for dose in chart.get("session_medication_doses", []):
+                    if dose["medication_id"] in medication_ids:
+                        st.info(f"{dose['medication_name']} taken within hold period.")
+            else:
+                st.warning(f"Rule finding: {finding['detail']}")
 
         dkey = lambda code: f"dec|{sid}|{role}|{code}"
         left, right = st.columns([1, 1.15])
@@ -681,13 +1129,20 @@ with main:
             accepted = [a for a in steps["actions"] if ss.get(dkey(a["code"])) == "Accept"]
             if n or completed_for_role:
                 with st.container(border=True):
-                    task_count = sum(1 if a["code"] == "BRING_CPAP" else
-                                     len(C.ACTION_FOLLOW_UP.get(a["code"], ([], ""))[0]) for a in accepted)
-                    done = sum(bool(ss.get(f"completed|{sid}|{role}|{a['code']}"))
-                               if a["code"] == "BRING_CPAP" else
-                               sum(bool(ss.get(f"todo|{sid}|{role}|{a['code']}|{i}"))
-                                   for i in range(len(C.ACTION_FOLLOW_UP.get(a["code"], ([], ""))[0])))
-                               for a in accepted)
+                    task_count = done = 0
+                    for action in accepted:
+                        code = action["code"]
+                        if code == "BRING_CPAP":
+                            task_count += 1
+                            done += ss.get(f"cpap_status|{sid}") in ("brought", "not_brought")
+                        elif code == "OBTAIN_ANESTHESIA_CONSENT":
+                            task_count += 2
+                            done += 2 if ss.get(f"consent_status|{sid}") in ("signed", "refused") else 0
+                        else:
+                            tasks, _ = action_tasks_for(sid, role, code, chart)
+                            task_count += len(tasks)
+                            done += sum(bool(ss.get(f"todo|{sid}|{role}|{code}|{i}"))
+                                        for i in range(len(tasks)))
                     st.markdown(f"**To-do · {ROLE_LABEL[role]}**" + (f" <span class='src'>· {done} of {task_count} done</span>" if task_count else ""),
                                 unsafe_allow_html=True)
                     if completed_for_role:
@@ -697,7 +1152,7 @@ with main:
                     if not accepted:
                         st.caption("Accept a next step to add its tasks here.")
                     for a in accepted:
-                        todo_steps, closes = C.ACTION_FOLLOW_UP.get(a["code"], ([], ""))
+                        todo_steps, closes = action_tasks_for(sid, role, a["code"], chart)
                         st.markdown(f"<span class='src'><b>{esc(action_text(a['code']))}</b></span>", unsafe_allow_html=True)
                         if a["code"] == "BRING_CPAP":
                             st.radio("Did the patient bring their CPAP machine, mask and settings?",
@@ -712,12 +1167,69 @@ with main:
                                 st.caption("Recorded: patient brought CPAP.")
                             elif cpap_status == "not_brought":
                                 st.caption("Recorded: patient did not bring CPAP. Anesthesia will see a rule finding.")
+                        elif a["code"] == "OBTAIN_ANESTHESIA_CONSENT":
+                            st.markdown("**Did the patient sign the anesthesia consent?**")
+                            saved_answer = ss.get(f"consent-answer-value|{sid}")
+                            st.radio(
+                                "Consent response",
+                                ["yes", "no"],
+                                index=["yes", "no"].index(saved_answer) if saved_answer else None,
+                                format_func=lambda value: {
+                                    "yes": "Yes — signed",
+                                    "no": "No — not signed",
+                                }[value],
+                                key=f"consent-answer|{sid}",
+                                on_change=mark_consent_answer,
+                                args=(sid,),
+                                label_visibility="collapsed",
+                            )
+                            if ss.get(f"consent-answer|{sid}") == "no":
+                                saved_outcome = ss.get(f"consent-outcome-value|{sid}", "")
+                                outcomes = ["", "pending", "refused"]
+                                st.selectbox(
+                                    "If not signed",
+                                    outcomes,
+                                    index=outcomes.index(saved_outcome),
+                                    format_func=lambda value: {
+                                        "": "Choose whether consent is pending or refused…",
+                                        "pending": "Still discussing / not yet signed",
+                                        "refused": "Patient refuses to sign",
+                                    }[value],
+                                    key=f"consent-outcome|{sid}",
+                                    on_change=mark_consent_outcome,
+                                    args=(sid,),
+                                )
+                            consent_status = ss.get(f"consent_status|{sid}")
+                            if consent_status == "signed":
+                                st.caption("Signed consent is reflected in the chart and pre-op checklist for this session.")
+                            elif consent_status == "refused":
+                                st.warning("Patient refusal is documented for this session. The case is on clinical hold pending team review.")
+                            else:
+                                st.caption("Pending or unanswered consent remains missing; it is not treated as signed.")
+                        elif role == "nurse" and a["code"] == "OBTAIN_EKG":
+                            for i, task in enumerate(todo_steps):
+                                st.checkbox(task, key=f"todo|{sid}|{role}|{a['code']}|{i}",
+                                            on_change=mark_action_complete, args=(sid, role, a["code"]))
+                            session_ekg_form(sid)
+                        elif a["code"] == "VERIFY_MEDICATION_LAST_DOSE":
+                            for i, task in enumerate(todo_steps):
+                                st.checkbox(task, key=f"todo|{sid}|{role}|{a['code']}|{i}",
+                                            on_change=mark_action_complete, args=(sid, role, a["code"]))
+                            for med_id in medication_ids_for_action(chart, a["code"]):
+                                medication = next(row for row in chart["meds"] if row["medication_id"] == med_id)
+                                medication_dose_form(sid, medication, c["surgery_date"])
                         else:
                             for i, s in enumerate(todo_steps):
                                 st.checkbox(s, key=f"todo|{sid}|{role}|{a['code']}|{i}",
                                             on_change=mark_action_complete, args=(sid, role, a["code"]))
-                        if all(ss.get(f"todo|{sid}|{role}|{a['code']}|{i}") for i in range(len(todo_steps))):
-                            if a["code"] != "BRING_CPAP":
+                        if a["code"] not in {"BRING_CPAP", "OBTAIN_ANESTHESIA_CONSENT"}:
+                            checks_done = all(
+                                ss.get(f"todo|{sid}|{role}|{a['code']}|{i}")
+                                for i in range(len(todo_steps))
+                            )
+                            if checks_done and not action_inputs_ready(sid, a["code"], chart):
+                                st.caption("Tasks checked · waiting for the required result or information.")
+                            elif checks_done:
                                 st.caption(f"Tasks done · waiting for the chart: {closes}")
                     if role == "nurse":
                         day_of_tests = dict.fromkeys(
@@ -816,21 +1328,41 @@ with main:
         st.dataframe(df, hide_index=True, width="stretch")
 
 
-    with tabs[1]:
+    if ss["chart-section"] == "Labs":
         show(sorted(chart["labs"], key=lambda r: (r["panel"], r["test_name"])),
              ["panel", "test_name", "result_value", "unit", "reference_low", "reference_high", "flag", "collection_date", "lab_id"], ["flag"])
         show_session_work({"lab"})
-    with tabs[2]:
+        editable_tests = sorted(set(
+            test for code in C.ACTION_FOLLOW_UP
+            for test in W.DAY_OF_LAB_ACTIONS.get(code, ())
+            if test in ss.get(f"dayof|{sid}", {})
+        ))
+        if role == "nurse" and editable_tests:
+            st.markdown("**Edit session day-of results**")
+            for test in editable_tests:
+                day_of_value_form(sid, test)
+    if ss["chart-section"] == "Medications":
         show([dict(m, preop_instruction=m["preop_instruction"] or "⚠ none documented") for m in chart["meds"]],
              ["medication_name", "dose", "route", "frequency", "preop_instruction", "medication_id"])
-    with tabs[3]:
+        if role == "nurse":
+            held_med_ids = medication_ids_for_action(chart, "VERIFY_MEDICATION_LAST_DOSE")
+            saved_med_ids = set(ss.get(f"med-dose|{sid}", {}))
+            edit_ids = sorted(saved_med_ids.intersection(held_med_ids))
+            if edit_ids:
+                st.markdown("**Edit session last-dose entries**")
+                for med_id in edit_ids:
+                    medication = next(row for row in chart["meds"] if row["medication_id"] == med_id)
+                    medication_dose_form(sid, medication, c["surgery_date"])
+    if ss["chart-section"] == "Tests & Imaging":
         show(chart["diagnostics"], ["test_type", "test_date", "result_value", "result_unit", "interpretation", "compared_to_prior", "test_id"],
              ["compared_to_prior"], title="Diagnostic tests")
+        if role == "nurse":
+            session_ekg_form(sid)
         show(chart["imaging"], ["imaging_type", "imaging_date", "report", "imaging_id"], title="Imaging")
         show(chart["clearances"], ["clearance_type", "status", "requested_date", "completed_date", "assessment_note", "clearance_id"], ["status"],
              title="Clearances")
         show_session_work({"diagnostic", "imaging", "clearance"})
-    with tabs[4]:
+    if ss["chart-section"] == "Consents & Blood":
         show(chart["consents"], ["consent_type", "status", "signed_date", "consent_id"], ["status"], title="Consents")
         show_session_work({"consent", "blood"})
         if chart["blood"]:
@@ -838,7 +1370,7 @@ with main:
                                     "ffp_units_available", "platelet_units_available"], ["antibody_screen"], title="Blood bank")
         else:
             st.caption("No blood bank record (not required for this procedure).")
-    with tabs[5]:
+    if ss["chart-section"] == "H&P":
         if chart["notes"]:
             for note in chart["notes"]:
                 st.text(note["note_text"])

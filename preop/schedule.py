@@ -36,6 +36,8 @@ def checklist_row(r, ch):
         note = f"{on} · expires before surgery" if r["item"] == "Type and screen" else f"{on} · older than {valid} days"
     elif st == "pending":
         note = on
+    elif st == "refused":
+        note = on or "Patient refused"
     elif r["item_type"] == "blood" and on:
         note = f"{on} (2 needed)"
     else:

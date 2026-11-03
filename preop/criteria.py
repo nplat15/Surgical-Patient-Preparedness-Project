@@ -61,6 +61,7 @@ ACTION_CATALOG = {
     "OBTAIN_SURGERY_CONSENT": ("nurse", "Contact the surgical team to complete and sign the surgical consent before the patient goes to the OR."),
     "NOTIFY_ANESTHESIA_CONSENT": ("nurse", "Notify anesthesia that the anesthesia consent is not signed."),
     "OBTAIN_ANESTHESIA_CONSENT": ("anesthesia", "Complete the anesthesia consent discussion and signature with the patient."),
+    "RESCHEDULE_AFTER_CONSENT_REFUSAL": ("anesthesia", "Patient refused anesthesia consent: review with the patient and surgeon; do not proceed until the team determines whether to reschedule."),
     "OBTAIN_BLOOD_CONSENT": ("nurse", "Obtain a signed blood transfusion consent or a signed refusal form."),
     "VERIFY_BLOOD_REFUSAL_FORM": ("nurse", "Patient refuses blood: verify the refusal form is signed and the refusal is flagged for the OR team."),
     "BLOOD_REFUSAL_PLAN": ("anesthesia", "Patient refuses blood products: develop a bloodless management plan with the surgeon (e.g., cell saver, anemia optimization)."),
@@ -115,7 +116,10 @@ ACTION_CATALOG = {
     "NOTIFY_POSITIVE_PREGNANCY": ("nurse", "Positive pregnancy test: notify surgeon and anesthesia immediately; do not proceed until reviewed."),
     "REVIEW_POSITIVE_PREGNANCY": ("anesthesia", "Positive pregnancy test: review with surgeon and patient whether to proceed."),
     "EVALUATE_EKG_ABNORMALITY": ("anesthesia", "New EKG abnormality: evaluate and consider cardiology consult before surgery."),
-    "NOTIFY_EKG_ABNORMALITY": ("nurse", "Notify anesthesia of the new EKG finding."),
+    "NOTIFY_EKG_ABNORMALITY": ("nurse", "Escalate the new EKG reading to anesthesia and document the notification."),
+    "REVIEW_COMPUTERIZED_EKG": ("anesthesia", "Evaluate the new EKG reading and document the anesthesia plan."),
+    "VERIFY_MEDICATION_LAST_DOSE": ("nurse", "Document each held medication's last dose amount and date; compare with its documented hold instruction."),
+    "REVIEW_RECENT_MEDICATION_DOSE": ("anesthesia", "Review a medication dose reported within its documented hold period with the nurse and surgeon."),
     "REVIEW_LOW_EF": ("anesthesia", "Reduced ejection fraction: plan hemodynamic monitoring/support."),
     "REVIEW_SEVERE_LUNG_DISEASE": ("anesthesia", "Severe obstruction on PFTs: plan for pulmonary risk (bronchodilators, ventilation, post-op care)."),
     "EVALUATE_NEW_SYMPTOMS": ("anesthesia", "New symptoms documented in the H&P: evaluate before surgery and consider postponing."),
@@ -182,6 +186,10 @@ ACTION_FOLLOW_UP = {
                                    "Confirm when they will see the patient"], "Signed anesthesia consent is in the chart"),
     "OBTAIN_ANESTHESIA_CONSENT": (["Discuss the anesthetic plan, risks and alternatives with the patient",
                                    "Have the patient sign the anesthesia consent"], "Signed anesthesia consent is in the chart"),
+    "RESCHEDULE_AFTER_CONSENT_REFUSAL": (["Confirm the patient's decision and discuss concerns without pressure",
+                                          "Notify the surgeon that anesthesia consent was refused",
+                                          "Document the team's decision about proceeding or rescheduling"],
+                                         "Surgeon and anesthesia document a plan after consent refusal"),
     "OBTAIN_BLOOD_CONSENT": (["Review transfusion with the patient (or confirm a refusal)",
                               "Have the patient sign the consent or refusal form"], "Signed blood consent or refusal form is in the chart"),
     "VERIFY_BLOOD_REFUSAL_FORM": (["Confirm the refusal form is signed and current",
@@ -213,6 +221,15 @@ ACTION_FOLLOW_UP = {
                             "Call anesthesia if it is above the limit"], "Day-of glucose is documented"),
     "OBTAIN_EKG": (["Get the order", "Perform a 12-lead EKG",
                     "Send the tracing for reading and flag any new changes to anesthesia"], "EKG is in the chart, dated within the required window"),
+    "REVIEW_COMPUTERIZED_EKG": (["Review the computerized reading and document the anesthesia plan"],
+                                "Anesthesia reviewed the EKG reading and documented a plan"),
+    "VERIFY_MEDICATION_LAST_DOSE": (["Record the last dose amount and date for each medication with hold instructions",
+                                    "Compare the reported dose with the documented hold instruction",
+                                    "If taken within the hold period, notify anesthesia and document the handoff"],
+                                   "Last dose and hold-period review are documented for each medication"),
+    "REVIEW_RECENT_MEDICATION_DOSE": (["Review the reported last dose with the nurse and surgeon",
+                                       "Document the anesthesia plan after reviewing the dose"],
+                                      "Anesthesia reviewed the recent medication dose and documented a plan"),
     "OBTAIN_CHEST_XRAY": (["Get the order", "Schedule the X-ray before the surgery date",
                            "Check the report is back"], "Chest X-ray report is in the chart"),
     "REQUEST_ECHO": (["Place the echocardiogram order", "Ask the nurse to schedule it before surgery",
@@ -297,6 +314,137 @@ ACTION_FOLLOW_UP = {
     "PONV_PROPHYLAXIS": _plan("nausea and vomiting history"),
     "LATEX_PRECAUTIONS": (["Call the OR to request a latex-free room",
                            "Add the allergy to the OR huddle"], "OR confirms latex-free set-up"),
+}
+
+COMPUTERIZED_EKG_GUIDANCE = {
+    "Normal Sinus Rhythm (NSR)": (
+        "Document EKG and verify cardiac history.",
+        "Review EKG and complete routine cardiac assessment.",
+    ),
+    "Sinus Bradycardia": (
+        "Document heart rate and check for symptoms such as dizziness or fainting.",
+        "Evaluate heart rate, symptoms, and medication history.",
+    ),
+    "Sinus Tachycardia": (
+        "Recheck vital signs and document possible symptoms or causes.",
+        "Evaluate underlying causes and determine if further assessment is needed.",
+    ),
+    "Sinus Arrhythmia": (
+        "Document rhythm and compare with previous EKG if available.",
+        "Review rhythm and determine if additional evaluation is necessary.",
+    ),
+    "Atrial Fibrillation (AFib)": (
+        "Verify symptoms, cardiac history, and anticoagulant medications.",
+        "Evaluate heart rate, rhythm stability, and anticoagulation plan.",
+    ),
+    "Atrial Flutter": (
+        "Document heart rate and symptoms; notify physician.",
+        "Assess rhythm stability and determine if further cardiac evaluation is needed.",
+    ),
+    "Supraventricular Tachycardia (SVT)": (
+        "Document heart rate, symptoms, and previous episodes.",
+        "Evaluate rhythm stability and need for additional treatment or assessment.",
+    ),
+    "Ventricular Tachycardia (VTach)": (
+        "Immediately escalate active or symptomatic findings.",
+        "Urgently evaluate cardiac stability and determine surgical timing.",
+    ),
+    "Ventricular Fibrillation (VFib)": (
+        "Activate emergency response immediately.",
+        "Lead emergency cardiac management; defer elective surgery.",
+    ),
+    "Premature Atrial Contractions (PACs)": (
+        "Document frequency, symptoms, and cardiac history.",
+        "Assess frequency and determine clinical significance.",
+    ),
+    "Premature Ventricular Contractions (PVCs)": (
+        "Document frequency and flag frequent or new occurrences.",
+        "Evaluate PVC frequency and potential underlying cardiac conditions.",
+    ),
+    "First-Degree AV Block": (
+        "Document PR interval and compare with previous EKG.",
+        "Review conduction findings and determine if further evaluation is needed.",
+    ),
+    "Second-Degree AV Block Type I (Mobitz I)": (
+        "Document heart rate and symptoms; flag for physician review.",
+        "Assess conduction and determine appropriate monitoring.",
+    ),
+    "Second-Degree AV Block Type II (Mobitz II)": (
+        "Promptly notify physician and document vital signs.",
+        "Obtain cardiac evaluation and assess need for pacing.",
+    ),
+    "Third-Degree AV Block (Complete Heart Block)": (
+        "Immediately escalate findings and assess patient stability.",
+        "Urgently evaluate pacing requirements and surgical timing.",
+    ),
+    "Right Bundle Branch Block (RBBB)": (
+        "Compare with previous EKG and document whether it is new.",
+        "Assess cardiac history and determine if additional testing is indicated.",
+    ),
+    "Left Bundle Branch Block (LBBB)": (
+        "Flag new findings and collect previous EKG results.",
+        "Evaluate for underlying cardiac disease or ischemia.",
+    ),
+    "ST Elevation": (
+        "Immediately report new ST elevation, especially with symptoms.",
+        "Evaluate for acute myocardial injury and determine surgical timing.",
+    ),
+    "ST Depression": (
+        "Document symptoms and compare with previous EKG.",
+        "Assess for possible myocardial ischemia and need for further evaluation.",
+    ),
+    "T-Wave Inversion": (
+        "Document finding and flag new changes.",
+        "Evaluate for possible ischemic or other cardiac causes.",
+    ),
+    "STEMI": (
+        "Activate emergency response for suspected acute STEMI.",
+        "Coordinate emergency cardiac evaluation and management; defer elective surgery.",
+    ),
+    "NSTEMI": (
+        "Escalate suspected acute cardiac symptoms and document findings.",
+        "Evaluate clinical presentation and determine appropriate cardiac management and surgical timing.",
+    ),
+    "Left Ventricular Hypertrophy (LVH)": (
+        "Document hypertension and previous cardiac history.",
+        "Evaluate for associated structural heart disease.",
+    ),
+    "Right Ventricular Hypertrophy (RVH)": (
+        "Document respiratory and cardiac history.",
+        "Assess for possible pulmonary hypertension or structural heart disease.",
+    ),
+    "Prolonged QT Interval": (
+        "Document medications and flag potential QT-prolonging drugs.",
+        "Review QTc, medications, and electrolytes; assess arrhythmia risk.",
+    ),
+    "Shortened QT Interval": (
+        "Document finding and relevant cardiac or family history.",
+        "Evaluate clinical significance and possible underlying conditions.",
+    ),
+    "Long QT Syndrome": (
+        "Document medications and personal/family history of arrhythmias.",
+        "Develop an anesthesia plan that accounts for arrhythmia risk.",
+    ),
+    "Brugada Pattern": (
+        "Document history of fainting and previous arrhythmias.",
+        "Evaluate arrhythmia risk and determine appropriate monitoring and anesthesia plan.",
+    ),
+    "Low-Voltage QRS": (
+        "Document finding and relevant medical history.",
+        "Evaluate possible underlying cardiac or pulmonary conditions.",
+    ),
+    "Hyperkalemia-Related Changes": (
+        "Notify physician and coordinate potassium laboratory testing.",
+        "Review potassium level and determine whether correction is needed before elective anesthesia.",
+    ),
+    "Hypokalemia-Related Changes": (
+        "Coordinate electrolyte laboratory review and document findings.",
+        "Evaluate potassium level and determine whether correction is needed.",
+    ),
+    "Pericarditis Pattern": (
+        "Document chest pain and recent illness; notify physician of new findings.",
+        "Evaluate possible pericardial inflammation and associated complications.",
+    ),
 }
 
 # Finding category -> effect on readiness status.
@@ -498,7 +646,7 @@ def _rule_finding(code, detail, evidence, category=None):
 
 
 def requirement_status(chart, req):
-    """Status of one required item: ok / missing / outdated / pending, plus what is on file."""
+    """Status of one required item: ok / missing / outdated / pending / refused, plus what is on file."""
     sdate = chart["case"]["surgery_date"]
     item, kind, valid = req["item"], req["item_type"], req["validity_days"]
     if (kind, item) in chart.get("session_completed_requirements", ()):
@@ -519,8 +667,11 @@ def requirement_status(chart, req):
         row = next((c for c in chart["consents"] if c["consent_type"] == item), None)
         if row:
             evid = [row["consent_id"]]
-            on_file = f"Signed {row['signed_date']}" if row.get("signed_date") else ""
-        if not row or row["status"] == "Missing":
+            on_file = (f"Signed {row['signed_date']}" if row.get("signed_date") else
+                       "Patient refused" if row["status"] == "Refused" else "")
+        if item == "Anesthesia consent" and row and row["status"] == "Refused":
+            status, detail = "refused", f"{item} refused by the patient"
+        elif not row or row["status"] == "Missing":
             status, detail = "missing", f"{item} not signed"
     elif kind == "note":
         notes = [n for n in chart["notes"] if n["note_type"] == "History and Physical"]
@@ -590,6 +741,9 @@ def check_requirements(chart):
         s = requirement_status(chart, req)
         if s["status"] == "pending":
             out.append(_rule_finding("PENDING_CLEARANCE", s["detail"], s["evidence_ids"]))
+        elif item == "Anesthesia consent" and s["status"] == "refused":
+            out.append(_finding("ANESTHESIA_CONSENT_REFUSED", "critical", s["detail"], [],
+                                ["RESCHEDULE_AFTER_CONSENT_REFUSAL"], s["evidence_ids"]))
         elif s["status"] != "ok":
             code = f"{'MISSING' if s['status'] == 'missing' else 'OUTDATED'}:{item}"
             out.append(_finding(code, "missing", s["detail"], nurse, anes, s["evidence_ids"]))
@@ -657,6 +811,51 @@ def check_values(chart):
     ekg = latest([t for t in chart["diagnostics"] if t["test_type"] == "EKG"], "test_date")
     if ekg and ekg.get("compared_to_prior") == "New finding":
         out.append(_rule_finding("NEW_EKG_ABNORMALITY", f"EKG: {ekg['interpretation']}", [ekg["test_id"]]))
+    for row in chart.get("session_machine_ekgs", []):
+        out.append(_finding(
+            "COMPUTERIZED_EKG_REVIEW",
+            "routine" if row["machine_reading"] == "Normal Sinus Rhythm (NSR)" else "clinical",
+            f"New EKG reading: {row['machine_reading']}",
+            ["NOTIFY_EKG_ABNORMALITY"],
+            ["REVIEW_COMPUTERIZED_EKG"],
+            [row["test_id"]],
+        ))
+    session_doses = {
+        row["medication_id"]: row for row in chart.get("session_medication_doses", [])
+    }
+    if chart.get("session_track_medication_doses"):
+        held_meds = [
+            row for row in chart["meds"]
+            if (row.get("preop_instruction") or "").strip()
+            and any(word in row["preop_instruction"].lower() for word in ("hold", "stop"))
+        ]
+        meds_missing_last_dose = [row for row in held_meds if row["medication_id"] not in session_doses]
+        if meds_missing_last_dose:
+            names = ", ".join(sorted({row["medication_name"] for row in meds_missing_last_dose}))
+            out.append(_finding(
+                "MEDICATION_LAST_DOSE",
+                "missing",
+                f"Record last dose amount and date for: {names}",
+                ["VERIFY_MEDICATION_LAST_DOSE"],
+                [],
+                [row["medication_id"] for row in meds_missing_last_dose],
+            ))
+    recent_doses = [
+        row for row in session_doses.values() if row.get("within_hold_period") is True
+    ]
+    if recent_doses:
+        detail = "; ".join(
+            f"{row['medication_name']} {row['amount']:g} {row['unit']} on {row['date']}"
+            for row in recent_doses
+        )
+        out.append(_finding(
+            "MEDICATION_DOSE_WITHIN_HOLD",
+            "clinical",
+            f"Reported dose within documented hold period: {detail}",
+            [],
+            ["REVIEW_RECENT_MEDICATION_DOSE"],
+            [row["medication_id"] for row in recent_doses],
+        ))
     echo = latest([t for t in chart["diagnostics"] if t["test_type"] == "Echocardiogram"], "test_date")
     if echo and num(echo["result_value"]) is not None and num(echo["result_value"]) < 35:
         out.append(_rule_finding("LOW_EJECTION_FRACTION", f"EF {echo['result_value']}%", [echo["test_id"]]))
@@ -705,19 +904,15 @@ def check_values(chart):
         out.append(_rule_finding("PONV_HISTORY", p["anesthesia_complication_history"], [p["patient_id"]]))
     if "latex" in (p.get("allergies") or "").lower():
         out.append(_rule_finding("LATEX_ALLERGY", "Latex allergy", [p["patient_id"]]))
-    day_of_ids = {row["lab_id"] for row in chart.get("session_day_of_labs", [])}
-    flagged_day_of = [finding for finding in out
-                      if day_of_ids.intersection(finding["evidence_ids"])
-                      and finding["actions"]["anesthesia"]]
-    if flagged_day_of:
-        flagged_ids = set().union(*(day_of_ids.intersection(f["evidence_ids"])
-                                     for f in flagged_day_of))
+    day_of_labs = chart.get("session_day_of_labs", [])
+    if day_of_labs:
+        day_of_ids = {row["lab_id"] for row in day_of_labs}
         details = "; ".join(
             f"{row['test_name']} {row['result_value']} {row['unit']}"
-            for row in chart["session_day_of_labs"] if row["lab_id"] in flagged_ids
+            for row in day_of_labs
         )
         out.append(_finding("DAY_OF_VALUES_REVIEW", "routine", f"Day-of values to review: {details}",
-                            [], ["UPDATE_ANESTHESIA_PLAN"], sorted(flagged_ids)))
+                            [], ["UPDATE_ANESTHESIA_PLAN"], sorted(day_of_ids)))
     return out
 
 
@@ -764,8 +959,13 @@ def criteria_document(procedure=None):
     for code, cat, rule, nurse, anes in VALUE_RULES + NOTE_FINDINGS:
         acts = ", ".join([f"nurse:{c}" for c in nurse] + [f"anesthesia:{c}" for c in anes])
         lines.append(f"- {code} [{cat}]: {rule} -> {acts}")
-    lines += ["", "C. STATUS",
-              "- Recommend hold: any critical finding (positive pregnancy test, K >= 6.0 or <= 3.0, Hgb < 7).",
+    lines += ["", "C. COMPUTERIZED EKG READINGS",
+              "- A session EKG selection is explicitly a machine-generated reading, not a clinician interpretation.",
+              "- Keep the selected reading and nurse notation visible to anesthesia and recommend the matching role-specific actions."]
+    for reading, (nurse_action, anesthesia_action) in COMPUTERIZED_EKG_GUIDANCE.items():
+        lines.append(f"- {reading}: nurse: {nurse_action} anesthesia: {anesthesia_action}")
+    lines += ["", "D. STATUS",
+              "- Recommend hold: any critical finding (including an explicit refusal of anesthesia consent; positive pregnancy test, K >= 6.0 or <= 3.0, Hgb < 7).",
               "- Needs clinical review: any clinical finding.",
               "- Outstanding items: only missing/outdated documentation, labs, tests, instructions.",
               "- Ready: none of the above (routine/safety precautions may still apply)."]

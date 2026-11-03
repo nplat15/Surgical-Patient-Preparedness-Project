@@ -123,6 +123,20 @@ def test_roster_gives_students_their_own_case():
     assert SHOWCASE not in sids and all(S.by_id()[s]["state"] != "ready" for s in sids)
 
 
+def test_patient_banner_has_no_stray_html_closing_tag():
+    from streamlit.testing.v1 import AppTest
+
+    app = os.path.join(D.ROOT, "app.py")
+    student = AppTest.from_file(app, default_timeout=60).run()
+    student.text_input[0].input("Banner QA")
+    student.button[0].click().run()
+
+    banner = next(item.value for item in student.markdown if item.value.startswith('<div class="banner">'))
+    assert "\n" not in banner
+    assert "</div>" in banner
+    assert not student.exception, student.exception
+
+
 def test_completed_anesthesia_consent_updates_session_chart_and_checklist():
     from preop import schedule as S
     from preop import workflow as W
@@ -150,14 +164,123 @@ def test_anesthesia_consent_completion_survives_role_switch():
     student.button(key="pt_S052").click().run()
     student.segmented_control[1].set_value("anesthesia").run()
     student.radio(key="dec|S052|anesthesia|OBTAIN_ANESTHESIA_CONSENT").set_value("Accept").run()
-
-    student.checkbox(key="todo|S052|anesthesia|OBTAIN_ANESTHESIA_CONSENT|0").check().run()
-    student.checkbox(key="todo|S052|anesthesia|OBTAIN_ANESTHESIA_CONSENT|1").check().run()
+    student.radio(key="consent-answer|S052").set_value("yes").run()
     assert any("Completed in this session" in item.value for item in student.markdown)
 
     student.segmented_control[1].set_value("nurse").run()
     checklist = next(item.value for item in student.markdown if "Pre-op checklist" in item.value)
     assert "<td><b>Anesthesia consent</b></td><td>Completed in this session</td>" in checklist
+    assert not student.exception, student.exception
+
+
+def test_refused_anesthesia_consent_creates_hold_without_signing():
+    from preop import schedule as S
+    from preop import workflow as W
+
+    chart = D.build_chart("S052")
+    req = next(r for r in C.applicable_requirements(chart) if r["item"] == "Anesthesia consent")
+    pending = W.apply_completed_actions(chart, set(), consent_status="pending")
+    assert C.requirement_status(pending, req)["status"] == "missing"
+    refused = W.apply_completed_actions(chart, set(), consent_status="refused")
+    consent = next(c for c in refused["consents"] if c["consent_type"] == "Anesthesia consent")
+
+    assert consent["status"] == "Refused"
+    assert C.requirement_status(refused, req)["status"] == "refused"
+    assert S.checklist_row(req, refused)["status"] == "refused"
+    assert C.requirement_status(chart, req)["status"] == "missing"
+    steps = PL.rules_next_steps(refused, "anesthesia")
+    assert steps["status"] == "Recommend hold"
+    assert "RESCHEDULE_AFTER_CONSENT_REFUSAL" in {action["code"] for action in steps["actions"]}
+    assert S.sched_state({"reqs": [S.checklist_row(r, refused) for r in C.applicable_requirements(refused)],
+                          "rules": {role: PL.rules_next_steps(refused, role) for role in C.ROLES},
+                          "patient": chart["patient"]}) == "hold"
+
+
+def test_anesthesia_consent_refusal_control_records_a_distinct_response():
+    from streamlit.testing.v1 import AppTest
+
+    app = os.path.join(D.ROOT, "app.py")
+    student = AppTest.from_file(app, default_timeout=60).run()
+    student.text_input[0].input("Consent refusal QA")
+    student.button[0].click().run()
+    student.button(key="pt_S052").click().run()
+    student.segmented_control[1].set_value("anesthesia").run()
+    student.radio(key="dec|S052|anesthesia|OBTAIN_ANESTHESIA_CONSENT").set_value("Accept").run()
+    student.radio(key="consent-answer|S052").set_value("no").run()
+    student.selectbox(key="consent-outcome|S052").set_value("refused").run()
+
+    assert student.session_state["consent_status|S052"] == "refused"
+    assert any("Anesthesia consent refused" in item.value for item in student.warning)
+    assert any("Clinical hold — team review required" in item.value for item in student.markdown)
+    checklist = next(item.value for item in student.markdown if "Pre-op checklist" in item.value)
+    assert "Refused" in checklist
+    assert not student.exception, student.exception
+
+
+def test_computerized_ekg_updates_expired_checklist_and_anesthesia_review():
+    from preop import schedule as S
+    from preop import workflow as W
+
+    chart = D.build_chart("S097")
+    req = next(r for r in C.applicable_requirements(chart) if r["item"] == "EKG")
+    assert C.requirement_status(chart, req)["status"] == "outdated"
+
+    updated = W.apply_completed_actions(
+        chart, set(), ekg_machine_reading="Sinus Bradycardia",
+        ekg_nurse_note="Machine shows a slow rhythm; nurse documented pulse for review.",
+    )
+    reading = updated["session_machine_ekgs"][0]
+    assert C.requirement_status(updated, req)["status"] == "ok"
+    assert S.checklist_row(req, updated)["status"] == "ok"
+    assert "Computerized reading from the machine" in reading["interpretation"]
+    assert "nurse documented pulse" in reading["interpretation"]
+    assert reading["compared_to_prior"] == "Not assessed"
+
+    steps = PL.rules_next_steps(updated, "anesthesia")
+    assert steps["status"] == "Needs clinical review"
+    action = next(a for a in steps["actions"] if a["code"] == "REVIEW_COMPUTERIZED_EKG")
+    assert action["reason"] == "New EKG reading: Sinus Bradycardia"
+    assert "NOTIFY_EKG_ABNORMALITY" in {
+        code for finding in steps["findings"] for code in finding["actions"]["nurse"]
+    }
+    assert C.COMPUTERIZED_EKG_GUIDANCE["Sinus Bradycardia"][1] == (
+        "Evaluate heart rate, symptoms, and medication history."
+    )
+
+
+def test_computerized_ekg_entry_is_visible_to_anesthesia_in_app():
+    from streamlit.testing.v1 import AppTest
+
+    app = os.path.join(D.ROOT, "app.py")
+    student = AppTest.from_file(app, default_timeout=60).run()
+    student.text_input[0].input("EKG QA")
+    student.button[0].click().run()
+    student.button(key="pt_S097").click().run()
+    student.radio(key="dec|S097|nurse|OBTAIN_EKG").set_value("Accept").run()
+    student.selectbox(key="ekg-reading|S097").set_value("Sinus Bradycardia")
+    student.text_area(key="ekg-note|S097").set_value("Pulse documented for anesthesia.")
+    student.button(key="FormSubmitter:ekg-form|S097-Record EKG reading").click().run()
+    student.segmented_control[1].set_value("anesthesia").run()
+
+    assert any(item.value == "New EKG reading: Sinus Bradycardia" for item in student.info)
+    assert all("Pulse documented for anesthesia" not in item.value for item in student.info)
+    assert any(item.key == "dec|S097|anesthesia|REVIEW_COMPUTERIZED_EKG"
+               for item in student.radio)
+    student.button(key="view-ekg|S097").click().run()
+    assert student.session_state["chart-section"] == "Tests & Imaging"
+    ekg_chart = next(frame.value.to_string() for frame in student.dataframe
+                     if "SESSION-EKG-S097" in frame.value.to_string())
+    assert "Pulse documented for anesthesia" in ekg_chart
+    student.segmented_control[1].set_value("nurse").run()
+    student.button(key="chart-nav|S097|Tests & Imaging").click().run()
+    assert not any(item.key == "ekg-reading|S097" for item in student.selectbox)
+    student.button(key="edit-ekg|S097").click().run()
+    assert any(item.key == "ekg-reading|S097" for item in student.selectbox)
+    student.selectbox(key="ekg-reading|S097").set_value("Atrial Flutter")
+    student.button(key="FormSubmitter:ekg-form|S097-Record EKG reading").click().run()
+    assert len(student.session_state["history|S097|ekg"]) == 1
+    assert student.session_state["session_ekg|S097"]["reading"] == "Atrial Flutter"
+    assert not any(item.key == "ekg-reading|S097" for item in student.selectbox)
     assert not student.exception, student.exception
 
 
@@ -226,7 +349,9 @@ def test_day_of_values_use_project_thresholds_and_prompt_anesthesia_review():
     within_rule_threshold = W.apply_completed_actions(
         chart, set(), day_of_values={"POC glucose": {"value": 10.0, "unit": "mmol/L"}})
     findings = C.evaluate_structured(within_rule_threshold)
-    assert "DAY_OF_VALUES_REVIEW" not in {finding["finding_code"] for finding in findings}
+    review = next(finding for finding in findings if finding["finding_code"] == "DAY_OF_VALUES_REVIEW")
+    assert "10.0 mmol/L" in review["detail"]
+    assert "UPDATE_ANESTHESIA_PLAN" in review["actions"]["anesthesia"]
 
 
 def test_day_of_value_flag_uses_reference_range_not_day_of_label():
@@ -253,6 +378,11 @@ def test_day_of_value_entry_appears_in_anesthesia_review():
     assert any(item.key == "dayof-value|S078|POC glucose" for item in student.number_input)
     student.number_input(key="dayof-value|S078|POC glucose").set_value(240)
     student.button(key="FormSubmitter:dayof-form|S078|POC glucose-Record POC glucose").click().run()
+    assert any(item.key == "dec|S078|nurse|INSULIN_INSTRUCTIONS" for item in student.radio)
+    assert not student.session_state.get("completed|S078|nurse|INSULIN_INSTRUCTIONS")
+    for index in range(3):
+        student.checkbox(key=f"todo|S078|nurse|INSULIN_INSTRUCTIONS|{index}").check().run()
+    assert student.session_state["completed|S078|nurse|INSULIN_INSTRUCTIONS"]
 
     student.segmented_control[1].set_value("anesthesia").run()
     assert any(item.key == "dec|S078|anesthesia|UPDATE_ANESTHESIA_PLAN"
@@ -262,6 +392,113 @@ def test_day_of_value_entry_appears_in_anesthesia_review():
                       if "DAYOF-S078-POC-glucose" in item.value.to_string())
     assert "240.0 mg/dL" in key_values and "261 mg/dL" in key_values
     assert "H" in key_values
+    assert not student.exception, student.exception
+
+    student.segmented_control[1].set_value("nurse").run()
+    student.button(key="chart-nav|S078|Labs").click().run()
+    assert not any(item.key == "dayof-value|S078|POC glucose" for item in student.number_input)
+    student.button(key="edit-lab|S078|POC glucose").click().run()
+    student.number_input(key="dayof-value|S078|POC glucose").set_value(220)
+    student.button(key="FormSubmitter:dayof-form|S078|POC glucose-Record POC glucose").click().run()
+    assert student.session_state["history|S078|lab:POC glucose"]
+    assert not any(item.key == "dayof-value|S078|POC glucose" for item in student.number_input)
+    assert not student.exception, student.exception
+
+
+def test_lab_team_pending_result_does_not_close_day_of_todo():
+    from streamlit.testing.v1 import AppTest
+
+    app = os.path.join(D.ROOT, "app.py")
+    student = AppTest.from_file(app, default_timeout=60).run()
+    student.text_input[0].input("Pending lab QA")
+    student.button[0].click().run()
+    student.button(key="pt_S078").click().run()
+    student.radio(key="dec|S078|nurse|INSULIN_INSTRUCTIONS").set_value("Accept").run()
+    student.button(key="lab-pending|S078|POC glucose").click().run()
+
+    assert student.session_state["dayof_pending|S078"]["POC glucose"]
+    for index in range(3):
+        student.checkbox(key=f"todo|S078|nurse|INSULIN_INSTRUCTIONS|{index}").check().run()
+    assert any(item.key == "dec|S078|nurse|INSULIN_INSTRUCTIONS" for item in student.radio)
+    assert not student.session_state.get("completed|S078|nurse|INSULIN_INSTRUCTIONS")
+
+    student.number_input(key="dayof-value|S078|POC glucose").set_value(100)
+    student.button(key="FormSubmitter:dayof-form|S078|POC glucose-Record POC glucose").click().run()
+    assert student.session_state["completed|S078|nurse|INSULIN_INSTRUCTIONS"]
+    assert not student.session_state["dayof_pending|S078"].get("POC glucose")
+    assert not student.exception, student.exception
+
+
+def test_ekg_pending_result_does_not_close_ekg_todo():
+    from streamlit.testing.v1 import AppTest
+
+    app = os.path.join(D.ROOT, "app.py")
+    student = AppTest.from_file(app, default_timeout=60).run()
+    student.text_input[0].input("Pending EKG QA")
+    student.button[0].click().run()
+    student.button(key="pt_S097").click().run()
+    student.radio(key="dec|S097|nurse|OBTAIN_EKG").set_value("Accept").run()
+    student.button(key="ekg-pending|S097").click().run()
+
+    assert student.session_state["session_ekg_pending|S097"]
+    for index in range(3):
+        student.checkbox(key=f"todo|S097|nurse|OBTAIN_EKG|{index}").check().run()
+    assert any(item.key == "dec|S097|nurse|OBTAIN_EKG" for item in student.radio)
+    assert not student.session_state.get("completed|S097|nurse|OBTAIN_EKG")
+    assert not student.exception, student.exception
+
+
+def test_recent_held_medication_dose_notifies_anesthesia_and_tracks_corrections():
+    from streamlit.testing.v1 import AppTest
+    from datetime import date
+    from preop import workflow as W
+
+    app = os.path.join(D.ROOT, "app.py")
+    student = AppTest.from_file(app, default_timeout=60).run()
+    student.text_input[0].input("Medication dose QA")
+    student.button[0].click().run()
+    student.button(key="pt_S004").click().run()
+    student.radio(key="dec|S004|nurse|VERIFY_MEDICATION_LAST_DOSE").set_value("Accept").run()
+
+    for index in range(3):
+        student.checkbox(key=f"todo|S004|nurse|VERIFY_MEDICATION_LAST_DOSE|{index}").check().run()
+    dose_date = date.fromisoformat(D.build_chart("S004")["case"]["surgery_date"])
+    student.date_input(key="med-dose-date|S004|M0007").set_value(dose_date)
+    student.button(key="FormSubmitter:med-dose-form|S004|M0007-Record last dose").click().run()
+    assert "M0007" not in student.session_state.get("med-dose|S004", {})
+
+    student.radio(key="med-dose-within|S004|M0007").set_value("yes")
+    student.button(key="FormSubmitter:med-dose-form|S004|M0007-Record last dose").click().run()
+    assert student.session_state["completed|S004|nurse|VERIFY_MEDICATION_LAST_DOSE"]
+    assert student.session_state["med-dose|S004"]["M0007"]["within_hold_period"]
+
+    student.segmented_control[1].set_value("anesthesia").run()
+    assert any(item.key == "dec|S004|anesthesia|REVIEW_RECENT_MEDICATION_DOSE"
+               for item in student.radio)
+    assert any(item.value == "Apixaban taken within hold period." for item in student.info)
+    assert all("Reported dose within documented hold period" not in item.value
+               for item in student.warning)
+    dose_chart = W.apply_completed_actions(
+        D.build_chart("S004"), set(), medication_doses=student.session_state["med-dose|S004"],
+        track_medication_doses=True,
+    )
+    dose_finding = next(finding for finding in C.evaluate_structured(dose_chart)
+                        if finding["finding_code"] == "MEDICATION_DOSE_WITHIN_HOLD")
+    assert "Reported dose within documented hold period: Apixaban 5 mg" in dose_finding["detail"]
+
+    student.segmented_control[1].set_value("nurse").run()
+    student.button(key="chart-nav|S004|Medications").click().run()
+    assert not any(item.key == "med-dose-amount|S004|M0007" for item in student.number_input)
+    student.button(key="edit-medication|S004|M0007").click().run()
+    student.number_input(key="med-dose-amount|S004|M0007").set_value(7.5)
+    student.button(key="FormSubmitter:med-dose-form|S004|M0007-Record last dose").click().run()
+    assert student.session_state["history|S004|medication:M0007"]
+    assert not any(item.key == "med-dose-amount|S004|M0007" for item in student.number_input)
+    assert not student.session_state.get("completed|S004|nurse|VERIFY_MEDICATION_LAST_DOSE")
+
+    student.segmented_control[1].set_value("anesthesia").run()
+    student.button(key="chart-nav|S004|Pre-Op Readiness").click().run()
+    assert any(item.value == "Apixaban taken within hold period." for item in student.info)
     assert not student.exception, student.exception
 
 
