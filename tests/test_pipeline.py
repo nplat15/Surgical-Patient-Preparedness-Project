@@ -248,6 +248,33 @@ def test_computerized_ekg_updates_expired_checklist_and_anesthesia_review():
     )
 
 
+def test_computerized_ekg_review_tasks_cover_findings_and_disposition():
+    from preop import workflow as W
+
+    assert set(C._EKG_REVIEW_GROUPS) == set(C.COMPUTERIZED_EKG_GUIDANCE)
+    for reading in C.COMPUTERIZED_EKG_GUIDANCE:
+        tasks = C.computerized_ekg_review_tasks(reading)
+        assert tasks
+        assert C.COMPUTERIZED_EKG_GUIDANCE[reading][1] in tasks[-1]
+
+    chart = W.apply_completed_actions(
+        D.build_chart("S097"), set(), ekg_machine_reading="Sinus Bradycardia",
+    )
+    for disposition, category, action_count in (
+        ("proceed", "routine", 0),
+        ("move_later", "clinical", 0),
+        ("reschedule", "clinical", 0),
+        ("clinical_hold", "critical", 0),
+    ):
+        chart["session_ekg_anesthesia_disposition"] = disposition
+        steps = PL.rules_next_steps(chart, "anesthesia")
+        ekg_finding = next(f for f in steps["findings"]
+                           if f["finding_code"] == "COMPUTERIZED_EKG_REVIEW")
+        assert ekg_finding["category"] == category
+        assert len([a for a in steps["actions"]
+                    if a["code"] == "REVIEW_COMPUTERIZED_EKG"]) == action_count
+
+
 def test_computerized_ekg_entry_is_visible_to_anesthesia_in_app():
     from streamlit.testing.v1 import AppTest
 
@@ -266,6 +293,18 @@ def test_computerized_ekg_entry_is_visible_to_anesthesia_in_app():
     assert all("Pulse documented for anesthesia" not in item.value for item in student.info)
     assert any(item.key == "dec|S097|anesthesia|REVIEW_COMPUTERIZED_EKG"
                for item in student.radio)
+    student.radio(key="dec|S097|anesthesia|REVIEW_COMPUTERIZED_EKG").set_value("Accept").run()
+    review_tasks = C.computerized_ekg_review_tasks("Sinus Bradycardia")
+    for index in range(len(review_tasks)):
+        student.checkbox(key=f"todo|S097|anesthesia|REVIEW_COMPUTERIZED_EKG|{index}").check().run()
+    disposition_key = "ekg-disposition|S097"
+    assert any(item.key == disposition_key for item in student.selectbox)
+    student.selectbox(key=disposition_key).set_value("clinical_hold").run()
+    assert student.session_state["ekg-disposition-value|S097"] == "clinical_hold"
+    assert any("Anesthesia disposition: Clinical hold" in item.value
+               for item in student.markdown)
+    assert "🟣" in student.button(key="pt_S097").label
+
     student.button(key="view-ekg|S097").click().run()
     assert student.session_state["chart-section"] == "Tests & Imaging"
     ekg_chart = next(frame.value.to_string() for frame in student.dataframe
@@ -280,6 +319,8 @@ def test_computerized_ekg_entry_is_visible_to_anesthesia_in_app():
     student.button(key="FormSubmitter:ekg-form|S097-Record EKG reading").click().run()
     assert len(student.session_state["history|S097|ekg"]) == 1
     assert student.session_state["session_ekg|S097"]["reading"] == "Atrial Flutter"
+    assert "ekg-disposition-value|S097" not in student.session_state
+    assert "completed|S097|anesthesia|REVIEW_COMPUTERIZED_EKG" not in student.session_state
     assert not any(item.key == "ekg-reading|S097" for item in student.selectbox)
     assert not student.exception, student.exception
 
@@ -445,6 +486,56 @@ def test_ekg_pending_result_does_not_close_ekg_todo():
         student.checkbox(key=f"todo|S097|nurse|OBTAIN_EKG|{index}").check().run()
     assert any(item.key == "dec|S097|nurse|OBTAIN_EKG" for item in student.radio)
     assert not student.session_state.get("completed|S097|nurse|OBTAIN_EKG")
+    assert not student.exception, student.exception
+
+
+def test_missing_medication_last_dose_finding_is_nurse_only():
+    from streamlit.testing.v1 import AppTest
+
+    app = os.path.join(D.ROOT, "app.py")
+    student = AppTest.from_file(app, default_timeout=60).run()
+    student.text_input[0].input("Medication role QA")
+    student.button[0].click().run()
+    student.button(key="pt_S004").click().run()
+
+    student.segmented_control[1].set_value("anesthesia").run()
+    assert all("Record last dose amount and date for" not in item.value
+               for item in student.warning)
+    assert not any(item.key == "dec|S004|anesthesia|VERIFY_MEDICATION_LAST_DOSE"
+                   for item in student.radio)
+
+    student.segmented_control[1].set_value("nurse").run()
+    assert any("Rule finding: Record last dose amount and date for: Apixaban" in item.value
+               for item in student.warning)
+    assert not student.exception, student.exception
+
+
+def test_completed_todo_stays_saved_after_accepting_next_step():
+    from streamlit.testing.v1 import AppTest
+
+    app = os.path.join(D.ROOT, "app.py")
+    student = AppTest.from_file(app, default_timeout=60).run()
+    student.text_input[0].input("Completed task QA")
+    student.button[0].click().run()
+    student.button(key="pt_S097").click().run()
+    student.radio(key="dec|S097|nurse|DRAW_HBA1C").set_value("Accept").run()
+    student.checkbox(key="todo|S097|nurse|DRAW_HBA1C|0").check().run()
+    student.radio(key="dec|S097|nurse|OBTAIN_EKG").set_value("Accept").run()
+    assert student.session_state["todo|S097|nurse|DRAW_HBA1C|0"]
+    assert not student.session_state["todo|S097|nurse|DRAW_HBA1C|1"]
+
+    for index in (1, 2):
+        student.checkbox(key=f"todo|S097|nurse|DRAW_HBA1C|{index}").check().run()
+
+    completed_key = "completed|S097|nurse|DRAW_HBA1C"
+    assert student.session_state[completed_key]
+    assert not any(item.key and item.key.startswith("todo|S097|nurse|DRAW_HBA1C|")
+                   for item in student.checkbox)
+
+    student.radio(key="dec|S097|nurse|OBTAIN_CHEST_XRAY").set_value("Accept").run()
+    assert student.session_state[completed_key]
+    assert any("Completed in this session" in item.value for item in student.markdown)
+    assert any("Obtain order and draw HbA1c." in item.value for item in student.markdown)
     assert not student.exception, student.exception
 
 

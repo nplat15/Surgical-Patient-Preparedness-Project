@@ -44,6 +44,12 @@ except StreamlitSecretNotFoundError:
     pass
 
 ROLE_LABEL = {"nurse": "Pre-op nurse", "anesthesia": "Anesthesiologist"}
+EKG_DISPOSITION_LABELS = {
+    "proceed": "Proceed as scheduled",
+    "move_later": "Move later today",
+    "reschedule": "Reschedule",
+    "clinical_hold": "Clinical hold",
+}
 STATUS_CLS = {"Ready": "ready", "Outstanding items": "later", "Needs clinical review": "resched", "Recommend hold": "hold"}
 KEY_TESTS = {
     "nurse": ["Hemoglobin", "Potassium", "Glucose", "POC glucose", "INR", "Serum hCG", "UA nitrite", "Urine culture"],
@@ -125,7 +131,8 @@ def completed_actions(sid):
     )
     for code in C.ACTION_FOLLOW_UP:
         role = C.ACTION_CATALOG[code][0]
-        if action_is_complete(sid, role, code, chart):
+        if (ss.get(f"completed|{sid}|{role}|{code}")
+                or action_is_complete(sid, role, code, chart)):
             completed.add((role, code))
     return completed
 
@@ -145,11 +152,13 @@ def action_tasks_for(sid, role, code, chart=None):
     if code in {"NOTIFY_EKG_ABNORMALITY", "REVIEW_COMPUTERIZED_EKG"}:
         reading = ss.get(f"session_ekg|{sid}", {}).get("reading")
         if reading in C.COMPUTERIZED_EKG_GUIDANCE:
-            nurse_action, anesthesia_action = C.COMPUTERIZED_EKG_GUIDANCE[reading]
             if code == "NOTIFY_EKG_ABNORMALITY":
-                tasks = [nurse_action, "Notify anesthesia of this reading and document the handoff"]
+                tasks = [
+                    C.COMPUTERIZED_EKG_GUIDANCE[reading][0],
+                    "Notify anesthesia of this reading and document the handoff",
+                ]
             else:
-                tasks = [anesthesia_action, "Document anesthesia review and any plan changes"]
+                tasks = C.computerized_ekg_review_tasks(reading)
     return tasks, closes
 
 
@@ -231,10 +240,17 @@ def mark_consent_outcome(sid):
 
 
 def reset_action_checkboxes(sid, role, code):
-    tasks, _ = action_tasks_for(sid, role, code)
-    for index in range(len(tasks)):
-        ss.pop(f"todo|{sid}|{role}|{code}|{index}", None)
+    prefix = f"todo|{sid}|{role}|{code}|"
+    for key in list(ss.keys()):
+        if key.startswith(prefix):
+            ss.pop(key, None)
     ss.pop(f"completed|{sid}|{role}|{code}", None)
+
+
+def save_ekg_disposition(sid):
+    disposition = ss.get(f"ekg-disposition|{sid}")
+    if disposition in EKG_DISPOSITION_LABELS:
+        ss[f"ekg-disposition-value|{sid}"] = disposition
 
 
 def append_change_history(sid, field, old_value, new_value):
@@ -268,14 +284,16 @@ def record_ekg_form(sid, reading, note):
         ss.pop(f"edit|{sid}|ekg", None)
         ss.pop(f"session_ekg_pending|{sid}", None)
         if changed_existing:
+            ss.pop(f"ekg-disposition-value|{sid}", None)
+            ss.pop(f"ekg-disposition|{sid}", None)
             for code in ("OBTAIN_EKG", "NOTIFY_EKG_ABNORMALITY", "REVIEW_COMPUTERIZED_EKG"):
                 role = C.ACTION_CATALOG[code][0]
                 reset_action_checkboxes(sid, role, code)
-        for code in ("OBTAIN_EKG", "NOTIFY_EKG_ABNORMALITY", "REVIEW_COMPUTERIZED_EKG"):
-            role = C.ACTION_CATALOG[code][0]
-            mark_action_complete(sid, role, code)
+        mark_action_complete(sid, "nurse", "OBTAIN_EKG")
     else:
         if old_entry:
+            ss.pop(f"ekg-disposition-value|{sid}", None)
+            ss.pop(f"ekg-disposition|{sid}", None)
             for code in ("OBTAIN_EKG", "NOTIFY_EKG_ABNORMALITY", "REVIEW_COMPUTERIZED_EKG"):
                 role = C.ACTION_CATALOG[code][0]
                 reset_action_checkboxes(sid, role, code)
@@ -623,18 +641,30 @@ for case_id, case in list(BOARD.items()):
         D.build_chart(case_id), completed, ss.get(f"cpap_status|{case_id}"), day_of_values,
         consent_status, ekg.get("reading"), ekg.get("note"),
         ss.get(f"med-dose|{case_id}", {}), track_medication_doses=True)
+    ekg_disposition = ss.get(f"ekg-disposition-value|{case_id}")
+    if ekg_disposition:
+        chart_with_work["session_ekg_anesthesia_disposition"] = ekg_disposition
     case = dict(case)
     case["reqs"] = [S.checklist_row(req, chart_with_work)
                     for req in C.applicable_requirements(chart_with_work)]
-    case["rules"] = {
-        role: (lambda result: dict(
+    case["rules"] = {}
+    for role in C.ROLES:
+        result = rules_next_steps(chart_with_work, role)
+        case["rules"][role] = dict(
             status=result["status"],
-            actions=[dict(code=a["code"], reason=a["reason"], evidence_ids=a["evidence_ids"],
-                          priority=a["priority"]) for a in result["actions"]],
-        ))(rules_next_steps(chart_with_work, role))
-        for role in C.ROLES
-    }
+            actions=[
+                dict(code=a["code"], reason=a["reason"], evidence_ids=a["evidence_ids"],
+                     priority=a["priority"])
+                for a in result["actions"]
+                if (role, a["code"]) not in completed
+            ],
+        )
     case["state"] = S.sched_state(case)
+    case["state"] = {
+        "move_later": "later",
+        "reschedule": "resched",
+        "clinical_hold": "hold",
+    }.get(ekg_disposition, case["state"])
     BOARD[case_id] = case
 DAYS = sorted({x["case"]["surgery_date"] for x in BOARD.values()})
 ss.setdefault("sid", ME)
@@ -877,6 +907,9 @@ with main:
         D.build_chart(sid), completed, ss.get(f"cpap_status|{sid}"), ss.get(f"dayof|{sid}", {}),
         consent_status, ekg.get("reading"), ekg.get("note"),
         ss.get(f"med-dose|{sid}", {}), track_medication_doses=True)
+    ekg_disposition = ss.get(f"ekg-disposition-value|{sid}")
+    if ekg_disposition:
+        chart["session_ekg_anesthesia_disposition"] = ekg_disposition
     c = dict(chart["case"], **{k: x["case"][k] for k in ("surgery_date", "surgery_time", "surgery_location")})  # after any move
     p = chart["patient"]
     proc = D.procedure_label(c)
@@ -945,6 +978,21 @@ with main:
         """Ready card, reschedule card, or a plain status bar, as on the demo page."""
         open_items = S.open_reqs(x)
         done = len(x["reqs"]) - len(open_items)
+        if ekg_disposition in {"move_later", "reschedule", "clinical_hold"}:
+            card_class = {
+                "move_later": "later",
+                "reschedule": "resched",
+                "clinical_hold": "hold",
+            }[ekg_disposition]
+            return (
+                f"<div class='card s-{card_class}'><div class='ti'>"
+                f"Anesthesia disposition: {esc(EKG_DISPOSITION_LABELS[ekg_disposition])}</div>"
+                f"<div class='sub'>Recorded for this session after review of the computerized EKG reading.</div>"
+                f"<div class='fx'><b>{esc(proc)}</b> · Current surgery: {when} · "
+                f"{esc(c['surgery_location'])}</div>"
+                f"<div class='src'>This disposition does not itself change the OR schedule. "
+                f"Confirm timing with the care team.</div></div>"
+            )
         if not n and status == "Ready":
             return (f"<div class='card s-ready'><div class='ti'>✓ Ready for surgery</div>"
                     f"<div class='sub'>Nothing outstanding for the {ROLE_LABEL[role].lower()}</div>"
@@ -1033,9 +1081,13 @@ with main:
             rule_steps = rules_next_steps(chart, role)
             session_findings = [
                 finding for finding in rule_steps.get("findings", [])
-                if session_ids.intersection(finding["evidence_ids"])
-                or (role == "anesthesia"
-                    and finding.get("finding_code") == "ANESTHESIA_CONSENT_REFUSED")
+                if (
+                    session_ids.intersection(finding["evidence_ids"])
+                    and (role == "nurse" or finding.get("finding_code") != "MEDICATION_LAST_DOSE")
+                ) or (
+                    role == "anesthesia"
+                    and finding.get("finding_code") == "ANESTHESIA_CONSENT_REFUSED"
+                )
             ]
             existing_findings = {finding.get("finding_code") for finding in steps.get("findings", [])}
             base_findings = [
@@ -1101,6 +1153,24 @@ with main:
         n = len(steps["actions"])
         html(top_card(steps["status"], n, summ.get("headline") or f"{n} item{'s' * (n != 1)} to address before surgery."))
         st.caption(f"{ROLE_LABEL[role]} view · engine: {res['engine']} · {steps.get('status_reason', '')}")
+        if role == "anesthesia" and chart.get("session_machine_ekgs"):
+            review_completed = ("anesthesia", "REVIEW_COMPUTERIZED_EKG") in completed
+            if review_completed:
+                saved_disposition = ss.get(f"ekg-disposition-value|{sid}")
+                options = ["proceed", "move_later", "reschedule", "clinical_hold"]
+                st.selectbox(
+                    "Anesthesia disposition after EKG review",
+                    options,
+                    index=options.index(saved_disposition) if saved_disposition else None,
+                    format_func=EKG_DISPOSITION_LABELS.get,
+                    key=f"ekg-disposition|{sid}",
+                    on_change=save_ekg_disposition,
+                    args=(sid,),
+                    placeholder="Select a disposition…",
+                    help="This prototype records the anesthesiologist's choice; it does not interpret the machine reading or change the OR schedule.",
+                )
+            else:
+                st.caption("Complete the anesthesia EKG review to-do before recording a disposition.")
         for finding in session_findings:
             if finding.get("finding_code") == "COMPUTERIZED_EKG_REVIEW":
                 reading = next(

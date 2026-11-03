@@ -447,6 +447,109 @@ COMPUTERIZED_EKG_GUIDANCE = {
     ),
 }
 
+_EKG_REVIEW_GROUP_TASKS = {
+    "normal": [
+        "Document EKG review",
+        "Complete the anesthesia assessment",
+    ],
+    "stable_rhythm": [
+        "Review cardiac history, symptoms, and relevant medications",
+        "Compare with a previous EKG if available",
+        "Document the assessment and anesthesia plan",
+    ],
+    "new_rhythm": [
+        "Review symptoms, cardiac history, and prior rhythm documentation",
+        "Assess whether additional testing or cardiology evaluation is needed",
+        "Determine surgical readiness and document the plan",
+    ],
+    "ventricular_arrhythmia": [
+        "Assess urgency, hemodynamic stability, and symptoms",
+        "Initiate urgent or emergency evaluation when indicated",
+        "Document the surgical timing decision and escalation",
+    ],
+    "conduction": [
+        "Compare with a previous EKG and assess symptoms and severity",
+        "Determine whether cardiology or electrophysiology evaluation is needed",
+        "Document the conduction assessment and surgical plan",
+    ],
+    "ischemic": [
+        "Review symptoms and compare with a previous EKG",
+        "Assess for possible acute ischemia and urgency of evaluation",
+        "Document the assessment and surgical timing decision",
+    ],
+    "acute_mi": [
+        "Initiate an elective-surgery hold and urgent evaluation",
+        "Arrange emergency or urgent cardiac evaluation",
+        "Document the decision and escalation",
+    ],
+    "structural": [
+        "Review relevant cardiac history and symptoms",
+        "Assess whether additional structural or cardiac evaluation is needed",
+        "Document the assessment and anesthesia plan",
+    ],
+    "qt_electrical": [
+        "Review relevant history, medications, and clinical context",
+        "Assess arrhythmia risk and need for further evaluation",
+        "Document the assessment and anesthesia plan",
+    ],
+    "electrolyte": [
+        "Review the most recent electrolyte results or request testing",
+        "Determine whether further evaluation or correction is needed",
+        "Document the assessment and anesthesia plan",
+    ],
+    "pericarditis": [
+        "Review symptoms, recent illness, and relevant history",
+        "Determine whether additional cardiac evaluation is needed",
+        "Document the assessment and anesthesia plan",
+    ],
+}
+
+_EKG_REVIEW_GROUPS = {
+    "Normal Sinus Rhythm (NSR)": "normal",
+    "Sinus Bradycardia": "stable_rhythm",
+    "Sinus Tachycardia": "stable_rhythm",
+    "Sinus Arrhythmia": "stable_rhythm",
+    "Atrial Fibrillation (AFib)": "new_rhythm",
+    "Atrial Flutter": "new_rhythm",
+    "Supraventricular Tachycardia (SVT)": "new_rhythm",
+    "Ventricular Tachycardia (VTach)": "ventricular_arrhythmia",
+    "Ventricular Fibrillation (VFib)": "ventricular_arrhythmia",
+    "Premature Atrial Contractions (PACs)": "stable_rhythm",
+    "Premature Ventricular Contractions (PVCs)": "stable_rhythm",
+    "First-Degree AV Block": "conduction",
+    "Second-Degree AV Block Type I (Mobitz I)": "conduction",
+    "Second-Degree AV Block Type II (Mobitz II)": "conduction",
+    "Third-Degree AV Block (Complete Heart Block)": "conduction",
+    "Right Bundle Branch Block (RBBB)": "conduction",
+    "Left Bundle Branch Block (LBBB)": "conduction",
+    "ST Elevation": "ischemic",
+    "ST Depression": "ischemic",
+    "T-Wave Inversion": "ischemic",
+    "STEMI": "acute_mi",
+    "NSTEMI": "acute_mi",
+    "Left Ventricular Hypertrophy (LVH)": "structural",
+    "Right Ventricular Hypertrophy (RVH)": "structural",
+    "Prolonged QT Interval": "qt_electrical",
+    "Shortened QT Interval": "qt_electrical",
+    "Long QT Syndrome": "qt_electrical",
+    "Brugada Pattern": "qt_electrical",
+    "Low-Voltage QRS": "structural",
+    "Hyperkalemia-Related Changes": "electrolyte",
+    "Hypokalemia-Related Changes": "electrolyte",
+    "Pericarditis Pattern": "pericarditis",
+}
+
+
+def computerized_ekg_review_tasks(reading):
+    """Return prototype anesthesia checklist tasks for one computerized reading."""
+    group = _EKG_REVIEW_GROUPS.get(reading)
+    if group is None:
+        raise ValueError(f"Unknown computerized EKG reading {reading!r}")
+    return [
+        *_EKG_REVIEW_GROUP_TASKS[group],
+        f"Consider the machine-reported finding: {COMPUTERIZED_EKG_GUIDANCE[reading][1]}",
+    ]
+
 # Finding category -> effect on readiness status.
 #   critical  -> "Recommend hold"
 #   clinical  -> "Needs clinical review"
@@ -811,13 +914,18 @@ def check_values(chart):
     ekg = latest([t for t in chart["diagnostics"] if t["test_type"] == "EKG"], "test_date")
     if ekg and ekg.get("compared_to_prior") == "New finding":
         out.append(_rule_finding("NEW_EKG_ABNORMALITY", f"EKG: {ekg['interpretation']}", [ekg["test_id"]]))
+    ekg_disposition = chart.get("session_ekg_anesthesia_disposition")
     for row in chart.get("session_machine_ekgs", []):
+        reviewed = ekg_disposition in {"proceed", "move_later", "reschedule", "clinical_hold"}
         out.append(_finding(
             "COMPUTERIZED_EKG_REVIEW",
-            "routine" if row["machine_reading"] == "Normal Sinus Rhythm (NSR)" else "clinical",
+            "routine" if (row["machine_reading"] == "Normal Sinus Rhythm (NSR)"
+                          or ekg_disposition == "proceed") else
+            "critical" if ekg_disposition == "clinical_hold" else
+            "clinical",
             f"New EKG reading: {row['machine_reading']}",
             ["NOTIFY_EKG_ABNORMALITY"],
-            ["REVIEW_COMPUTERIZED_EKG"],
+            [] if reviewed else ["REVIEW_COMPUTERIZED_EKG"],
             [row["test_id"]],
         ))
     session_doses = {
