@@ -154,6 +154,64 @@ def test_completed_anesthesia_consent_updates_session_chart_and_checklist():
     assert C.requirement_status(chart, req)["status"] == "missing"
 
 
+def test_clearance_and_outside_test_requests_do_not_complete_requirements():
+    from preop import schedule as S
+    from preop import workflow as W
+
+    chart = D.build_chart("S003")
+    clearance_req = next(
+        req for req in C.applicable_requirements(chart)
+        if req["item"] == "Pulmonary assessment"
+    )
+    requested = W.apply_completed_actions(
+        chart, {("anesthesia", "REQUEST_PULMONARY_CLEARANCE")},
+    )
+    assert C.requirement_status(requested, clearance_req)["status"] == "pending"
+    assert next(row for row in requested["clearances"]
+                if row["clearance_type"] == "Pulmonary assessment")["status"] == "Pending"
+    assert ("clearance", "Pulmonary assessment") not in requested["session_completed_requirements"]
+
+    followed_up = W.apply_completed_actions(
+        requested, {("nurse", "FOLLOW_UP_CLEARANCE")},
+    )
+    assert C.requirement_status(followed_up, clearance_req)["status"] == "pending"
+
+    def state_for(updated):
+        return S.sched_state({
+            "reqs": [S.checklist_row(req, updated)
+                     for req in C.applicable_requirements(updated)],
+            "rules": {role: PL.rules_next_steps(updated, role) for role in C.ROLES},
+            "patient": updated["patient"],
+        })
+
+    assert state_for(requested) == "resched"
+    assert state_for(followed_up) == "resched"
+
+    chart = dict(D.build_chart("S082"))
+    chart["patient"] = dict(
+        chart["patient"],
+        diagnoses=[*chart["patient"]["diagnoses"], "COPD"],
+    )
+    for item, action_code, role, collection, field, kind in (
+        ("Echocardiogram", "REQUEST_ECHO", "anesthesia", "diagnostics", "test_type", "diagnostic"),
+        ("Pulmonary function test", "REQUEST_PFT", "anesthesia", "diagnostics", "test_type", "diagnostic"),
+        ("Chest X-ray", "OBTAIN_CHEST_XRAY", "nurse", "imaging", "imaging_type", "imaging"),
+    ):
+        req = next(req for req in C.applicable_requirements(chart)
+                   if req["item"] == item and req["item_type"] == kind)
+        chart_without_result = dict(chart)
+        chart_without_result[collection] = [
+            row for row in chart[collection] if row[field] != item
+        ]
+        assert C.requirement_status(chart_without_result, req)["status"] == "missing"
+        result_requested = W.apply_completed_actions(
+            chart_without_result, {(role, action_code)},
+        )
+        assert C.requirement_status(result_requested, req)["status"] == "missing"
+        assert (kind, item) not in result_requested["session_completed_requirements"]
+        assert state_for(result_requested) == "resched"
+
+
 def test_anesthesia_consent_completion_survives_role_switch():
     from streamlit.testing.v1 import AppTest
 
@@ -282,7 +340,35 @@ def test_computerized_ekg_entry_is_visible_to_anesthesia_in_app():
     student = AppTest.from_file(app, default_timeout=60).run()
     student.text_input[0].input("EKG QA")
     student.button[0].click().run()
+
+    student.button(key="pt_S095").click().run()
+    student.segmented_control[1].set_value("anesthesia").run()
+    student.radio(key="dec|S095|anesthesia|REQUEST_PULMONARY_CLEARANCE").set_value("Accept").run()
+    clearance_tasks = C.ACTION_FOLLOW_UP["REQUEST_PULMONARY_CLEARANCE"][0]
+    for index in range(len(clearance_tasks)):
+        student.checkbox(
+            key=f"todo|S095|anesthesia|REQUEST_PULMONARY_CLEARANCE|{index}",
+        ).check().run()
+    student.session_state["session_ekg|S095"] = {
+        "reading": "Sinus Bradycardia",
+        "note": "",
+    }
+    student.run()
+    student.radio(key="dec|S095|anesthesia|REVIEW_COMPUTERIZED_EKG").set_value("Accept").run()
+    review_tasks = C.computerized_ekg_review_tasks("Sinus Bradycardia")
+    for index in range(len(review_tasks)):
+        student.checkbox(
+            key=f"todo|S095|anesthesia|REVIEW_COMPUTERIZED_EKG|{index}",
+        ).check().run()
+    student.selectbox(key="ekg-disposition|S095").set_value("clinical_hold").run()
+    dashboard = "\n".join(item.value for item in student.markdown)
+    assert "Anesthesia disposition: Clinical hold" in dashboard
+    assert "Rescheduling may still be needed while outside work is pending:" in dashboard
+    assert "Pulmonary assessment" in dashboard
+    assert "🟣" in student.button(key="pt_S095").label
+
     student.button(key="pt_S097").click().run()
+    student.segmented_control[1].set_value("nurse").run()
     student.radio(key="dec|S097|nurse|OBTAIN_EKG").set_value("Accept").run()
     student.selectbox(key="ekg-reading|S097").set_value("Sinus Bradycardia")
     student.text_area(key="ekg-note|S097").set_value("Pulse documented for anesthesia.")

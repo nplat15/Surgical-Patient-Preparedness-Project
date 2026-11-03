@@ -1,6 +1,8 @@
 """Session-local chart updates for work completed in the classroom demo."""
 from __future__ import annotations
 
+from datetime import date
+
 from . import criteria as C
 
 
@@ -53,6 +55,7 @@ def apply_completed_actions(chart, completed_actions, cpap_status=None, day_of_v
     if cpap_status is not None:
         updated["session_cpap_status"] = cpap_status
     updated["diagnostics"] = [dict(row) for row in chart["diagnostics"]]
+    updated["clearances"] = [dict(row) for row in chart["clearances"]]
     updated["session_machine_ekgs"] = []
     if ekg_machine_reading:
         if ekg_machine_reading not in C.COMPUTERIZED_EKG_GUIDANCE:
@@ -140,6 +143,27 @@ def apply_completed_actions(chart, completed_actions, cpap_status=None, day_of_v
         if status["status"] == "ok":
             continue
         if req["item"] == "Anesthesia consent" and consent_status == "refused":
+            continue
+        if req["item_type"] == "clearance":
+            request_actions = {
+                (role, code) for role, code in req["missing_actions"]
+                if code in {"REQUEST_CARDIOLOGY_CLEARANCE", "REQUEST_PULMONARY_CLEARANCE"}
+            }
+            if status["status"] == "missing" and request_actions.intersection(completed_actions):
+                updated["clearances"].append({
+                    "clearance_id": f"SESSION-CLEARANCE-{chart['case']['surgery_id']}-{req['item'].replace(' ', '-')}",
+                    "surgery_id": chart["case"]["surgery_id"],
+                    "patient_id": chart["case"]["patient_id"],
+                    "clearance_type": req["item"],
+                    "status": "Pending",
+                    "requested_date": date.today().isoformat(),
+                    "completed_date": "",
+                    "assessment_note": "",
+                })
+            # Requesting or following up does not mean the external assessment is complete.
+            continue
+        if req["item_type"] in {"diagnostic", "imaging"}:
+            # Ordering or scheduling outside work does not put its result in the chart.
             continue
         required_actions = _actions_for_requirement(req, status)
         if not required_actions or not required_actions.issubset(completed_actions):

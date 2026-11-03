@@ -979,17 +979,34 @@ with main:
         open_items = S.open_reqs(x)
         done = len(x["reqs"]) - len(open_items)
         if ekg_disposition in {"move_later", "reschedule", "clinical_hold"}:
+            slow = [r for r in open_items if S.takes_days(r)]
             card_class = {
                 "move_later": "later",
                 "reschedule": "resched",
                 "clinical_hold": "hold",
             }[ekg_disposition]
+            pending_outside_html = ""
+            if slow:
+                pending_items = "".join(
+                    f"<li><b>{esc(r['item'])}</b>"
+                    f"<span class='lead days'>Pending outside completion</span></li>"
+                    for r in slow
+                )
+                pending_outside_html = (
+                    "<div class='sugg s-resched'>"
+                    "<span class='lb'>Rescheduling reminder</span>"
+                    "<b>Rescheduling may still be needed while outside work is pending:</b>"
+                    f"<ul>{pending_items}</ul>"
+                    "<span class='src'>This reminder remains alongside the anesthesia disposition. "
+                    "Reassess surgical timing after these items are completed.</span></div>"
+                )
             return (
                 f"<div class='card s-{card_class}'><div class='ti'>"
                 f"Anesthesia disposition: {esc(EKG_DISPOSITION_LABELS[ekg_disposition])}</div>"
                 f"<div class='sub'>Recorded for this session after review of the computerized EKG reading.</div>"
                 f"<div class='fx'><b>{esc(proc)}</b> · Current surgery: {when} · "
                 f"{esc(c['surgery_location'])}</div>"
+                f"{pending_outside_html}"
                 f"<div class='src'>This disposition does not itself change the OR schedule. "
                 f"Confirm timing with the care team.</div></div>"
             )
@@ -1021,10 +1038,15 @@ with main:
                 f"Suggested new time: {S.fmt_day(sg['date'])} · {sg['time']} · {esc(sg['room'])}"
                 if hard and sg else f"Surgery: {when} · {esc(c['surgery_location'])}"
             )
+            external_work_note = (
+                f"Nothing outstanding for the {ROLE_LABEL[role].lower()}; "
+                f"{' and '.join(r['item'] for r in slow)} still requires outside completion."
+                if not n and slow else note
+            )
             return (f"<div class='card s-{card_class}'><div class='ti'>{title}</div>"
                     f"<div class='sub'>{k} pre-op item{'s' * (k != 1)} {'is' if k == 1 else 'are'} not ready for {esc(proc)} at {c['surgery_date']} {c['surgery_time']} · {esc(status)}</div>"
                     f"<div class='fx'><b>{schedule_text}</b></div>"
-                    f"<ul>{items}</ul><div class='src'>{esc(note)}</div></div>")
+                    f"<ul>{items}</ul><div class='src'>{esc(external_work_note)}</div></div>")
         return (f"<div class='bar s-{STATUS_CLS.get(status, 'open')}'>{esc(status)} "
                 f"<span>· {esc(headline)} · Surgery: {when} · {esc(c['surgery_location'])}</span></div>")
 
