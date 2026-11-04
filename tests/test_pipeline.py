@@ -393,8 +393,8 @@ def test_computerized_ekg_entry_is_visible_to_anesthesia_in_app():
 
     student.button(key="view-ekg|S097").click().run()
     assert student.session_state["chart-section"] == "Tests & Imaging"
-    ekg_chart = next(frame.value.to_string() for frame in student.dataframe
-                     if "SESSION-EKG-S097" in frame.value.to_string())
+    ekg_chart = next(item.value for item in student.markdown
+                     if "<table" in item.value and "SESSION-EKG-S097" in item.value)
     assert "Pulse documented for anesthesia" in ekg_chart
     student.segmented_control[1].set_value("nurse").run()
     student.button(key="chart-nav|S097|Tests & Imaging").click().run()
@@ -515,8 +515,8 @@ def test_day_of_value_entry_appears_in_anesthesia_review():
     assert any(item.key == "dec|S078|anesthesia|UPDATE_ANESTHESIA_PLAN"
                for item in student.radio)
     assert any("Day-of values to review" in item.value for item in student.warning)
-    key_values = next(item.value.to_string() for item in student.dataframe
-                      if "DAYOF-S078-POC-glucose" in item.value.to_string())
+    key_values = next(item.value for item in student.markdown
+                      if "<table" in item.value and "DAYOF-S078-POC-glucose" in item.value)
     assert "240.0 mg/dL" in key_values and "261 mg/dL" in key_values
     assert "H" in key_values
     assert not student.exception, student.exception

@@ -19,7 +19,6 @@ import threading
 from datetime import date, datetime
 from html import escape as esc
 
-import pandas as pd
 import streamlit as st
 from streamlit.errors import StreamlitSecretNotFoundError
 
@@ -755,6 +754,18 @@ def html(s):
     st.markdown(s, unsafe_allow_html=True)
 
 
+def table(rows, cols=None, hl=(), bad=()):
+    """A plain HTML table; values of the `hl` columns that are in `bad` are shown in red. Used instead of
+    st.dataframe, which makes each browser download a large extra script the first time it shows a table. Under
+    classroom load that download timed out ("TypeError: Failed to fetch dynamically imported module")."""
+    cols = cols or list(dict.fromkeys(k for r in rows for k in r))
+    cell = lambda r, c: ("<td style='color:#d0473b;font-weight:600'>" if c in hl and r.get(c) in bad else "<td>") + \
+        esc("" if r.get(c) is None else str(r.get(c))) + "</td>"
+    html("<div style='overflow-x:auto'><table class='ck'><tr>"
+         + "".join(f"<th>{esc(c.replace('_', ' '))}</th>" for c in cols) + "</tr>"
+         + "".join("<tr>" + "".join(cell(r, c) for c in cols) + "</tr>" for r in rows) + "</table></div>")
+
+
 # ---------------------------------------------------------------------------
 # Header: title and view switch, as on the demo page
 # ---------------------------------------------------------------------------
@@ -1380,8 +1391,7 @@ with main:
                         rows.append(dict(Test=d["test_type"], Value=(f"{d['result_value']} {d['result_unit']}".strip() or d["interpretation"]),
                                          Flag="New" if d["compared_to_prior"] == "New finding" else "", Date=d["test_date"], ID=d["test_id"]))
                 if rows:
-                    st.dataframe(pd.DataFrame(rows).style.map(lambda v: "color:#d0473b;font-weight:600" if v in ("H", "L", "Critical", "Abnormal", "New") else "",
-                                                              subset=["Flag"]), hide_index=True, width="stretch")
+                    table(rows, hl=("Flag",), bad=("H", "L", "Critical", "Abnormal", "New"))
                 else:
                     st.caption("No values in chart.")
 
@@ -1440,11 +1450,7 @@ with main:
         if not rows:
             st.caption("None in chart.")
             return
-        df = pd.DataFrame(rows)[cols]
-        if hl:
-            bad = {"H", "L", "Critical", "Abnormal", "Missing", "Refused", "Pending", "Positive", "New finding"}
-            df = df.style.map(lambda v: "color:#d0473b;font-weight:600" if v in bad else "", subset=hl)
-        st.dataframe(df, hide_index=True, width="stretch")
+        table(rows, cols, hl or (), {"H", "L", "Critical", "Abnormal", "Missing", "Refused", "Pending", "Positive", "New finding"})
 
 
     if ss["chart-section"] == "Labs":
