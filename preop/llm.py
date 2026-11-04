@@ -61,8 +61,9 @@ class LLM:
         for attempt in range(3):
             try:
                 if self.provider == "anthropic":
-                    r = self.client.messages.create(model=self.model, max_tokens=self.max_tokens,
-                                                    temperature=self.temperature, system=system,
+                    # No temperature: anthropic SDK 1.x removed sampling parameters, and current Claude models
+                    # accept only the default anyway.
+                    r = self.client.messages.create(model=self.model, max_tokens=self.max_tokens, system=system,
                                                     messages=[{"role": "user", "content": user}])
                     return "".join(b.text for b in r.content if getattr(b, "type", "") == "text")
                 if self.provider == "openai":
