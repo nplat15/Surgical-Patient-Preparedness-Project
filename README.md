@@ -64,6 +64,13 @@ Cost guide: one case = 1 QA call + 2 calls per role (5 calls for both roles).
    OPENAI_API_KEY = "your-key"
    ```
 
+   AI reviews run only for one login, so classmates cannot spend the API key. Add its passcode:
+
+   ```toml
+   PREOP_AI_CODE = "your-passcode"
+   PREOP_AI_USER = "Mombo"        # optional; Mombo is the default
+   ```
+
    Secrets are read by the app at startup. Do not commit API keys or a local `.streamlit/secrets.toml`.
 
 This is a public class-project prototype with no passwords or access control (the name sign-in only hands out example cases). Use only its fictional data; do not upload real patient information. Streamlit Community Cloud's local filesystem is not durable, so saved decisions and cached LLM results may be lost when the app restarts. They are not a persistent shared workflow or audit log.
@@ -85,6 +92,11 @@ the presenter's walkthrough. A "What to try" list walks students through the boa
 * Saved day-of lab values, EKG readings, and medication last-dose entries show a compact summary with a **Make edit** control; the entry form stays hidden until requested and closes after saving. Corrections reset related task checks and appear in a session-only change history. A medication dose attested as within its documented hold period creates a concise anesthesia alert and a review task; the detailed finding remains available to the rules workflow.
 * The student's sign-in is in the URL (`?u=...`), so a page refresh keeps the same patient. Unsaved clicks are lost on refresh.
 * Assignments are kept in memory. If the app restarts, students sign in again and may get a different patient.
+* **AI login:** signing in as **Mombo** (any capitalization) asks for the `PREOP_AI_CODE` passcode. That login is
+  the only one with the **AI review (LLM)** switch, and it always gets case S054 (Darnell Gallagher, knee arthroscopy).
+  The board shows S054 as Ready, but the H&P family history says his brother had a very high fever and muscle rigidity
+  during anesthesia, which suggests malignant hyperthermia. Only the AI review, which reads the note, finds it.
+  Everyone else gets the rules-only check.
 * AI reviews: at most 4 run at once and the rest wait their turn. Students on the same case and role share one model call.
   If the AI review fails (for example, rate limits), the page shows an error and keeps the rules-only check.
 * Saved decisions go to `results/decisions.csv` with the student's name.

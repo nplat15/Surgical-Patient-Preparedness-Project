@@ -15,6 +15,10 @@ from . import criteria as C
 from . import schedule as S
 
 SHOWCASE = "S082"  # the presenter's walkthrough case; students get the others
+# The AI login's case: the board shows it as Ready, but the H&P family history describes a brother's reaction to
+# anesthesia that suggests malignant hyperthermia. Only reading the note finds it. Ready cases are not in the
+# student pool, so no student gets this one.
+AI_CASE = "S054"
 ORDER = {"resched": 0, "later": 1, "hold": 2, "open": 3}
 
 
@@ -38,11 +42,17 @@ class Roster:
         self._users = {}
         self._next = 0
 
-    def join(self, name):
+    def join(self, name, ai=False):
+        """ai=True marks the one login allowed to run AI reviews (it uses the project's API key). That login always
+        gets AI_CASE and does not use up a case from the student pool."""
         with self._lock:
             token = secrets.token_urlsafe(6)
-            self._users[token] = dict(name=name, sid=self.pool[self._next % len(self.pool)])
-            self._next += 1
+            if ai:
+                sid = AI_CASE
+            else:
+                sid = self.pool[self._next % len(self.pool)]
+                self._next += 1
+            self._users[token] = dict(name=name, sid=sid, ai=ai)
             return token
 
     def reset(self):

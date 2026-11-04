@@ -36,7 +36,8 @@ st.set_page_config(page_title="Pre-Op Readiness", page_icon="🩺", layout="wide
 # while the LLM client reads environment variables. st.secrets loads lazily, so a missing
 # secrets.toml (a local run) raises on first lookup, not on access.
 try:
-    for setting in ("PREOP_LLM_PROVIDER", "PREOP_LLM_MODEL", "ANTHROPIC_API_KEY", "OPENAI_API_KEY", "PREOP_TEAM_CODE"):
+    for setting in ("PREOP_LLM_PROVIDER", "PREOP_LLM_MODEL", "ANTHROPIC_API_KEY", "OPENAI_API_KEY", "PREOP_TEAM_CODE",
+                    "PREOP_AI_USER", "PREOP_AI_CODE"):
         if not os.environ.get(setting) and setting in st.secrets:
             os.environ[setting] = str(st.secrets[setting])
 except StreamlitSecretNotFoundError:
@@ -114,6 +115,7 @@ def shared():
 
 
 ROSTER, DECISIONS_LOCK, AI_SLOTS = shared()
+AI_USER = os.environ.get("PREOP_AI_USER", "Mombo")  # the only login that can run AI reviews
 ss = st.session_state
 
 
@@ -554,12 +556,45 @@ def sign_in():
         st.markdown("### 🩺 Pre-Op Readiness Board")
         st.write("Enter your first name or a nickname to get your own example patient. "
                  "Anything you change only shows on your screen.")
-        with st.form("join"):
-            name = st.text_input("Your name", max_chars=40, placeholder="e.g. Sam")
-            if st.form_submit_button("Get my patient", type="primary", width="stretch"):
-                st.query_params["u"] = ROSTER.join(name.strip() or "Guest")  # in the URL so a refresh keeps the patient
-                st.rerun()
+        if ss.get("ai_signin"):
+            ai_sign_in(ss.ai_signin)
+        else:
+            with st.form("join"):
+                name = st.text_input("Your name", max_chars=40, placeholder="e.g. Sam")
+                if st.form_submit_button("Get my patient", type="primary", width="stretch"):
+                    name = name.strip() or "Guest"
+                    if name.casefold() == AI_USER.casefold():  # the AI login asks for its passcode first
+                        ss.ai_signin = name
+                        st.rerun()
+                    join(name)
         st.caption("Fictional patients · teaching rules, not clinical guidelines · not for patient care")
+
+
+def join(name, ai=False):
+    st.query_params["u"] = ROSTER.join(name, ai=ai)  # in the URL so a refresh keeps the patient
+    st.rerun()
+
+
+def ai_sign_in(name):
+    """Passcode step for the one login that runs AI reviews on the project's API key, so a classmate who types
+    the same name gets the rules-only board instead of spending API credit."""
+    code = os.environ.get("PREOP_AI_CODE", "")
+    with st.form("ai_join"):
+        st.write(f"**{name}** is the AI review login. Enter its passcode.")
+        entered = st.text_input("AI passcode", type="password")
+        go, back = st.columns(2)
+        ok = go.form_submit_button("Sign in", type="primary", width="stretch")
+        cancel = back.form_submit_button("Back", width="stretch")
+    if cancel:
+        del ss.ai_signin
+        st.rerun()
+    if ok:
+        if not code:
+            st.error("The AI login is not set up. Add PREOP_AI_CODE to the app's secrets.")
+        elif hmac.compare_digest(entered.encode(), code.encode()):
+            join(name, ai=True)
+        else:
+            st.error("Wrong passcode.")
 
 
 def start_clean():
@@ -789,7 +824,7 @@ with st.expander("What to try (about 3 minutes)", expanded=ss.sid == ME and not 
         "4. If a new time is suggested, apply it, then open the **OR schedule** to see the change.\n\n"
         "Your changes only show on your screen. Classmates each have their own copy of the board.")
 st.caption("Fictional patients · teaching rules, not clinical guidelines · not for patient care")
-provider = default_provider()
+provider = default_provider() if USER.get("ai") else "mock"  # AI reviews only for the AI login
 
 
 # ---------------------------------------------------------------------------
@@ -993,7 +1028,7 @@ with main:
     ctl = st.columns([2, 1.3], vertical_alignment="center")
     role = ctl[0].segmented_control("Role", list(ROLE_LABEL), format_func=ROLE_LABEL.get, key="role",
                                     label_visibility="collapsed", on_change=keep, args=("role", "nurse"))
-    ai = ctl[1].toggle("AI review (LLM)", value=provider != "mock", key="ai")
+    ai = USER.get("ai") and ctl[1].toggle("AI review (LLM)", value=provider != "mock", key="ai")
     engine = "llm" if ai else "rules"
     if ai and provider == "mock":
         ctl[1].caption("No API key found. Showing the rules-only check.")

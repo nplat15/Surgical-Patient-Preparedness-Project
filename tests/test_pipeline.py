@@ -740,6 +740,35 @@ def test_project_team_can_reset_everyone():
         del os.environ["PREOP_TEAM_CODE"]
 
 
+
+def test_only_the_ai_login_gets_ai_review_and_the_hidden_finding_case():
+    from streamlit.testing.v1 import AppTest
+    from preop.classroom import AI_CASE
+    app = os.path.join(D.ROOT, "app.py")
+    os.environ["PREOP_AI_CODE"] = "ai-code"
+    try:
+        student = AppTest.from_file(app, default_timeout=60).run()
+        student.text_input[0].input("Ana")
+        student.button[0].click().run()
+        assert student.session_state.sid != AI_CASE and not student.toggle      # rules only, no AI switch
+
+        mombo = AppTest.from_file(app, default_timeout=60).run()
+        mombo.text_input[0].input("mombo")
+        mombo.button[0].click().run()
+        assert [t.label for t in mombo.main.text_input] == ["AI passcode"]
+        mombo.text_input[0].input("wrong")
+        mombo.button[0].click().run()
+        assert "u" not in mombo.query_params                                   # wrong passcode: not signed in
+        mombo.text_input[0].input("ai-code")
+        mombo.button[0].click().run()
+        assert not mombo.exception, mombo.exception
+        assert mombo.session_state.sid == AI_CASE and [t.label for t in mombo.toggle] == ["AI review (LLM)"]
+        rules = PL.run_case(AI_CASE, role="anesthesia", engine="rules")
+        assert rules["next_steps"]["status"] == "Ready"                        # the finding is only in the H&P
+    finally:
+        del os.environ["PREOP_AI_CODE"]
+
+
 if __name__ == "__main__":
     for name, fn in list(globals().items()):
         if name.startswith("test_"):
