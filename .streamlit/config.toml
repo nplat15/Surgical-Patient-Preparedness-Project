@@ -1,3 +1,9 @@
+# Don't watch source files for changes. Streamlit otherwise checks every loaded module (pandas, pyarrow, ...)
+# after each rerun in each browser session, which used ~90% of the server's time and stalled the app when a
+# class signed in at once. After pushing new code, reboot the app from the Streamlit Cloud menu to load it.
+[server]
+fileWatcherType = "none"
+
 # Softer palette and fonts from the demo page (demo/template.html) in place of Streamlit's
 # pure white / black with a red accent. The app follows the system light or dark setting.
 [theme]

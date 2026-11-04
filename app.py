@@ -632,7 +632,11 @@ watch_for_reset()
 ss.setdefault("moves", {})  # demo schedule changes for this browser session: sid -> (date, time, room, kind)
 MOVES = tuple(sorted((sid, *mv) for sid, mv in ss.moves.items()))
 BOARD = {x["id"]: x for x in S.cases(MOVES)}
-for case_id, case in list(BOARD.items()):
+
+
+def with_session_work(case):
+    """A board case with this browser session's completed work applied to its checklist, rules and state."""
+    case_id = case["id"]
     completed = completed_actions(case_id)
     day_of_values = ss.get(f"dayof|{case_id}", {})
     consent_status = ss.get(f"consent_status|{case_id}")
@@ -665,8 +669,31 @@ for case_id, case in list(BOARD.items()):
         "reschedule": "resched",
         "clinical_hold": "hold",
     }.get(ekg_disposition, case["state"])
-    BOARD[case_id] = case
-DAYS = sorted({x["case"]["surgery_date"] for x in BOARD.values()})
+    return {k: case[k] for k in ("reqs", "rules", "state")}
+
+
+@st.cache_resource
+def untouched_readiness():
+    """case id -> checklist, rules and state for a case no one has worked on in their session. These are the same
+    for every student, so they are worked out once per server and shared, not redone for all 100 cases on every
+    click in every session (that made the app stall when a class signed in at once). Never modify the values.
+    The lock lets one session fill it in while the others wait, instead of all of them doing the same work."""
+    return {}, threading.Lock()
+
+
+# A case this session has changed has its id in a session key (dec|S012|..., dayof|S012, ...): only those are
+# recomputed on each rerun.
+UNTOUCHED, UNTOUCHED_LOCK = untouched_readiness()
+touched = {part for key in ss.keys() if isinstance(key, str) for part in key.split("|")}
+if any(i not in UNTOUCHED and i not in touched for i in BOARD):
+    with UNTOUCHED_LOCK:
+        for case_id, case in BOARD.items():
+            if case_id not in UNTOUCHED and case_id not in touched:
+                UNTOUCHED[case_id] = with_session_work(case)
+for case_id, case in list(BOARD.items()):
+    work = with_session_work(case) if case_id in touched else UNTOUCHED[case_id]
+    BOARD[case_id] = dict(case, **work)
+DAYS =sorted({x["case"]["surgery_date"] for x in BOARD.values()})
 ss.setdefault("sid", ME)
 ss.setdefault("view", "Patient chart")
 ss.setdefault("role", "nurse")
