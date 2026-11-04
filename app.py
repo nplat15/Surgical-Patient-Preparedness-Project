@@ -61,6 +61,8 @@ CK = {"ok": ("✓", "Complete"), "missing": ("✗", "Missing"), "outdated": ("!"
       "pending": ("…", "Pending"), "refused": ("✗", "Refused")}
 DECLINE_REASONS = ["Already done elsewhere", "Not indicated for this patient", "Patient declined", "Covered by another order", "Other"]
 DECISIONS = os.path.join(D.ROOT, "results", "decisions.csv")
+# An AI summary headline that says the patient should not go ahead as scheduled.
+AI_NOT_READY = re.compile(r"\bnot (ready|cleared|safe)\b|should not proceed|do not proceed|\bhold\b", re.I)
 
 # Status colors from the demo page; the dark set matches the dark theme in .streamlit/config.toml.
 st.markdown("""<style>
@@ -77,6 +79,7 @@ st.markdown("""<style>
 .sugg .lb{color:var(--c);font-size:.75em;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-right:8px}
 .card{padding:16px 20px;border-radius:10px;background:var(--cb);border:1px solid var(--c);margin-bottom:10px}
 .card .ti{font-size:1.6em;font-weight:700;color:var(--c);line-height:1.2}
+.card.flag{border-width:2px;border-left-width:8px} .card.flag .sub{font-size:1.1em;margin-top:6px}
 .card .sub{margin-top:2px} .card .fx{margin-top:6px;font-size:.9em;color:var(--muted)}
 .card ul{margin:6px 0;padding-left:0;list-style:none} .card li{margin:2px 0}
 .lead{font-size:.85em;color:var(--muted);margin-left:6px} .lead.days{color:var(--bad);font-weight:600}
@@ -1057,8 +1060,9 @@ with main:
         )
 
 
-    def top_card(status, n, headline):
-        """Ready card, reschedule card, or a plain status bar, as on the demo page."""
+    def top_card(status, n, headline, ai_actions=None):
+        """Ready card, reschedule card, or a plain status bar, as on the demo page. ai_actions: the AI review's
+        actions, so an AI headline saying the patient is not ready gets a red card instead of a status bar."""
         open_items = S.open_reqs(x)
         done = len(x["reqs"]) - len(open_items)
         if ekg_disposition in {"move_later", "reschedule", "clinical_hold"}:
@@ -1130,6 +1134,13 @@ with main:
                     f"<div class='sub'>{k} pre-op item{'s' * (k != 1)} {'is' if k == 1 else 'are'} not ready for {esc(proc)} at {c['surgery_date']} {c['surgery_time']} · {esc(status)}</div>"
                     f"<div class='fx'><b>{schedule_text}</b></div>"
                     f"<ul>{items}</ul><div class='src'>{esc(external_work_note)}</div></div>")
+        if ai_actions and AI_NOT_READY.search(headline):
+            items = "".join(f"<li><b>⚠ {esc(action_text(a['code']))}</b> <span class='src'>{esc(a.get('reason', ''))}</span></li>"
+                            for a in ai_actions)
+            return (f"<div class='card flag s-resched'><div class='ti'>⚠ AI review: not ready as scheduled</div>"
+                    f"<div class='sub'><b>{esc(headline)}</b></div><ul>{items}</ul>"
+                    f"<div class='fx'><b>{esc(proc)}</b> · Surgery: {when} · {esc(c['surgery_location'])} · "
+                    f"Status by the project criteria: {esc(status)}</div></div>")
         return (f"<div class='bar s-{STATUS_CLS.get(status, 'open')}'>{esc(status)} "
                 f"<span>· {esc(headline)} · Surgery: {when} · {esc(c['surgery_location'])}</span></div>")
 
@@ -1256,7 +1267,9 @@ with main:
         res["next_steps"] = steps
         summ = res["summary"]
         n = len(steps["actions"])
-        html(top_card(steps["status"], n, summ.get("headline") or f"{n} item{'s' * (n != 1)} to address before surgery."))
+        ai_result = not res["engine"].startswith(("rules", "mock"))
+        html(top_card(steps["status"], n, summ.get("headline") or f"{n} item{'s' * (n != 1)} to address before surgery.",
+                      ai_actions=steps["actions"] if ai_result else None))
         st.caption(f"{ROLE_LABEL[role]} view · engine: {res['engine']} · {steps.get('status_reason', '')}")
         if role == "anesthesia" and chart.get("session_machine_ekgs"):
             review_completed = ("anesthesia", "REVIEW_COMPUTERIZED_EKG") in completed

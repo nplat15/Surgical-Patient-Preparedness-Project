@@ -767,6 +767,20 @@ def test_only_the_ai_login_gets_ai_review_and_the_hidden_finding_case():
         assert mombo.session_state.sid == AI_CASE and [t.label for t in mombo.toggle] == ["AI review (LLM)"]
         rules = PL.run_case(AI_CASE, role="anesthesia", engine="rules")
         assert rules["next_steps"]["status"] == "Ready"                        # the finding is only in the H&P
+
+        # An AI result whose headline says "not ready" gets the red card, not the green status bar.
+        ai = PL.run_case(AI_CASE, role="nurse", engine="rules")
+        ai["engine"] = "anthropic:test"
+        ai["summary"] = dict(ai["summary"], headline="Not ready to proceed as scheduled: possible malignant hyperthermia risk.")
+        ai["next_steps"] = dict(ai["next_steps"], status="Ready", actions=[
+            dict(code="NOTIFY_MH_RISK", reason="Brother's reaction to anesthesia", evidence_ids=["N051"], priority="high")])
+        mombo.session_state["results"] = {(AI_CASE, "nurse", "llm"): ai}
+        mombo.toggle[0].set_value(True).run()
+        assert not mombo.exception, mombo.exception
+        page = " ".join(m.value for m in mombo.markdown)
+        assert "card flag s-resched" in page and "AI review: not ready as scheduled" in page
+        mombo.toggle[0].set_value(False).run()                                  # rules-only view keeps its own card
+        assert "AI review: not ready" not in " ".join(m.value for m in mombo.markdown)
     finally:
         del os.environ["PREOP_AI_CODE"]
 
