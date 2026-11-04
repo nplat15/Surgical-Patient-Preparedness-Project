@@ -752,14 +752,16 @@ def test_only_the_ai_login_gets_ai_review_and_the_hidden_finding_case():
         student.button[0].click().run()
         assert student.session_state.sid != AI_CASE and not student.toggle      # rules only, no AI switch
 
-        mombo = AppTest.from_file(app, default_timeout=60).run()
+        mombo = AppTest.from_file(app, default_timeout=60)
+        mombo.secrets["PREOP_AI_CODE"] = " ai-code "                       # test value, not a local secrets.toml
+        mombo.run()
         mombo.text_input[0].input("mombo")
         mombo.button[0].click().run()
         assert [t.label for t in mombo.main.text_input] == ["AI passcode"]
         mombo.text_input[0].input("wrong")
         mombo.button[0].click().run()
         assert "u" not in mombo.query_params                                   # wrong passcode: not signed in
-        mombo.text_input[0].input("ai-code")
+        mombo.text_input[0].input("ai-code ")                                 # stray spaces are ignored
         mombo.button[0].click().run()
         assert not mombo.exception, mombo.exception
         assert mombo.session_state.sid == AI_CASE and [t.label for t in mombo.toggle] == ["AI review (LLM)"]

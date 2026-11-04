@@ -575,10 +575,20 @@ def join(name, ai=False):
     st.rerun()
 
 
+def secret(name):
+    """A setting's current value: the app's secrets first, then the environment (tests and local runs)."""
+    try:
+        if name in st.secrets:
+            return str(st.secrets[name]).strip()
+    except StreamlitSecretNotFoundError:
+        pass
+    return os.environ.get(name, "").strip()
+
+
 def ai_sign_in(name):
     """Passcode step for the one login that runs AI reviews on the project's API key, so a classmate who types
     the same name gets the rules-only board instead of spending API credit."""
-    code = os.environ.get("PREOP_AI_CODE", "")
+    code = secret("PREOP_AI_CODE")  # read on every try, so a changed secret applies without a restart
     with st.form("ai_join"):
         st.write(f"**{name}** is the AI review login. Enter its passcode.")
         entered = st.text_input("AI passcode", type="password")
@@ -591,10 +601,10 @@ def ai_sign_in(name):
     if ok:
         if not code:
             st.error("The AI login is not set up. Add PREOP_AI_CODE to the app's secrets.")
-        elif hmac.compare_digest(entered.encode(), code.encode()):
+        elif hmac.compare_digest(entered.strip().encode(), code.encode()):
             join(name, ai=True)
         else:
-            st.error("Wrong passcode.")
+            st.error("Wrong AI passcode. It has to match PREOP_AI_CODE in the app's secrets exactly, including capitals.")
 
 
 def start_clean():
@@ -632,7 +642,7 @@ def team_panel():
                 ss.team = True
                 st.rerun()
             elif entered:
-                st.caption("Wrong passcode.")
+                st.caption("Wrong team passcode.")
             return
         st.caption(f"{len(ROSTER)} signed in")
         sure = st.checkbox("Sign everyone out and clear their changes")
